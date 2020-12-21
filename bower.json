@@ -1,0 +1,22 @@
+{
+  "name": "sdpmap",
+  "description": "SDP2020",
+  "main": "",
+  "authors": [
+    "empowering <youngk@u.sogang.ac.kr>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "select2": "~4.0",
+    "jquery": "^3.5.1"
+  }
+}

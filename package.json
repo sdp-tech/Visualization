@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "choices.js": "^9.0.1",
+    "favicons": "^4.8.2",
+    "jquery": "^3.5.1",
+    "leaflet-search": "^2.9.9",
+    "leaflet.awesome-markers": "^2.0.5"
+  }
+}
