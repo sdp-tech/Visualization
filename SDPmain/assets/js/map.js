@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // Load data and save it as variable
-    var data = load_data();
+    load_data();
+    var mapdata = localStorage.getItem('mapdata');
+
+    // console.log(JSON.parse(mapdata));
 
     // load the map
-    load_map(data);
+    load_map(mapdata);
     
     /* sidemenu */
     $('#toolbar .hamburger').on('click', function() {
@@ -17,159 +20,89 @@ document.addEventListener('DOMContentLoaded', function() {
 // local storage for time saving
 function load_data()
 {
-    #TODO API로 나중에 바꾸기
+    // #TODO API로 나중에 바꾸기
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
     // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
     // // load data
     // fetch(proxyurl+url)
 
-    #TODO 우선 Local file
-    fetchJSON('SDPmain/temp/output.geojson')
-    .then(response => response.json())
-    .then(data => 
-        localStorage["data"] = JSON.stringify(data)
-    )
-
-    return localStorage["data"];
+    // #TODO 우선 Local file
+    $.getJSON("./temp/output.json", function(json) {
+        localStorage.setItem('mapdata', JSON.stringify(json));
+    })
+    .catch(err => console.error(err));
+    
 }
 
-// process each data
-function each_data(data, mymap, markersLayer){
-
-    data = JSON.parse(data);
-
-    // set for each data
-    globalThis.set_continents = [];
-    globalThis.set_countries = [];
-    globalThis.set_ppi_status = [];
-    globalThis.set_prime_sectors = [];
-    globalThis.set_subsector = [];
-    globalThis.set_reason_for_delay = [];
-    globalThis.set_type_of_ppi = [];
-    globalThis.set_income_group = [];
-
-    data.forEach(datum => {
-        // console.log(data);
-        // console.log(data.country);
-
-
-/// 이거 그냥 json 파일로 로컬에 저장하면 안되나?????
-
-        const continent = datum.geographical;
-        const country = datum.country;
-        const latitude = datum.latitude;
-        const longitude = datum.longitude;
-        const project_name_wb = datum.project_name_wb;
-        const income_group = datum.income_group;
-        const ppi_status = datum.ppi_status;
-        const type_of_ppi = datum.type_of_ppi;
-        const prime_sector = datum.sector;
-        const subsector = datum.subsector;
-        const reason_for_delay = datum.reason_for_delay;
-        const url = datum.urls;
-
+function onEachFeature(feature, layer) {
         
-        // push into the array
-        set_continents.push(continent);
-        set_countries.push(country);
-        set_ppi_status.push(ppi_status);
-        set_prime_sectors.push(prime_sector);
-        set_subsector.push(subsector);
-        set_reason_for_delay.push(reason_for_delay);
-        set_type_of_ppi.push(type_of_ppi);
-        set_income_group.push(income_group);
+    var popupText = 
+        "<p id='p_popup_detail'>"+
+        "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
+        "<b>Country:</b> " + feature.properties.countries + "<br>"+
+        "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
+        "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
+        "<b>Problem:</b> " + feature.properties.reason_for_delay +
+        "<p id='linked_p_popup_detail'>" +
+        "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+        "<a href='#'>See also</a></b>"+
+        "</p></p>";
 
-
-        // pop-up contents 
-        const popup_detail = document.createElement('div');
-        popup_detail.setAttribute("id", "popup_detail");
-        popup_detail.innerHTML = 
-            "<p id='p_popup_detail'>"+
-            "<strong style='color: #84b819' >" + project_name_wb + "</strong><br>" + 
-            "<b>Country:</b> " + country + "<br>"+
-            "<b>Status:</b> " + ppi_status + "<br>"+
-            "<b>Prime Sector:</b> " + prime_sector + "<br>"+
-            "<b>Sub Sector:</b> " + subsector + "<br>"+
-            "<b>Problem:</b> " + reason_for_delay +
-            "<p id='linked_p_popup_detail'>" +
-            "<b><a href='"+ url +"'>URL</a>"+ " | " +
-            "<a href='#'>See also</a></b>"+
-            "</p></p>";
-
-        // add marker + popup
-        try
-        {
-            var title = project_name_wb; // value searched
-            loc = [latitude, longitude]    //position found
-
-            // case
-            var x = prime_sector;
-            switch (x) {
-            case "Energy":
-                icon_color = 'green';
-                icon_png = 'lightbulb';
-                break;
-            case "Transport":
-                icon_color = 'blue';
-                icon_png = 'bus';
-                break;
-            default:
-                icon_color = 'orange';
-                icon_png = 'heart';
-            }
-
-            var colored_marker = L.AwesomeMarkers.icon({
-                icon: icon_png,
-                prefix:'fa',
-                markerColor: icon_color
-                });
-
-            marker = new L.Marker(new L.latLng(loc), {
-                title: title,
-                opacity: 0.8,
-                tags: [ continent, income_group, prime_sector, subsector, ppi_status, type_of_ppi],
-                icon : colored_marker
-            }).bindPopup(popup_detail).addTo(mymap);
-
-
-            //필터링 구현할 수 있을 것 같닷
-            var markersLayer = markersLayer.addLayer(marker);
-
-        }
-        // skip the error
-        // N/A value ?
-        catch(e)
-        {
-            return true;
-        }
-
-    }
-
-)
-    // save all the properties as a set
-    set_continents = [...new Set(set_continents)];
-    set_countries = [...new Set(set_countries)];
-    set_ppi_status = [...new Set(set_ppi_status)];
-    set_prime_sectors = [...new Set(set_prime_sectors)];
-    set_subsector = [...new Set(set_subsector)];
-    set_reason_for_delay = [...new Set(set_reason_for_delay)];
-    set_type_of_ppi = [...new Set(set_type_of_ppi)];
-    set_income_group = [...new Set(set_income_group)];
-
+    layer.bindPopup(popupText, {
+        closeButton: true,
+        offset: L.point(0, -20)
+    });
+    layer.on('click', function() {
+        layer.openPopup();
+    });
+    
 }
 
+function styling(feature) {
 
+    var sector = feature.properties.sector;
+    switch (sector) {
+        case "Energy":
+            icon_color = 'green';
+            icon_png = 'lightbulb';
+            break;
+        case "Transport":
+            icon_color = 'blue';
+            icon_png = 'bus';
+            break;
+        default:
+            icon_color = 'orange';
+            icon_png = 'heart';
+    };
+
+    var colored_marker = L.AwesomeMarkers.icon({
+        icon: icon_png,
+        prefix:'fa',
+        markerColor: icon_color
+    });
+    return colored_marker;
+}
+
+function pointToLayer(feature, latlng) {
+    return L.Marker(latlng), {
+        title: feature.properties.project_name_wb,
+        opacity: 0.8,
+        // tags: [ continent, income_group, prime_sector, subsector, ppi_status, type_of_ppi],
+        icon : colored_marker,
+    };
+}
 
 // setting a map 
-function load_map(data){
+function load_map(mapdata){
 
-    /***************************
-     *      Base map Layer     *
-    ***************************/
+    // /***************************
+    //  *      Base map Layer     *
+    // ***************************/
 
-    var mymap = L.map('mapwrap', {zoomControl: false}).setView([10,10],2);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    var mymap = L.map('mapwrap', {zoomControl: true}).setView([10,10],2);
+    L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         subdomains: 'abcd',
         tileSize: 512,
 
@@ -180,123 +113,131 @@ function load_map(data){
 
     }).addTo(mymap);
 
+    // #TODO Uncaught TypeError: L.geoJSON is not a function
+    
+    $.getJSON(mapdata, function(json) {
+
+        geoLayer = L.geoJSON(json, {
+            style : styling,
+            onEachFeature: onEachFeature,
+            pointToLayer: pointToLayer,
+        }).addTo(mymap);
+    });
+
     // back to original zoom
     mymap.addControl(new L.Control.ZoomMin())
-
-    // markers layer
-    var markersLayer = new L.LayerGroup();  
-    mymap.addLayer(markersLayer); 
-
-    /*********************************
-     *  set each datum into markers  *
-    *********************************/
-
-    /// process data
-    each_data(data, mymap, markersLayer);
-
-    /**********************************
-     *   Search bar outside the map   *
-    **********************************/
-
-    // add the search bar to the map
-    var controlSearch = new L.Control.Search({
-        container: 'findbox',
-        initial: false,
-        collapsed: false,
-        layer: markersLayer,  // name of the layer
-        zoom: 10,        // set zoom to found location when searched
-        // marker: false,
-        // textPlaceholder: 'search...' // placeholder while nothing is searched
-    });
-    
-    mymap.addControl(controlSearch); // add it to the map
-    
-    controlSearch.on('search:locationfound', function(e) {
-        if(e.layer._popup)
-            e.layer.openPopup();
-    
-    })
-
-
-// filters
-data_filtering(data, mymap, markersLayer);
-
-
-    /**********************
-     *   Error Handling   *
-    **********************/
-
-    // error handling
-    function onLocationError(e) {
-        alert(e.message);
-    }
-    mymap.on('locationerror', onLocationError);
-
 }
+
+//     /*********************************
+//      *  set each datum into markers  *
+//     *********************************/
+
+//     /// process data
+//     // each_data(data, mymap, markersLayer);
+
+//     /**********************************
+//      *   Search bar outside the map   *
+//     **********************************/
+
+//     // add the search bar to the map
+//     var controlSearch = new L.Control.Search({
+//         container: 'findbox',
+//         initial: false,
+//         collapsed: false,
+//         layer: markersLayer,  // name of the layer
+//         zoom: 10,        // set zoom to found location when searched
+//         // marker: false,
+//         // textPlaceholder: 'search...' // placeholder while nothing is searched
+//     });
+    
+//     mymap.addControl(controlSearch); // add it to the map
+    
+//     controlSearch.on('search:locationfound', function(e) {
+//         if(e.layer._popup)
+//             e.layer.openPopup();
+    
+//     })
+
+
+// // filters
+// // data_filtering(data, mymap, markersLayer);
+
+
+//     /**********************
+//      *   Error Handling   *
+//     **********************/
+
+//     // error handling
+//     function onLocationError(e) {
+//         alert(e.message);
+//     }
+//     mymap.on('locationerror', onLocationError);
+
+// }
 
 
 // markers 불러오기
 
-function data_filtering(data, mymap, markersLayer){
+// function data_filtering(data, mymap, markersLayer){
 
-    /**********************************
-     * filter markers with conditions *
-    **********************************/
-    /* ref : https://codepen.io/izelvor/pen/oRGowL */
+//     /**********************************
+//      * filter markers with conditions *
+//     **********************************/
+//     /* ref : https://codepen.io/izelvor/pen/oRGowL */
 
-    // 이미 각자 attribute로 tags 있으니까 분류하기만 하면 됨
+//     // 이미 각자 attribute로 tags 있으니까 분류하기만 하면 됨
 
-    // // set list into html
-    // var buildingLayers = L.layerGroup().addTo(mymap);
-    // var $listItem = $('<li>').html(set_continents).appendTo('#toolbar ul');
-    // $listItem.on('click', function(){
-    //     buildingLayers.clearLayers();
-    //     buildingLayers.addLayer(thisLayer);
-    //     var notifyIcon = L.divIcon({
-    //         className: 'notify-icon',
-    //         iconSize: [25, 25],
-    //         html: '<span></span>'
-    // })});
-    // // var notifyMarker = L.marker([thisLat,thisLon], {icon: notifyIcon});
-    // // buildingLayers.addLayer(notifyMarker);
+//     // // set list into html
+//     // var buildingLayers = L.layerGroup().addTo(mymap);
+//     // var $listItem = $('<li>').html(set_continents).appendTo('#toolbar ul');
+//     // $listItem.on('click', function(){
+//     //     buildingLayers.clearLayers();
+//     //     buildingLayers.addLayer(thisLayer);
+//     //     var notifyIcon = L.divIcon({
+//     //         className: 'notify-icon',
+//     //         iconSize: [25, 25],
+//     //         html: '<span></span>'
+//     // })});
+//     // // var notifyMarker = L.marker([thisLat,thisLon], {icon: notifyIcon});
+//     // // buildingLayers.addLayer(notifyMarker);
 
-    // let filter_custom = [];
+//     // let filter_custom = [];
     
-    // document.querySelectorAll('.form-control').forEach(item => {
-    //     item.addEventListener('change', event => {
-    //     filter_custom.push(item.value);
-    //     let unique_list = [...new Set(filter_custom)];
-    //     const result = document.querySelector('.result');
-    //     result.textContent = `You chose ${unique_list}`;
-    // })});
+//     // document.querySelectorAll('.form-control').forEach(item => {
+//     //     item.addEventListener('change', event => {
+//     //     filter_custom.push(item.value);
+//     //     let unique_list = [...new Set(filter_custom)];
+//     //     const result = document.querySelector('.result');
+//     //     result.textContent = `You chose ${unique_list}`;
+//     // })});
 
 
-    let dict_country = set_countries.reduce((a,x) => ({...a, [x]: x}), {});
-    var select = document.getElementById("country-select");
+//     let dict_country = set_countries.reduce((a,x) => ({...a, [x]: x}), {});
+//     var select = document.getElementById("country-select");
 
-    for(index in dict_country) {
-        select.options[select.options.length] = new Option(dict_country[index], index);
-    }
-    // console.log(select.options[select.selectedIndex].value);
+//     for(index in dict_country) {
+//         select.options[select.options.length] = new Option(dict_country[index], index);
+//     }
+//     // console.log(select.options[select.selectedIndex].value);
 
-    let user_selection = [];
+//     let user_selection = [];
 
-    $(document).ready(function() {
-        $('.js-example-matcher-start').select2({
-            tags: true,
-            tokenSeparators: [',', ' '],
-            placeholder: "Select a country",
+//     $(document).ready(function() {
+//         $('.js-example-matcher-start').select2({
+//             tags: true,
+//             tokenSeparators: [',', ' '],
+//             placeholder: "Select a country",
             
-        });
+//         });
 
-    });
+//     });
 
-    document.querySelectorAll('.js-example-matcher-start').forEach(item => {
-        item.addEventListener('change', event => {
-            user_selection.push(item.value);
-        let unique_list = [...new Set(user_selection)];
-        const result = document.querySelector('.result');
-        result.textContent = `You chose ${unique_list}`;
-    })});
+//     document.querySelectorAll('.js-example-matcher-start').forEach(item => {
+//         item.addEventListener('change', event => {
+//             user_selection.push(item.value);
+//         let unique_list = [...new Set(user_selection)];
+//         const result = document.querySelector('.result');
+//         result.textContent = `You chose ${unique_list}`;
+//     })});
 
-}
+// }
