@@ -17,11 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // local storage for time saving
 function load_data()
 {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+    #TODO API로 나중에 바꾸기
+    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+    // // load data
+    // fetch(proxyurl+url)
 
-    // load data
-    fetch(proxyurl+url)
+    #TODO 우선 Local file
+    fetchJSON('SDPmain/temp/output.geojson')
     .then(response => response.json())
     .then(data => 
         localStorage["data"] = JSON.stringify(data)
@@ -48,6 +51,9 @@ function each_data(data, mymap, markersLayer){
     data.forEach(datum => {
         // console.log(data);
         // console.log(data.country);
+
+
+/// 이거 그냥 json 파일로 로컬에 저장하면 안되나?????
 
         const continent = datum.geographical;
         const country = datum.country;
@@ -267,6 +273,7 @@ function data_filtering(data, mymap, markersLayer){
 
     let dict_country = set_countries.reduce((a,x) => ({...a, [x]: x}), {});
     var select = document.getElementById("country-select");
+
     for(index in dict_country) {
         select.options[select.options.length] = new Option(dict_country[index], index);
     }
