@@ -39,61 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
 // }
 
-// function onEachFeature(feature, layer) {
-        
-//     var popupText = 
-//         "<p id='p_popup_detail'>"+
-//         "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
-//         "<b>Country:</b> " + feature.properties.countries + "<br>"+
-//         "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-//         "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
-//         "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-//         "<b>Problem:</b> " + feature.properties.reason_for_delay +
-//         "<p id='linked_p_popup_detail'>" +
-//         "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
-//         "<a href='#'>See also</a></b>"+
-//         "</p></p>";
-
-//     layer.bindPopup(popupText, {
-//         closeButton: true,
-//         offset: L.point(0, -20)
-//     });
-//     layer.on('click', function() {
-//         layer.openPopup();
-//     });
-    
-// }
-
-
-// function pointToLayer(feature, latlng) {
-
-//     var sector = feature.properties.sector;
-//     switch (sector) {
-//         case "Energy":
-//             icon_color = 'green';
-//             icon_png = 'lightbulb';
-//             break;
-//         case "Transport":
-//             icon_color = 'blue';
-//             icon_png = 'bus';
-//             break;
-//         default:
-//             icon_color = 'orange';
-//             icon_png = 'heart';
-//     };
-
-//     var colored_marker = L.AwesomeMarkers.icon({
-//         icon: icon_png,
-//         prefix:'fa',
-//         markerColor: icon_color
-//     });
-
-//     marker = new L.Marker(latlng, {
-//         icon : colored_marker
-//     });
-
-//     return marker;
-// }
 
 // setting a map 
 function load_map(){
@@ -102,9 +47,9 @@ function load_map(){
     //  *      Base map Layer     *
     // ***************************/
 
-    var mymap = L.map('mapwrap', {zoomControl: true}).setView([10,10],2);
+    var mymap = L.map('mapwrap', {zoomControl: false}).setView([10,10],2);
     L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        attribution: 'SDP &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         subdomains: 'abcd',
         tileSize: 512,
 
@@ -114,184 +59,183 @@ function load_map(){
         zoomOffset: -1
 
     }).addTo(mymap);
+
+    L.control.zoom({
+        position: 'topright'
+    }).addTo(mymap);
     
+    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+    
+    // $.getJSON(proxy+url, function(json) {
+
     $.getJSON("http://127.0.0.1:8080/output.json", function(json) {
 
-        localStorage.setItem('mapdata', JSON.stringify(json));
-        var mapdata = localStorage.getItem('mapdata');
-
-        geoLayer = L.geoJson(mapdata, {
-
-            onEachFeature: function (feature, layer) {
-                var popupText = 
-                    "<p id='p_popup_detail'>"+
-                    "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
-                    "<b>Country:</b> " + feature.properties.countries + "<br>"+
-                    "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-                    "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
-                    "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-                    "<b>Problem:</b> " + feature.properties.reason_for_delay +
-                    "<p id='linked_p_popup_detail'>" +
-                    "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
-                    "<a href='#'>See also</a></b>"+
-                    "</p></p>";
-            
-                layer.bindPopup(popupText, {
-                    closeButton: true,
-                    offset: L.point(0, -20)
-                });
-                layer.on('click', function() {
-                    layer.openPopup();
-                });
+        try{
+            geoLayer = L.geoJson(json, {
+                onEachFeature: function (feature, layer) {
+                    var popupText = 
+                        "<p id='p_popup_detail'>"+
+                        "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
+                        "<b>Country:</b> " + feature.properties.countries + "<br>"+
+                        "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
+                        "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+                        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
+                        "<b>Problem:</b> " + feature.properties.reason_for_delay +
+                        "<p id='linked_p_popup_detail'>" +
+                        "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+                        "<a href='#'>See also</a></b>"+
+                        "</p></p>";
                 
-            },
-            pointToLayer: function (feature, latlng) {
-            
-                var sector = feature.properties.sector;
-                switch (sector) {
-                    case "Energy":
-                        icon_color = 'green';
-                        icon_png = 'lightbulb';
-                        break;
-                    case "Transport":
-                        icon_color = 'blue';
-                        icon_png = 'bus';
-                        break;
-                    default:
-                        icon_color = 'orange';
-                        icon_png = 'heart';
-                };
+                    layer.bindPopup(popupText, {
+                        closeButton: true,
+                        offset: L.point(0, -20)
+                    });
+                    layer.on('click', function() {
+                        layer.openPopup();
+                    });
+                    
+                    },
+
+                // filter: userfilter,
+
+                pointToLayer: function (feature, latlng) {
                 
-                var awesomemark = L.AwesomeMarkers.icon({
-                    icon: icon_png,
-                    prefix:'fa',
-                    markerColor: icon_color})
+                    var sector = feature.properties.sector;
+                    switch (sector) {
+                        case "Energy":
+                            icon_color = 'green';
+                            icon_png = 'lightbulb';
+                            break;
+                        case "Transport":
+                            icon_color = 'blue';
+                            icon_png = 'bus';
+                            break;
+                        default:
+                            icon_color = 'orange';
+                            icon_png = 'heart';
+                    };
+                    
+                    var awesomemark = L.AwesomeMarkers.icon({
+                        icon: icon_png,
+                        prefix:'fa',
+                        markerColor: icon_color})
 
-                var marker = new L.Marker(latlng, {
-                    icon : awesomemark,
-                });
-            
-                return marker;
-            },
-            
-        }).addTo(mymap);
+                    var marker = new L.Marker(latlng, {
+                        icon : awesomemark,
+                    });
+                
+                    return marker;
+                },
+                
+            }).addTo(mymap);
 
-    }).catch(err => console.error(err));;
+
+        } catch(err){
+            console.error(err);
+        };
+        
+        // add to HTML
+        options_to_html(json);
 
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())
+    });
 }
 
-//     /*********************************
-//      *  set each datum into markers  *
-//     *********************************/
+//////////////
+/// filter ///
+//////////////
 
-//     /// process data
-//     // each_data(data, mymap, markersLayer);
+function options_to_html(data){
 
-//     /**********************************
-//      *   Search bar outside the map   *
-//     **********************************/
-
-//     // add the search bar to the map
-//     var controlSearch = new L.Control.Search({
-//         container: 'findbox',
-//         initial: false,
-//         collapsed: false,
-//         layer: markersLayer,  // name of the layer
-//         zoom: 10,        // set zoom to found location when searched
-//         // marker: false,
-//         // textPlaceholder: 'search...' // placeholder while nothing is searched
-//     });
+    var property_list = getKeys(data);
+    console.log(data);
+    var geographical_set = property_list["geographical"];
+    // console.log(geographical_set);
+    var country_set = property_list["country"];
     
-//     mymap.addControl(controlSearch); // add it to the map
-    
-//     controlSearch.on('search:locationfound', function(e) {
-//         if(e.layer._popup)
-//             e.layer.openPopup();
-    
-//     })
+    var selectElement = document.getElementById('country-select');
+
+    for (option of geographical_set.values()) {
+        ggnew = new Option(option, option);
+        selectElement.add(ggnew);
+        ggnew.disabled = true;
+        for (country of country_to_geographical(data, option).values()) {
+            countryoption = new Option(country, country);
+            selectElement.add(countryoption);
+        }
+    }
 
 
-// // filters
-// // data_filtering(data, mymap, markersLayer);
+    // console.log(select.options[select.selectedIndex].value);
 
+    let user_selection = [];
 
-//     /**********************
-//      *   Error Handling   *
-//     **********************/
+    // const selectElement = document.querySelector('.js-select2-multi');
+    $(document).ready(function() {
+        $('.js-select2-multi').select2();
+    });
 
-//     // error handling
-//     function onLocationError(e) {
-//         alert(e.message);
-//     }
-//     mymap.on('locationerror', onLocationError);
+    function showvalue(e) { 
+        var select_val = $(e.currentTarget).val();
+        console.log(select_val)
+    }
 
-// }
+    $(".js-select2-multi")
+        .on("change", showvalue)
+}
 
+function updatefilter() {
+	inputstates = {
+  	geographical: [],
+    country: []
+  }
+}
 
-// markers 불러오기
+function userfilter(feature){
+    document.querySelectorAll('input')
+}
 
-// function data_filtering(data, mymap, markersLayer){
+function getKeys(input){
 
-//     /**********************************
-//      * filter markers with conditions *
-//     **********************************/
-//     /* ref : https://codepen.io/izelvor/pen/oRGowL */
+    // Step 1, group feature values by property.
+    let out = input.features.reduce((acc, {properties}) =>
+    {
+        Object.entries(properties).forEach(([key, val]) =>
+        {
+            acc[key] = acc[key] || new Set();
+            acc[key].add(val);
+        });
 
-//     // 이미 각자 attribute로 tags 있으니까 분류하기만 하면 됨
+        return acc;
+    }, {});
 
-//     // // set list into html
-//     // var buildingLayers = L.layerGroup().addTo(mymap);
-//     // var $listItem = $('<li>').html(set_continents).appendTo('#toolbar ul');
-//     // $listItem.on('click', function(){
-//     //     buildingLayers.clearLayers();
-//     //     buildingLayers.addLayer(thisLayer);
-//     //     var notifyIcon = L.divIcon({
-//     //         className: 'notify-icon',
-//     //         iconSize: [25, 25],
-//     //         html: '<span></span>'
-//     // })});
-//     // // var notifyMarker = L.marker([thisLat,thisLon], {icon: notifyIcon});
-//     // // buildingLayers.addLayer(notifyMarker);
+    return out;
+}
 
-//     // let filter_custom = [];
-    
-//     // document.querySelectorAll('.form-control').forEach(item => {
-//     //     item.addEventListener('change', event => {
-//     //     filter_custom.push(item.value);
-//     //     let unique_list = [...new Set(filter_custom)];
-//     //     const result = document.querySelector('.result');
-//     //     result.textContent = `You chose ${unique_list}`;
-//     // })});
+function getObjects(obj, key, val) {
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getObjects(obj[i], key, val));
+        } else if (i == key && obj[key] == val) {
+            objects.push(obj);
+        }
+    }
+    return objects;
+}
 
+// map country-geographical into a set
+function country_to_geographical(input, geographical) {;
 
-//     let dict_country = set_countries.reduce((a,x) => ({...a, [x]: x}), {});
-//     var select = document.getElementById("country-select");
+    array = getObjects(input, "geographical", geographical);
 
-//     for(index in dict_country) {
-//         select.options[select.options.length] = new Option(dict_country[index], index);
-//     }
-//     // console.log(select.options[select.selectedIndex].value);
+    // console.log(array);
 
-//     let user_selection = [];
+    data = array.map(data => data.country);
+    data = Array.from(new Set(data)).sort();
 
-//     $(document).ready(function() {
-//         $('.js-example-matcher-start').select2({
-//             tags: true,
-//             tokenSeparators: [',', ' '],
-//             placeholder: "Select a country",
-            
-//         });
-
-//     });
-
-//     document.querySelectorAll('.js-example-matcher-start').forEach(item => {
-//         item.addEventListener('change', event => {
-//             user_selection.push(item.value);
-//         let unique_list = [...new Set(user_selection)];
-//         const result = document.querySelector('.result');
-//         result.textContent = `You chose ${unique_list}`;
-//     })});
-
-// }
+    return data;
+};

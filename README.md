@@ -29,3 +29,5 @@ geojson 로컬파일 불러올 때 오류
 
 geojson feature -filter (module)
 https://developer.aliyun.com/mirror/npm/package/feature-filter-geojson/v/1.0.0
+근데 이건 검색 세분화일 때 유용할듯
+기본 geojson filter사용 후 판단하기

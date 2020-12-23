@@ -35,6 +35,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/select2.css" rel="stylesheet">;
 
   <!-- search bar-->
   <script type="text/javascript" src="assets/js/leaflet-search.min.js"></script>
@@ -137,7 +138,9 @@
 
                     <div class="filter_list">
 
-                      <select class="js-example-matcher-start" id="country-select" name="countries[]" multiple="multiple" style="width: 90%"></select>
+                      <select class="js-select2-multi" id="country-select" name="countries[]" multiple="multiple" style="width: 90%">
+                        <option></option>
+                      </select>
                       <!-- <select id="country-select" class="filter_options"></select> -->
 
                     </div>
