@@ -1551,3 +1551,7 @@ section {
     opacity: 1;
   }
 }
+.fa{
+  font-family: FontAwesome;
+  
+}

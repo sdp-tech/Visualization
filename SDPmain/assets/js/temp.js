@@ -1,26 +1,27 @@
 var map = L.map('mapwrap').setView([40, -120], 4);
 
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
   maxZoom: 18,
   id: 'mapbox.streets'
 }).addTo(map);
 
-$.getJSON('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson', function(json) {
+$.getJSON("./temp/output.json", function(json) {
 
   geoLayer = L.geoJson(json, {
 
     style: function(feature) {
-      var mag = feature.properties.mag;
-      if (mag >= 4.0) {
+      var lat = feature.properties.lat;
+      if (lat >= 50) {
         return {
           color: "red"
         }; 
       }
-      else if (mag >= 3.0) {
+      else if (lat >= 40) {
         return {
           color: "orange"
         };
-      } else if (mag >= 2.0) {
+      } else if (lat >= 20) {
         return {
           color: "yellow"
         };
@@ -33,9 +34,9 @@ $.getJSON('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geo
 
     onEachFeature: function(feature, layer) {
 
-      var popupText = "<b>Magnitude:</b> " + feature.properties.mag +
-        "<br><b>Location:</b> " + feature.properties.place +
-        "<br><a href='" + feature.properties.url + "'>More info</a>";
+      var popupText = "<b>Country:</b> " + feature.properties.country +
+        "<br><b>Sector:</b> " + feature.properties.sector +
+        "<br><a href='" + feature.properties.urls + "'>More info</a>";
 
       layer.bindPopup(popupText, {
         closeButton: true,
@@ -48,8 +49,11 @@ $.getJSON('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geo
 
     pointToLayer: function(feature, latlng) {
       return L.circleMarker(latlng, {
-        radius: Math.round(feature.properties.mag) * 3,
+        radius: 10,
       });
     },
   }).addTo(map);
 });
+
+L.marker([51.930295,4.515209], {icon: L.AwesomeMarkers.icon({icon: 'shopping-cart', prefix: 'fa', markerColor: 'blue'}) }).addTo(map);
+

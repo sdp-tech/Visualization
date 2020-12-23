@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // Load data and save it as variable
-    load_data();
-    var mapdata = localStorage.getItem('mapdata');
+    // load_data();
+    // var mapdata = localStorage.getItem('mapdata');
 
     // console.log(JSON.parse(mapdata));
 
     // load the map
-    load_map(mapdata);
+    load_map();
     
     /* sidemenu */
     $('#toolbar .hamburger').on('click', function() {
@@ -18,83 +18,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // load data and save in 
 // local storage for time saving
-function load_data()
-{
-    // #TODO API로 나중에 바꾸기
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
-    // // load data
-    // fetch(proxyurl+url)
+// function load_data()
+// {
+//     // #TODO API로 나중에 바꾸기
+//     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+//     // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+//     const url = "http://127.0.0.1:8080/output.json";
+//     // load data
+//     $.getJSON(url, function(json) {
+//         localStorage.setItem('mapdata', JSON.stringify(json));
+//     })
+//     .catch(err => console.error(err));
 
-    // #TODO 우선 Local file
-    $.getJSON("./temp/output.json", function(json) {
-        localStorage.setItem('mapdata', JSON.stringify(json));
-    })
-    .catch(err => console.error(err));
+
+//     // #TODO 우선 Local file
+//     // $.getJSON("./temp/output.json", function(json) {
+//     //     localStorage.setItem('mapdata', JSON.stringify(json));
+//     // })
+//     // .catch(err => console.error(err));
     
-}
+// }
 
-function onEachFeature(feature, layer) {
+// function onEachFeature(feature, layer) {
         
-    var popupText = 
-        "<p id='p_popup_detail'>"+
-        "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
-        "<b>Country:</b> " + feature.properties.countries + "<br>"+
-        "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-        "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
-        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-        "<b>Problem:</b> " + feature.properties.reason_for_delay +
-        "<p id='linked_p_popup_detail'>" +
-        "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
-        "<a href='#'>See also</a></b>"+
-        "</p></p>";
+//     var popupText = 
+//         "<p id='p_popup_detail'>"+
+//         "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
+//         "<b>Country:</b> " + feature.properties.countries + "<br>"+
+//         "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
+//         "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+//         "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
+//         "<b>Problem:</b> " + feature.properties.reason_for_delay +
+//         "<p id='linked_p_popup_detail'>" +
+//         "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+//         "<a href='#'>See also</a></b>"+
+//         "</p></p>";
 
-    layer.bindPopup(popupText, {
-        closeButton: true,
-        offset: L.point(0, -20)
-    });
-    layer.on('click', function() {
-        layer.openPopup();
-    });
+//     layer.bindPopup(popupText, {
+//         closeButton: true,
+//         offset: L.point(0, -20)
+//     });
+//     layer.on('click', function() {
+//         layer.openPopup();
+//     });
     
-}
+// }
 
-function styling(feature) {
 
-    var sector = feature.properties.sector;
-    switch (sector) {
-        case "Energy":
-            icon_color = 'green';
-            icon_png = 'lightbulb';
-            break;
-        case "Transport":
-            icon_color = 'blue';
-            icon_png = 'bus';
-            break;
-        default:
-            icon_color = 'orange';
-            icon_png = 'heart';
-    };
+// function pointToLayer(feature, latlng) {
 
-    var colored_marker = L.AwesomeMarkers.icon({
-        icon: icon_png,
-        prefix:'fa',
-        markerColor: icon_color
-    });
-    return colored_marker;
-}
+//     var sector = feature.properties.sector;
+//     switch (sector) {
+//         case "Energy":
+//             icon_color = 'green';
+//             icon_png = 'lightbulb';
+//             break;
+//         case "Transport":
+//             icon_color = 'blue';
+//             icon_png = 'bus';
+//             break;
+//         default:
+//             icon_color = 'orange';
+//             icon_png = 'heart';
+//     };
 
-function pointToLayer(feature, latlng) {
-    return L.Marker(latlng), {
-        title: feature.properties.project_name_wb,
-        opacity: 0.8,
-        // tags: [ continent, income_group, prime_sector, subsector, ppi_status, type_of_ppi],
-        icon : colored_marker,
-    };
-}
+//     var colored_marker = L.AwesomeMarkers.icon({
+//         icon: icon_png,
+//         prefix:'fa',
+//         markerColor: icon_color
+//     });
+
+//     marker = new L.Marker(latlng, {
+//         icon : colored_marker
+//     });
+
+//     return marker;
+// }
 
 // setting a map 
-function load_map(mapdata){
+function load_map(){
 
     // /***************************
     //  *      Base map Layer     *
@@ -112,20 +114,72 @@ function load_map(mapdata){
         zoomOffset: -1
 
     }).addTo(mymap);
-
-    // #TODO Uncaught TypeError: L.geoJSON is not a function
     
-    $.getJSON(mapdata, function(json) {
+    $.getJSON("http://127.0.0.1:8080/output.json", function(json) {
 
-        geoLayer = L.geoJSON(json, {
-            style : styling,
-            onEachFeature: onEachFeature,
-            pointToLayer: pointToLayer,
+        localStorage.setItem('mapdata', JSON.stringify(json));
+        var mapdata = localStorage.getItem('mapdata');
+
+        geoLayer = L.geoJson(mapdata, {
+
+            onEachFeature: function (feature, layer) {
+                var popupText = 
+                    "<p id='p_popup_detail'>"+
+                    "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
+                    "<b>Country:</b> " + feature.properties.countries + "<br>"+
+                    "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
+                    "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+                    "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
+                    "<b>Problem:</b> " + feature.properties.reason_for_delay +
+                    "<p id='linked_p_popup_detail'>" +
+                    "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+                    "<a href='#'>See also</a></b>"+
+                    "</p></p>";
+            
+                layer.bindPopup(popupText, {
+                    closeButton: true,
+                    offset: L.point(0, -20)
+                });
+                layer.on('click', function() {
+                    layer.openPopup();
+                });
+                
+            },
+            pointToLayer: function (feature, latlng) {
+            
+                var sector = feature.properties.sector;
+                switch (sector) {
+                    case "Energy":
+                        icon_color = 'green';
+                        icon_png = 'lightbulb';
+                        break;
+                    case "Transport":
+                        icon_color = 'blue';
+                        icon_png = 'bus';
+                        break;
+                    default:
+                        icon_color = 'orange';
+                        icon_png = 'heart';
+                };
+                
+                var awesomemark = L.AwesomeMarkers.icon({
+                    icon: icon_png,
+                    prefix:'fa',
+                    markerColor: icon_color})
+
+                var marker = new L.Marker(latlng, {
+                    icon : awesomemark,
+                });
+            
+                return marker;
+            },
+            
         }).addTo(mymap);
-    });
 
-    // back to original zoom
-    mymap.addControl(new L.Control.ZoomMin())
+    }).catch(err => console.error(err));;
+
+    // // back to original zoom
+    // mymap.addControl(new L.Control.ZoomMin())
 }
 
 //     /*********************************
