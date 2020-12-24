@@ -33,9 +33,43 @@ https://developer.aliyun.com/mirror/npm/package/feature-filter-geojson/v/1.0.0
 기본 geojson filter사용 후 판단하기
 
 
-필터를 구현했다 .. on christmas ...  하ㅏ루종일 .. 해서 .. 힘들다..
+// 필터를 구현했다 .. on christmas ...  하ㅏ루종일 .. 해서 .. 힘들다..
 더러운 자바스크립트 ..
 updatestaes ->
 
 js object란?
 Object.values() !!
+
+
+
+//updateStates
+
+    $(document).ready(function() 내에
+        1. $('.country-select').on('change.select2', function (el) {
+        2. $('.sector-select').on('change', function (el) {
+    따로 구현함 
+    처음에는 let 
+    input of queryselectall(select)에서 onchange 로
+    switch(input.id) case로 짰는데
+    event change가 왜인지 << 아직 알아내지 못함>>
+    모든 select가 변화하는 것으로 나오길래 select를 각각 분리할 수 밖에 없었음
+
+
+// 필터링 구현
+-> 아무것도 선택하지 않았을 때는 모든 것을 선택한 것으로 만들기
+( 첫 화면에서 볼 수 있게, 그리고 옵션 들 중 하나만 적용됐을 때를 위해서)
+countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
+var variable = ()? true:false 형식 사용
+
+
+
+// fc year range
+https://www.cssscript.com/animated-customizable-range-slider-pure-javascript-rslider-js/
+
+지도가 움직여서 fc 조절안됨.
+지도 Fix하는 법?
+차ㅏㅈ았음~
+
+fc year Module
+http://ionden.com/a/plugins/ion.rangeSlider/demo_interactions.html
+

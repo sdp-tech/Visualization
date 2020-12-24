@@ -1420,7 +1420,7 @@ section {
 # map
 --------------------------------------------------------------*/
 #mapid {
-  height: 700px;
+  height: 488px;
   margin: 0px;
 }
 
@@ -1470,11 +1470,11 @@ section {
 #toolbar {
   background: rgba(255, 255, 255, 1);
   opacity: .6;
-  width: 200px;
+  width: 250px;
   height: 600px;
   height: 100vh;
   position: absolute;
-  left: -200px;
+  left: -250px;
   z-index: 1000;
   transition: .5s left;
   padding: 20px;

@@ -60,8 +60,10 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 
-  <!-- sidebar filter-->
-  <link rel="stylesheet" href="assets/css/sidebar_filter.css" media="screen">
+  <!-- year range selection-->
+   <!--Plugin CSS file with desired skin-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+      
 
   <!-- =======================================================
   * Template Name: Squadfree - v2.2.0
@@ -119,7 +121,7 @@
       <div class="container">
         <p>
           <!-- MAP GOES HERE-->
-          필터를 추가해야해용
+          Description goes here
               <div id="findbox"></div>
 
               <!-- sidemenu -->
@@ -139,34 +141,32 @@
                     <ul>
                       <li>
                         <h6>Region</h6>
-                        <select class="js-select2-multi country-select" id="country-select" name="countries[]" multiple="multiple" style="width: 90%" placeholder="Select the Country"></select>
+                        <select class="select js-select2-multi country-select" id="country-select" name="countries[]" multiple="multiple" style="width: 90%"></select>
                       </li>
 
                       <li>
                         <h6>Sector</h6>
-                        <select class="js-select2-multi sector-select" id="sector-select" name="sector[]" multiple="multiple" style="width: 90%" placeholder="Select the Country"></select>
+                        <select class="select js-select2-multi sector-select" id="sector-select" name="sector[]" multiple="multiple" style="width: 90%"></select>
                       </li>
                       <li>
                         <h6>FC Year</h6>
+                        <input type="text" class="select js-range-slider" id="#demo_2" name="my_range" value="">
                       </li>
                       <li>
                         <h6>Status</h6>
+                        <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select>
                       </li>
                       <li>
                         <h6>Income Group</h6>
+                        <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select>
                       </li>
                       <li>
                         <h6>Type of PPI</h6>
+                        <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select>
                       </li>
                     </ul>
 
                     </div>
-                  </div>
-
-                  <div class ="result"></div>
-
-
-
                   </div>
               
                 </div>
@@ -273,13 +273,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.min.js"></script>
   <script src="assets/js/leaflet.awesome-markers.js"></script>
   <script src="../node_modules/feature-filter-geojson/index.js"></script>
+  <script src="assets/vendor/range-slider-master/src/js/rSlider.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <!-- personal file-->
   <script type="text/javascript" src="assets/js/map.js"></script>
 
-
+  <!--Plugin JavaScript file-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+ 
 </body>
 
 </html>

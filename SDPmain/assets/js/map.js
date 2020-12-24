@@ -8,7 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let customOption = {
         countryOp: [],
         sectorOp: [],
-        statusOp: []
+        yearOp:{
+            "from" : 1960,
+            "to": 2021,
+        },
+        statusOp: [],
+        incomeOp: [],
+        ppitypeOp: [],
     }
 
     // console.log(JSON.parse(mapdata));
@@ -58,7 +64,7 @@ function load_map(customOption){
     // ***************************/
 
     let data;
-    var mymap = L.map('mapwrap', {zoomControl: false}).setView([10,10],2);
+    var mymap = L.map('mapwrap', {zoomControl: false}).setView([20,30],3);
     L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
         attribution: 'SDP &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         subdomains: 'abcd',
@@ -74,7 +80,16 @@ function load_map(customOption){
     L.control.zoom({
         position: 'topright'
     }).addTo(mymap);
-    
+
+    // prohibit dragging
+    var div = L.DomUtil.get('toolbar');
+    if (!L.Browser.touch) {
+        L.DomEvent.disableClickPropagation(div);
+        L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+    } else {
+        L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+    }
+
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
     // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
     
@@ -88,10 +103,12 @@ function load_map(customOption){
                         "<p id='p_popup_detail'>"+
                         "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
                         "<b>Country:</b> " + feature.properties.country + "<br>"+
+                        "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
                         "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
                         "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
                         "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-                        "<b>Problem:</b> " + feature.properties.reason_for_delay +
+                        "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
+                        "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
                         "<p id='linked_p_popup_detail'>" +
                         "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
                         "<a href='#'>See also</a></b>"+
@@ -109,9 +126,15 @@ function load_map(customOption){
 
                 
                 filter: function(feature) {
-                    const countryselect = customOption.countryOp.includes(feature.properties.country);
-                    const sectorselect = customOption.sectorOp.includes(feature.properties.subsector);
-                    return (countryselect||sectorselect);
+
+                    // if no filter, select all
+                     countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
+                     sectorselect = (customOption.sectorOp.length == 0)? true : (customOption.sectorOp.includes(feature.properties.subsector));
+                     statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
+                     incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
+                     ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
+                     yearselect = yearIsincluded(feature, customOption.yearOp);
+                     return (countryselect&&sectorselect&&yearselect&&statusselect&&ppitypeselect);
                 },
 
                 pointToLayer: function (feature, latlng) {
@@ -174,11 +197,17 @@ function options_to_html(data){
 
     var geographical_set = property_list["geographical"];
     var sector_set = property_list["sector"];
+    var status_set = arraytosortedSet(property_list["ppi_status"]);
+    var income_set = arraytosortedSet(property_list["income_group"]);
+    var ppitype_set = arraytosortedSet(property_list["type_of_ppi"]);
 
     // console.log(geographical_set);
     
     var regionselect = document.getElementById('country-select');
     var sectorselect = document.getElementById('sector-select');
+    var statusselect = document.getElementById('status-select');
+    var incomeselect = document.getElementById('income-select');
+    var ppitypeselect = document.getElementById('ppitype-select');
 
     // region select
     for (option of geographical_set.values()) {
@@ -202,7 +231,26 @@ function options_to_html(data){
         }
     }    
 
+    // status
+    for (option of status_set.values()) {
+        stnew = new Option(option, option);
+        statusselect.add(stnew);
+        stnew.disabled = false;
+    }    
 
+    // income
+    for (option of income_set.values()) {
+        icnew = new Option(option, option);
+        incomeselect.add(icnew);
+        icnew.disabled = false;
+    }    
+
+    // ppi-type
+    for (option of ppitype_set.values()) {
+        ptnew = new Option(option, option);
+        ppitypeselect.add(ptnew);
+        ptnew.disabled = false;
+    }    
     // console.log(select.options[select.selectedIndex].value);
 }
 
@@ -212,11 +260,14 @@ function updateStates(customOption) {
   
     // region
     $(document).ready(function() {
-        $('.js-select2-multi').select2({
-            placeholder: "You can choose ..."
-        }); 
+        $('.js-select2-multi').select2(); 
 
-        $('.country-select').on('change.select2', function (el) {
+        // country selection
+        $('.country-select')
+        .select2({
+            placeholder: "Choose a Country"
+        })
+        .on('change.select2', function (el) {
             value = $(el.currentTarget).val();
             console.log("region selected");
             customOption.countryOp = [];
@@ -224,7 +275,12 @@ function updateStates(customOption) {
                 customOption.countryOp.push(value[i]);}
         });
 
-        $('.sector-select').on('change', function (el) {
+        // sector selection
+        $('.sector-select')
+        .select2({
+            placeholder: "Choose a Sector"
+        })
+        .on('change', function (el) {
             value = $(el.currentTarget).val();
             console.log("sector selected");
             customOption.sectorOp = [];
@@ -232,11 +288,66 @@ function updateStates(customOption) {
                 customOption.sectorOp.push(value[i]);}
         });
 
+        // FC year slider
+        $('.js-range-slider').ionRangeSlider({
+            type: "double",
+            min: 1960,
+            max: 2021,
+            from: 1960,
+            to: 2021,
+            grid: true,
+            onChange: function (data) {
+                // Called every time handle position is changed
+                customOption.yearOp = {};
+                customOption.yearOp["from"]=data.from;
+                customOption.yearOp["to"]=data.to;
+                // console.log(customOption);
+        }})
+
+        // status selection
+        $('.status-select')
+        .select2({
+            placeholder: "Choose Status"
+        })
+        .on('change', function (el) {
+            value = $(el.currentTarget).val();
+            console.log("Status selected");
+            customOption.statusOp = [];
+            for (i = 0; i < value.length; i++) {
+                customOption.statusOp.push(value[i]);}
+        });
+
+
+        // income group selection
+        $('.income-select')
+        .select2({
+            placeholder: "Choose an Income Group"
+        })
+        .on('change', function (el) {
+            value = $(el.currentTarget).val();
+            console.log("Status selected");
+            customOption.incomeOp = [];
+            for (i = 0; i < value.length; i++) {
+                customOption.incomeOp.push(value[i]);}
+        });
+        
+        // ppi type selection
+        $('.ppitype-select')
+        .select2({
+            placeholder: "Choose a PPI Type"
+        })
+        .on('change', function (el) {
+            value = $(el.currentTarget).val();
+            console.log("Status selected");
+            customOption.ppitypeOp = [];
+            for (i = 0; i < value.length; i++) {
+                customOption.ppitypeOp.push(value[i]);}
+        });
     })
 }
 
 function detectChange(json, geoLayer, customOption) {
-    for (let input of document.querySelectorAll('select')) {
+    for (let input of document.querySelectorAll('.select')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
             console.log("change detected");
@@ -303,3 +414,25 @@ function subsector_to_region(input, sector) {;
     data = Array.from(new Set(data)).sort();
     return data;
 };
+
+function yearIsincluded(feature, yearOp)
+{
+    let targetyear = feature.properties.fc_year;
+    dateFrom = yearOp["from"];
+    dateTo = yearOp["to"];
+    
+    if (targetyear == ("N/A"||"BLANK")){
+        return true;
+    }
+    else if ((targetyear >= dateFrom) && (targetyear <= dateTo))
+    {
+        return true;
+    }
+    return false;
+}
+
+function arraytosortedSet(array)
+{
+    array = Array.from(new Set(array)).sort();
+    return array;
+}
