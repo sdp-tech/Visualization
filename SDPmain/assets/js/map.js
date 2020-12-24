@@ -4,10 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // load_data();
     // var mapdata = localStorage.getItem('mapdata');
 
+    // filterArray
+    let customOption = {
+        countryOp: [],
+        statusOp: []
+    }
+
     // console.log(JSON.parse(mapdata));
 
     // load the map
-    load_map();
+    load_map(customOption);
+
+    // filtering
+    // updatefilter();
     
     /* sidemenu */
     $('#toolbar .hamburger').on('click', function() {
@@ -41,12 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // setting a map 
-function load_map(){
+function load_map(customOption){
 
     // /***************************
     //  *      Base map Layer     *
     // ***************************/
 
+    let data;
     var mymap = L.map('mapwrap', {zoomControl: false}).setView([10,10],2);
     L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
         attribution: 'SDP &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -70,14 +80,13 @@ function load_map(){
     // $.getJSON(proxy+url, function(json) {
 
     $.getJSON("http://127.0.0.1:8080/output.json", function(json) {
-
         try{
             geoLayer = L.geoJson(json, {
                 onEachFeature: function (feature, layer) {
                     var popupText = 
                         "<p id='p_popup_detail'>"+
                         "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
-                        "<b>Country:</b> " + feature.properties.countries + "<br>"+
+                        "<b>Country:</b> " + feature.properties.country + "<br>"+
                         "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
                         "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
                         "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
@@ -97,10 +106,14 @@ function load_map(){
                     
                     },
 
-                // filter: userfilter,
+                
+                filter: function(feature) {
+                    const countryselect = customOption.countryOp.includes(feature.properties.country);
+                    console.log(typeof(customOption.countryOp));
+                    return countryselect;
+                },
 
                 pointToLayer: function (feature, latlng) {
-                
                     var sector = feature.properties.sector;
                     switch (sector) {
                         case "Energy":
@@ -129,6 +142,13 @@ function load_map(){
                 },
                 
             }).addTo(mymap);
+                    
+            // Initialization
+            updateStates(customOption);
+            geoLayer.addData(json);
+
+            //
+            detectChange(json, geoLayer, customOption);
 
 
         } catch(err){
@@ -150,7 +170,7 @@ function load_map(){
 function options_to_html(data){
 
     var property_list = getKeys(data);
-    console.log(data);
+
     var geographical_set = property_list["geographical"];
     // console.log(geographical_set);
     var country_set = property_list["country"];
@@ -169,33 +189,42 @@ function options_to_html(data){
 
 
     // console.log(select.options[select.selectedIndex].value);
+}
 
-    let user_selection = [];
+function updateStates(customOption) {
 
-    // const selectElement = document.querySelector('.js-select2-multi');
+    console.log(customOption);
+  
     $(document).ready(function() {
-        $('.js-select2-multi').select2();
-    });
+        $('.js-select2-multi').select2()        
+        .on("change", showvalue)});
+
+    var select_val;
 
     function showvalue(e) { 
-        var select_val = $(e.currentTarget).val();
-        console.log(select_val)
+        customOption.countryOp = [];
+        value = $(e.currentTarget).val()
+        for (i = 0; i < value.length; i++) {
+            customOption.countryOp.push(value[i]);
+        }
+        console.log(customOption);
     }
-
-    $(".js-select2-multi")
-        .on("change", showvalue)
+  
 }
 
-function updatefilter() {
-	inputstates = {
-  	geographical: [],
-    country: []
-  }
+function detectChange(json, geoLayer, customOption) {
+    for (let input of document.querySelectorAll('select')) {
+        //Listen to 'change' event of all inputs
+        input.onchange = (e) => {
+            console.log("change detected");
+            geoLayer.clearLayers()
+            updateStates(customOption)
+            geoLayer.addData(json)   
+            
+        }
+    }
 }
 
-function userfilter(feature){
-    document.querySelectorAll('input')
-}
 
 function getKeys(input){
 

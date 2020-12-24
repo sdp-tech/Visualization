@@ -1,59 +1,49 @@
-var map = L.map('mapwrap').setView([40, -120], 4);
+let checkboxStates
 
+// json test = json file
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-  maxZoom: 18,
-  id: 'mapbox.streets'
-}).addTo(map);
+const map = L.map('map').setView([48.2083537, 16.3725042], 2)
 
-$.getJSON("./temp/output.json", function(json) {
+L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+  subdomains: 'abcd'
+}).addTo(map)
 
-  geoLayer = L.geoJson(json, {
+const geojsonLayer = L.geoJSON(null,{
+	filter: (feature) => {
+  	const isYearChecked = checkboxStates.years.includes(feature.properties.year)
+    const isEventTypeChecked = checkboxStates.eventTypes.includes(feature.properties.eventType)
+    return isYearChecked && isEventTypeChecked //only true if both are true
+  }
+}).addTo(map)
 
-    style: function(feature) {
-      var lat = feature.properties.lat;
-      if (lat >= 50) {
-        return {
-          color: "red"
-        }; 
+function updateCheckboxStates() {
+	checkboxStates = {
+  	years: [],
+    eventTypes: []
+  }
+  
+	for (let input of document.querySelectorAll('input')) {
+  	if(input.checked) {
+    	switch (input.className) {
+      	case 'event-type': checkboxStates.eventTypes.push(input.value); break
+        case 'year': checkboxStates.years.push(input.value); break
       }
-      else if (lat >= 40) {
-        return {
-          color: "orange"
-        };
-      } else if (lat >= 20) {
-        return {
-          color: "yellow"
-        };
-      } else {
-        return {
-          color: "green"
-        }
-      }
-    },
+    }
+  }
+}
 
-    onEachFeature: function(feature, layer) {
 
-      var popupText = "<b>Country:</b> " + feature.properties.country +
-        "<br><b>Sector:</b> " + feature.properties.sector +
-        "<br><a href='" + feature.properties.urls + "'>More info</a>";
+for (let input of document.querySelectorAll('input')) {
+  //Listen to 'change' event of all inputs
+  input.onchange = (e) => {
+    geojsonLayer.clearLayers()
+  	updateCheckboxStates()
+    geojsonLayer.addData(jsontest)   
+  }
+}
 
-      layer.bindPopup(popupText, {
-        closeButton: true,
-        offset: L.point(0, -20)
-      });
-      layer.on('click', function() {
-        layer.openPopup();
-      });
-    },
 
-    pointToLayer: function(feature, latlng) {
-      return L.circleMarker(latlng, {
-        radius: 10,
-      });
-    },
-  }).addTo(map);
-});
-
-L.marker([51.930295,4.515209], {icon: L.AwesomeMarkers.icon({icon: 'shopping-cart', prefix: 'fa', markerColor: 'blue'}) }).addTo(map);
-
+/****** INIT ******/
+updateCheckboxStates()
+geojsonLayer.addData(jsontest)
