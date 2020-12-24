@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // filterArray
     let customOption = {
         countryOp: [],
+        sectorOp: [],
         statusOp: []
     }
 
@@ -109,8 +110,8 @@ function load_map(customOption){
                 
                 filter: function(feature) {
                     const countryselect = customOption.countryOp.includes(feature.properties.country);
-                    console.log(typeof(customOption.countryOp));
-                    return countryselect;
+                    const sectorselect = customOption.sectorOp.includes(feature.properties.subsector);
+                    return (countryselect||sectorselect);
                 },
 
                 pointToLayer: function (feature, latlng) {
@@ -172,20 +173,34 @@ function options_to_html(data){
     var property_list = getKeys(data);
 
     var geographical_set = property_list["geographical"];
-    // console.log(geographical_set);
-    var country_set = property_list["country"];
-    
-    var selectElement = document.getElementById('country-select');
+    var sector_set = property_list["sector"];
 
+    // console.log(geographical_set);
+    
+    var regionselect = document.getElementById('country-select');
+    var sectorselect = document.getElementById('sector-select');
+
+    // region select
     for (option of geographical_set.values()) {
         ggnew = new Option(option, option);
-        selectElement.add(ggnew);
+        regionselect.add(ggnew);
         ggnew.disabled = true;
         for (country of country_to_geographical(data, option).values()) {
             countryoption = new Option(country, country);
-            selectElement.add(countryoption);
+            regionselect.add(countryoption);
         }
     }
+
+    // sector select
+    for (option of sector_set.values()) {
+        scnew = new Option(option, option);
+        sectorselect.add(scnew);
+        scnew.disabled = true;
+        for (subsector of subsector_to_region(data, option).values()) {
+            subsectoroption = new Option(subsector, subsector);
+            sectorselect.add(subsectoroption);
+        }
+    }    
 
 
     // console.log(select.options[select.selectedIndex].value);
@@ -195,21 +210,29 @@ function updateStates(customOption) {
 
     console.log(customOption);
   
+    // region
     $(document).ready(function() {
-        $('.js-select2-multi').select2()        
-        .on("change", showvalue)});
+        $('.js-select2-multi').select2({
+            placeholder: "You can choose ..."
+        }); 
 
-    var select_val;
+        $('.country-select').on('change.select2', function (el) {
+            value = $(el.currentTarget).val();
+            console.log("region selected");
+            customOption.countryOp = [];
+            for (i = 0; i < value.length; i++) {
+                customOption.countryOp.push(value[i]);}
+        });
 
-    function showvalue(e) { 
-        customOption.countryOp = [];
-        value = $(e.currentTarget).val()
-        for (i = 0; i < value.length; i++) {
-            customOption.countryOp.push(value[i]);
-        }
-        console.log(customOption);
-    }
-  
+        $('.sector-select').on('change', function (el) {
+            value = $(el.currentTarget).val();
+            console.log("sector selected");
+            customOption.sectorOp = [];
+            for (i = 0; i < value.length; i++) {
+                customOption.sectorOp.push(value[i]);}
+        });
+
+    })
 }
 
 function detectChange(json, geoLayer, customOption) {
@@ -266,5 +289,17 @@ function country_to_geographical(input, geographical) {;
     data = array.map(data => data.country);
     data = Array.from(new Set(data)).sort();
 
+    return data;
+};
+
+//
+function subsector_to_region(input, sector) {;
+
+    array = getObjects(input, "sector", sector);
+
+    // console.log(array);
+
+    data = array.map(data => data.subsector);
+    data = Array.from(new Set(data)).sort();
     return data;
 };
