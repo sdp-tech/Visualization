@@ -59,9 +59,11 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
   <!-- year range selection-->
-   <!--Plugin CSS file with desired skin-->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
-      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+  
+  <!-- loading -->
+  <link rel="stylesheet" href="assets/css/loading.css">
+
 
   <!-- =======================================================
   * Template Name: Squadfree - v2.2.0
@@ -123,48 +125,83 @@
               <div id="findbox"></div>
 
               <!-- sidemenu -->
-              <div id="mapwrap">
+              <div class ="mapcontainer" id="mapwrap">
                 <div id="toolbar">
-                  <div class="hamburger">
-                    <span>filters</span>
-                  </div>
 
-                  <ul>
-                  </ul>
+                  <div class="hamburger">
+                  </div>
 
                   <!-- filters-->
                   <div id="filters">
                     <h4>Filter bar</h4>
                     <div class="filter_list"></div>
                     <ul>
+
+                      <!-- // Region -->
                       <li>
-                        <h6>Region</h6>
-                        <select class="select js-select2-multi country-select" id="country-select" name="countries[]" multiple="multiple" style="width: 90%"></select>
+                        <button class="dropdown-btn"><h6>Region
+                          <i class="fa fa-caret-down"></i></h6>
+                        </button>
+                        <div class="dropdown-container">
+                          <select class="select js-select2-multi country-select" id="country-select" name="countries[]" multiple="multiple" style="width: 90%"></select>
+                        </div>
                       </li>
 
+
+                      <!-- // Sector -->
                       <li>
-                        <h6>Sector</h6>
-                        <select class="select js-select2-multi sector-select" id="sector-select" name="sector[]" multiple="multiple" style="width: 90%"></select>
+                        <button class="dropdown-btn"><h6>Sector
+                          <i class="fa fa-caret-down"></i></h6>
+                        </button>
+                        <div class="dropdown-container">
+                          <select class="select js-select2-multi sector-select" id="sector-select" name="sector[]" multiple="multiple" style="width: 90%"></select>
+                        </div>
                       </li>
+
+
+                      <!-- // FC Year -->
                       <li>
-                        <h6>FC Year</h6>
-                        <input type="text" class="select js-range-slider" id="#demo_2" name="my_range" value="">
+                        <button class="dropdown-btn"><h6>FC Year
+                          <i class="fa fa-caret-down"></i></h6>
+                        </button>
+                        <div class="dropdown-container">
+                          <input type="text" class="select js-range-slider" id="#demo_2" name="my_range" value="">
+                        </div>
                       </li>
+
+                      <!-- // Status -->
                       <li>
-                        <h6>Status</h6>
-                        <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select>
+                        <button class="dropdown-btn"><h6>Status
+                          <i class="fa fa-caret-down"></i></h6>
+                        </button>
+                        <div class="dropdown-container">
+                          <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select>
+                        </div>
                       </li>
+
+                      <!-- // Income Group -->
                       <li>
-                        <h6>Income Group</h6>
-                        <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select>
+                        <button class="dropdown-btn"><h6>Income Group
+                          <i class="fa fa-caret-down"></i></h6>
+                        </button>
+                        <div class="dropdown-container">
+                          <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select>
+                        </div>
                       </li>
+
+                      <!-- // Income Group -->
                       <li>
-                        <h6>Type of PPI</h6>
-                        <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select>
+                        <button class="dropdown-btn"><h6>Type of PPI
+                          <i class="fa fa-caret-down"></i></h6>
+                        </button>
+                        <div class="dropdown-container">
+                          <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select>
+                        </div>
                       </li>
+
+
                     </ul>
 
-                    </div>
                   </div>
               
                 </div>
@@ -271,6 +308,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.min.js"></script>
   <script src="assets/js/leaflet.awesome-markers.js"></script>
   <script src="assets/vendor/range-slider-master/src/js/rSlider.js"></script>
+  <script src="assets/js/loading.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

@@ -1498,15 +1498,18 @@ section {
   border-bottom-right-radius: 3px;
   border: 1px solid #333;
   cursor: pointer;
+  z-index: 1000;
 }
 
 .hamburger span {
   color: #fff;
   display: inline-block;
-  position: relative;
+  position: absolute;
   transform: rotate(90deg);
   top: 39px;
-  left: -21px;
+  right: -10px;
+  z-index: 1000;
+
 }
 
 #tourstops {
@@ -1554,5 +1557,28 @@ section {
 }
 .fa{
   font-family: FontAwesome;
-  
 }
+
+.dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.fa-caret-down {
+  float: right;
+  padding-right: 0px;
+}
+.dropdown-container {
+  display: none;
+  padding-left: 8px;
+}
+

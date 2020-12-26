@@ -177,6 +177,7 @@
 
 .select2-container--default .select2-selection--multiple {
   background-color: white;
+  padding:1px;
   border: 1px solid #aaa;
   border-radius: 4px;
   cursor: text; }

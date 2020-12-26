@@ -7,6 +7,7 @@
     "geojson": "^0.5.0",
     "jquery": "^3.5.1",
     "leaflet-search": "^2.9.9",
-    "leaflet.awesome-markers": "^2.0.5"
+    "leaflet.awesome-markers": "^2.0.5",
+    "select2-bootstrap4-theme": "^1.0.0"
   }
 }

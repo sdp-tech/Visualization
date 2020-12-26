@@ -1,31 +1,60 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // filterArray
-    let customOption = {
-        countryOp: [],
-        sectorOp: [],
-        yearOp:{
-            "from" : 1960,
-            "to": 2021,
-        },
-        statusOp: [],
-        incomeOp: [],
-        ppitypeOp: [],
-    }
+// filterArray
+let customOption = {
+    countryOp: [],
+    sectorOp: [],
+    yearOp:{
+        "from" : 1960,
+        "to": 2021,
+    },
+    statusOp: [],
+    incomeOp: [],
+    ppitypeOp: [],
+}
 
-    // load the map
-    load_map(customOption);
+// load the map
+$.loading.start('Loading...')
 
-    /* sidemenu */
-    $('#toolbar .hamburger').on('click', function() {
-        $(this).parent().toggleClass('open');
-  });
-  
+load_data(customOption);
+
+/* sidemenu */
+$('#toolbar .hamburger').on('click', function() {
+    $(this).parent().toggleClass('open');
 });
 
+/* sidemenu dropdown */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+function load_data(customOption)
+{
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+    $.ajax({
+        dataType: "json",
+        url: proxyurl+url,
+        success: function(json)
+        {
+            load_map(json, customOption);
+            $.loading.end();
+        }
+    });
+}
 
 // setting a map 
-function load_map(customOption){
+function load_map(json,customOption){
 
     // /***************************
     //  *      Base map Layer     *
@@ -44,23 +73,25 @@ function load_map(customOption){
 
     }).addTo(mymap);
 
+    // prohibit dragging when mouse is over the filterbar
+    $('#toolbar').on("mouseover", function(){ 
+        mymap.dragging.disable();
+        mymap.doubleClickZoom.disable();
+        mymap.scrollWheelZoom.disable();
+        mymap.keyboard.disable();
+        mymap.boxZoom.disable();
+    }).on("mouseout", function(){
+        mymap.dragging.enable();
+        mymap.doubleClickZoom.enable();
+        mymap.scrollWheelZoom.enable();
+        mymap.keyboard.enable();
+        mymap.boxZoom.enable();  
+    });
+
     L.control.zoom({
         position: 'topright'
     }).addTo(mymap);
 
-    // prohibit dragging
-    var div = L.DomUtil.get('toolbar');
-    if (!L.Browser.touch) {
-        L.DomEvent.disableClickPropagation(div);
-        L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
-    } else {
-        L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
-    }
-
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
-    
-    $.getJSON(proxyurl+url, function(json) {
 
         try{
             geoLayer = L.geoJson(json, {
@@ -150,7 +181,7 @@ function load_map(customOption){
 
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())
-    });
+    
 }
 
 //////////////
