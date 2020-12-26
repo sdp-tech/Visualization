@@ -43,7 +43,6 @@ js object란?
 Object.values() !!
 
 
-
 //updateStates
 
     $(document).ready(function() 내에
