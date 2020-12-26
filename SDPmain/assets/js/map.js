@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Load data and save it as variable
-    // load_data();
-    // var mapdata = localStorage.getItem('mapdata');
-
+    
     // filterArray
     let customOption = {
         countryOp: [],
@@ -17,43 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
         ppitypeOp: [],
     }
 
-    // console.log(JSON.parse(mapdata));
-
     // load the map
     load_map(customOption);
 
-    // filtering
-    // updatefilter();
-    
     /* sidemenu */
     $('#toolbar .hamburger').on('click', function() {
         $(this).parent().toggleClass('open');
   });
   
 });
-
-// load data and save in 
-// local storage for time saving
-// function load_data()
-// {
-//     // #TODO API로 나중에 바꾸기
-//     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-//     // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
-//     const url = "http://127.0.0.1:8080/output.json";
-//     // load data
-//     $.getJSON(url, function(json) {
-//         localStorage.setItem('mapdata', JSON.stringify(json));
-//     })
-//     .catch(err => console.error(err));
-
-
-//     // #TODO 우선 Local file
-//     // $.getJSON("./temp/output.json", function(json) {
-//     //     localStorage.setItem('mapdata', JSON.stringify(json));
-//     // })
-//     // .catch(err => console.error(err));
-    
-// }
 
 
 // setting a map 
@@ -63,7 +31,6 @@ function load_map(customOption){
     //  *      Base map Layer     *
     // ***************************/
 
-    let data;
     var mymap = L.map('mapwrap', {zoomControl: false}).setView([20,30],3);
     L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
         attribution: 'SDP &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -90,12 +57,11 @@ function load_map(customOption){
         L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
     }
 
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
     
-    // $.getJSON(proxy+url, function(json) {
+    $.getJSON(proxyurl+url, function(json) {
 
-    $.getJSON("http://127.0.0.1:8080/output.json", function(json) {
         try{
             geoLayer = L.geoJson(json, {
                 onEachFeature: function (feature, layer) {
@@ -358,7 +324,6 @@ function detectChange(json, geoLayer, customOption) {
         }
     }
 }
-
 
 function getKeys(input){
 
