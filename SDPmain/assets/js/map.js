@@ -91,93 +91,90 @@ function load_map(json,customOption){
     L.control.zoom({
         position: 'topright'
     }).addTo(mymap);
-
-
-        try{
-            geoLayer = L.geoJson(json, {
-                onEachFeature: function (feature, layer) {
-                    var popupText = 
-                        "<p id='p_popup_detail'>"+
-                        "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
-                        "<b>Country:</b> " + feature.properties.country + "<br>"+
-                        "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
-                        "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-                        "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
-                        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-                        "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
-                        "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
-                        "<p id='linked_p_popup_detail'>" +
-                        "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
-                        "<a href='#'>See also</a></b>"+
-                        "</p></p>";
+    
+    try{
+        geoLayer = L.geoJson(json, {
+            onEachFeature: function (feature, layer) {
+                var popupText = 
+                    "<p id='p_popup_detail'>"+
+                    "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
+                    "<b>Country:</b> " + feature.properties.country + "<br>"+
+                    "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
+                    "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
+                    "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+                    "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
+                    "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
+                    "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
+                    "<p id='linked_p_popup_detail'>" +
+                    "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+                    "<a href='#'>See also</a></b>"+
+                    "</p></p>";
+            
+                layer.bindPopup(popupText, {
+                    closeButton: true,
+                    offset: L.point(0, -20)
+                });
+                layer.on('click', function() {
+                    layer.openPopup();
+                });
                 
-                    layer.bindPopup(popupText, {
-                        closeButton: true,
-                        offset: L.point(0, -20)
-                    });
-                    layer.on('click', function() {
-                        layer.openPopup();
-                    });
-                    
-                    },
+            },
 
+            filter: function(feature) {
+
+                // if no filter, select all
+                    countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
+                    sectorselect = (customOption.sectorOp.length == 0)? true : (customOption.sectorOp.includes(feature.properties.subsector));
+                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
+                    incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
+                    ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
+                    yearselect = yearIsincluded(feature, customOption.yearOp);
+                    return (countryselect&&sectorselect&&yearselect&&statusselect&&ppitypeselect);
+            },
+
+            pointToLayer: function (feature, latlng, layer) {
+                var sector = feature.properties.sector;
+                switch (sector) {
+                    case "Energy":
+                        icon_color = 'green';
+                        icon_png = 'lightbulb';
+                        break;
+                    case "Transport":
+                        icon_color = 'blue';
+                        icon_png = 'bus';
+                        break;
+                    default:
+                        icon_color = 'orange';
+                        icon_png = 'heart';
+                };
                 
-                filter: function(feature) {
+                var awesomemark = L.AwesomeMarkers.icon({
+                    icon: icon_png,
+                    prefix:'fa',
+                    markerColor: icon_color})
 
-                    // if no filter, select all
-                     countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
-                     sectorselect = (customOption.sectorOp.length == 0)? true : (customOption.sectorOp.includes(feature.properties.subsector));
-                     statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
-                     incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
-                     ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
-                     yearselect = yearIsincluded(feature, customOption.yearOp);
-                     return (countryselect&&sectorselect&&yearselect&&statusselect&&ppitypeselect);
-                },
-
-                pointToLayer: function (feature, latlng) {
-                    var sector = feature.properties.sector;
-                    switch (sector) {
-                        case "Energy":
-                            icon_color = 'green';
-                            icon_png = 'lightbulb';
-                            break;
-                        case "Transport":
-                            icon_color = 'blue';
-                            icon_png = 'bus';
-                            break;
-                        default:
-                            icon_color = 'orange';
-                            icon_png = 'heart';
-                    };
-                    
-                    var awesomemark = L.AwesomeMarkers.icon({
-                        icon: icon_png,
-                        prefix:'fa',
-                        markerColor: icon_color})
-
-                    var marker = new L.Marker(latlng, {
-                        icon : awesomemark,
-                    });
+                var marker = new L.Marker(latlng, {
+                    title : feature.properties.project_name_wb,
+                    icon : awesomemark,
+                });
+                return marker;
+            },
+        });
+        mymap.addLayer(geoLayer);
                 
-                    return marker;
-                },
-                
-            }).addTo(mymap);
-                    
-            // Initialization
-            updateStates(customOption);
-            geoLayer.addData(json);
+        // Initialization
+        updateStates(customOption);
+        geoLayer.addData(json);
 
-            //
-            detectChange(json, geoLayer, customOption);
+        // Updata when any change is detected
+        detectChange(json, geoLayer, customOption);
 
-
-        } catch(err){
-            console.error(err);
-        };
+    } catch(err){
+        console.error(err);
+    };
         
-        // add to HTML
-        options_to_html(json);
+    // add to HTML
+    options_to_html(json);
 
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())

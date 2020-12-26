@@ -177,7 +177,7 @@
 
 .select2-container--default .select2-selection--multiple {
   background-color: white;
-  padding:1px;
+  padding:1px
   border: 1px solid #aaa;
   border-radius: 4px;
   cursor: text; }
@@ -204,13 +204,13 @@
     float: left;
     margin-right: 5px;
     margin-top: 5px;
-    padding: 0 5px; }
+    padding: 30px; }
   .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     color: #999;
     cursor: pointer;
     display: inline-block;
     font-weight: bold;
-    margin-right: 2px; }
+    margin-right: 5px; }
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
       color: #333; }
 
