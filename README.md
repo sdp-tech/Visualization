@@ -21,15 +21,22 @@ You can also:
 ### Fix / Update 
 
 **201128**
->> map.js > load_data(), each_data()
+> map.js > load_data(), each_data()
 속도 개선을 위해 load_data() , each_data() function 분리 
 => 데이터를 불러와서 Localstorage 에 저장하도록 함.
 
 **201222**
->> Changed a json format of data into geojson format
+> Changed a json format of data into geojson format
 
 **201225**
->> Filtering function implemented with Select2 & rangeSlider on filter bar
+> Filtering function implemented with Select2 & rangeSlider on filter bar
+
+**201226**
+> Disable Mouse dragging or zooming when mouse is over the filter bar
+> Added a loading page before the map, map data is loaded
+
+**201226**
+> added optgroup element for clarifying the option group of region / sector
 
 
 ### Tech
