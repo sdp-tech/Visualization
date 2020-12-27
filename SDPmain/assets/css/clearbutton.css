@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+
+button {
+    height:50px;
+    background: tomato;
+    border:none;
+    outline:0;
+    border-radius: 60% 40%;
+    box-shadow:0;
+    display:inline-block;
+    transition:all 0.8s;
+    font-family: "Raleway", sans-serif;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:before {
+    top:-2px;
+    right:-2px;
+}
+button:after {
+    bottom:-2px;
+    left:-2px;
+}
+
+button:hover:before {
+    border-bottom-color:transparent;
+    border-right-color:transparent;
+    transition: width 0.4s 0s, height 0.4s 0.4s;
+}
+button:hover:after {
+    border-top-color:transparent;
+    border-left-color:transparent;
+    transition: width 0.4s 0.8s, height 0.4s 1.2s, border 0s 0.8s;
+}
+button:hover {
+    background:transparent;
+}
+

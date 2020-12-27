@@ -14,6 +14,7 @@ let customOption = {
 // load the map
 $.loading.start('Loading...')
 
+var mapdata;
 load_data(customOption);
 
 /* sidemenu */
@@ -26,7 +27,7 @@ var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 
 for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
+  dropdown[i].addEventListener("mouseover", function() {
     this.classList.toggle("active");
     var dropdownContent = this.nextElementSibling;
     if (dropdownContent.style.display === "block") {
@@ -47,6 +48,7 @@ function load_data(customOption)
         url: proxyurl+url,
         success: function(json)
         {
+            mapdata = json;
             load_map(json, customOption);
             $.loading.end();
         }
@@ -189,41 +191,62 @@ function options_to_html(data){
 
     var property_list = getKeys(data);
 
-    var geographical_set = property_list["geographical"];
-    var sector_set = property_list["sector"];
+    var geographical_set = arraytosortedSet(property_list["geographical"]);
+    var sector_set = arraytosortedSet(property_list["sector"]);
     var status_set = arraytosortedSet(property_list["ppi_status"]);
     var income_set = arraytosortedSet(property_list["income_group"]);
     var ppitype_set = arraytosortedSet(property_list["type_of_ppi"]);
-
-    // console.log(geographical_set);
     
-    var regionselect = document.getElementById('country-select');
-    var sectorselect = document.getElementById('sector-select');
     var statusselect = document.getElementById('status-select');
     var incomeselect = document.getElementById('income-select');
     var ppitypeselect = document.getElementById('ppitype-select');
 
     // region select
-    for (option of geographical_set.values()) {
-        ggnew = new Option(option, option);
-        regionselect.add(ggnew);
-        ggnew.disabled = true;
-        for (country of country_to_geographical(data, option).values()) {
-            countryoption = new Option(country, country);
-            regionselect.add(countryoption);
-        }
-    }
+
+    var opt = {
+        friendchat:[
+            {name:"somefriend1"},
+            {name:"somefriend2"}
+        ],
+        otherchat:[
+            {name:"someother1"},
+            {name:"someother2"}
+        ],
+        friendrequest:[
+            {name:"somerequest1"},
+            {name:"somerequest2"}
+        ],
+        sentrequest:[
+            {name:"somesent1"},
+            {name:"somesent2"}
+        ]
+    };
+
+    // sector region
+
+    $(function(){
+        var $select = $('#country-select');
+        $.each(geographical_set, function(index, optgroup){
+            var group = $('<optgroup label="' + optgroup + '" />');
+            $.each(country_to_geographical(optgroup), function(index, value){
+                $('<option />').html(value).appendTo(group);
+            });
+            group.appendTo($select);
+        });
+    });
+
 
     // sector select
-    for (option of sector_set.values()) {
-        scnew = new Option(option, option);
-        sectorselect.add(scnew);
-        scnew.disabled = true;
-        for (subsector of subsector_to_region(data, option).values()) {
-            subsectoroption = new Option(subsector, subsector);
-            sectorselect.add(subsectoroption);
-        }
-    }    
+    $(function(){
+        var $select = $('#sector-select');
+        $.each(sector_set, function(index, optgroup){
+            var group = $('<optgroup label="' + optgroup + '" />');
+            $.each(subsector_to_region(optgroup), function(index, value){
+                $('<option />').html(value).appendTo(group);
+            });
+            group.appendTo($select);
+        });
+    });
 
     // status
     for (option of status_set.values()) {
@@ -348,9 +371,10 @@ function detectChange(json, geoLayer, customOption) {
             geoLayer.clearLayers()
             updateStates(customOption)
             geoLayer.addData(json)   
-            
         }
     }
+
+
 }
 
 function getKeys(input){
@@ -384,8 +408,9 @@ function getObjects(obj, key, val) {
 }
 
 // map country-geographical into a set
-function country_to_geographical(input, geographical) {;
+function country_to_geographical(geographical) {;
 
+    input = mapdata;
     array = getObjects(input, "geographical", geographical);
 
     // console.log(array);
@@ -397,8 +422,9 @@ function country_to_geographical(input, geographical) {;
 };
 
 //
-function subsector_to_region(input, sector) {;
+function subsector_to_region(sector) {;
 
+    input = mapdata;
     array = getObjects(input, "sector", sector);
 
     // console.log(array);
@@ -429,3 +455,4 @@ function arraytosortedSet(array)
     array = Array.from(new Set(array)).sort();
     return array;
 }
+
