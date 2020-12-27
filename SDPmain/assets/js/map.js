@@ -22,21 +22,21 @@ $('#toolbar .hamburger').on('click', function() {
     $(this).parent().toggleClass('open');
 });
 
-/* sidemenu dropdown */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
+// /* sidemenu dropdown */
+// var dropdown = document.getElementsByClassName("dropdown-btn");
+// var i;
 
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("mouseover", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-}
+// for (i = 0; i < dropdown.length; i++) {
+//   dropdown[i].addEventListener("mouseover", function() {
+//     this.classList.toggle("active");
+//     var dropdownContent = this.nextElementSibling;
+//     if (dropdownContent.style.display === "block") {
+//       dropdownContent.style.display = "none";
+//     } else {
+//       dropdownContent.style.display = "block";
+//     }
+//   });
+// }
 
 
 function load_data(customOption)
