@@ -905,7 +905,7 @@ section {
   font-weight: 700;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgb(255, 253, 253);
 }
 
 .portfolio-details .portfolio-info ul {
@@ -1502,9 +1502,11 @@ section {
   z-index: 1000;
 }
 
-.hamburger span {
+.hamburger span{
   color: #fff;
-  display: inline-block;
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  /* display: inline-block; */
   position: absolute;
   transform: rotate(90deg);
   top: 39px;
@@ -1523,10 +1525,11 @@ section {
   padding: 0;
 }
 
-#toolbar li {
+#toolbar li.listclass_filter{
   list-style-type: none;
   border-bottom: 1px solid #ccc;
-  padding: 6px 3px;
+  padding: 10px 1px;
+  margin: 4px;
   cursor: pointer;
 }
 

@@ -22,22 +22,6 @@ $('#toolbar .hamburger').on('click', function() {
     $(this).parent().toggleClass('open');
 });
 
-// /* sidemenu dropdown */
-// var dropdown = document.getElementsByClassName("dropdown-btn");
-// var i;
-
-// for (i = 0; i < dropdown.length; i++) {
-//   dropdown[i].addEventListener("mouseover", function() {
-//     this.classList.toggle("active");
-//     var dropdownContent = this.nextElementSibling;
-//     if (dropdownContent.style.display === "block") {
-//       dropdownContent.style.display = "none";
-//     } else {
-//       dropdownContent.style.display = "block";
-//     }
-//   });
-// }
-
 
 function load_data(customOption)
 {
@@ -48,12 +32,72 @@ function load_data(customOption)
         url: proxyurl+url,
         success: function(json)
         {
-            mapdata = json;
-            load_map(json, customOption);
+            mapdata = data_process(json);
+            load_map(mapdata, customOption);
             $.loading.end();
         }
     });
 }
+
+// processing data
+function data_process(rawdata)
+{
+    // processing = JSON.stringify(rawdata);
+    // console.log(rawdata);
+    // console.log(processing);
+
+    $.each(rawdata.features, function (key, val) {
+        $.each(val.properties, function(i,j){
+            switch(i) {
+                case "fc_year":
+                    if (isNaN(j)){
+                        return true;
+                    }
+                    else{
+                        j = Math.round(j);
+                    }
+                    val.properties[i] = j;
+                    break;
+                case "type_of_ppi":
+                    if (j.toLowerCase().includes("green")){
+                        j = "Greenfield";
+                    }
+                    else if(j.toLowerCase().includes("brown")){
+                        j = "Brownfield";
+                    }
+                    else if(j.toLowerCase().includes("expans")){
+                        j = "Expansion";
+                        console.log("??")
+                    }
+                    else if(j.toLowerCase().includes("n/a")){
+                        j = "N/A";
+                    }
+                    else{
+                        return true;
+                    }
+                    val.properties[i] = j;
+                    break;
+                case "ppi_status":
+                    if (j.toLowerCase().includes("delay")){
+                        j = "Delayed";
+                    }
+                    else if(j.toLowerCase().includes("cancel")){
+                        j = "Canceled";
+                    }
+                    else{
+                        return true;
+                    }
+                    val.properties[i] = j;
+                    break;
+              }
+        })              
+    });
+
+    // console.log(processing);
+    // console.log(processing);
+
+    return rawdata;
+};
 
 // setting a map 
 function load_map(json,customOption){
