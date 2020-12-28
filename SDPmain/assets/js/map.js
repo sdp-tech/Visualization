@@ -106,7 +106,8 @@ function load_map(json,customOption){
     //  *      Base map Layer     *
     // ***************************/
 
-    var mymap = L.map('mapwrap', {zoomControl: false}).setView([20,30],3);
+    var mymap = L.map('mapwrap', {zoomControl: false}).setView([35,40],2.5);
+
     L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
         attribution: 'SDP &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         subdomains: 'abcd',
@@ -133,11 +134,8 @@ function load_map(json,customOption){
         mymap.keyboard.enable();
         mymap.boxZoom.enable();  
     });
-
-    L.control.zoom({
-        position: 'topright'
-    }).addTo(mymap);
     
+    var markers=[];
     try{
         geoLayer = L.geoJson(json, {
             onEachFeature: function (feature, layer) {
@@ -179,6 +177,7 @@ function load_map(json,customOption){
             },
 
             pointToLayer: function (feature, latlng, layer) {
+
                 var sector = feature.properties.sector;
                 switch (sector) {
                     case "Energy":
@@ -203,6 +202,7 @@ function load_map(json,customOption){
                     title : feature.properties.project_name_wb,
                     icon : awesomemark,
                 });
+                markers.push(marker);
                 return marker;
             },
         });
@@ -214,6 +214,27 @@ function load_map(json,customOption){
 
         // Updata when any change is detected
         detectChange(json, geoLayer, customOption);
+
+        console.log(markers);
+        // Searchbox
+        var searchControl = mymap.addControl( new L.Control.Search({
+            // container: 'toolbar',
+            position: 'bottomright',
+            layer: geoLayer,
+            initial: false,
+            collapsed: false,
+            moveToLocation: function(latlng, title, map) {
+                map.setView(latlng, 6); // access the zoom
+                let targetmarker = markers.find(el => el.defaultOptions.title === title);
+                targetmarker.openPopup();
+            }
+        }) );
+
+        
+        // zoom box
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(mymap);
 
     } catch(err){
         console.error(err);
@@ -503,4 +524,3 @@ function arraytosortedSet(array)
     array = Array.from(new Set(array)).sort();
     return array;
 }
-
