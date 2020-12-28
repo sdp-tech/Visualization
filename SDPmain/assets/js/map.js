@@ -271,9 +271,9 @@ function options_to_html(data){
     $(function(){
         var $select = $('#country-select');
         $.each(geographical_set, function(index, optgroup){
-            var group = $('<optgroup label="' + optgroup + '" />');
+            var group = $('<optgroup class="optionlist" label="' + optgroup + '" />');
             $.each(country_to_geographical(optgroup), function(index, value){
-                $('<option />').html(value).appendTo(group);
+                $('<option class="optionlist" />').html(value).appendTo(group);
             });
             group.appendTo($select);
         });
@@ -407,7 +407,7 @@ function detectChange(json, geoLayer, customOption) {
         $('.select').val(null).trigger('change');
         $('.js-range-slider').data("ionRangeSlider").update({
             from: 1960,
-            to: 2020,
+            to: 2021,
         })
     })
 

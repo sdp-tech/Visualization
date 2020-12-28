@@ -1,39 +1,44 @@
-@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
-
-button {
-    height:50px;
-    background: tomato;
-    border:none;
-    outline:0;
-    border-radius: 60% 40%;
-    box-shadow:0;
-    display:inline-block;
-    transition:all 0.8s;
-    font-family: "Raleway", sans-serif;
-    font-size:15px;
-    cursor:pointer;
-}
-
-button:before {
-    top:-2px;
-    right:-2px;
-}
-button:after {
-    bottom:-2px;
-    left:-2px;
-}
-
-button:hover:before {
-    border-bottom-color:transparent;
-    border-right-color:transparent;
-    transition: width 0.4s 0s, height 0.4s 0.4s;
-}
-button:hover:after {
-    border-top-color:transparent;
-    border-left-color:transparent;
-    transition: width 0.4s 0.8s, height 0.4s 1.2s, border 0s 0.8s;
-}
-button:hover {
-    background:transparent;
-}
-
+.button {
+    border-radius: 6px;
+    background-color: #ed5565;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 20px;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button span {
+    vertical-align: middle;
+    line-height: normal;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    /* right: -20px; */
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

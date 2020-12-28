@@ -36,7 +36,10 @@ You can also:
 > Added a loading page before the map, map data is loaded
 
 **201226**
-> added optgroup element for clarifying the option group of region / sector
+> added optgroup elements to region / sector for clarifying the child options
+
+**201227**
+> added a filter clear button (using Select2, ionRangeSlider module)
 
 
 ### Tech
