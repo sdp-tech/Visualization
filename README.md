@@ -75,10 +75,10 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 Sustainable Development Program
 ![alt text](sdp_logo.png)
 
-Webpage : https://www.sdpglobal.org/
-Instagram: @_sdp_official
-Phone: +82 010 9167 0663
-Email: sdpygl@gmail.com
+- Webpage : https://www.sdpglobal.org/
+- Instagram: @_sdp_official
+- Phone: +82 010 9167 0663
+- Email: sdpygl@gmail.com
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
