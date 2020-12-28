@@ -279,28 +279,6 @@ function options_to_html(data){
     var ppitypeselect = document.getElementById('ppitype-select');
 
     // region select
-
-    var opt = {
-        friendchat:[
-            {name:"somefriend1"},
-            {name:"somefriend2"}
-        ],
-        otherchat:[
-            {name:"someother1"},
-            {name:"someother2"}
-        ],
-        friendrequest:[
-            {name:"somerequest1"},
-            {name:"somerequest2"}
-        ],
-        sentrequest:[
-            {name:"somesent1"},
-            {name:"somesent2"}
-        ]
-    };
-
-    // sector region
-
     $(function(){
         var $select = $('#country-select');
         $.each(geographical_set, function(index, optgroup){
@@ -444,7 +422,7 @@ function detectChange(json, geoLayer, customOption) {
         })
     })
 
-    for (let input of document.querySelectorAll('.select', '.js-range-slider')) {
+    for (let input of document.querySelectorAll('.select, .js-range-slider')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
             console.log("change detected");
