@@ -73,6 +73,7 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 ## Who are we?
 ----
 Sustainable Development Program
+![alt text](sdp_logo.png)
 
 Webpage : https://www.sdpglobal.org/
 Instagram: @_sdp_official
