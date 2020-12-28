@@ -40,6 +40,8 @@ You can also:
 
 **201227**
 > added a filter clear button (using Select2, ionRangeSlider module)
+> Search Control added ** let marker open its own popup when searched **
+> added an Easybutton to get back to the initial setView
 
 
 ### Tech
@@ -53,6 +55,7 @@ SDP Failure Map uses a number of open source projects to work properly:
 | Select2 ~4.0| https://select2.org/ |
 | rangeSlider | https://skinnynpale.github.io/rangeSlider.js/ |
 | leaflet.awesome-markers 2.0.5 | https://github.com/lvoogdt/Leaflet.awesome-markers |
+|L.EasyButton|https://github.com/CliffCloud/Leaflet.EasyButton|
 
 And of course SDP FailureMap itself is open source with a [public repository](https://github.com/sdp-tech/Visualization)
  on GitHub.

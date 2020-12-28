@@ -214,27 +214,39 @@ function load_map(json,customOption){
 
         // Updata when any change is detected
         detectChange(json, geoLayer, customOption);
-
-        console.log(markers);
+        
         // Searchbox
         var searchControl = mymap.addControl( new L.Control.Search({
             // container: 'toolbar',
-            position: 'bottomright',
+            position: 'topright',
             layer: geoLayer,
             initial: false,
-            collapsed: false,
+            collapsed: true,
             moveToLocation: function(latlng, title, map) {
-                map.setView(latlng, 6); // access the zoom
+                map.setView(latlng,5);
                 let targetmarker = markers.find(el => el.defaultOptions.title === title);
                 targetmarker.openPopup();
             }
         }) );
 
-        
         // zoom box
         L.control.zoom({
             position: 'topright'
         }).addTo(mymap);
+
+
+        L.easyButton({
+            position: 'topright',
+            states: [{
+                        stateName: 'zoom-to-original',        // name the state
+                        icon:      'fas fa-map',               // and define its properties
+                        title:     'zoom to a original',      // like its title
+                        onClick: function(btn, map) {       // and its callback
+                            map.setView([35,40],2.5);
+                            btn.state('zoom-to-original');    // change state on click!
+                        }
+                }]}).addTo(mymap);
+
 
     } catch(err){
         console.error(err);
