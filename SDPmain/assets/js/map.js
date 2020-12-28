@@ -25,13 +25,15 @@ $('#toolbar .hamburger').on('click', function() {
 
 function load_data(customOption)
 {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
     $.ajax({
         dataType: "json",
-        url: proxyurl+url,
-        success: function(json)
+        url: proxy+url,
+        origin: "example.com",
+        success: function(requested)
         {
+            json=requested['body'];
             mapdata = data_process(json);
             load_map(mapdata, customOption);
             $.loading.end();
@@ -67,7 +69,6 @@ function data_process(rawdata)
                     }
                     else if(j.toLowerCase().includes("expans")){
                         j = "Expansion";
-                        console.log("??")
                     }
                     else if(j.toLowerCase().includes("n/a")){
                         j = "N/A";
@@ -125,7 +126,7 @@ function load_map(json,customOption){
         mymap.doubleClickZoom.disable();
         mymap.scrollWheelZoom.disable();
         mymap.keyboard.disable();
-        mymap.boxZoom.disable();
+        mymap.boxZoom.disable(); 
     }).on("mouseout", function(){
         mymap.dragging.enable();
         mymap.doubleClickZoom.enable();
