@@ -30,7 +30,6 @@ function load_data(customOption)
     $.ajax({
         dataType: "json",
         url: proxy+url,
-        origin: "example.com",
         success: function(requested)
         {
             json=requested['body'];
@@ -322,7 +321,6 @@ function updateStates(customOption) {
   
     // region
     $(document).ready(function() {
-        $('.js-select2-multi').select2(); 
 
         // country selection
         $('.country-select')
@@ -351,6 +349,7 @@ function updateStates(customOption) {
         });
 
         // FC year slider
+         
         $('.js-range-slider').ionRangeSlider({
             type: "double",
             min: 1960,
@@ -398,18 +397,21 @@ function updateStates(customOption) {
         .select2({
             placeholder: "Choose a PPI Type"
         })
-        .on('change', function (el) {
-            value = $(el.currentTarget).val();
-            console.log("Status selected");
-            customOption.ppitypeOp = [];
-            for (i = 0; i < value.length; i++) {
-                customOption.ppitypeOp.push(value[i]);}
-        });
     })
 }
 
 function detectChange(json, geoLayer, customOption) {
-    for (let input of document.querySelectorAll('.select')) {
+
+    // clear filters - select2 & js slider
+    $('.clearfilter').on('click', function (){
+        $('.select').val(null).trigger('change');
+        $('.js-range-slider').data("ionRangeSlider").update({
+            from: 1960,
+            to: 2020,
+        })
+    })
+
+    for (let input of document.querySelectorAll('.select', '.js-range-slider')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
             console.log("change detected");
@@ -418,6 +420,7 @@ function detectChange(json, geoLayer, customOption) {
             geoLayer.addData(json)   
         }
     }
+
 
 
 }

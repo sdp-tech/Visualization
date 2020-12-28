@@ -41,7 +41,7 @@
     .select2-container .select2-search--inline .select2-search__field {
       box-sizing: border-box;
       border: none;
-      font-size: 100%;
+      font-size: 13px;
       margin-top: 5px;
       padding: 0; }
       .select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button {
@@ -60,6 +60,12 @@
 
 .select2-results {
   display: block; }
+
+strong.select2-results__group
+select2-results__options select2-results__options--nested{
+  font-size : 12px;
+}
+
 
 .select2-results__options {
   list-style: none;
