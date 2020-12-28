@@ -1,14 +1,23 @@
 # SDP Visualization
 
-SDP Failure Map is ~.
-> Please fill this 
-> box ... 
+<b>Project MaPPIng​</b>
+>Project MaPPping focuses on large-scale infrastructure that can increase >connectivity with many of the megacities that arise from the intensive >urbanization of Asia. The project aims to collect, analyze, and visualize these >relevant indicators to show how sustainable development in Asia is happening and >how to move forward.​
 
-#### It contains ... 
-  - blah
-  - blahblah
-  - blahblahblah
 
+#### Project Process
+  - Phase 1
+
+In December 2019, SDP was selected as the Data Reviewer and Research Assistant for the World Bank Group Singapore PPI team for the first time as an undergraduate group to participate in the "The World Bank 2019 PPI Report" project. SDP conducted open-source tracking and data review of all Private Partition Infrastructure (PPI) Deals conducted at Developing Country in 2019.
+
+  - Phase 2
+
+We continue to work with the World Bank through the "PPI Deal Tracking" project. In response to global fan demographics in 2020, we collect and classify PPI Deals that have been affected by Corona 19. Furthermore, the goal is to build a SDP-specific infrastructure database to increase competitiveness.
+
+  - Phase 3
+
+Based on the infrastructure database of SDPs built through the previous Phases, we plan to make visualizations that can derive insights (and here it is!)
+
+#### About the Map
 # Features
   - Retreive data from JSON API
   - Interactive filters
@@ -63,12 +72,14 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 
 ### Todos
 
-- Search bar 
 
 License
 ----
+Sustainable Development Program
 
-MIT
+Instagram: @_sdp_official
+Phone: +82 010 9167 0663
+Email: sdpygl@gmail.com
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
