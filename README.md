@@ -29,29 +29,26 @@ You can also:
 
 ### Fix / Update 
 
-**201128**
-> map.js > load_data(), each_data()
-속도 개선을 위해 load_data() , each_data() function 분리 
-=> 데이터를 불러와서 Localstorage 에 저장하도록 함.
+...
 
 **201222**
-> Changed a json format of data into geojson format
+> 1. Changed a json format of data into geojson format
 
 **201225**
-> Filtering function implemented with Select2 & rangeSlider on filter bar
+> 1. Filtering function implemented with Select2 & rangeSlider on filter bar
 
 **201226**
-> Disable Mouse dragging or zooming when mouse is over the filter bar
-> Added a loading page before the map, map data is loaded
+> 1. Disable Mouse dragging or zooming when mouse is over the filter bar
+> 2. Added a loading page before the map, map data is loaded
 
 **201226**
-> added optgroup elements to region / sector for clarifying the child options
+> 1. added optgroup elements to region / sector for clarifying the child options
 
 **201227**
-> added a filter clear button (using Select2, ionRangeSlider module)
-> Search Control added ** let marker open its own popup when searched **
-> added an Easybutton to get back to the initial setView
-> let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
+> 1. added a filter clear button (using Select2, ionRangeSlider module)
+> 2. Search Control added ** let marker open its own popup when searched **
+> 3. added an Easybutton to get back to the initial setView
+> 4. let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
 
 ### Tech
@@ -73,10 +70,11 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 ### Todos
 
 
-License
+## Who are we?
 ----
 Sustainable Development Program
 
+Webpage : https://www.sdpglobal.org/
 Instagram: @_sdp_official
 Phone: +82 010 9167 0663
 Email: sdpygl@gmail.com
