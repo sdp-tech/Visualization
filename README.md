@@ -11,13 +11,13 @@ In December 2019, SDP was selected as the Data Reviewer and Research Assistant f
 
   - Phase 2
 
-We continue to work with the World Bank through the "PPI Deal Tracking" project. In response to global fan demographics in 2020, we collect and classify PPI Deals that have been affected by Corona 19. Furthermore, the goal is to build a SDP-specific infrastructure database to increase competitiveness.
+We continue to work with the World Bank through the "PPI Deal Tracking" project. In response to global pandemic in 2020, we collect and classify PPI Deals that have been affected by Covid-19. Furthermore, the goal is to build a SDP-specific infrastructure database to increase competitiveness.
 
   - Phase 3
 
 Based on the infrastructure database of SDPs built through the previous Phases, we plan to make visualizations that can derive insights (and here it is!)
 
-#### About the Map
+***
 # Features
   - Retreive data from JSON API
   - Interactive filters
@@ -27,6 +27,7 @@ Based on the infrastructure database of SDPs built through the previous Phases, 
 You can also:
   - Search data on Searchbar 
 
+***
 # Fix / Update 
 
 ...
@@ -50,7 +51,7 @@ You can also:
 > 3. added an Easybutton to get back to the initial setView
 > 4. let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
-
+***
 # Tech
 
 SDP Failure Map uses a number of open source projects to work properly:
@@ -67,9 +68,10 @@ SDP Failure Map uses a number of open source projects to work properly:
 And of course SDP FailureMap itself is open source with a [public repository](https://github.com/sdp-tech/Visualization)
  on GitHub.
 
+***
 # Todos
 
-
+***
 # Who are we?
 ----
 Sustainable Development Program
