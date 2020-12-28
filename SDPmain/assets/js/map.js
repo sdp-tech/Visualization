@@ -417,6 +417,7 @@ function detectChange(json, geoLayer, customOption) {
 
     // clear filters - select2 & js slider
     $('.clearfilter').on('click', function (){
+        console.log("hh")
         $('.select').val(null).trigger('change');
         $('.js-range-slider').data("ionRangeSlider").update({
             from: 1960,
