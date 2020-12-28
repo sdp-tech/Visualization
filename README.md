@@ -30,7 +30,8 @@ You can also:
 ***
 # Fix / Update 
 
-...
+**201120**
+~
 
 **201222**
 > 1. Changed a json format of data into geojson format
@@ -73,7 +74,7 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 
 ***
 # Who are we?
-----
+
 Sustainable Development Program
 ![alt text](sdp_logo.png)
 
