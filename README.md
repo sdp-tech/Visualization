@@ -27,7 +27,7 @@ Based on the infrastructure database of SDPs built through the previous Phases, 
 You can also:
   - Search data on Searchbar 
 
-### Fix / Update 
+# Fix / Update 
 
 ...
 
@@ -51,7 +51,7 @@ You can also:
 > 4. let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
 
-### Tech
+# Tech
 
 SDP Failure Map uses a number of open source projects to work properly:
 
@@ -67,10 +67,10 @@ SDP Failure Map uses a number of open source projects to work properly:
 And of course SDP FailureMap itself is open source with a [public repository](https://github.com/sdp-tech/Visualization)
  on GitHub.
 
-### Todos
+# Todos
 
 
-## Who are we?
+# Who are we?
 ----
 Sustainable Development Program
 ![alt text](sdp_logo.png)
