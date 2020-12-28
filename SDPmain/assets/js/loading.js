@@ -6,8 +6,10 @@ $.loading = {
         '<br><br><br><br><p class="loading">Loading...</p>'+'</div>'
 
         $('.mapcontainer').append(_LoadingHtml);
+        $('.hamburger').hide();
     },
     end: function () {
         $(".box").remove();
+        $('.hamburger').show();
     }
 }

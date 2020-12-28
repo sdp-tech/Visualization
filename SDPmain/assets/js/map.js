@@ -21,6 +21,7 @@ load_data(customOption);
 $('#toolbar .hamburger').on('click', function() {
     $(this).parent().toggleClass('open');
 });
+toggle_selectableOptgroup();
 
 
 function load_data(customOption)
@@ -359,6 +360,7 @@ function updateStates(customOption) {
                 customOption.sectorOp.push(value[i]);}
         });
 
+
         // FC year slider
          
         $('.js-range-slider').ionRangeSlider({
@@ -513,4 +515,77 @@ function arraytosortedSet(array)
 {
     array = Array.from(new Set(array)).sort();
     return array;
+}
+
+
+function toggle_selectableOptgroup()
+{
+    ////////////
+    // Region // 
+    ////////////
+
+    $('.country-select').select2();
+
+    $(document).on("click", "#select2-country-select-results  strong", function(){
+
+        var groupName = $(this).html()
+        var options = $('.country-select option');
+    
+        $.each(options, function(key, value){
+            console.log($(value).prop("selected"), $(key).prop)
+            if($(value)[0].parentElement.label.indexOf(groupName) >= 0){
+                if($(value).prop("selected")== true){
+                    $(value).prop("selected",false);
+                    return true;
+                }
+                else if($(value).prop("selected")== false){
+                    $(value).prop("selected",true);
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        });        
+
+    $('.country-select').trigger("change");
+    $('.country-select').select2('close'); 
+
+    })
+
+    ////////////
+    // Sector // 
+    ////////////
+
+    $('.sector-select').select2();
+
+    $(document).on("click", "#select2-sector-select-results  strong", function(){
+
+        var groupName = $(this).html()
+        var options = $('.sector-select option');
+    
+        $.each(options, function(key, value){
+            console.log($(value).prop("selected"), $(key).prop)
+            if($(value)[0].parentElement.label.indexOf(groupName) >= 0){
+                if($(value).prop("selected")== true){
+                    $(value).prop("selected",false);
+                    return true;
+                }
+                else if($(value).prop("selected")== false){
+                    $(value).prop("selected",true);
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        });        
+
+    $('.sector-select').trigger("change");
+    $('.sector-select').select2('close'); 
+
+    })
+
 }

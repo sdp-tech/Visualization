@@ -1457,7 +1457,7 @@ section {
   height: 600px;
   height: 100vh;
   margin-top: 30px;
-  border: 1px solid rgb(233, 233, 233);
+  border: 1px solid transparent;
   position: relative;
   overflow: hidden;
 }
@@ -1607,4 +1607,3 @@ section {
 	float: left;
 	margin-left: -22px;
 }
-

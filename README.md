@@ -42,6 +42,7 @@ You can also:
 > added a filter clear button (using Select2, ionRangeSlider module)
 > Search Control added ** let marker open its own popup when searched **
 > added an Easybutton to get back to the initial setView
+> let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
 
 ### Tech
