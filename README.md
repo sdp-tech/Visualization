@@ -52,6 +52,10 @@ You can also:
 > 3. added an Easybutton to get back to the initial setView
 > 4. let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
+**201230**
+> 1. Fixed subtle errors
+> 2. Added content to main.html
+
 ***
 # Tech
 

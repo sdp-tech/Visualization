@@ -224,7 +224,7 @@ function load_map(json,customOption){
             initial: false,
             collapsed: true,
             moveToLocation: function(latlng, title, map) {
-                map.setView(latlng,5);
+                map.setView(latlng,10);
                 let targetmarker = markers.find(el => el.defaultOptions.title === title);
                 targetmarker.openPopup();
             }
@@ -410,6 +410,13 @@ function updateStates(customOption) {
         .select2({
             placeholder: "Choose a PPI Type"
         })
+        .on('change', function (el) {
+            value = $(el.currentTarget).val();
+            console.log("PPI type selected");
+            customOption.ppitypeOp = [];
+            for (i = 0; i < value.length; i++) {
+                customOption.ppitypeOp.push(value[i]);}
+        });
     })
 }
 
