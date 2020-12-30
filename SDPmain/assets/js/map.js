@@ -432,7 +432,7 @@ function detectChange(json, geoLayer, customOption) {
         })
     })
 
-    for (let input of document.querySelectorAll('.select, .js-range-slider')) {
+    for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
             console.log("change detected");
@@ -503,6 +503,7 @@ function subsector_to_region(sector) {;
     return data;
 };
 
+// Manage Range slider
 function yearIsincluded(feature, yearOp)
 {
     let targetyear = feature.properties.fc_year;
@@ -510,7 +511,7 @@ function yearIsincluded(feature, yearOp)
     dateTo = yearOp["to"];
     
     if (targetyear == ("N/A"||"BLANK")){
-        return true;
+        return includeNA();
     }
     else if ((targetyear >= dateFrom) && (targetyear <= dateTo))
     {
@@ -518,6 +519,19 @@ function yearIsincluded(feature, yearOp)
     }
     return false;
 }
+
+// checkbox checking
+function includeNA() {
+    // Get the checkbox
+    var checkBox = document.getElementById("myCheck");
+  
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 function arraytosortedSet(array)
 {
