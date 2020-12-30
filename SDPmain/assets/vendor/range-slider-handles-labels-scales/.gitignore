@@ -1,6 +1,0 @@
-node_modules
-.vscode
-.idea
-.eslintcache
-.nyc_output
-coverage
