@@ -31,7 +31,7 @@ You can also:
 # Fix / Update 
 
 **201120**
-~
+> 1. Map Design
 
 **201222**
 > 1. Changed a json format of data into geojson format
@@ -50,7 +50,7 @@ You can also:
 > 1. Add a filter clear button (using Select2, ionRangeSlider module)
 > 2. Search Control added ** let marker open its own popup when searched **
 > 3. Add an Easybutton to get back to the initial setView
-> 4. let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
+> 4. Let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
 **201230**
 > 1. Add content to main.html
