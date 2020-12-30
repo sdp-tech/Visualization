@@ -55,6 +55,7 @@ You can also:
 **201230**
 > 1. Fixed subtle errors
 > 2. Added content to main.html
+> 3. Added checkbox to include N/A value to FC year search result 
 
 ***
 # Tech
