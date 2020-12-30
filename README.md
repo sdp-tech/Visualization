@@ -41,21 +41,20 @@ You can also:
 
 **201226**
 > 1. Disable Mouse dragging or zooming when mouse is over the filter bar
-> 2. Added a loading page before the map, map data is loaded
+> 2. Add a loading page before the map, map data is loaded
 
 **201226**
-> 1. added optgroup elements to region / sector for clarifying the child options
+> 1. Add optgroup elements to region / sector for clarifying the child options
 
 **201227**
-> 1. added a filter clear button (using Select2, ionRangeSlider module)
+> 1. Add a filter clear button (using Select2, ionRangeSlider module)
 > 2. Search Control added ** let marker open its own popup when searched **
-> 3. added an Easybutton to get back to the initial setView
+> 3. Add an Easybutton to get back to the initial setView
 > 4. let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
 **201230**
-> 1. Fixed subtle errors
-> 2. Added content to main.html
-> 3. Added checkbox to determine whether to include N/A value to FC year search result or not
+> 1. Add content to main.html
+> 2. Add checkbox to determine whether to include N/A value to FC year search result or not
 
 ***
 # Tech
@@ -77,10 +76,14 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 ***
 # Todos
 
+0.
+1.
+2.
+
 ***
 # Who are we?
 
-Sustainable Development Program
+<b>Sustainable Development Program</b>
 ![alt text](sdp_logo.png)
 
 - Webpage : https://www.sdpglobal.org/
