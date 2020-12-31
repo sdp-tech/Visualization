@@ -362,7 +362,7 @@ function updateStates(customOption) {
 
 
         // FC year slider
-         
+
         $('.js-range-slider').ionRangeSlider({
             type: "double",
             min: 1960,
@@ -370,13 +370,16 @@ function updateStates(customOption) {
             from: 1960,
             to: 2021,
             grid: true,
+            prettify: function(date){
+                return date.toString();
+            },
             onChange: function (data) {
                 // Called every time handle position is changed
                 customOption.yearOp = {};
-                customOption.yearOp["from"]=data.from;
-                customOption.yearOp["to"]=data.to;
+                customOption.yearOp["from"]=(data.from);
+                customOption.yearOp["to"]=(data.to);
                 // console.log(customOption);
-        }})
+            }})
 
         // status selection
         $('.status-select')
@@ -612,3 +615,11 @@ function toggle_selectableOptgroup()
     })
 
 }
+
+
+/////////////
+// tooltip //
+/////////////
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+  });

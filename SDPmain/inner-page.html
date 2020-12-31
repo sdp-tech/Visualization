@@ -70,6 +70,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
   <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
+  <!-- Tooltip-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
   <!-- =======================================================
   * Template Name: Squadfree - v2.2.0
   * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
@@ -129,61 +133,57 @@
 
         <p> Failure Map </p>
           <!-- MAP GOES HERE-->
+
               <!-- sidemenu -->
-              <div class ="mapcontainer" id="mapwrap">
+              <div class ="mapcontainer wrapper" id="mapwrap">
                 <div id="toolbar">
                   <div class="hamburger">
-                    <span> Filters </span>
+                    <span><a href="#" data-toggle="tooltip" title="Description goes here"">Filters</a></span>
                   </div>
 
                   <!-- filters-->
                   <div id="filters">
-                    <h4>Filter bar</h4>
+                    <h4><a class="tooltips" href="#" data-toggle="tooltip" title="filterbar">Filter bar</a></h4>
                     <div class="filter_list"></div>
                     <ul>
 
                       <!-- // Region -->
-                      <li class="listclass_filter">                         
-                         <h6>Region</h6>
-                         <h9 class="filtertip">Click the title of the region to select/unselect all of the corresponding countries.</h9>
-                         <select class="select js-select2-multi country-select" id="country-select" name="countries[]" multiple="multiple" style="width: 90%"></select> 
+                      <li class="listclass_filter">       
+                        <h6><a href="#" data-toggle="tooltip" title="Click the title of the region to select/unselect all of the corresponding countries.">Region</a></h6>
+                        <select class="select js-select2-multi country-select" id="country-select" name="countries[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
 
                       <!-- // Sector -->
                       <li class="listclass_filter">                         
-                        
-                          <h6>Sector</h6>
-                         <h9 class="filtertip">
-                        Click the title of the sector to select/unselect all of the corresponding subsectors.</span>
-                        </h9>
+                        <h6><a href="#" data-toggle="tooltip" title="Click the title of the sector to select/unselect all of the corresponding subsectors.">Sector</a></h6>
                          <select class="select js-select2-multi sector-select" id="sector-select" name="sector[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
 
                       <!-- // FC Year -->
                       <li class="listclass_filter">                         
-                         <h6>FC Year</h6>
-                         <input type="checkbox" id="myCheck" onclick="includeNA()" checked="true"> Include N/A value 
-                         <input type="text" class="js-range-slider" id="#demo_2" name="my_range" value=""> 
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">FC Year</a></h6>
+                        <input type="checkbox" id="myCheck" onclick="includeNA()" checked="true"> Include N/A value 
+                        <input type="text" class="js-range-slider" id="#demo_2" name="my_range" value=""> 
                       </li>
 
                       <!-- // Status -->
                       <li class="listclass_filter">                         
-                         <h6>Status</h6>
-                         <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select> 
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Status</a></h6>
+                        <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
                       <!-- // Income Group -->
                       <li class="listclass_filter">                         
-                         <h6>Income Group</h6>
-                         <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select> 
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Income Group</a></h6>
+                        <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
                       <!-- // Income Group -->
                       <li class="listclass_filter">                         
-                         <h6>Type of PPI</h6>
-                         <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select> 
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Type of PPI</a></h6>
+                        <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
 

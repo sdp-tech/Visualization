@@ -41,20 +41,24 @@ You can also:
 
 **201226**
 > 1. Disable Mouse dragging or zooming when mouse is over the filter bar
-> 2. Add a loading page before the map, map data is loaded
+> 2. Added a loading page before the map, map data is loaded
 
 **201226**
-> 1. Add optgroup elements to region / sector for clarifying the child options
+> 1. Added optgroup elements to region / sector for clarifying the child options
 
 **201227**
-> 1. Add a filter clear button (using Select2, ionRangeSlider module)
+> 1. Added a filter clear button (using Select2, ionRangeSlider module)
 > 2. Search Control added ** let marker open its own popup when searched **
-> 3. Add an Easybutton to get back to the initial setView
+> 3. Added an Easybutton to get back to the initial setView
 > 4. Let optgroup be selectable so that user can selet/ unselect all according options by clicking the optgroup title
 
 **201230**
-> 1. Add content to main.html
-> 2. Add checkbox to determine whether to include N/A value to FC year search result or not
+> 1. Added content to main.html
+> 2. Added checkbox to determine whether to include N/A value to FC year search result or not
+
+**201231**
+> 1. Added tooltip to divs
+> 2. Applied Number toString() Method to FC year slider
 
 ***
 # Tech

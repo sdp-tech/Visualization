@@ -1447,8 +1447,6 @@ section {
 }
 
 
-
-
 /* sidemenu */
 
 
@@ -1606,4 +1604,10 @@ section {
 	position: static;
 	float: left;
 	margin-left: -22px;
+}
+
+/* tooltip */
+#filters > h4 > a,
+#filters>ul>li a {
+  color: black;
 }
