@@ -1611,7 +1611,3 @@ section {
 #filters>ul>li a {
   color: black;
 }
-#filters > button > span > a,
-#toolbar > div.hamburger > span > a{
-  color: white;
-}
