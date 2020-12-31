@@ -1611,3 +1611,9 @@ section {
 #filters>ul>li a {
   color: black;
 }
+
+#toolbar > div.hamburger > span > a,
+#filters > button > span > a{
+  color: white;
+  font-style : bold;
+}
