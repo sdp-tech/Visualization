@@ -25,9 +25,7 @@ Based on the infrastructure database of SDPs built through the previous Phases, 
   - Pop-up bind marker
 
 You can also:
-  - Search data on Searchbar 
-
-
+  - 
 
 ***
 # Tech
@@ -46,12 +44,6 @@ SDP Failure Map uses a number of open source projects to work properly:
 And of course SDP FailureMap itself is open source with a [public repository](https://github.com/sdp-tech/Visualization)
  on GitHub.
 
-***
-# Todos
-
-0.
-1.
-2.
 
 ***
 # Who are we?
