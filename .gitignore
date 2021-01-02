@@ -36,8 +36,10 @@
 ehthumbs.db
 Thumbs.db
 
+#  Custom exception  #
+######################
 cors-anywhere/
 joojeol.md
 /jsonTogeojson
-.DS_Store
+/git-s3-push
 .vscode
