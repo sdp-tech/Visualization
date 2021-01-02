@@ -180,17 +180,52 @@ function load_map(json,customOption){
             pointToLayer: function (feature, latlng, layer) {
 
                 var sector = feature.properties.sector;
+                var subsector = feature.properties.subsector;
+
+                // sector
                 switch (sector) {
                     case "Energy":
                         icon_color = 'green';
-                        icon_png = 'lightbulb';
+                        break;
+                    case "ICT":
+                        icon_color = 'purple';
+                        break;
+                    case "Municipal Solid Waste":
+                        icon_color = 'orange';
                         break;
                     case "Transport":
                         icon_color = 'blue';
-                        icon_png = 'bus';
                         break;
                     default:
-                        icon_color = 'orange';
+                        icon_color = 'pink';
+                };
+                //subsector
+                switch (subsector) {
+                    case "Airports":
+                        icon_png = "plane-departure";
+                        break;
+                    case "Railways":
+                        icon_png = "subway";
+                        break;
+                    case "Electricity":
+                        icon_png = "bolt";
+                        break;
+                    case "Natural Gas":
+                        icon_png = "burn";
+                        break;
+                    case "ICT backbone":
+                        icon_png = "sitemap";
+                        break;
+                    case "Ports":
+                        icon_png = "ship";
+                        break;
+                    case "Roads":
+                        icon_png = "road";
+                        break;
+                    case "Treatment/Disposal":
+                        icon_png = "trash-alt";
+                        break;
+                    default:
                         icon_png = 'heart';
                 };
                 
