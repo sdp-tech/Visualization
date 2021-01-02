@@ -60,6 +60,9 @@ You can also:
 > 1. Added tooltip to divs
 > 2. Applied Number toString() Method to FC year slider
 
+**210102**
+> 1. Added clear buttons for each properrty
+
 ***
 # Tech
 

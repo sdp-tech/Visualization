@@ -23,6 +23,46 @@ $('#toolbar .hamburger').on('click', function() {
 });
 toggle_selectableOptgroup();
 
+/*clear button*/
+// clear filters - select2 & js slider
+$('.clearfilter').on('click', function (){
+    $('#myCheck').checked="true"
+    $('.select').val(null).trigger('change');
+    $('.js-range-slider').data("ionRangeSlider").update({
+        from: 1960,
+        to: 2021,
+    })
+})
+
+for (let input of document.querySelectorAll('#clearEach')) {
+    input.onclick = (e) =>{
+        switch(input.className) {
+            case "region_clear":
+                $('.country-select').val(null).trigger('change');
+                break;
+            case "sector_clear":
+                $('.sector-select').val(null).trigger('change');
+                break;
+            case "fcyear_clear":
+                $('.js-range-slider').data("ionRangeSlider").update({
+                    from: 1960,
+                    to: 2021,
+                })
+                break;
+            case "status_clear":
+                $('.status-select').val(null).trigger('change');
+                break;
+            case "income_clear":
+                $('.income-select').val(null).trigger('change');
+                break;
+            case "ppitype_clear":
+                $('.ppitype-select').val(null).trigger('change');
+                break;
+            default:
+                console.log("default");
+            }
+    }
+}
 
 function load_data(customOption)
 {
@@ -460,17 +500,6 @@ function updateStates(customOption) {
 
 function detectChange(json, geoLayer, customOption) {
 
-    // clear filters - select2 & js slider
-    $('.clearfilter').on('click', function (){
-        console.log("hh")
-        $('#myCheck').checked="true"
-        $('.select').val(null).trigger('change');
-        $('.js-range-slider').data("ionRangeSlider").update({
-            from: 1960,
-            to: 2021,
-        })
-    })
-
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
@@ -480,9 +509,6 @@ function detectChange(json, geoLayer, customOption) {
             geoLayer.addData(json)   
         }
     }
-
-
-
 }
 
 function getKeys(input){

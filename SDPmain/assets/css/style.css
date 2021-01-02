@@ -1449,6 +1449,21 @@ section {
 
 /* sidemenu */
 
+#clearEach {
+  width: 40px;
+  height: 20px;
+  padding: 0px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 0;
+  background: lightgray;
+}
+
+#clearEach span {
+  justify-content: center;
+  text-align: center;
+  font-size:8px;
+}
 
 #mapwrap {
   width: 100%;
@@ -1483,6 +1498,8 @@ section {
 #toolbar.open {
   left: 0;
   opacity: .95;
+  overflow-y : scroll;
+
 }
 
 #toolbar .hamburger {
