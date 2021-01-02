@@ -1473,6 +1473,7 @@ section {
   margin-top: 30px;
   border: 1px solid transparent;
   position: relative;
+  overflow: hidden;
 }
 
 #leafletmap {
