@@ -1458,11 +1458,10 @@ section {
   border-radius: 3px;
   box-sizing: border-box;
   border: 2px;
-  background:#dae1ed;
+  background:#ebeef1;
 }
 
 #clearEach span {
-  font-family: 'Courier New', Courier, monospace;
   justify-content: center;
   text-align: center;
   font-size:8px;
@@ -1474,7 +1473,6 @@ section {
   margin-top: 30px;
   border: 1px solid transparent;
   position: relative;
-  overflow: hidden;
 }
 
 #leafletmap {
@@ -1499,14 +1497,12 @@ section {
 #toolbar.open {
   left: 0;
   opacity: .95;
-  /* overflow-y : scroll; */
   width: 260px;
 }
 
 #filters{
-  height: 650px;
-  max-height: 670px;
-  overflow-y : scroll;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
 }
 
 #toolbar .hamburger {
