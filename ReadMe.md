@@ -25,7 +25,7 @@ Based on the infrastructure database of SDPs built through the previous Phases, 
   - Pop-up bind marker
 
 You can also:
-  - 
+  - ?
 
 ***
 # Tech
@@ -53,7 +53,6 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
 
 - Webpage : https://www.sdpglobal.org/
 - Instagram: @_sdp_official
-- Phone: +82 010 9167 0663
 - Email: sdpygl@gmail.com
 
 
