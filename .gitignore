@@ -42,5 +42,5 @@ cors-anywhere/
 joojeol.md
 /jsonTogeojson
 /git-s3-push
-/bin
+.bin
 .vscode
