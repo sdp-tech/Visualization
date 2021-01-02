@@ -1452,10 +1452,12 @@ section {
 #clearEach {
   width: 40px;
   height: 20px;
+  line-height: 20px;
   padding: 0px;
+  text-align: center;
   border-radius: 3px;
   box-sizing: border-box;
-  border: 0;
+  border: 2px;
   background: lightgray;
 }
 
@@ -1498,8 +1500,12 @@ section {
 #toolbar.open {
   left: 0;
   opacity: .95;
-  overflow-y : scroll;
+  /* overflow-y : scroll; */
+  width: 250px;
+}
 
+.filters{
+  overflow-y : scroll;
 }
 
 #toolbar .hamburger {
