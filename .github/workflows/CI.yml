@@ -17,6 +17,14 @@ jobs:
       - name: git clone  
         uses: actions/checkout@master
       
+      # set credential
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
       # update S3 bucket with latest pushed version
       - name: Push Contents to S3
-        run: aws s3 sync ./SDPmain s3://failure-map-bucket
+        run: aws s3 sync ./SDPmain s3://failure-map-bucket/SDPmain --delete
