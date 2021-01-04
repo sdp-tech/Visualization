@@ -182,8 +182,9 @@ function load_map(json,customOption){
             onEachFeature: function (feature, layer) {
                 var popupText = 
                     "<p id='p_popup_detail'>"+
-                    "<strong style='color: #84b819' >" + feature.properties.project_name_wb + "</strong><br>" + 
+                    "<strong style='color: #84b819; font-size:120%;' >" + feature.properties.project_name_wb + "</strong><br>" + 
                     "<b>Country:</b> " + feature.properties.country + "<br>"+
+                    "<b>Income Group:</b> " + feature.properties.income_group + "<br>"+
                     "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
                     "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
                     "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
@@ -214,7 +215,7 @@ function load_map(json,customOption){
                     incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
                     ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
                     yearselect = yearIsincluded(feature, customOption.yearOp);
-                    return (countryselect&&sectorselect&&yearselect&&statusselect&&ppitypeselect);
+                    return (countryselect&&sectorselect&&yearselect&&incomeselect&&statusselect&&ppitypeselect);
             },
 
             pointToLayer: function (feature, latlng, layer) {
@@ -237,7 +238,7 @@ function load_map(json,customOption){
                         icon_color = 'blue';
                         break;
                     default:
-                        icon_color = 'pink';
+                        icon_color = 'red';
                 };
                 //subsector
                 switch (subsector) {
@@ -266,7 +267,7 @@ function load_map(json,customOption){
                         icon_png = "trash-alt";
                         break;
                     default:
-                        icon_png = 'heart';
+                        icon_png = 'globe';
                 };
                 
                 var awesomemark = L.AwesomeMarkers.icon({
@@ -477,7 +478,7 @@ function updateStates(customOption) {
         })
         .on('change', function (el) {
             value = $(el.currentTarget).val();
-            console.log("Status selected");
+            console.log("Income group selected");
             customOption.incomeOp = [];
             for (i = 0; i < value.length; i++) {
                 customOption.incomeOp.push(value[i]);}
