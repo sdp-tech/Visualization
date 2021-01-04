@@ -18,13 +18,5 @@ jobs:
         uses: actions/checkout@master
       
       # update S3 bucket with latest pushed version
-      - name: Transfer to S3 for serving static
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
-        env:
-          AWS_S3_BUCKET: failure-map-bucket
-          AWS_ACCESS_KEY_ID: ${{ secrets. AWS_IAM_MANAGER_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-northeast-2
-          SOURCE_DIR: 'SDPmain'
+      - name: Push Contents to S3
+        run: aws s3 sync ./SDPmain s3://failure-map-bucket
