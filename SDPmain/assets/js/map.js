@@ -337,6 +337,15 @@ function load_map(json,customOption){
     
 }
 
+//tutorial//
+function on() {
+    document.getElementById("tutorial").style.display = "block";
+  }
+  
+  function off() {
+    document.getElementById("tutorial").style.display = "none";
+  }
+
 //////////////
 /// filter ///
 //////////////
