@@ -5,11 +5,14 @@ $.loading = {
         '<div id="box"></div>'+
         '<br><br><br><br><p class="loading">Loading...</p>'+'</div>'
 
+        $('#tutorial_btn').hide();
         $('.mapcontainer').append(_LoadingHtml);
         $('.hamburger').hide();
+
     },
     end: function () {
-        $(".box").remove();
+        $("#loader").remove();
         $('.hamburger').show();
+        $('#tutorial_btn').show();
     }
 }
