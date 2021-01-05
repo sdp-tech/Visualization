@@ -23,6 +23,66 @@ $('#toolbar .hamburger').on('click', function() {
 });
 toggle_selectableOptgroup();
 
+
+//tutorial//
+currentIndex = 0;
+minIndex = 0;
+maxIndex = 3;
+
+function on() {
+    $toolbar = $('#toolbar');
+    className = $('#toolbar').attr('class');
+
+    document.getElementById("tutorial").style.display = "block";
+    if (className != 'open'){
+        $('#toolbar').toggleClass('open');
+    }
+
+    currentIndex = 0;
+    showpage(currentIndex);
+  }
+  
+function off() {
+    document.getElementById("tutorial").style.display = "none";
+    if ($('#toolbar').attr('class') == 'open'){
+        $('#toolbar').toggleClass('open');
+    }
+}
+
+function tutorialpage(action) {
+    if (action == previous){
+        currentIndex--;
+    }
+    if (action == next){
+        currentIndex++;
+    }
+    console.log(currentIndex);
+    showpage(currentIndex);
+}
+
+function showpage(currentIndex){
+    for (let input of document.querySelectorAll('.tutorial_content')) {
+        if (input.id == currentIndex){
+            input.hidden = false;
+        }
+        else{
+            input.hidden = true;
+        }
+        if (currentIndex == minIndex){
+            document.getElementById("previous").disabled = true;
+        }
+        else{
+            document.getElementById("previous").disabled = false;
+        }
+        if (currentIndex == maxIndex){
+            document.getElementById("next").disabled = true;
+        }
+        else{
+            document.getElementById("next").disabled = false;
+        }
+    }
+}
+
 /*clear button*/
 // clear filters - select2 & js slider
 $('.clearfilter').on('click', function (){
@@ -337,14 +397,7 @@ function load_map(json,customOption){
     
 }
 
-//tutorial//
-function on() {
-    document.getElementById("tutorial").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("tutorial").style.display = "none";
-  }
+
 
 //////////////
 /// filter ///

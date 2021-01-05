@@ -127,8 +127,12 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
+
+      <!-- tutorial -->
       <div class="container">
         <br>
+        <p style="text-align: right;"><button onclick="on()">Tutorial</button></p>
+
           <!-- MAP GOES HERE-->
 
               <!-- sidemenu -->
@@ -141,14 +145,30 @@
                   <!-- filters-->
                   <div id="filters">
                     <h4><a class="tooltips" href="#" data-toggle="tooltip" title="filterbar">Filter bar</a></h4>  
-                    <button onclick="on()">Tutorial</button>
                     <div class="filter_list"></div>
                     <ul>
-                  
-                  <!-- tutorial -->
-                  <div id="tutorial" onclick="off()">
-                    <div id="tutorial_text">Tutorial Text</div>
-                  </div>
+
+                      <!-- tutorial -->
+                      <div id="tutorial">
+                        <div id="tutorial_text">Tutorial Text<br>
+                        <button id="previous" onclick="tutorialpage(previous)">previous</button>
+                        <button id="next" onclick="tutorialpage(next)">next</button>
+                        <button id="close" onclick="off()">close</button>
+
+                        <div class = "tutorial_content" id = "0">
+                          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" alt="alternatetext">
+                        </div>
+                        <div class = "tutorial_content" id = "1">
+                          <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" alt="alternatetext">
+                        </div>
+                        <div class = "tutorial_content" id = "2">
+                          <img src="https://homepages.cae.wisc.edu/~ece533/images/girl.png" alt="alternatetext">
+                        </div>
+                        <div class = "tutorial_content" id = "3">
+                          메롱이다
+                        </div>
+                        </div>
+                      </div>                
 
                       <!-- // Region -->
                       <li class="listclass_filter">  
