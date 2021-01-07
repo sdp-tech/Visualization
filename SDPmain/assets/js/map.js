@@ -297,6 +297,9 @@ function load_map(json,customOption){
                     case "Transport":
                         icon_color = 'blue';
                         break;
+                    case "Water and sewerage":
+                        icon_color = 'gray';
+                        break;                        
                     default:
                         icon_color = 'red';
                 };
