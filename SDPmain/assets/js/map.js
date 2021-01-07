@@ -270,8 +270,8 @@ function load_map(json,customOption){
 
                 // if no filter, select all
                     countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
-                    sectorselect = (customOption.sectorOp.length == 0)? true : (customOption.sectorOp.includes(feature.properties.subsector));
-                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
+                    sectorselect = (customOption.sectorOp.length == 0)? true : (sectorClass(customOption.sectorOp,feature.properties));
+                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.ppi_status));
                     incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
                     ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
                     yearselect = yearIsincluded(feature, customOption.yearOp);
@@ -432,14 +432,13 @@ function options_to_html(data){
         });
     });
 
-
     // sector select
     $(function(){
         var $select = $('#sector-select');
         $.each(sector_set, function(index, optgroup){
             var group = $('<optgroup label="' + optgroup + '" />');
             $.each(subsector_to_region(optgroup), function(index, value){
-                $('<option />').html(value).appendTo(group);
+                $(`<option value="${optgroup}:${value}"/>`).html(value).appendTo(group);
             });
             group.appendTo($select);
         });
@@ -649,6 +648,15 @@ function yearIsincluded(feature, yearOp)
         return true;
     }
     return false;
+}
+
+function sectorClass(sectorOp,properties){
+    if (sectorOp.includes(`${properties.sector}:${properties.subsector}`)){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 // checkbox checking
