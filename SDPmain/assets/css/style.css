@@ -1463,9 +1463,9 @@ section {
 
 #tutorial_text{
   position: fixed;
-  top: 50%;
+  top: 55%;
   left: 50%;
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   line-height: 20px;
   color: white;
@@ -1488,9 +1488,15 @@ section {
 }
 
 #clearEach span {
+  font-family: "Poppins", sans-serif !important;;
   justify-content: center;
   text-align: center;
   font-size:8px;
+  vertical-align: middle;
+  line-height: normal;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
 }
 
 #mapwrap {
@@ -1663,4 +1669,34 @@ section {
 #filters > button > span > a{
   color: white;
   font-style : bold;
+}
+
+/* Tutorial button */
+
+#tutorial_btn{
+  color: #c44436ab !important;
+  /* text-transform: uppercase; */
+  background: #ffffff;
+  padding: 5px 10px;
+  border: 3px solid #c44436ab !important;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+}
+
+#tutorial_btn:hover {
+  color: #494949 !important;
+  border-radius: 50px;
+  border-color: #494949 !important;
+  transition: all 0.3s ease 0s;
+  }
+
+.innerbtn_tutorial {
+  width : 30px;
+  height: 30px;
+  border: 2px solid gray !important;
+  opacity: 80%;
+  color: black !important;
+  border-radius: 50px;
+  border-color: gray !important;
 }
