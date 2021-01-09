@@ -15,6 +15,7 @@ body {
 
 a {
   color: #67b0d1;
+  cursor: pointer;
 }
 
 a:hover {
@@ -1539,6 +1540,7 @@ section {
 }
 
 #toolbar .hamburger {
+  cursor: pointer;
   height: 100px;
   width: 25px;
   background: #000;

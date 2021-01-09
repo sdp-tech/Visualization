@@ -18,9 +18,10 @@ var mapdata;
 load_data(customOption);
 
 /* sidemenu */
-$('#toolbar .hamburger').on('click', function() {
-    $(this).parent().toggleClass('open');
-});
+function toolbar_open() {
+    $toolbar = $('#toolbar');
+    $toolbar.toggleClass('open');
+};
 toggle_selectableOptgroup();
 
 
