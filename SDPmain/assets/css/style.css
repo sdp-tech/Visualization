@@ -1125,7 +1125,7 @@ section {
   padding-bottom: 80px;
 }
 
-.contact .info-box {
+.contact .info-box, .team-intro .info-box {
   color: #444444;
   background: #fff;
   text-align: center;
@@ -1133,7 +1133,7 @@ section {
   padding: 20px 0 30px 0;
 }
 
-.contact .info-box i {
+.contact .info-box i , .team-intro .info-box i{
   font-size: 32px;
   color: #c44536;
   border-radius: 50%;
@@ -1141,14 +1141,14 @@ section {
   border: 2px dotted#772e25;
 }
 
-.contact .info-box h3 {
+.contact .info-box h3 , .team-intro .info-box h3{
   font-size: 20px;
   color: #777777;
   font-weight: 700;
   margin: 10px 0;
 }
 
-.contact .info-box p {
+.contact .info-box p , .team-intro .info-box p{
   padding: 0;
   line-height: 24px;
   font-size: 14px;
