@@ -1749,3 +1749,9 @@ section {
   transition: max-height 0.2s ease-out;
 }
 
+p.notice {
+  font-weight : bold;
+  padding: 20px;
+  overflow: auto;
+  color : rgba(48, 7, 161, 0.664);
+}
