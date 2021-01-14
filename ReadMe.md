@@ -25,7 +25,7 @@ Based on the infrastructure database of SDPs built through the previous Phases, 
   - Pop-up bind marker
 
 You can also:
-  - ?
+  - ...
 
 ***
 # Tech
