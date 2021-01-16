@@ -589,10 +589,11 @@ section {
   margin: 0 0 10px 0;
 }
 
-.about .icon-boxes .icon-box p {
+.about .icon-boxes .icon-box p, .icon-box li {
   font-size: 15px;
   color: #848484;
 }
+
 
 @media (max-width: 1200px) {
   .about .content {
