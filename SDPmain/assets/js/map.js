@@ -135,7 +135,9 @@ function load_data(customOption)
         success: function(requested)
         {
             json=requested['body'];
+            console.log(json);
             mapdata = data_process(json);
+            console.log(mapdata);
             load_map(mapdata, customOption);
             $.loading.end();
         }
