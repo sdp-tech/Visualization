@@ -130,12 +130,15 @@ function load_data(customOption)
         url: proxy+url,
         success: function(requested)
         {
+            console.time("Time this");
             json=requested['body'];
             console.log(json);
             mapdata = data_process(json);
             console.log(mapdata);
             load_map(mapdata, customOption);
+            console.timeEnd("Time this");
             $.loading.end();
+            
         }
     });
 }
