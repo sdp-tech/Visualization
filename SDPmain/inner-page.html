@@ -131,9 +131,32 @@
     <section class="inner-page">
 
       <!-- tutorial -->
+      <div id="tutorial">
+        <div id="tutorial_text">Tutorial Text<br>
+          <p class = "button_control" style="text-align: right; font-size: 16px"><button class="innerbtn_tutorial" id="close" onclick="tutorial_off()">x</button></p>
+          <div class = "tutorial_content" id = "0">
+            <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" alt="alternatetext">
+          </div>
+          <div class = "tutorial_content" id = "1">
+            <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" alt="alternatetext">
+          </div>
+          <div class = "tutorial_content" id = "2">
+            <img src="https://homepages.cae.wisc.edu/~ece533/images/girl.png" alt="alternatetext">
+          </div>
+          <div class = "tutorial_content" id = "3">
+            글자도 가능
+          </div>
+          <p class = "button_control" style="text-align: center;">
+            <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
+            <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
+          </p>
+          </div>
+      </div>     
+
+      <!-- tutorial -->
       <div class="container">
         <br>
-        <p style="text-align: left;"><button id="tutorial_btn" onclick="on()"><span>Tutorial</span></button></p>
+        <!-- <p style="text-align: left;"><button id="tutorial_btn" onclick="on()"><span>Tutorial</span></button></p> -->
 
           <!-- MAP GOES HERE-->
 
@@ -149,31 +172,7 @@
                   <div id="filters">
                     <h4><a class="tooltips" href="#" data-toggle="tooltip" title="filterbar">Filter bar</a></h4>  
                     <div class="filter_list"></div>
-                    <ul>
-
-                      <!-- tutorial -->
-                      <div id="tutorial">
-                        <div id="tutorial_text">Tutorial Text<br>
-                          <p class = "button_control" style="text-align: right; font-size: 16px"><button class="innerbtn_tutorial" id="close" onclick="off()">x</button></p>
-
-                          <div class = "tutorial_content" id = "0">
-                            <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" alt="alternatetext">
-                          </div>
-                          <div class = "tutorial_content" id = "1">
-                            <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" alt="alternatetext">
-                          </div>
-                          <div class = "tutorial_content" id = "2">
-                            <img src="https://homepages.cae.wisc.edu/~ece533/images/girl.png" alt="alternatetext">
-                          </div>
-                          <div class = "tutorial_content" id = "3">
-                            메롱이다
-                          </div>
-                          <p class = "button_control" style="text-align: center;">
-                            <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
-                            <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
-                          </p>
-                          </div>
-                      </div>                
+                    <ul>           
 
                       <!-- // Region -->
                       <li class="listclass_filter">  

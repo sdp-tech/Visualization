@@ -12,6 +12,7 @@ let customOption = {
 }
 
 // load the map
+tutorial_on();
 $.loading.start('Loading...')
 
 var mapdata;
@@ -27,27 +28,16 @@ toggle_selectableOptgroup();
 
 //tutorial//
 currentIndex = 0;
-minIndex = 0;
-maxIndex = 3;
 
-function on() {
-    $toolbar = $('#toolbar');
-    className = $('#toolbar').attr('class');
 
+function tutorial_on() {
     document.getElementById("tutorial").style.display = "block";
-    if (className != 'open'){
-        $('#toolbar').toggleClass('open');
-    }
-
     currentIndex = 0;
     showpage(currentIndex);
   }
   
-function off() {
+function tutorial_off() {
     document.getElementById("tutorial").style.display = "none";
-    if ($('#toolbar').attr('class') == 'open'){
-        $('#toolbar').toggleClass('open');
-    }
 }
 
 function tutorialpage(action) {
@@ -62,6 +52,7 @@ function tutorialpage(action) {
 }
 
 function showpage(currentIndex){
+
     for (let input of document.querySelectorAll('.tutorial_content')) {
         if (input.id == currentIndex){
             input.hidden = false;
@@ -69,20 +60,25 @@ function showpage(currentIndex){
         else{
             input.hidden = true;
         }
-        if (currentIndex == minIndex){
-            document.getElementById("previous").disabled = true;
-        }
-        else{
-            document.getElementById("previous").disabled = false;
-        }
-        if (currentIndex == maxIndex){
-            document.getElementById("next").disabled = true;
-        }
-        else{
-            document.getElementById("next").disabled = false;
-        }
+    }
+        
+    // disable button when reached min/max page
+    minIndex = 0;
+    maxIndex = 3;
+    if (currentIndex == minIndex){
+        document.getElementById("previous").disabled = true;
+    }
+    else{
+        document.getElementById("previous").disabled = false;
+    }
+    if (currentIndex == maxIndex){
+        document.getElementById("next").disabled = true;
+    }
+    else{
+        document.getElementById("next").disabled = false;
     }
 }
+
 
 /*clear button*/
 // clear filters - select2 & js slider
