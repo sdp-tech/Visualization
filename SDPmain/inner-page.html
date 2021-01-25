@@ -130,13 +130,13 @@
     <section class="inner-page">
       <!-- tutorial -->
       <div id="tutorial" class="modal">
-        <span class="tutorial_off" id="tutorial_close">&times;</span>
-        <div id="tutorial_text" class="modal-content">
+
+\        <div id="tutorial_text" class="modal-content">
 
           <!-- modal header -->
           <div class="modal-header">
-            <h5>Modal Header</h5>
-            <span class="close">&times;</span>
+            <h5>Tutorial</h5>
+            <span class="close" id="tutorial_close" onclick="popup_close();">&times;</span>
           </div>
 
           <!-- modal body -->
@@ -149,18 +149,13 @@
             </div>
             <div class = "tutorial_content" id = "2">
               <img class="tutorial_img" src="assets/img/tutorial_image/tutorial3.png" alt="alternatetext">
-            </div>
-          </div>
-
-            <!-- modal footer -->
-            <div class="modal-footer">
-              <p class = "button_control" style="text-align: center;">
-                <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
-                <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
-              </p>
-              <input type="checkbox" id="check" onclick="closePopup();">
-              <b>하루에 한번만 보기</b>
-            </div>
+            </div></div>
+            
+            <br>
+            <p class = "button_control" style="text-align: center;">
+              <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
+              <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
+            </p>
         </div>
 
       </div>     
