@@ -47,9 +47,6 @@ function popup_close(){
     modal.style.display = "none";
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = popup_close();
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
@@ -149,7 +146,6 @@ function load_data(customOption)
         {
             
             json=requested['body'];
-            console.log(json);
             mapdata = data_process(json);
             console.log(mapdata);
             load_map(mapdata, customOption);
@@ -202,6 +198,9 @@ function data_process(rawdata)
                     }
                     else if(j.toLowerCase().includes("cancel")){
                         j = "Canceled";
+                    }
+                    else if(j.toLowerCase().includes("nan")){
+                        j = "N/A";
                     }
                     else{
                         return true;
@@ -289,7 +288,7 @@ function load_map(json,customOption){
                 // if no filter, select all
                     countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
                     sectorselect = (customOption.sectorOp.length == 0)? true : (sectorClass(customOption.sectorOp,feature.properties));
-                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.ppi_status));
+                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
                     incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
                     ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
                     yearselect = yearIsincluded(feature, customOption.yearOp);
@@ -365,6 +364,7 @@ function load_map(json,customOption){
             },
         });
         mymap.addLayer(geoLayer);
+        console.log(markers);
                 
         // Initialization
         updateStates(customOption);
@@ -658,14 +658,14 @@ function yearIsincluded(feature, yearOp)
     dateFrom = yearOp["from"];
     dateTo = yearOp["to"];
     
-    if (targetyear == ("N/A"||"BLANK")){
-        return includeNA();
-    }
-    else if ((targetyear >= dateFrom) && (targetyear <= dateTo))
+    if ((targetyear >= dateFrom) && (targetyear <= dateTo))
     {
         return true;
     }
-    return false;
+    else{
+        return includeNA();
+    }
+
 }
 
 function sectorClass(sectorOp,properties){
