@@ -128,34 +128,47 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
-
       <!-- tutorial -->
-      <div id="tutorial">
-        <div id="tutorial_text">Tutorial Text<br>
-          <p class = "button_control" style="text-align: right; font-size: 16px"><button class="innerbtn_tutorial" id="close" onclick="tutorial_off()">x</button></p>
-          <div class = "tutorial_content" id = "0">
-            <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" alt="alternatetext">
+      <div id="tutorial" class="modal">
+        <span class="tutorial_off" id="tutorial_close">&times;</span>
+        <div id="tutorial_text" class="modal-content">
+
+          <!-- modal header -->
+          <div class="modal-header">
+            <h5>Modal Header</h5>
+            <span class="close">&times;</span>
           </div>
-          <div class = "tutorial_content" id = "1">
-            <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" alt="alternatetext">
+
+          <!-- modal body -->
+          <div class="modal-body">
+            <div class = "tutorial_content" id = "0">
+              <img class="tutorial_img" src="assets/img/tutorial_image/tutorial1.png" alt="alternatetext">
+            </div>
+            <div class = "tutorial_content" id = "1">
+              <img class="tutorial_img" src="assets/img/tutorial_image/tutorial2.png" alt="alternatetext">
+            </div>
+            <div class = "tutorial_content" id = "2">
+              <img class="tutorial_img" src="assets/img/tutorial_image/tutorial3.png" alt="alternatetext">
+            </div>
           </div>
-          <div class = "tutorial_content" id = "2">
-            <img src="https://homepages.cae.wisc.edu/~ece533/images/girl.png" alt="alternatetext">
-          </div>
-          <div class = "tutorial_content" id = "3">
-            글자도 가능
-          </div>
-          <p class = "button_control" style="text-align: center;">
-            <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
-            <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
-          </p>
-          </div>
+
+            <!-- modal footer -->
+            <div class="modal-footer">
+              <p class = "button_control" style="text-align: center;">
+                <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
+                <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
+              </p>
+              <input type="checkbox" id="check" onclick="closePopup();">
+              <b>하루에 한번만 보기</b>
+            </div>
+        </div>
+
       </div>     
 
       <!-- tutorial -->
       <div class="container">
         <br>
-        <!-- <p style="text-align: left;"><button id="tutorial_btn" onclick="on()"><span>Tutorial</span></button></p> -->
+        <p style="text-align: left;"><button id="tutorial_btn" onclick="tutorial_on()"><span>Tutorial</span></button></p>
 
           <!-- MAP GOES HERE-->
 

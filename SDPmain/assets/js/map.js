@@ -12,11 +12,15 @@ let customOption = {
 }
 
 // load the map
-tutorial_on();
+
 $.loading.start('Loading...')
 
 var mapdata;
+
+console.time("Time this");
 load_data(customOption);
+console.timeEnd("Time this");
+
 
 /* sidemenu */
 function toolbar_open() {
@@ -27,17 +31,47 @@ toggle_selectableOptgroup();
 
 
 //tutorial//
+// Get the modal
+var modal = document.getElementById("tutorial");
+
+// Get the button that opens the modal
+var btn = document.getElementById("tutorial_btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
 currentIndex = 0;
 
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+  currentIndex = 0;
+  showpage(currentIndex);
+}
 
-function tutorial_on() {
-    document.getElementById("tutorial").style.display = "block";
-    currentIndex = 0;
-    showpage(currentIndex);
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
-  
-function tutorial_off() {
-    document.getElementById("tutorial").style.display = "none";
+}
+
+function setCookie(name, value, expiredays) {
+    var date = new Date();
+    date.setDate(date.getDate() + expiredays);
+    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
+}
+
+function closePopup() {
+    if (document.getElementById("check").value) {
+        setCookie("popupYN", "N", 1);
+        self.close();
+    }
 }
 
 function tutorialpage(action) {
@@ -64,7 +98,7 @@ function showpage(currentIndex){
         
     // disable button when reached min/max page
     minIndex = 0;
-    maxIndex = 3;
+    maxIndex = 2;
     if (currentIndex == minIndex){
         document.getElementById("previous").disabled = true;
     }
@@ -130,13 +164,12 @@ function load_data(customOption)
         url: proxy+url,
         success: function(requested)
         {
-            console.time("Time this");
+            
             json=requested['body'];
             console.log(json);
             mapdata = data_process(json);
             console.log(mapdata);
             load_map(mapdata, customOption);
-            console.timeEnd("Time this");
             $.loading.end();
             
         }
