@@ -1762,7 +1762,7 @@ tr:hover {background-color:#f5f5f5;}
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   z-index: 10000;
-  overflow: auto; Enable scroll if needed
+  overflow: auto; /*Enable scroll if needed*/
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -1770,6 +1770,7 @@ tr:hover {background-color:#f5f5f5;}
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
+  border-radius: 10px;
   margin: auto;
   padding: 0px;
   border: 1px solid #888;
@@ -1778,6 +1779,7 @@ tr:hover {background-color:#f5f5f5;}
 
 .modal-header {
   padding: 20px 40px;
+  border-radius: 10px 10px 0px 0px;
   background: #546E7A;
   color: #ffffff;
 }
