@@ -12,10 +12,15 @@ let customOption = {
 }
 
 // load the map
+
 $.loading.start('Loading...')
 
 var mapdata;
+
+console.time("Time this");
 load_data(customOption);
+console.timeEnd("Time this");
+
 
 /* sidemenu */
 function toolbar_open() {
@@ -26,28 +31,27 @@ toggle_selectableOptgroup();
 
 
 //tutorial//
+// Get the modal
+var modal = document.getElementById("tutorial");
+
 currentIndex = 0;
-minIndex = 0;
-maxIndex = 3;
 
-function on() {
-    $toolbar = $('#toolbar');
-    className = $('#toolbar').attr('class');
+// When the user clicks the button, open the modal 
+function tutorial_on() {
+  modal.style.display = "block";
+  currentIndex = 0;
+  showpage(currentIndex);
+}
 
-    document.getElementById("tutorial").style.display = "block";
-    if (className != 'open'){
-        $('#toolbar').toggleClass('open');
-    }
+function popup_close(){
+    modal.style.display = "none";
+}
 
-    currentIndex = 0;
-    showpage(currentIndex);
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    popup_close();
   }
-  
-function off() {
-    document.getElementById("tutorial").style.display = "none";
-    if ($('#toolbar').attr('class') == 'open'){
-        $('#toolbar').toggleClass('open');
-    }
 }
 
 function tutorialpage(action) {
@@ -62,6 +66,7 @@ function tutorialpage(action) {
 }
 
 function showpage(currentIndex){
+
     for (let input of document.querySelectorAll('.tutorial_content')) {
         if (input.id == currentIndex){
             input.hidden = false;
@@ -69,20 +74,25 @@ function showpage(currentIndex){
         else{
             input.hidden = true;
         }
-        if (currentIndex == minIndex){
-            document.getElementById("previous").disabled = true;
-        }
-        else{
-            document.getElementById("previous").disabled = false;
-        }
-        if (currentIndex == maxIndex){
-            document.getElementById("next").disabled = true;
-        }
-        else{
-            document.getElementById("next").disabled = false;
-        }
+    }
+        
+    // disable button when reached min/max page
+    minIndex = 0;
+    maxIndex = 2;
+    if (currentIndex == minIndex){
+        document.getElementById("previous").disabled = true;
+    }
+    else{
+        document.getElementById("previous").disabled = false;
+    }
+    if (currentIndex == maxIndex){
+        document.getElementById("next").disabled = true;
+    }
+    else{
+        document.getElementById("next").disabled = false;
     }
 }
+
 
 /*clear button*/
 // clear filters - select2 & js slider
@@ -134,10 +144,13 @@ function load_data(customOption)
         url: proxy+url,
         success: function(requested)
         {
+            
             json=requested['body'];
             mapdata = data_process(json);
+            console.log(mapdata);
             load_map(mapdata, customOption);
             $.loading.end();
+            
         }
     });
 }
@@ -185,6 +198,9 @@ function data_process(rawdata)
                     }
                     else if(j.toLowerCase().includes("cancel")){
                         j = "Canceled";
+                    }
+                    else if(j.toLowerCase().includes("nan")){
+                        j = "N/A";
                     }
                     else{
                         return true;
@@ -272,7 +288,7 @@ function load_map(json,customOption){
                 // if no filter, select all
                     countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
                     sectorselect = (customOption.sectorOp.length == 0)? true : (sectorClass(customOption.sectorOp,feature.properties));
-                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.ppi_status));
+                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
                     incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
                     ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
                     yearselect = yearIsincluded(feature, customOption.yearOp);
@@ -348,6 +364,7 @@ function load_map(json,customOption){
             },
         });
         mymap.addLayer(geoLayer);
+        console.log(markers);
                 
         // Initialization
         updateStates(customOption);
@@ -641,14 +658,14 @@ function yearIsincluded(feature, yearOp)
     dateFrom = yearOp["from"];
     dateTo = yearOp["to"];
     
-    if (targetyear == ("N/A"||"BLANK")){
-        return includeNA();
-    }
-    else if ((targetyear >= dateFrom) && (targetyear <= dateTo))
+    if ((targetyear >= dateFrom) && (targetyear <= dateTo))
     {
         return true;
     }
-    return false;
+    else{
+        return includeNA();
+    }
+
 }
 
 function sectorClass(sectorOp,properties){

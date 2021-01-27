@@ -24,7 +24,7 @@
         }
         $('html, body').animate({
           scrollTop: scrollto
-        }, 1500, 'easeInOutExpo');
+        }, 800, 'easeInOutExpo');
         if ($(this).parents('.nav-menu, .mobile-nav').length) {
           $('.nav-menu .active, .mobile-nav .active').removeClass('active');
           $(this).closest('li').addClass('active');
@@ -47,7 +47,7 @@
         var scrollto = $(initial_nav).offset().top - scrolltoOffset;
         $('html, body').animate({
           scrollTop: scrollto
-        }, 1500, 'easeInOutExpo');
+        }, 800, 'easeInOutExpo');
       }
     }
   });

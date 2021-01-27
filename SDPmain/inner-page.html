@@ -35,7 +35,6 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/teamsection.css" rel="stylesheet">
 
 
   <!-- search bar-->
@@ -129,11 +128,42 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
+      <!-- tutorial -->
+      <div id="tutorial" class="modal">
+
+        <div id="tutorial_text" class="modal-content">
+
+          <!-- modal header -->
+          <div class="modal-header">
+            <p style="float: left;font-size: 24px; margin:0px; font-weight: bold;">Tutorial</p>
+            <span class="close" id="tutorial_close" onclick="popup_close();">&times;</span>
+          </div>
+
+          <!-- modal body -->
+          <div class="modal-body">
+            <div class = "tutorial_content" id = "0">
+              <img class="tutorial_img" src="assets/img/tutorial_image/tutorial1.png" alt="alternatetext">
+            </div>
+            <div class = "tutorial_content" id = "1">
+              <img class="tutorial_img" src="assets/img/tutorial_image/tutorial2.png" alt="alternatetext">
+            </div>
+            <div class = "tutorial_content" id = "2">
+              <img class="tutorial_img" src="assets/img/tutorial_image/tutorial3.png" alt="alternatetext">
+            </div></div>
+            
+            <br>
+            <p class = "button_control" style="text-align: center;">
+              <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
+              <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
+            </p>
+        </div>
+
+      </div>     
 
       <!-- tutorial -->
       <div class="container">
         <br>
-        <p style="text-align: left;"><button id="tutorial_btn" onclick="on()"><span>Tutorial</span></button></p>
+        <p style="text-align: right;"><button id="tutorial_btn" onclick="tutorial_on()"><span>Tutorial</span></button></p>
 
           <!-- MAP GOES HERE-->
 
@@ -149,31 +179,7 @@
                   <div id="filters">
                     <h4><a class="tooltips" href="#" data-toggle="tooltip" title="filterbar">Filter bar</a></h4>  
                     <div class="filter_list"></div>
-                    <ul>
-
-                      <!-- tutorial -->
-                      <div id="tutorial">
-                        <div id="tutorial_text">Tutorial Text<br>
-                          <p class = "button_control" style="text-align: right; font-size: 16px"><button class="innerbtn_tutorial" id="close" onclick="off()">x</button></p>
-
-                          <div class = "tutorial_content" id = "0">
-                            <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" alt="alternatetext">
-                          </div>
-                          <div class = "tutorial_content" id = "1">
-                            <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" alt="alternatetext">
-                          </div>
-                          <div class = "tutorial_content" id = "2">
-                            <img src="https://homepages.cae.wisc.edu/~ece533/images/girl.png" alt="alternatetext">
-                          </div>
-                          <div class = "tutorial_content" id = "3">
-                            메롱이다
-                          </div>
-                          <p class = "button_control" style="text-align: center;">
-                            <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
-                            <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
-                          </p>
-                          </div>
-                      </div>                
+                    <ul>           
 
                       <!-- // Region -->
                       <li class="listclass_filter">  
