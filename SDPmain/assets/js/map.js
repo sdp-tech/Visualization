@@ -13,28 +13,23 @@ let customOption = {
 
 // load the map
 
-$.loading.start('Loading...')
+$.loading.start('Loading...');
 
 var mapdata;
 
-console.time("Time this");
 load_data(customOption);
-console.timeEnd("Time this");
-
 
 /* sidemenu */
 function toolbar_open() {
-    $toolbar = $('#toolbar');
-    $toolbar.toggleClass('open');
+    $('#toolbar').toggleClass('open');
 };
 toggle_selectableOptgroup();
-
 
 //tutorial//
 // Get the modal
 var modal = document.getElementById("tutorial");
 
-currentIndex = 0;
+var currentIndex = 0;
 
 // When the user clicks the button, open the modal 
 function tutorial_on() {
@@ -61,7 +56,6 @@ function tutorialpage(action) {
     if (action == next){
         currentIndex++;
     }
-    console.log(currentIndex);
     showpage(currentIndex);
 }
 
@@ -77,8 +71,8 @@ function showpage(currentIndex){
     }
         
     // disable button when reached min/max page
-    minIndex = 0;
-    maxIndex = 2;
+    let minIndex = 0;
+    let maxIndex = 2;
     if (currentIndex == minIndex){
         document.getElementById("previous").disabled = true;
     }
@@ -130,7 +124,6 @@ for (let input of document.querySelectorAll('#clearEach')) {
                 $('.ppitype-select').val(null).trigger('change');
                 break;
             default:
-                console.log("default");
             }
     }
 }
@@ -142,15 +135,19 @@ function load_data(customOption)
     $.ajax({
         dataType: "json",
         url: proxy+url,
+        //to support IE
+        cache : false,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+
         success: function(requested)
         {
-            
-            json=requested['body'];
+            let json=requested['body'];
             mapdata = data_process(json);
-            console.log(mapdata);
             load_map(mapdata, customOption);
             $.loading.end();
-            
+        },
+        error : function(err){
+            console.log(err);
         }
     });
 }
@@ -210,10 +207,6 @@ function data_process(rawdata)
               }
         })              
     });
-
-    // console.log(processing);
-    // console.log(processing);
-
     return rawdata;
 };
 
@@ -255,7 +248,7 @@ function load_map(json,customOption){
     
     var markers=[];
     try{
-        geoLayer = L.geoJson(json, {
+        let geoLayer = L.geoJson(json, {
             onEachFeature: function (feature, layer) {
                 var popupText = 
                     "<p id='p_popup_detail'>"+
@@ -286,12 +279,12 @@ function load_map(json,customOption){
             filter: function(feature) {
 
                 // if no filter, select all
-                    countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
-                    sectorselect = (customOption.sectorOp.length == 0)? true : (sectorClass(customOption.sectorOp,feature.properties));
-                    statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
-                    incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
-                    ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
-                    yearselect = yearIsincluded(feature, customOption.yearOp);
+                    const countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
+                    const sectorselect = (customOption.sectorOp.length == 0)? true : (sectorClass(customOption.sectorOp,feature.properties));
+                    const statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
+                    const incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
+                    const ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
+                    const yearselect = yearIsincluded(feature, customOption.yearOp);
                     return (countryselect&&sectorselect&&yearselect&&incomeselect&&statusselect&&ppitypeselect);
             },
 
@@ -299,6 +292,7 @@ function load_map(json,customOption){
 
                 var sector = feature.properties.sector;
                 var subsector = feature.properties.subsector;
+                let icon_color, icon_png;
 
                 // sector
                 switch (sector) {
@@ -353,12 +347,14 @@ function load_map(json,customOption){
                 var awesomemark = L.AwesomeMarkers.icon({
                     icon: icon_png,
                     prefix:'fa',
-                    markerColor: icon_color})
+                    markerColor: icon_color
+                });
 
                 var marker = new L.Marker(latlng, {
                     title : feature.properties.project_name_wb,
                     icon : awesomemark,
                 });
+
                 markers.push(marker);
                 return marker;
             },
@@ -463,22 +459,22 @@ function options_to_html(data){
     });
 
     // status
-    for (option of status_set.values()) {
-        stnew = new Option(option, option);
+    for (let option of status_set.values()) {
+        let stnew = new Option(option, option);
         statusselect.add(stnew);
         stnew.disabled = false;
     }    
 
     // income
-    for (option of income_set.values()) {
-        icnew = new Option(option, option);
+    for (let option of income_set.values()) {
+        let icnew = new Option(option, option);
         incomeselect.add(icnew);
         icnew.disabled = false;
     }    
 
     // ppi-type
-    for (option of ppitype_set.values()) {
-        ptnew = new Option(option, option);
+    for (let option of ppitype_set.values()) {
+        let ptnew = new Option(option, option);
         ppitypeselect.add(ptnew);
         ptnew.disabled = false;
     }    
@@ -487,11 +483,9 @@ function options_to_html(data){
 
 function updateStates(customOption) {
 
-    console.log(customOption);
-  
     // region
     $(document).ready(function() {
-
+        let value;
         // country selection
         $('.country-select')
         .select2({
@@ -501,7 +495,7 @@ function updateStates(customOption) {
             value = $(el.currentTarget).val();
             console.log("region selected");
             customOption.countryOp = [];
-            for (i = 0; i < value.length; i++) {
+            for (let i = 0; i < value.length; i++) {
                 customOption.countryOp.push(value[i]);}
         });
 
@@ -514,7 +508,7 @@ function updateStates(customOption) {
             value = $(el.currentTarget).val();
             console.log("sector selected");
             customOption.sectorOp = [];
-            for (i = 0; i < value.length; i++) {
+            for (let i = 0; i < value.length; i++) {
                 customOption.sectorOp.push(value[i]);}
         });
 
@@ -548,7 +542,7 @@ function updateStates(customOption) {
             value = $(el.currentTarget).val();
             console.log("Status selected");
             customOption.statusOp = [];
-            for (i = 0; i < value.length; i++) {
+            for (let i = 0; i < value.length; i++) {
                 customOption.statusOp.push(value[i]);}
         });
 
@@ -562,7 +556,7 @@ function updateStates(customOption) {
             value = $(el.currentTarget).val();
             console.log("Income group selected");
             customOption.incomeOp = [];
-            for (i = 0; i < value.length; i++) {
+            for (let i = 0; i < value.length; i++) {
                 customOption.incomeOp.push(value[i]);}
         });
         
@@ -575,7 +569,7 @@ function updateStates(customOption) {
             value = $(el.currentTarget).val();
             console.log("PPI type selected");
             customOption.ppitypeOp = [];
-            for (i = 0; i < value.length; i++) {
+            for (let i = 0; i < value.length; i++) {
                 customOption.ppitypeOp.push(value[i]);}
         });
     })
@@ -627,12 +621,12 @@ function getObjects(obj, key, val) {
 // map country-geographical into a set
 function country_to_geographical(geographical) {;
 
-    input = mapdata;
-    array = getObjects(input, "geographical", geographical);
+    let input = mapdata;
+    let array = getObjects(input, "geographical", geographical);
 
     // console.log(array);
 
-    data = array.map(data => data.country);
+    let data = array.map(data => data.country);
     data = Array.from(new Set(data)).sort();
 
     return data;
@@ -641,12 +635,12 @@ function country_to_geographical(geographical) {;
 //
 function subsector_to_region(sector) {;
 
-    input = mapdata;
-    array = getObjects(input, "sector", sector);
+    let input = mapdata;
+    let array = getObjects(input, "sector", sector);
 
     // console.log(array);
 
-    data = array.map(data => data.subsector);
+    let data = array.map(data => data.subsector);
     data = Array.from(new Set(data)).sort();
     return data;
 };
@@ -655,8 +649,8 @@ function subsector_to_region(sector) {;
 function yearIsincluded(feature, yearOp)
 {
     let targetyear = feature.properties.fc_year;
-    dateFrom = yearOp["from"];
-    dateTo = yearOp["to"];
+    let dateFrom = yearOp["from"];
+    let dateTo = yearOp["to"];
     
     if ((targetyear >= dateFrom) && (targetyear <= dateTo))
     {

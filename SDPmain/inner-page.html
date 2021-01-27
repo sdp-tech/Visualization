@@ -4,7 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" /> -->
 
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>    
+  
+  <script type="text/babel"></script> -->
   <title>Map</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
@@ -35,7 +45,6 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
 
   <!-- search bar-->
   <link rel="stylesheet" href="assets/css/leaflet-search.css" />
@@ -153,7 +162,7 @@
             
             <br>
             <p class = "button_control" style="text-align: center;">
-              <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"><</button>
+              <button class="innerbtn_tutorial" id="previous" onclick="tutorialpage(previous)"></button>
               <button class="innerbtn_tutorial" id="next" onclick="tutorialpage(next)">></button>
             </p>
         </div>
@@ -197,26 +206,26 @@
 
                       <!-- // FC Year -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">FC Year</a> <button class="fcyear_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">FC Year</a> <button class="fcyear_clear" id="clearEach"><span>clear</span></button></h6>
                         <input type="checkbox" id="myCheck" onclick="includeNA()" checked="true"> Include N/A value 
                         <input type="text" class="js-range-slider" id="#demo_2" name="my_range" value=""> 
                       </li>
 
                       <!-- // Status -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Status</a> <button class="status_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">Status</a> <button class="status_clear" id="clearEach"><span>clear</span></button></h6>
                         <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
                       <!-- // Income Group -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Income Group</a> <button class="income_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">Income Group</a> <button class="income_clear" id="clearEach"><span>clear</span></button></h6>
                         <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
                       <!-- // PPI Type  -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Type of PPI</a> <button class="ppitype_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">Type of PPI</a> <button class="ppitype_clear" id="clearEach"><span>clear</span></button></h6>
                         <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
@@ -315,7 +324,6 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="assets/vendor/jquery/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>

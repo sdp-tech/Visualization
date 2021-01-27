@@ -1,4 +1,6 @@
 $.loading = {
+    //to support IE
+    cache : false,
     start: function (loadingTips='') {
         let _LoadingHtml = '<div id="loader">'+
         '<div id="shadow"></div>'+
