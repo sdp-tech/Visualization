@@ -1108,6 +1108,7 @@ section {
   color:#c44536;
 }
 
+
 .team .member .social a:hover {
   color:#c44536 ;
 }
@@ -1116,6 +1117,12 @@ section {
   font-size: 16px;
   margin: 0 2px;
 }
+
+#team .info-box{
+  padding : 30px;
+}
+
+#contact a { text-decoration: none; }
 
 @media (max-width: 992px) {
   .team .member {

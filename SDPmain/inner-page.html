@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <script src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
 
   <title>Map</title>
   <meta content="" name="descriptison">
@@ -36,6 +35,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
 
   <!-- search bar-->
   <link rel="stylesheet" href="assets/css/leaflet-search.css" />
@@ -69,6 +69,11 @@
 
   <!-- Easy button -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+  <!-- Tooltip-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <!-- =======================================================
   * Template Name: Squadfree - v2.2.0
@@ -131,7 +136,7 @@
           <!-- modal header -->
           <div class="modal-header">
             <p style="float: left;font-size: 24px; margin:0px; font-weight: bold;">Tutorial</p>
-            <span class="close" id="tutorial_close" onclick="tutorial_off();">&times;</span>
+            <span class="close" id="tutorial_close" onclick="popup_close();">&times;</span>
           </div>
 
           <!-- modal body -->
@@ -192,26 +197,26 @@
 
                       <!-- // FC Year -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">FC Year</a> <button class="fcyear_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">FC Year</a> <button class="fcyear_clear" id="clearEach"><span>clear</span></button></h6>
                         <input type="checkbox" id="myCheck" onclick="includeNA()" checked="true"> Include N/A value 
                         <input type="text" class="js-range-slider" id="#demo_2" name="my_range" value=""> 
                       </li>
 
                       <!-- // Status -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">Status</a> <button class="status_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Status</a> <button class="status_clear" id="clearEach"><span>clear</span></button></h6>
                         <select class="select js-select2-multi status-select" id="status-select" name="status[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
                       <!-- // Income Group -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">Income Group</a> <button class="income_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Income Group</a> <button class="income_clear" id="clearEach"><span>clear</span></button></h6>
                         <select class="select js-select2-multi income-select" id="income-select" name="income[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
                       <!-- // PPI Type  -->
                       <li class="listclass_filter">                         
-                        <h6><a href="#" data-toggle="tooltip" title="Description goes here">Type of PPI</a> <button class="ppitype_clear" id="clearEach"><span>clear</span></button></h6>
+                        <h6><a href="#" data-toggle="tooltip" title="Description goes here"">Type of PPI</a> <button class="ppitype_clear" id="clearEach"><span>clear</span></button></h6>
                         <select class="select js-select2-multi ppitype-select" id="ppitype-select" name="ppitype[]" multiple="multiple" style="width: 90%"></select> 
                       </li>
 
@@ -310,10 +315,12 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
   <script src="assets/vendor/counterup/counterup.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/venobox/venobox.min.js"></script>
@@ -324,25 +331,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.min.js"></script>
   <script src="assets/js/leaflet.awesome-markers.js"></script>
   <script src="assets/js/loading.js"></script>
-  
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
   <!-- personal file-->
   <script type="text/javascript" src="assets/js/map.js"></script>
-  <script type="text/javascript" src="assets/js/tutorial.js"></script>
-  <script type="text/javascript" src="assets/js/filterbar.js"></script>
- 
-  <!--Plugin JavaScript file !-->
+
+  <!--Plugin JavaScript file-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
  
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-
-  <!-- Tooltip -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
-  
 </body>
 
 </html>

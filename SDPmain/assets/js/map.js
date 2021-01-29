@@ -215,7 +215,7 @@ function addPopup(feature, layer) {
         "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
         "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
         "<p id='linked_p_popup_detail'>" +
-        "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+        "<b><a href='"+ feature.properties.urls + '"target="_blank" rel="noopener noreferrer">URL</a>"'+ " | " +
         "<a href='#'>See also</a></b>"+
         "</p></p>";
 
