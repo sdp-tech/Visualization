@@ -228,6 +228,12 @@ L.Control.Search = L.Control.extend({
 		this._input.size = this._inputMinSize;
 		this._input.focus();
 		this._cancel.style.display = 'none';
+
+		/* add 'back to map' when clicking search-cancel btn */
+		this._map.setView([35,40], 2.5);
+		this._map.closePopup();
+		/* end */
+
 		this._hideTooltip();
 		this.fire('search:cancel');
 		return this;
