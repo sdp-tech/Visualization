@@ -1,5 +1,19 @@
+//class
+//var 선언부
+//function 선언부
+//call 
+
+//module
+//tutorial button 끝
+//side bar
+//map
+
+var mapdata;
+var mymap;
+var markers = [];
+
 // filterArray
-let customOption = {
+var customOption = {
     countryOp: [],
     sectorOp: [],
     yearOp:{
@@ -9,131 +23,23 @@ let customOption = {
     statusOp: [],
     incomeOp: [],
     ppitypeOp: [],
-}
+};
 
-// load the map
-
-$.loading.start('Loading...');
-
-var mapdata;
-
-load_data(customOption);
-/* sidemenu */
 function toolbar_open() {
     $('#toolbar').toggleClass('open');
 };
-toggle_selectableOptgroup();
-
-//tutorial//
-// Get the modal
-var modal = document.getElementById("tutorial");
-
-var currentIndex = 0;
-
-// When the user clicks the button, open the modal 
-function tutorial_on() {
-  modal.style.display = "block";
-  currentIndex = 0;
-  showpage(currentIndex);
-}
-
-function popup_close(){
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    popup_close();
-  }
-}
-
-function tutorialpage(action) {
-    if (action == previous){
-        currentIndex--;
-    }
-    if (action == next){
-        currentIndex++;
-    }
-    showpage(currentIndex);
-}
-
-function showpage(currentIndex){
-
-    for (let input of document.querySelectorAll('.tutorial_content')) {
-        if (input.id == currentIndex){
-            input.hidden = false;
-        }
-        else{
-            input.hidden = true;
-        }
-    }
-        
-    // disable button when reached min/max page
-    let minIndex = 0;
-    let maxIndex = 2;
-    if (currentIndex == minIndex){
-        document.getElementById("previous").disabled = true;
-    }
-    else{
-        document.getElementById("previous").disabled = false;
-    }
-    if (currentIndex == maxIndex){
-        document.getElementById("next").disabled = true;
-    }
-    else{
-        document.getElementById("next").disabled = false;
-    }
-}
-
-
-/*clear button*/
-// clear filters - select2 & js slider
-$('.clearfilter').on('click', function (){
-    $('#myCheck').checked="true"
-    $('.select').val(null).trigger('change');
-    $('.js-range-slider').data("ionRangeSlider").update({
-        from: 1960,
-        to: 2021,
-    })
-})
-
-for (let input of document.querySelectorAll('#clearEach')) {
-    input.onclick = (e) =>{
-        switch(input.className) {
-            case "region_clear":
-                $('.country-select').val(null).trigger('change');
-                break;
-            case "sector_clear":
-                $('.sector-select').val(null).trigger('change');
-                break;
-            case "fcyear_clear":
-                $('.js-range-slider').data("ionRangeSlider").update({
-                    from: 1960,
-                    to: 2021,
-                })
-                break;
-            case "status_clear":
-                $('.status-select').val(null).trigger('change');
-                break;
-            case "income_clear":
-                $('.income-select').val(null).trigger('change');
-                break;
-            case "ppitype_clear":
-                $('.ppitype-select').val(null).trigger('change');
-                break;
-            default:
-            }
-    }
-}
 
 function load_data(customOption)
 {
     const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+
+    //const url = "mongodb://sdpygl:sdp_ygl@127.125.186.99:27017/";
+
     $.ajax({
         dataType: "json",
         url: proxy+url,
+        
         //to support IE
         cache : false,
         headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -154,58 +60,44 @@ function load_data(customOption)
 // processing data
 function data_process(rawdata)
 {
-    // processing = JSON.stringify(rawdata);
-    // console.log(rawdata);
-    // console.log(processing);
-
     $.each(rawdata.features, function (key, val) {
-        $.each(val.properties, function(i,j){
-            switch(i) {
-                case "fc_year":
-                    if (isNaN(j)){
-                        return true;
-                    }
-                    else{
-                        j = Math.round(j);
-                    }
-                    val.properties[i] = j;
+        $.each(val.properties, function(col, option){
+            switch(col) {
+                case "fc_year":                    
+                    option = (isNaN(option) ? "N/A" : Math.round(option));
                     break;
-                case "type_of_ppi":
-                    if (j.toLowerCase().includes("green")){
-                        j = "Greenfield";
-                    }
-                    else if(j.toLowerCase().includes("brown")){
-                        j = "Brownfield";
-                    }
-                    else if(j.toLowerCase().includes("expans")){
-                        j = "Expansion";
-                    }
-                    else if(j.toLowerCase().includes("n/a")){
-                        j = "N/A";
-                    }
-                    else{
-                        return true;
-                    }
-                    val.properties[i] = j;
-                    break;
+
                 case "ppi_status":
-                    if (j.toLowerCase().includes("delay")){
-                        j = "Delayed";
+                    if (option.toLowerCase().includes("delay")){
+                        option = "Delayed";
                     }
-                    else if(j.toLowerCase().includes("cancel")){
-                        j = "Canceled";
+                    else if(option.toLowerCase().includes("cancel")){
+                        option = "Canceled";
                     }
-                    else if(j.toLowerCase().includes("nan")){
-                        j = "N/A";
+                    else {
+                        option = "N/A";
                     }
-                    else{
-                        return true;
+                    break;
+
+                case "type_of_ppi":
+                    if (option.toLowerCase().includes("green")){
+                        option = "Greenfield";
                     }
-                    val.properties[i] = j;
+                    else if(option.toLowerCase().includes("brown")){
+                        option = "Brownfield";
+                    }
+                    else if(option.toLowerCase().includes("expans")){
+                        option = "Expansion";
+                    }
+                    else {
+                        option = "N/A";
+                    }
                     break;
               }
+            val.properties[col] = option;
         })              
     });
+    
     return rawdata;
 };
 
@@ -216,9 +108,10 @@ function load_map(json,customOption){
     //  *      Base map Layer     *
     // ***************************/
 
-    var mymap = L.map('mapwrap', {zoomControl: false}).setView([35,40],2.5);
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGluYTAwNyIsImEiOiJja2hmZDNvOTgwNnVrMnJsNG1sOWtzcXNoIn0.Do0MCp-8-o2cv5cl-A2sNQ', {
+    mymap = L.map('mapwrap', {zoomControl: false}).setView([35,40],2.5);
+    
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGluYTAwNyIsImEiOiJja2hmZDNvOTgwNnVrMnJsNG1sOWtzcXNoIn0.Do0MCp-8-o2cv5cl-A2sNQ', 
+    {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         subdomains: 'abcd',
         tileSize: 512,
@@ -245,119 +138,13 @@ function load_map(json,customOption){
         mymap.boxZoom.enable();  
     });
     
-    var markers=[];
-    try{
+    try {
         let geoLayer = L.geoJson(json, {
-            onEachFeature: function (feature, layer) {
-                var popupText = 
-                    "<p id='p_popup_detail'>"+
-                    "<strong style='color: #84b819; font-size:120%;' >" + feature.properties.project_name_wb + "</strong><br>" + 
-                    "<b>Country:</b> " + feature.properties.country + "<br>"+
-                    "<b>Income Group:</b> " + feature.properties.income_group + "<br>"+
-                    "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
-                    "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-                    "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
-                    "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-                    "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
-                    "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
-                    "<p id='linked_p_popup_detail'>" +
-                    "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
-                    "<a href='#'>See also</a></b>"+
-                    "</p></p>";
-            
-                layer.bindPopup(popupText, {
-                    closeButton: true,
-                    offset: L.point(0, -20)
-                });
-                layer.on('click', function() {
-                    layer.openPopup();
-                });
-                
-            },
-
-            filter: function(feature) {
-
-                // if no filter, select all
-                    const countryselect = (customOption.countryOp.length == 0)? true : (customOption.countryOp.includes(feature.properties.country));
-                    const sectorselect = (customOption.sectorOp.length == 0)? true : (sectorClass(customOption.sectorOp,feature.properties));
-                    const statusselect = (customOption.statusOp.length == 0)? true : (customOption.statusOp.includes(feature.properties.ppi_status));
-                    const incomeselect = (customOption.incomeOp.length == 0)? true : (customOption.incomeOp.includes(feature.properties.income_group));
-                    const ppitypeselect = (customOption.ppitypeOp.length == 0)? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
-                    const yearselect = yearIsincluded(feature, customOption.yearOp);
-                    return (countryselect&&sectorselect&&yearselect&&incomeselect&&statusselect&&ppitypeselect);
-            },
-
-            pointToLayer: function (feature, latlng, layer) {
-
-                var sector = feature.properties.sector;
-                var subsector = feature.properties.subsector;
-                let icon_color, icon_png;
-
-                // sector
-                switch (sector) {
-                    case "Energy":
-                        icon_color = 'green';
-                        break;
-                    case "ICT":
-                        icon_color = 'purple';
-                        break;
-                    case "Municipal Solid Waste":
-                        icon_color = 'orange';
-                        break;
-                    case "Transport":
-                        icon_color = 'blue';
-                        break;
-                    case "Water and sewerage":
-                        icon_color = 'gray';
-                        break;                        
-                    default:
-                        icon_color = 'red';
-                };
-                //subsector
-                switch (subsector) {
-                    case "Airports":
-                        icon_png = "plane-departure";
-                        break;
-                    case "Railways":
-                        icon_png = "subway";
-                        break;
-                    case "Electricity":
-                        icon_png = "bolt";
-                        break;
-                    case "Natural Gas":
-                        icon_png = "burn";
-                        break;
-                    case "ICT backbone":
-                        icon_png = "sitemap";
-                        break;
-                    case "Ports":
-                        icon_png = "ship";
-                        break;
-                    case "Roads":
-                        icon_png = "road";
-                        break;
-                    case "Treatment/Disposal":
-                        icon_png = "trash-alt";
-                        break;
-                    default:
-                        icon_png = 'globe';
-                };
-                
-                var awesomemark = L.AwesomeMarkers.icon({
-                    icon: icon_png,
-                    prefix:'fa',
-                    markerColor: icon_color
-                });
-
-                var marker = new L.Marker(latlng, {
-                    title : feature.properties.project_name_wb,
-                    icon : awesomemark,
-                });
-
-                markers.push(marker);
-                return marker;
-            },
+            onEachFeature : addPopup,
+            filter : geoJson_filter,
+            pointToLayer: geoJson_pointToLayer 
         });
+
         mymap.addLayer(geoLayer);
                 
         // Initialization
@@ -368,18 +155,20 @@ function load_map(json,customOption){
         detectChange(json, geoLayer, customOption);
         
         // Searchbox
-        var searchControl = mymap.addControl( new L.Control.Search({
+        mymap.addControl( new L.Control.Search({
             // container: 'toolbar',
             position: 'topright',
             layer: geoLayer,
             initial: false,
             collapsed: true,
+
             moveToLocation: function(latlng, title, map) {
                 map.setView(latlng,10);
                 let targetmarker = markers.find(el => el.defaultOptions.title === title);
                 targetmarker.openPopup();
             }
-        }) );
+        }) 
+        );
 
         // zoom box
         L.control.zoom({
@@ -397,7 +186,8 @@ function load_map(json,customOption){
                             map.setView([35,40],2.5);
                             btn.state('zoom-to-original');    // change state on click!
                         }
-                }]}).addTo(mymap);
+                }]
+            }).addTo(mymap);
 
 
     } catch(err){
@@ -412,7 +202,122 @@ function load_map(json,customOption){
     
 }
 
+function addPopup(feature, layer) {
+    var popupText = 
+        "<p id='p_popup_detail'>"+
+        "<strong style='color: #84b819; font-size:120%;' >" + feature.properties.project_name_wb + "</strong><br>" + 
+        "<b>Country:</b> " + feature.properties.country + "<br>"+
+        "<b>Income Group:</b> " + feature.properties.income_group + "<br>"+
+        "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
+        "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
+        "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
+        "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
+        "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
+        "<p id='linked_p_popup_detail'>" +
+        "<b><a href='"+ feature.properties.urls +"'>URL</a>"+ " | " +
+        "<a href='#'>See also</a></b>"+
+        "</p></p>";
 
+    layer.bindPopup(popupText, {
+        closeButton: true,
+        offset: L.point(0, -20)
+    });
+
+    layer.on('click', function() {
+        layer.openPopup();
+    });
+};
+
+function geoJson_filter(feature) {
+    // if no filter, select all
+    const countryselect = (customOption.countryOp.length == 0) ? true : (customOption.countryOp.includes(feature.properties.country));
+    const sectorselect = (customOption.sectorOp.length == 0) ? true : (sectorClass(customOption.sectorOp, feature.properties));
+    const statusselect = (customOption.statusOp.length == 0) ? true : (customOption.statusOp.includes(feature.properties.ppi_status));
+    const incomeselect = (customOption.incomeOp.length == 0) ? true : (customOption.incomeOp.includes(feature.properties.income_group));
+    const ppitypeselect = (customOption.ppitypeOp.length == 0) ? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
+    const yearselect = yearIsincluded(feature, customOption.yearOp);
+    return (countryselect && sectorselect && yearselect && incomeselect && statusselect && ppitypeselect);
+}
+
+function geoJson_pointToLayer(feature, latlng, layer) {
+
+    const sector = feature.properties.sector;
+    const subsector = feature.properties.subsector;
+    const icon_color = sector_to_icon(sector);
+    const icon_png = subsector_to_icon(subsector);
+
+    const awesomemark = L.AwesomeMarkers.icon({
+        icon: icon_png,
+        prefix:'fa',
+        markerColor: icon_color
+    });
+
+    const marker = new L.Marker(latlng, {
+        title : feature.properties.project_name_wb,
+        icon : awesomemark,
+    });
+
+    markers.push(marker);
+    return marker;
+};
+
+function sector_to_icon(sector){
+// sector
+    switch (sector) {
+        case "Energy":
+            icon_color = 'green';
+            break;
+        case "ICT":
+            icon_color = 'purple';
+            break;
+        case "Municipal Solid Waste":
+            icon_color = 'orange';
+            break;
+        case "Transport":
+            icon_color = 'blue';
+            break;
+        case "Water and sewerage":
+            icon_color = 'gray';
+            break;                        
+        default:
+            icon_color = 'red';
+    };
+    return icon_color;
+}
+
+function subsector_to_icon(subsector){
+                //subsector
+    switch (subsector) {
+        case "Airports":
+            icon_png = "plane-departure";
+            break;
+        case "Railways":
+            icon_png = "subway";
+            break;
+        case "Electricity":
+            icon_png = "bolt";
+            break;
+        case "Natural Gas":
+            icon_png = "burn";
+            break;
+        case "ICT backbone":
+            icon_png = "sitemap";
+            break;
+        case "Ports":
+            icon_png = "ship";
+            break;
+        case "Roads":
+            icon_png = "road";
+            break;
+        case "Treatment/Disposal":
+            icon_png = "trash-alt";
+            break;
+        default:
+            icon_png = 'globe';
+    };
+    return icon_png;
+}
 
 //////////////
 /// filter ///
@@ -420,13 +325,13 @@ function load_map(json,customOption){
 
 function options_to_html(data){
 
-    var property_list = getKeys(data);
+    const property_list = getKeys(data);
 
-    var geographical_set = arraytosortedSet(property_list["geographical"]);
-    var sector_set = arraytosortedSet(property_list["sector"]);
-    var status_set = arraytosortedSet(property_list["ppi_status"]);
-    var income_set = arraytosortedSet(property_list["income_group"]);
-    var ppitype_set = arraytosortedSet(property_list["type_of_ppi"]);
+    const geographical_set = arraytosortedSet(property_list["geographical"]);
+    const sector_set = arraytosortedSet(property_list["sector"]);
+    const status_set = arraytosortedSet(property_list["ppi_status"]);
+    const income_set = arraytosortedSet(property_list["income_group"]);
+    const ppitype_set = arraytosortedSet(property_list["type_of_ppi"]);
     
     var statusselect = document.getElementById('status-select');
     var incomeselect = document.getElementById('income-select');
@@ -457,26 +362,19 @@ function options_to_html(data){
     });
 
     // status
-    for (let option of status_set.values()) {
-        let stnew = new Option(option, option);
-        statusselect.add(stnew);
-        stnew.disabled = false;
-    }    
+    addOptionToSelect(status_set, statusselect);
 
-    // income
-    for (let option of income_set.values()) {
-        let icnew = new Option(option, option);
-        incomeselect.add(icnew);
-        icnew.disabled = false;
-    }    
+// income
+    addOptionToSelect(income_set, incomeselect);
 
     // ppi-type
-    for (let option of ppitype_set.values()) {
-        let ptnew = new Option(option, option);
-        ppitypeselect.add(ptnew);
-        ptnew.disabled = false;
-    }    
-    // console.log(select.options[select.selectedIndex].value);
+    addOptionToSelect(ppitype_set, ppitypeselect);
+}
+
+function addOptionToSelect(option_set, select){
+    for (let option of option_set.values()) {
+        select.add(new Option(option, option));
+    }
 }
 
 function updateStates(customOption) {
@@ -491,7 +389,6 @@ function updateStates(customOption) {
         })
         .on('change.select2', function (el) {
             value = $(el.currentTarget).val();
-            console.log("region selected");
             customOption.countryOp = [];
             for (let i = 0; i < value.length; i++) {
                 customOption.countryOp.push(value[i]);}
@@ -504,7 +401,6 @@ function updateStates(customOption) {
         })
         .on('change', function (el) {
             value = $(el.currentTarget).val();
-            console.log("sector selected");
             customOption.sectorOp = [];
             for (let i = 0; i < value.length; i++) {
                 customOption.sectorOp.push(value[i]);}
@@ -512,7 +408,6 @@ function updateStates(customOption) {
 
 
         // FC year slider
-
         $('.js-range-slider').ionRangeSlider({
             type: "double",
             min: 1960,
@@ -528,7 +423,6 @@ function updateStates(customOption) {
                 customOption.yearOp = {};
                 customOption.yearOp["from"]=(data.from);
                 customOption.yearOp["to"]=(data.to);
-                // console.log(customOption);
             }})
 
         // status selection
@@ -538,7 +432,6 @@ function updateStates(customOption) {
         })
         .on('change', function (el) {
             value = $(el.currentTarget).val();
-            console.log("Status selected");
             customOption.statusOp = [];
             for (let i = 0; i < value.length; i++) {
                 customOption.statusOp.push(value[i]);}
@@ -552,7 +445,6 @@ function updateStates(customOption) {
         })
         .on('change', function (el) {
             value = $(el.currentTarget).val();
-            console.log("Income group selected");
             customOption.incomeOp = [];
             for (let i = 0; i < value.length; i++) {
                 customOption.incomeOp.push(value[i]);}
@@ -565,7 +457,6 @@ function updateStates(customOption) {
         })
         .on('change', function (el) {
             value = $(el.currentTarget).val();
-            console.log("PPI type selected");
             customOption.ppitypeOp = [];
             for (let i = 0; i < value.length; i++) {
                 customOption.ppitypeOp.push(value[i]);}
@@ -578,7 +469,6 @@ function detectChange(json, geoLayer, customOption) {
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
-            console.log("change detected");
             geoLayer.clearLayers()
             updateStates(customOption)
             geoLayer.addData(json)   
@@ -621,26 +511,18 @@ function country_to_geographical(geographical) {;
 
     let input = mapdata;
     let array = getObjects(input, "geographical", geographical);
-
-    // console.log(array);
-
     let data = array.map(data => data.country);
-    data = Array.from(new Set(data)).sort();
-
-    return data;
+    
+    return arraytosortedSet(data);
 };
 
-//
 function subsector_to_region(sector) {;
 
     let input = mapdata;
     let array = getObjects(input, "sector", sector);
-
-    // console.log(array);
-
     let data = array.map(data => data.subsector);
-    data = Array.from(new Set(data)).sort();
-    return data;
+
+    return arraytosortedSet(data);
 };
 
 // Manage Range slider
@@ -650,121 +532,116 @@ function yearIsincluded(feature, yearOp)
     let dateFrom = yearOp["from"];
     let dateTo = yearOp["to"];
     
-    if ((targetyear >= dateFrom) && (targetyear <= dateTo))
-    {
+    if ((targetyear >= dateFrom) && (targetyear <= dateTo)) {
         return true;
     }
-    else{
-        return includeNA();
-    }
-
+    return includeNA();
 }
 
 function sectorClass(sectorOp,properties){
-    if (sectorOp.includes(`${properties.sector}:${properties.subsector}`)){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return sectorOp.includes(`${properties.sector}:${properties.subsector}`);
 }
 
 // checkbox checking
 function includeNA() {
     // Get the checkbox
-    var checkBox = document.getElementById("myCheck");
-  
-    // If the checkbox is checked, display the output text
-    if (checkBox.checked == true){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-function arraytosortedSet(array)
-{
-    array = Array.from(new Set(array)).sort();
-    return array;
+    return document.getElementById("myCheck").checked;
 }
 
+function arraytosortedSet(array){
+    return Array.from(new Set(array)).sort();
+}
 
-function toggle_selectableOptgroup()
-{
-    ////////////
+function toggle_selectableOptgroup(){
+    
     // Region // 
-    ////////////
-
     $('.country-select').select2();
 
-    $(document).on("click", "#select2-country-select-results  strong", function(){
+    $(document).on("click", "#select2-country-select-results strong", function(){
 
-        var groupName = $(this).html()
-        var options = $('.country-select option');
+        let groupName = $(this).html()
+        let options = $('.country-select option');
     
         $.each(options, function(key, value){
-            console.log($(value).prop("selected"), $(key).prop)
             if($(value)[0].parentElement.label.indexOf(groupName) >= 0){
-                if($(value).prop("selected")== true){
-                    $(value).prop("selected",false);
-                    return true;
-                }
-                else if($(value).prop("selected")== false){
-                    $(value).prop("selected",true);
-                    return true;
-                }
-            }
-            else
-            {
-                return true;
+                $(value).prop("selected", true);
             }
         });        
 
     $('.country-select').trigger("change");
     $('.country-select').select2('close'); 
+    });
 
-    })
-
-    ////////////
     // Sector // 
-    ////////////
-
     $('.sector-select').select2();
 
-    $(document).on("click", "#select2-sector-select-results  strong", function(){
+    $(document).on("click", "#select2-sector-select-results strong", function(){
 
-        var groupName = $(this).html()
-        var options = $('.sector-select option');
+        let groupName = $(this).html()
+        let options = $('.sector-select option');
     
         $.each(options, function(key, value){
-            console.log($(value).prop("selected"), $(key).prop)
             if($(value)[0].parentElement.label.indexOf(groupName) >= 0){
-                if($(value).prop("selected")== true){
-                    $(value).prop("selected",false);
-                    return true;
-                }
-                else if($(value).prop("selected")== false){
-                    $(value).prop("selected",true);
-                    return true;
-                }
-            }
-            else
-            {
-                return true;
+                $(value).prop("selected", true);
             }
         });        
 
     $('.sector-select').trigger("change");
     $('.sector-select').select2('close'); 
-
     })
-
 }
 
+// load the map
+$.loading.start('Loading...');
+
+load_data(customOption);
+
+/* sidemenu */
+toggle_selectableOptgroup();
+
+/*clear button*/
+// clear filters - select2 & js slider
+$('.clearfilter').on('click', function (){
+    $('#myCheck').checked="true";
+    $('.select').val(null).trigger('change');
+    $('.js-range-slider').data("ionRangeSlider").update({
+        from: 1960,
+        to: 2021,
+    });
+});
+
+for (let input of document.querySelectorAll('#clearEach')) {
+    input.onclick = (e) =>{
+        switch(input.className) {
+            case "region_clear":
+                $('.country-select').val(null).trigger('change');
+                break;
+            case "sector_clear":
+                $('.sector-select').val(null).trigger('change');
+                break;
+            case "fcyear_clear":
+                $('.js-range-slider').data("ionRangeSlider").update({
+                    from: 1960,
+                    to: 2021,
+                })
+                break;
+            case "status_clear":
+                $('.status-select').val(null).trigger('change');
+                break;
+            case "income_clear":
+                $('.income-select').val(null).trigger('change');
+                break;
+            case "ppitype_clear":
+                $('.ppitype-select').val(null).trigger('change');
+                break;
+            default:
+        }
+    }
+}
 
 /////////////
 // tooltip //
 /////////////
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
-  });
+});

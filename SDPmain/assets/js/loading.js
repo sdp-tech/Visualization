@@ -5,7 +5,7 @@ $.loading = {
         let _LoadingHtml = '<div id="loader">'+
         '<div id="shadow"></div>'+
         '<div id="box"></div>'+
-        '<br><br><br><br><p class="loading">Loading...</p>'+'</div>'
+        `<br><br><br><br><p class="loading">${loadingTips}</p>`+'</div>'
 
         $('#tutorial_btn').hide();
         $('.mapcontainer').append(_LoadingHtml);
