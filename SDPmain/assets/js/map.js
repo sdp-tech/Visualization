@@ -17,9 +17,7 @@ $.loading.start('Loading...')
 
 var mapdata;
 
-console.time("Time this");
 load_data(customOption);
-console.timeEnd("Time this");
 
 
 /* sidemenu */
@@ -61,7 +59,6 @@ function tutorialpage(action) {
     if (action == next){
         currentIndex++;
     }
-    console.log(currentIndex);
     showpage(currentIndex);
 }
 
@@ -147,7 +144,6 @@ function load_data(customOption)
             
             json=requested['body'];
             mapdata = data_process(json);
-            console.log(mapdata);
             load_map(mapdata, customOption);
             $.loading.end();
             
@@ -364,7 +360,6 @@ function load_map(json,customOption){
             },
         });
         mymap.addLayer(geoLayer);
-        console.log(markers);
                 
         // Initialization
         updateStates(customOption);
