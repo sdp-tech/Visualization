@@ -43,3 +43,6 @@ joojeol.md
 /jsonTogeojson
 /git-s3-push
 .vscode
+node_modules
+package-lock.json
+package-lock.json

@@ -18,7 +18,6 @@ $.loading.start('Loading...');
 var mapdata;
 
 load_data(customOption);
-
 /* sidemenu */
 function toolbar_open() {
     $('#toolbar').toggleClass('open');
@@ -360,7 +359,6 @@ function load_map(json,customOption){
             },
         });
         mymap.addLayer(geoLayer);
-        console.log(markers);
                 
         // Initialization
         updateStates(customOption);
