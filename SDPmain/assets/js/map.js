@@ -31,18 +31,20 @@ function toolbar_open() {
 
 function load_data(customOption)
 {
-    const proxy = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
-
-    //const url = "mongodb://sdpygl:sdp_ygl@127.125.186.99:27017/";
+    // const proxy = "https://cors-anywhere.herokuapp.com/";
+    // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+    const url = 'apis/data'
 
     $.ajax({
         dataType: "json",
-        url: proxy+url,
-        
+        crossDomain:true,
+        url: url,
         //to support IE
         cache : false,
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+
+    },
 
         success: function(requested)
         {
@@ -52,7 +54,8 @@ function load_data(customOption)
             $.loading.end();
         },
         error : function(err){
-            console.log(err);
+
+            console.log("ERR", err);
         }
     });
 }
@@ -62,6 +65,8 @@ function data_process(rawdata)
 {
     $.each(rawdata.features, function (key, val) {
         $.each(val.properties, function(col, option){
+            if(option == null)
+                option = ""
             switch(col) {
                 case "fc_year":                    
                     option = (isNaN(option) ? "N/A" : Math.round(option));
@@ -80,6 +85,7 @@ function data_process(rawdata)
                     break;
 
                 case "type_of_ppi":
+                    
                     if (option.toLowerCase().includes("green")){
                         option = "Greenfield";
                     }
@@ -137,7 +143,6 @@ function load_map(json,customOption){
         mymap.keyboard.enable();
         mymap.boxZoom.enable();  
     });
-    
     try {
         let geoLayer = L.geoJson(json, {
             onEachFeature : addPopup,
@@ -477,9 +482,8 @@ function detectChange(json, geoLayer, customOption) {
 }
 
 function getKeys(input){
-
     // Step 1, group feature values by property.
-    let out = input.features.reduce((acc, {properties}) =>
+        let out = input.features.reduce((acc, {properties}) =>
     {
         Object.entries(properties).forEach(([key, val]) =>
         {
@@ -489,6 +493,7 @@ function getKeys(input){
 
         return acc;
     }, {});
+    
 
     return out;
 }
@@ -528,7 +533,8 @@ function subsector_to_region(sector) {;
 // Manage Range slider
 function yearIsincluded(feature, yearOp)
 {
-    let targetyear = feature.properties.fc_year;
+
+    let    targetyear = feature.properties.fc_year;
     let dateFrom = yearOp["from"];
     let dateTo = yearOp["to"];
     
