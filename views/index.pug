@@ -8,7 +8,6 @@ head
   // Favicons
   link(href='assets/img/favicon.png' rel='icon')
   link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
-  // Google Fonts
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
   // Vendor CSS Files
   link(href='assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
@@ -262,7 +261,7 @@ main#main
         br
         h2 Methodology
         p
-          | SDP Project MaPPPing Failure map focuses on Private Public Partnership project deals that have been affected by various regions reported by open sources shared on the web. The team categorized and organized the data based on significant characteristics of the project and laid them out on the map for users to view. These characteristics generally follow World Bank PPI classification as well as what the team believes is significant. The Failure Map utilizes the filter bar based on these characteristics and classifications. 
+          | SDP Project MaPPPing Failure map focuses on Private Public Partnership project deals that have been affected by open sources shared on the web. The team categorized and organized the data based on significant characteristics of the project and laid them out on the map for users to view. These characteristics generally follow World Bank PPI classification as well as what the team believes is significant. The Failure Map utilizes the filter bar based on these characteristics and classifications.
           br
           br
           |             For a better understanding of the classification of the project deals, select the options below:
@@ -288,98 +287,110 @@ main#main
           button.accordion Sector
           .panel
             br
-            // // Energy
+            p
+              span(style='font-weight: 400;') Projects are organized according to the type of infrastructure. 
+              span(style='font-weight: 400;')
+                br
+              span(style='font-weight: 400;') 5 Primary Sectors: Energy, ICT, Transport, Water and Sewerage, and Solid Waste
+              span(style='font-weight: 400;')
+                br
+              span(style='font-weight: 400;') (Subsectors are listed below each Primary Sectors)
+            hr
             p
               strong Energy:
               span(style='font-weight: 400;')
                 | Includes the activities directly related to the provision of electricity or natural gas to users as a public service.
+            p
+              strong Subsectors
+              span(style='font-weight: 400;') :
             ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Electricity:
                 span(style='font-weight: 400;')
-                  | Activities required for the provision of electricity. It includes the segments of generation, transmission and distribution of electricity.
-            ul
-              li(style='font-weight: 400;')
+                  | Activities required for the provision of electricity. It includes the segments of generation, transmission, and distribution of electricity.
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Natural gas
                 span(style='font-weight: 400;') : It includes the segments of transmission and distribution pipelines. 
                 strong
                   em Excludes gas exploration and production
                 span(style='font-weight: 400;')
-                  | . Note that if the gas is used as an input by a power plant, the project belongs to electricity subsector and the generation segment.
-            p &nbsp;
-            // // ICT
+                  | . Note that if the gas is used as an input by a power plant, the project belongs to the electricity subsector and the generation segment.
+            hr
             p
               strong Information and communication technology (ICT):
               span(style='font-weight: 400;')  Reflecting changes in the telecoms/ICT field, the 
               span(style='font-weight: 400;') SDP Project MaPPPing
               span(style='font-weight: 400;')  will only track:
+            p
+              strong Subsectors
+              span(style='font-weight: 400;') :
             ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') ICT backbone
                 span(style='font-weight: 400;')
                   | : Hard infrastructure cable assets (such as fiber optic networks and other types of broadband networks) where the government is involved either through being a contracting authority (i.e. a party to a concession agreement), the owner of the assets, or some other form of government support.
-            p &nbsp;
-            // // Transport
+            hr
             p
               strong Transport:
               span(style='font-weight: 400;')
                 | Assets or facilities required to move people or freight from one location to another as a public service.
+            p
+              strong Subsectors
+              span(style='font-weight: 400;') :
             ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Airport:
                 span(style='font-weight: 400;')  includes physical infrastructure (terminal, runway, tower)
-            ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Railway:
                 span(style='font-weight: 400;')
-                  | includes track, terminals, rails and rolling stock.&nbsp; Subway systems and/or monorails are also considered railway.
-            ul
-              li(style='font-weight: 400;')
+                  | includes track, terminals, rails, and rolling stock.&nbsp; Subway systems and/or monorails are also considered railway.
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Road
                 span(style='font-weight: 400;')
                   | : includes all facilities necessary for land transport, but excludes buses and automobiles.&nbsp; A project may also have a combination of the below.
-            ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Ports
                 span(style='font-weight: 400;')
                   | : includes terminal facilities and surrounding waterway, but excludes shipping companies.
-            p &nbsp;
-            // // Water and sewerage
+            hr
             p
               strong Water and sewerage:
               span(style='font-weight: 400;')
                 | Activities needed to provide potable water to users or to process or dispose of wastewater as a public service.
+            p
+              strong Subsectors
+              span(style='font-weight: 400;') :&nbsp;
             ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Treatment plant
                 span(style='font-weight: 400;')
                   | : includes all facilities necessary for treating and storing potable water to users or processing wastewater.
-            ul
-              li(style='font-weight: 400;')
+              li(style='font-weight: 400;' aria-level='1')
                 em
                   span(style='font-weight: 400;') Water Utility
                 span(style='font-weight: 400;')
                   | : includes all facilities necessary for storing and delivering potable water to users, including pipes and devices for measuring consumption, for transfer of potable water to individual users.
-            p &nbsp;
-            // Solid Waste
+            hr
             p
               strong Solid Waste: 
               span(style='font-weight: 400;')
                 | Activities related to collection, transfer, treatment and disposal of municipal solid waste as a public service.
-            ul
-              li
-                em
-                  span(style='font-weight: 400;') Treatment/Disposal: 
-                span(style='font-weight: 400;')
-                  | includes sorting and recycling facilities, mechanical and biological treatment, incineration/waste to Energy facilities and sanitary landfill. Treatment/Disposal also includes facilities related with collection, transport, and integrated management of waste.
+            p
+              strong Subsectors:&nbsp;
+            p
+              em
+                span(style='font-weight: 400;') Treatment/Disposal: 
+              span(style='font-weight: 400;')
+                | includes sorting and recycling facilities, mechanical and biological treatment, incineration/waste to Energy facilities and sanitary landfill. Treatment/Disposal also includes facilities related with collection, transport, and integrated management of waste.
           // Income group
           button.accordion Income group
           .panel
@@ -624,12 +635,25 @@ main#main
             .info-box.mb-6
               i.bx.bxs-book-bookmark
               h3 Research Team
-              p &#xC58F;&#xD638;
+              p(style='text-align: justify;')
+                span(style='font-weight: 400;')
+                  | Members of the research team are working as &ldquo;Research Analyst&rdquo; and &ldquo;Data Reviewer&rdquo; in Project MaPPPing. We search the articles regarding PPP(public-private partnership) projects directly or by using tools(AI Status Suggest) developed by our tech team, which will be entered into the Failure Map database. By categorizing and analyzing a vast range of Infrastructure Information from SDP&apos;s own database, better insights for a sustainable future are derived. Further, we contribute to the improvement of our tool by regularly delivering suggestions for efficient crawling to our tech team based on our findings.
+              br
+              p(style='text-align: justify;')
+                span(style='font-weight: 400;')
+                  | We would like to present the present and future of sustainable development in developing countries through Project MaPPPing. In this sense, We believe that the failure map, which analyzes the failure of the infrastructure from a variety of perspectives, such as type, region, and time, will be a useful reference at the beginning of infrastructure construction as well as the planning inspection stage.
           li.col-6.col-md-6.col-lg-6
             .info-box.mb-6
               i.bx.bx-laptop
               h3 Tech Team
-              p &#xC58F;&#xC57C;&#xD638;
+              p(style='text-align: justify;')
+                | Members of the tech team are responsible for the visualization of the data on our website and subsequent management of the homepage in Project MaPPPing. We run the server by using tools such as HTML, CSS, JavaScript, and AWS.
+              br
+              p(style='text-align: justify;')
+                | We are trying hard to easily and intuitively express high-quality data obtained through collaboration with our research team. Our team aims to provide various functions which help our research team to gain better insights based on our data.
+              br
+              p(style='text-align: justify;')
+                | For instance, currently, individuals can filter the various infrastructure by their characteristics, enabling comparison and further analysis of certain projects. At present, we are working on the &ldquo;See Also&rdquo; part, which recommends infrastructure projects with high similarity, considering multiple criteria, by applying a variety of techniques required.
   // End Testimonials Section
   // ======= Contact Section =======
   section#contact.contact
@@ -639,44 +663,31 @@ main#main
         h2 Contact Us
         p For more information, use the channels below.
       .row(data-aos='fade-up' data-aos-delay='100')
-        .col-lg-3.col-md-6
-          .info-box.mb-4
-            i.bx.bxl-facebook
-            h3 Facebook
-            p &#xC8FC;&#xC18C;?
-        .col-lg-3.col-md-6
-          .info-box.mb-4
-            i.bx.bxl-instagram
-            h3 Instagram
-            p &#xC8FC;&#xC18C;?
-        .col-lg-3.col-md-6
-          .info-box.mb-4
-            i.bx.bxl-youtube
-            h3 Youtube
-            p &#xC8FC;&#xC18C;?
-        .col-lg-3.col-md-6
-          .info-box.mb-4
-            i.bx.bxl-blogger
-            h3 Blogger
-            p &#xC8FC;&#xC18C;?
-      .row(data-aos='fade-up' data-aos-delay='200')
-        // Yonsei Map
-        .col-lg-6
-          #map(style='border:0; width: 100%; height: 384px')
-          script.
-            mapboxgl.accessToken = 'pk.eyJ1Ijoic3VlZXp6IiwiYSI6ImNraGJ6OXVuZDA0OTAycW1kN2l6a25sYjgifQ.SkuusTAy8hmk734KEKGrxw';
-            var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-            center: [126.9388, 37.5664], // starting position [lng, lat]
-            zoom: 14.3 // starting zoom
-            });
-        .col-lg-6
-          .info-box
-            p.notice
-              | &#xC774;&#xBA54;&#xC77C; &#xD3FC; &#xC9C0;&#xC6E0;&#xC2B5;&#xB2C8;&#xB2E4;.
-              | &#xC9C0;&#xB3C4;&#xB3C4; &#xC9C0;&#xC6B8;&#xAE4C;&#xC694;?
-              | &#xD639;&#xC2DC; &#xC704;&#xC758; &#xB124;&#xBAA8;&#xCE78; &#xC678;&#xC5D0; &#xC774; contact us &#xC139;&#xC158;&#xC5D0; &#xB123;&#xC744; &#xAC83;&#xC774; &#xC788;&#xC744;&#xAE4C;&#xC6A9;
+        .col-md
+          a(href='https://www.facebook.com/SDPforYGL' target='_blank' rel='noopener noreferrer')
+            .info-box.mb-4
+              i.bx.bxl-facebook
+              h3 Facebook
+        .col-md
+          a(href='https://www.instagram.com/_sdp_official/' target='_blank' rel='noopener noreferrer')
+            .info-box.mb-4
+              i.bx.bxl-instagram
+              h3 Instagram
+        .col-md
+          a(href='https://www.youtube.com/channel/UCb72tSWPKXzaUV64hTy2T5g' target='_blank' rel='noopener noreferrer')
+            .info-box.mb-4
+              i.bx.bxl-youtube
+              h3 Youtube
+        .col-md
+          a(href='https://sdpglobal.blogspot.com/' target='_blank' rel='noopener noreferrer')
+            .info-box.mb-4
+              i.bx.bxl-blogger
+              h3 Blogger
+        .col-md
+          a(href='https://www.sdpglobal.org/ ' target='_blank' rel='noopener noreferrer')
+            .info-box.mb-4
+              i.bx.bxs-widget
+              h3 Website
   // End Contact Section
 // End #main
 // ======= Footer =======
@@ -692,9 +703,6 @@ footer#footer
             p
               strong Instagram:
               |  @_sdp_official 
-              br
-              strong Phone:
-              |  +82 010####### 
               br
               strong Email:
               |  sdpygl@gmail.com 
