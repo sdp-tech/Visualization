@@ -5,7 +5,7 @@ const request = require('request')
 const url = 'mongodb://sdpygl:sdp_ygl@13.125.186.99:27017/admin';
 
 const dbName = 'visualization';
-let db, collection, geojson_total_document;
+let db, collection;
 
 MongoClient.connect(url, async function(err, client) {
   assert.equal(null, err);
@@ -19,8 +19,8 @@ MongoClient.connect(url, async function(err, client) {
 });
 
 const geojsonlize = ()=>{
-    return new Promise((resolve, reject) =>{
-        geojson_total_document =  collection.find({}).toArray(function(__, docs) {
+    return new Promise((resolve, __) =>{
+        collection.find({}).toArray(function(__, docs) {
         var geojson_feature_storage = []
         docs[0].Features.map( document =>{
           const geojson_feature = {
@@ -33,7 +33,7 @@ const geojsonlize = ()=>{
           }
           geojson_feature_storage.push(geojson_feature)
         })
-        geojson_total_document = {
+        const geojson_total_document = {
           "type": "FeatureCollection",
           "features": geojson_feature_storage
           }
@@ -44,6 +44,5 @@ const geojsonlize = ()=>{
 }
 
 module.exports = {
-    geojson_total_document,
     geojsonlize
 }
