@@ -608,9 +608,13 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Services
+# Insight
 --------------------------------------------------------------*/
-.services .icon-box {
+#Insight .insight-box{
+  perspective: 1000px;
+}
+
+#Insight .icon-box {
   padding: 30px;
   position: relative;
   overflow: hidden;
@@ -619,9 +623,29 @@ section {
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   z-index: 1;
+  perspective: 1000px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
-.services .icon-box::before {
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+#Insight .insight-box:hover .icon-box {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+#Insight .icon-box .title, #Insight .icon-box .description {
+  position: relative;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+#Insight .icon-box .description {
+  transform: rotateY(180deg);
+}
+
+/* #Insight .icon-box::before {
   content: '';
   position: absolute;
   background: white;
@@ -633,46 +657,48 @@ section {
   z-index: -1;
 }
 
-.services .icon-box:hover::before {
+#Insight .icon-box:hover::before {
   background: #c44536;
   top: 0;
   border-radius: 0px;
-}
+} */
 
-.services .icon {
+#Insight .icon {
   margin-bottom: 15px;
 }
 
-.services .icon i {
+#Insight .icon i {
   font-size: 48px;
   line-height: 1;
   color: #c44536;
   transition: all 0.3s ease-in-out;
 }
 
-.services .title {
+#Insight .title {
   font-weight: 700;
   margin-bottom: 15px;
   font-size: 18px;
 }
 
-.services .title a {
+#Insight .title a {
   color: #111;
 }
 
-.services .description {
+#Insight .description {
   font-size: 15px;
   line-height: 28px;
   margin-bottom: 0;
 }
 
-.services .icon-box:hover .title a, .services .icon-box:hover .description, .description li {
+#Insight .icon-box:hover .title a, #Insight .icon-box:hover .description, .description li {
   color: #fff;
 }
 
-.services .icon-box:hover .icon i {
+#Insight .icon-box:hover .icon i {
   color: #fff;
 }
+
+
 
 /*--------------------------------------------------------------
 # Counts
@@ -1829,3 +1855,4 @@ img.tutorial_img{
   margin-left: auto;
   margin-right: auto;
 }
+

@@ -26,7 +26,12 @@ var customOption = {
 };
 
 function toolbar_open() {
-    $('#toolbar').toggleClass('open');
+    if ( document.getElementById("MyElement").classList.contains('open') ){
+        document.getElementById("MyElement").classList.remove('open');
+    }
+    else{
+        document.getElementById("MyElement").classList.add('open');
+    }
 };
 
 function load_data(customOption)
