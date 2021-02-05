@@ -26,11 +26,11 @@ var customOption = {
 };
 
 function toolbar_open() {
-    if ( document.getElementById("MyElement").classList.contains('open') ){
-        document.getElementById("MyElement").classList.remove('open');
+    if ( document.getElementById("toolbar").classList.contains('open') ){
+        document.getElementById("toolbar").classList.remove('open');
     }
     else{
-        document.getElementById("MyElement").classList.add('open');
+        document.getElementById("toolbar").classList.add('open');
     }
 };
 
