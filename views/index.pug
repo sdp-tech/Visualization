@@ -30,7 +30,7 @@ header#header.fixed-top.header-transparent
   .container.d-flex.align-items-center
     .logo.mr-auto
       h1.text-light
-        a(href='index.html')
+        a(href='index')
           span Project MaPPPing
       // Uncomment below if you prefer to use an image logo
       // <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
@@ -66,7 +66,7 @@ section#hero
     h1 Failure Map
     h2 Sustainable Development Program
     br
-    a.cta-btn(href='inner-page.html') Go to our Map / Get Started
+    a.cta-btn(href='inner-page') Go to our Map / Get Started
     br
     a.btn-get-started.scrollto(href='#about')
       i.bx.bx-chevrons-down
@@ -141,8 +141,8 @@ main#main
                   |  and start developing your own!
         // End .content
   // End About Section
-  // ======= Services Section =======
-  section#Insight.services
+  // ======= Insight Section =======
+  section#Insight.insight-box
     .container
       .section-title(data-aos='fade-in' data-aos-delay='100')
         br
@@ -150,13 +150,13 @@ main#main
         p
           | SDP Failure Map provides insights as follows. This section enables the potential users to understand and foresee how the map can be utilized.
       .row.insight2
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up')
             h4.title
               a.inactiveLink(href='#') The causes of failure of the PPP infrastructure projects
             p.description
               | The categorized causes of project failures show potential risks and allow project managers to devise numerous failure scenarios and prepare effective recovery strategies.
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up' data-aos-delay='100')
             h4.title
               a.inactiveLink(href='#') Areas with high project failure rates and low areas
@@ -168,13 +168,13 @@ main#main
                 p.description
                   | The data could work as the starting point of the feasibility check for the consulting firms.
             p
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up' data-aos-delay='200')
             h4.title
               a.inactiveLink(href='#') Number of project failures per year
             p.description
               | Scholars and researchers of various organizations can detect the annual growth of the infrastructure projects in the world.
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up' data-aos-delay='300')
             h4.title
               a.inactiveLink(href='#') Frequent project failure cause by sector
@@ -182,28 +182,28 @@ main#main
               | Corporates and governments may prevent possible failure cause with sector-specific plannings.
       br
       .row.insight2
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up')
             h4.title
               a.inactiveLink(href='#')
                 | Varying degree of failure in developing/developed countries (Does the degree of national development have a significant impact on failure)?
             p.description
               | Banks, corporations, and government agencies can use this data as a means of determining risks in deciding whether to invest in certain countries or not.
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up' data-aos-delay='100')
             h4.title
               a.inactiveLink(href='#') Impact of major crisis (e.g. COVID-19) on project failure gradient
             p.description
               | Analysts and investment consultants can use this data to predict how current/future crises will affect projects.
             p
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up' data-aos-delay='200')
             h4.title
               a.inactiveLink(href='#')
                 | Project failure over time (can be linked to IMF, Covid, etc. when data is more accumulated)
             p.description
               | When more data is accumulated, project failure over time may be linked with general global circumstances.
-        .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
+        .insight-box.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
           .icon-box(data-aos='fade-up' data-aos-delay='300')
             h4.title
               a.inactiveLink(href='#') Concentrated sector by country/region
@@ -218,7 +218,7 @@ main#main
           li Recent Update: 2021.01.09
           p.notice &#xC5EC;&#xB7EC;&#xBD84; doc&#xC5D0; &#xC62C;&#xB824;&#xC8FC;&#xC2E0; More to read &#xCD94;&#xAC00; &#xB05D;&#xB09C;&#xAC74;&#xAC00;&#xC694;? &#xC5B4;&#xB5A4; &#xD615;&#xD0DC;&#xB85C; &#xB123;&#xC744;&#xAC74;&#xC9C0; &#xC54C;&#xB824;&#xC8FC;&#xC138;&#xC6A9;
           br
-  // End Services Section
+  // End Insight Section
   // ======= Counts Section =======
   section#counts.counts.section-bg
     .container
@@ -391,6 +391,18 @@ main#main
                 span(style='font-weight: 400;') Treatment/Disposal: 
               span(style='font-weight: 400;')
                 | includes sorting and recycling facilities, mechanical and biological treatment, incineration/waste to Energy facilities and sanitary landfill. Treatment/Disposal also includes facilities related with collection, transport, and integrated management of waste.
+            hr
+            p
+              strong Others: 
+              span(style='font-weight: 400;')
+                | Includes activities and facilities not included in energy, information and communication technology (ICT), transport, water and sewerage, and solid waste.
+            p
+              strong Subsectors:
+            p
+              em
+                span(style='font-weight: 400;') Others: 
+              span(style='font-weight: 400;')
+                | refers to all infrastructure not mentioned above; smart city, housing, multiple complex, economic zone project, etc.
           // Income group
           button.accordion Income group
           .panel
