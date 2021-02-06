@@ -215,7 +215,7 @@ function addPopup(feature, layer) {
         "<b>Income Group:</b> " + feature.properties.income_group + "<br>"+
         "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
         "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-        "<b>Prime Sector:</b> " + feature.properties.sector + "<br>"+
+        "<b>Primary Sector:</b> " + feature.properties.sector + "<br>"+
         "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
         "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
         "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
