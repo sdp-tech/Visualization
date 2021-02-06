@@ -63,24 +63,34 @@ header#header.fixed-top
   .container.d-flex.align-items-center
     .logo.mr-auto
       h1.text-light
+<<<<<<< HEAD
         a(href='index.html')
           span PROJECT MaPPPing
+=======
+<<<<<<< HEAD
+        a(href='index')
+          span SDP PROJECT MaPPPing
+=======
+        a(href='index.html')
+          span PROJECT MaPPPing
+>>>>>>> b0f3cd0 (Edit main.n.pug)
+>>>>>>> hotfix
       // Uncomment below if you prefer to use an image logo
       // <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
     nav.nav-menu.d-none.d-lg-block
       ul
         li.active
-          a(href='#hero') Home
+          a(href='../#hero') Home
         li
-          a(href='#about') Project MaPPPing
+          a(href='../#about') Project MaPPPing
         li
-          a(href='#Insight') Insight
+          a(href='../#Insight') Insight
         li
-          a(href='#Methodology') Methodology
+          a(href='../#Methodology') Methodology
         li
-          a(href='#team') SDP Team
+          a(href='../#team') SDP Team
         li
-          a(href='#contact') Contact Us
+          a(href='../#contact') Contact Us
     // .nav-menu
 // End Header
 main#main
@@ -91,7 +101,7 @@ main#main
         h2 Map
         ol
           li
-            a(href='index.html') Home
+            a(href='index') Home
           li Map
   // End Breadcrumbs Section
   section.inner-page
@@ -101,7 +111,7 @@ main#main
         // modal header
         .modal-header
           p(style='float: left;font-size: 24px; margin:0px; font-weight: bold;') Tutorial
-          span#tutorial_close.close(onclick='tutorial_off()') &times;
+          span#tutorial_close.close(onclick='popup_close();') &times;
         // modal body
         .modal-body
           #0.tutorial_content
@@ -246,8 +256,8 @@ script(src='assets/js/leaflet.awesome-markers.js')
 script(src='assets/js/loading.js')
 // Template Main JS File
 script(src='assets/js/main.js')
+script(src='assets/js/tutorial.js')
 // personal file
 script(type='text/javascript' src='assets/js/map.js')
-script(type='text/javascript' src='assets/js/tutorial.js')
 // Plugin JavaScript file
 script(src='https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js')

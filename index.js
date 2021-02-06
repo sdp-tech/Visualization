@@ -11,10 +11,8 @@ app.use('/assets', express.static('SDPmain/assets/'))
 app.set('view engine', 'pug')
 
 app.get('/', (__, res)=>res.render('index'))
-app.get('/', (__,res)=>res.render('index'))
-app.get('/index.html', (__, res)=>res.render('index'))
+app.get('/index', (__, res)=>res.render('index'))
 app.get('/inner-page', (__, res)=>res.render('inner-page'))
-app.get('/inner-page.html', (__, res)=>res.render('inner-page'))
 app.get('/apis/update-data', (__, res) => {
   mongodb.geojsonlize().then(data=>{cached_json = data});
   return res.redirect('/inner-page')
