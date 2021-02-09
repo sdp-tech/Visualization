@@ -18,31 +18,14 @@ MongoClient.connect(url, async function(err, client) {
   request.get('http://localhost:4000/apis/update-data')
 });
 
-const geojsonlize = ()=>{
-    return new Promise((resolve, __) =>{
-        collection.find({}).toArray(function(__, docs) {
-        var geojson_feature_storage = []
-        docs[0].Features.map( document =>{
-          const geojson_feature = {
-            "type":"Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [(document.geometry.coordinates[0]), (document.geometry.coordinates[1])],
-            },
-            "properties": document.properties
-          }
-          geojson_feature_storage.push(geojson_feature)
-        })
-        const geojson_total_document = {
-          "type": "FeatureCollection",
-          "features": geojson_feature_storage
-          }
-          resolve( geojson_total_document)
-      });
-    })
-        
+const getData = () => {
+    return new Promise((resolve, __) => {
+      collection.find({}).toArray(function(__, features){
+        return resolve(features);
+      })
+  });
 }
 
 module.exports = {
-    geojsonlize
+  getData
 }
