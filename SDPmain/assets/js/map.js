@@ -16,8 +16,8 @@ var markers = [];
 var customOption = {
     countryOp: [],
     sectorOp: [],
-    yearOp:{
-        "from" : 1960,
+    yearOp: {
+        "from": 1960,
         "to": 2021,
     },
     statusOp: [],
@@ -29,54 +29,51 @@ function toolbar_open() {
     document.getElementById("toolbar").classList.toggle('open');
 };
 
-function load_data(customOption)
-{
+function load_data(customOption) {
     // const proxy = "https://cors-anywhere.herokuapp.com/";
     // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
     const url = 'apis/data'
 
     $.ajax({
         dataType: "json",
-        crossDomain:true,
+        crossDomain: true,
         url: url,
         //to support IE
-        cache : false,
+        cache: false,
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
+        },
 
-    },
-
-        success: function(requested)
-        {
-            let json=requested['body'];
+        success: function (requested) {
+            let json = requested['body'];
             mapdata = data_process(json);
             load_map(mapdata, customOption);
             $.loading.end();
         },
-        error : function(err){
-
+        error: function (err) {
             console.log("ERR", err);
         }
     });
 }
 
 // processing data
-function data_process(rawdata)
-{
-    $.each(rawdata.features, function (key, val) {
-        $.each(val.properties, function(col, option){
-            if(option == null)
+function data_process(json) {
+    json.forEach((element) => {
+        Object.keys(element.properties).forEach((col) => {
+            let option = element.properties[col];
+
+            if (option == null)
                 option = ""
-            switch(col) {
-                case "fc_year":                    
+
+            switch (col) {
+                case "fc_year":
                     option = (isNaN(option) ? "N/A" : Math.round(option));
                     break;
-
                 case "ppi_status":
-                    if (option.toLowerCase().includes("delay")){
+                    if (option.toLowerCase().includes("delay")) {
                         option = "Delayed";
                     }
-                    else if(option.toLowerCase().includes("cancel")){
+                    else if (option.toLowerCase().includes("cancel")) {
                         option = "Canceled";
                     }
                     else {
@@ -85,94 +82,94 @@ function data_process(rawdata)
                     break;
 
                 case "type_of_ppi":
-                    
-                    if (option.toLowerCase().includes("green")){
+
+                    if (option.toLowerCase().includes("green")) {
                         option = "Greenfield";
                     }
-                    else if(option.toLowerCase().includes("brown")){
+                    else if (option.toLowerCase().includes("brown")) {
                         option = "Brownfield";
                     }
-                    else if(option.toLowerCase().includes("expans")){
+                    else if (option.toLowerCase().includes("expans")) {
                         option = "Expansion";
                     }
                     else {
                         option = "N/A";
                     }
                     break;
-              }
-            val.properties[col] = option;
-        })              
+            }
+            element.properties[col] = option;
+        })
     });
-    
-    return rawdata;
+
+    return json;
 };
 
 // setting a map 
-function load_map(json,customOption){
+function load_map(json, customOption) {
 
     // /***************************
     //  *      Base map Layer     *
     // ***************************/
+    mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);
 
-    mymap = L.map('mapwrap', {zoomControl: false}).setView([35,40],2.5);
-    
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGluYTAwNyIsImEiOiJja2hmZDNvOTgwNnVrMnJsNG1sOWtzcXNoIn0.Do0MCp-8-o2cv5cl-A2sNQ', 
-    {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        subdomains: 'abcd',
-        tileSize: 512,
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGluYTAwNyIsImEiOiJja2hmZDNvOTgwNnVrMnJsNG1sOWtzcXNoIn0.Do0MCp-8-o2cv5cl-A2sNQ',
+        {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            subdomains: 'abcd',
+            tileSize: 512,
 
-        // zoom controller
-        minZoom: 2,
-        maxZoom: 16,
-        zoomOffset: -1
+            // zoom controller
+            minZoom: 2,
+            maxZoom: 16,
+            zoomOffset: -1
 
-    }).addTo(mymap);
+        }).addTo(mymap);
 
     // prohibit dragging when mouse is over the filterbar
-    $('#toolbar').on("mouseover", function(){ 
+    $('#toolbar').on("mouseover", function () {
         mymap.dragging.disable();
         mymap.doubleClickZoom.disable();
         mymap.scrollWheelZoom.disable();
         mymap.keyboard.disable();
-        mymap.boxZoom.disable(); 
-    }).on("mouseout", function(){
+        mymap.boxZoom.disable();
+    }).on("mouseout", function () {
         mymap.dragging.enable();
         mymap.doubleClickZoom.enable();
         mymap.scrollWheelZoom.enable();
         mymap.keyboard.enable();
-        mymap.boxZoom.enable();  
+        mymap.boxZoom.enable();
     });
     try {
+        console.log(json);
         let geoLayer = L.geoJson(json, {
-            onEachFeature : addPopup,
-            filter : geoJson_filter,
-            pointToLayer: geoJson_pointToLayer 
+            onEachFeature: addPopup,
+            filter: geoJson_filter,
+            pointToLayer: geoJson_pointToLayer
         });
 
         mymap.addLayer(geoLayer);
-                
+
         // Initialization
         updateStates(customOption);
         geoLayer.addData(json);
 
         // Updata when any change is detected
         detectChange(json, geoLayer, customOption);
-        
+
         // Searchbox
-        mymap.addControl( new L.Control.Search({
+        mymap.addControl(new L.Control.Search({
             // container: 'toolbar',
             position: 'topright',
             layer: geoLayer,
             initial: false,
             collapsed: true,
 
-            moveToLocation: function(latlng, title, map) {
-                map.setView(latlng,10);
+            moveToLocation: function (latlng, title, map) {
+                map.setView(latlng, 10);
                 let targetmarker = markers.find(el => el.defaultOptions.title === title);
                 targetmarker.openPopup();
             }
-        }) 
+        })
         );
 
         // zoom box
@@ -180,47 +177,45 @@ function load_map(json,customOption){
             position: 'topright'
         }).addTo(mymap);
 
-
         L.easyButton({
             position: 'topright',
             states: [{
-                        stateName: 'zoom-to-original',        // name the state
-                        icon:      'fas fa-map',               // and define its properties
-                        title:     'zoom to a original',      // like its title
-                        onClick: function(btn, map) {       // and its callback
-                            map.setView([35,40],2.5);
-                            btn.state('zoom-to-original');    // change state on click!
-                        }
-                }]
-            }).addTo(mymap);
+                stateName: 'zoom-to-original',        // name the state
+                icon: 'fas fa-map',               // and define its properties
+                title: 'zoom to a original',      // like its title
+                onClick: function (btn, map) {       // and its callback
+                    map.setView([35, 40], 2.5);
+                    btn.state('zoom-to-original');    // change state on click!
+                }
+            }]
+        }).addTo(mymap);
 
-
-    } catch(err){
+    } catch (err) {
         console.error(err);
     };
-        
+
     // add to HTML
     options_to_html(json);
 
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())
-    
+
 }
 
 function addPopup(feature, layer) {
-    var popupText = 
-        "<p id='p_popup_detail'>"+
-        "<strong style='color: #84b819; font-size:120%;' >" + feature.properties.project_name_wb + "</strong><br>" + 
-        "<b>Country:</b> " + feature.properties.country + "<br>"+
-        "<b>Income Group:</b> " + feature.properties.income_group + "<br>"+
-        "<b>FC Year:</b> " + feature.properties.fc_year + "<br>"+
-        "<b>Status:</b> " + feature.properties.ppi_status + "<br>"+
-        "<b>Primary Sector:</b> " + feature.properties.sector + "<br>"+
-        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>"+
-        "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>"+
-        "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>"+
+    var popupText =
+        "<p id='p_popup_detail'>" +
+        "<strong style='color: #84b819; font-size:120%;' >" + feature.properties.project_name_wb + "</strong><br>" +
+        "<b>Country:</b> " + feature.properties.country + "<br>" +
+        "<b>Income Group:</b> " + feature.properties.income_group + "<br>" +
+        "<b>FC Year:</b> " + feature.properties.fc_year + "<br>" +
+        "<b>Status:</b> " + feature.properties.ppi_status + "<br>" +
+        "<b>Primary Sector:</b> " + feature.properties.sector + "<br>" +
+        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>" +
+        "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>" +
+        "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>" +
         "<p id='linked_p_popup_detail'>" +
-        "<b><a href='"+ feature.properties.urls + "'target='_blank' rel='noopener noreferrer'>URL</a>"+
+        "<b><a href='" + feature.properties.urls + "'target='_blank' rel='noopener noreferrer'>URL</a>" +
         "</p></p>";
 
     layer.bindPopup(popupText, {
@@ -228,7 +223,7 @@ function addPopup(feature, layer) {
         offset: L.point(0, -20)
     });
 
-    layer.on('click', function() {
+    layer.on('click', function () {
         layer.openPopup();
     });
 };
@@ -253,21 +248,21 @@ function geoJson_pointToLayer(feature, latlng, layer) {
 
     const awesomemark = L.AwesomeMarkers.icon({
         icon: icon_png,
-        prefix:'fa',
+        prefix: 'fa',
         markerColor: icon_color
     });
 
     const marker = new L.Marker(latlng, {
-        title : feature.properties.project_name_wb,
-        icon : awesomemark,
+        title: feature.properties.project_name_wb,
+        icon: awesomemark,
     });
 
     markers.push(marker);
     return marker;
 };
 
-function sector_to_icon(sector){
-// sector
+function sector_to_icon(sector) {
+    // sector
     switch (sector) {
         case "Energy":
             icon_color = 'green';
@@ -283,15 +278,15 @@ function sector_to_icon(sector){
             break;
         case "Water and sewerage":
             icon_color = 'gray';
-            break;                        
+            break;
         default:
             icon_color = 'red';
     };
     return icon_color;
 }
 
-function subsector_to_icon(subsector){
-                //subsector
+function subsector_to_icon(subsector) {
+    //subsector
     switch (subsector) {
         case "Airports":
             icon_png = "plane-departure";
@@ -327,7 +322,7 @@ function subsector_to_icon(subsector){
 /// filter ///
 //////////////
 
-function options_to_html(data){
+function options_to_html(data) {
 
     const property_list = getKeys(data);
 
@@ -336,17 +331,17 @@ function options_to_html(data){
     const status_set = arraytosortedSet(property_list["ppi_status"]);
     const income_set = arraytosortedSet(property_list["income_group"]);
     const ppitype_set = arraytosortedSet(property_list["type_of_ppi"]);
-    
+
     var statusselect = document.getElementById('status-select');
     var incomeselect = document.getElementById('income-select');
     var ppitypeselect = document.getElementById('ppitype-select');
 
     // region select
-    $(function(){
+    $(function () {
         var $select = $('#country-select');
-        $.each(geographical_set, function(index, optgroup){
+        $.each(geographical_set, function (index, optgroup) {
             var group = $('<optgroup class="optionlist" label="' + optgroup + '" />');
-            $.each(country_to_geographical(optgroup), function(index, value){
+            $.each(country_to_geographical(optgroup), function (index, value) {
                 $('<option class="optionlist" />').html(value).appendTo(group);
             });
             group.appendTo($select);
@@ -354,11 +349,11 @@ function options_to_html(data){
     });
 
     // sector select
-    $(function(){
+    $(function () {
         var $select = $('#sector-select');
-        $.each(sector_set, function(index, optgroup){
+        $.each(sector_set, function (index, optgroup) {
             var group = $('<optgroup label="' + optgroup + '" />');
-            $.each(subsector_to_region(optgroup), function(index, value){
+            $.each(subsector_to_region(optgroup), function (index, value) {
                 $(`<option value="${optgroup}:${value}"/>`).html(value).appendTo(group);
             });
             group.appendTo($select);
@@ -368,14 +363,14 @@ function options_to_html(data){
     // status
     addOptionToSelect(status_set, statusselect);
 
-// income
+    // income
     addOptionToSelect(income_set, incomeselect);
 
     // ppi-type
     addOptionToSelect(ppitype_set, ppitypeselect);
 }
 
-function addOptionToSelect(option_set, select){
+function addOptionToSelect(option_set, select) {
     for (let option of option_set.values()) {
         select.add(new Option(option, option));
     }
@@ -384,31 +379,33 @@ function addOptionToSelect(option_set, select){
 function updateStates(customOption) {
 
     // region
-    $(document).ready(function() {
+    $(document).ready(function () {
         let value;
         // country selection
         $('.country-select')
-        .select2({
-            placeholder: "Choose a Country"
-        })
-        .on('change.select2', function (el) {
-            value = $(el.currentTarget).val();
-            customOption.countryOp = [];
-            for (let i = 0; i < value.length; i++) {
-                customOption.countryOp.push(value[i]);}
-        });
+            .select2({
+                placeholder: "Choose a Country"
+            })
+            .on('change.select2', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.countryOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.countryOp.push(value[i]);
+                }
+            });
 
         // sector selection
         $('.sector-select')
-        .select2({
-            placeholder: "Choose a Sector"
-        })
-        .on('change', function (el) {
-            value = $(el.currentTarget).val();
-            customOption.sectorOp = [];
-            for (let i = 0; i < value.length; i++) {
-                customOption.sectorOp.push(value[i]);}
-        });
+            .select2({
+                placeholder: "Choose a Sector"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.sectorOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.sectorOp.push(value[i]);
+                }
+            });
 
 
         // FC year slider
@@ -419,52 +416,56 @@ function updateStates(customOption) {
             from: 1960,
             to: 2021,
             grid: true,
-            prettify: function(date){
+            prettify: function (date) {
                 return date.toString();
             },
             onChange: function (data) {
                 // Called every time handle position is changed
                 customOption.yearOp = {};
-                customOption.yearOp["from"]=(data.from);
-                customOption.yearOp["to"]=(data.to);
-            }})
+                customOption.yearOp["from"] = (data.from);
+                customOption.yearOp["to"] = (data.to);
+            }
+        })
 
         // status selection
         $('.status-select')
-        .select2({
-            placeholder: "Choose Status"
-        })
-        .on('change', function (el) {
-            value = $(el.currentTarget).val();
-            customOption.statusOp = [];
-            for (let i = 0; i < value.length; i++) {
-                customOption.statusOp.push(value[i]);}
-        });
+            .select2({
+                placeholder: "Choose Status"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.statusOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.statusOp.push(value[i]);
+                }
+            });
 
 
         // income group selection
         $('.income-select')
-        .select2({
-            placeholder: "Choose an Income Group"
-        })
-        .on('change', function (el) {
-            value = $(el.currentTarget).val();
-            customOption.incomeOp = [];
-            for (let i = 0; i < value.length; i++) {
-                customOption.incomeOp.push(value[i]);}
-        });
-        
+            .select2({
+                placeholder: "Choose an Income Group"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.incomeOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.incomeOp.push(value[i]);
+                }
+            });
+
         // ppi type selection
         $('.ppitype-select')
-        .select2({
-            placeholder: "Choose a PPI Type"
-        })
-        .on('change', function (el) {
-            value = $(el.currentTarget).val();
-            customOption.ppitypeOp = [];
-            for (let i = 0; i < value.length; i++) {
-                customOption.ppitypeOp.push(value[i]);}
-        });
+            .select2({
+                placeholder: "Choose a PPI Type"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.ppitypeOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.ppitypeOp.push(value[i]);
+                }
+            });
     })
 }
 
@@ -475,24 +476,23 @@ function detectChange(json, geoLayer, customOption) {
         input.onchange = (e) => {
             geoLayer.clearLayers()
             updateStates(customOption)
-            geoLayer.addData(json)   
+            geoLayer.addData(json)
         }
     }
 }
 
-function getKeys(input){
+//feature array 
+function getKeys(input) {
     // Step 1, group feature values by property.
-        let out = input.features.reduce((acc, {properties}) =>
-    {
-        Object.entries(properties).forEach(([key, val]) =>
-        {
+    let out = input.reduce((acc, { properties }) => {
+        Object.entries(properties).forEach(([key, val]) => {
             acc[key] = acc[key] || new Set();
             acc[key].add(val);
         });
 
         return acc;
     }, {});
-    
+
 
     return out;
 }
@@ -511,16 +511,18 @@ function getObjects(obj, key, val) {
 }
 
 // map country-geographical into a set
-function country_to_geographical(geographical) {;
+function country_to_geographical(geographical) {
+    ;
 
     let input = mapdata;
     let array = getObjects(input, "geographical", geographical);
     let data = array.map(data => data.country);
-    
+
     return arraytosortedSet(data);
 };
 
-function subsector_to_region(sector) {;
+function subsector_to_region(sector) {
+    ;
 
     let input = mapdata;
     let array = getObjects(input, "sector", sector);
@@ -530,20 +532,19 @@ function subsector_to_region(sector) {;
 };
 
 // Manage Range slider
-function yearIsincluded(feature, yearOp)
-{
+function yearIsincluded(feature, yearOp) {
 
-    let    targetyear = feature.properties.fc_year;
+    let targetyear = feature.properties.fc_year;
     let dateFrom = yearOp["from"];
     let dateTo = yearOp["to"];
-    
+
     if ((targetyear >= dateFrom) && (targetyear <= dateTo)) {
         return true;
     }
     return includeNA();
 }
 
-function sectorClass(sectorOp,properties){
+function sectorClass(sectorOp, properties) {
     return sectorOp.includes(`${properties.sector}:${properties.subsector}`);
 }
 
@@ -553,46 +554,46 @@ function includeNA() {
     return document.getElementById("myCheck").checked;
 }
 
-function arraytosortedSet(array){
+function arraytosortedSet(array) {
     return Array.from(new Set(array)).sort();
 }
 
-function toggle_selectableOptgroup(){
-    
+function toggle_selectableOptgroup() {
+
     // Region // 
     $('.country-select').select2();
 
-    $(document).on("click", "#select2-country-select-results strong", function(){
+    $(document).on("click", "#select2-country-select-results strong", function () {
 
         let groupName = $(this).html()
         let options = $('.country-select option');
-    
-        $.each(options, function(key, value){
-            if($(value)[0].parentElement.label.indexOf(groupName) >= 0){
+
+        $.each(options, function (key, value) {
+            if ($(value)[0].parentElement.label.indexOf(groupName) >= 0) {
                 $(value).prop("selected", true);
             }
-        });        
+        });
 
-    $('.country-select').trigger("change");
-    $('.country-select').select2('close'); 
+        $('.country-select').trigger("change");
+        $('.country-select').select2('close');
     });
 
     // Sector // 
     $('.sector-select').select2();
 
-    $(document).on("click", "#select2-sector-select-results strong", function(){
+    $(document).on("click", "#select2-sector-select-results strong", function () {
 
         let groupName = $(this).html()
         let options = $('.sector-select option');
-    
-        $.each(options, function(key, value){
-            if($(value)[0].parentElement.label.indexOf(groupName) >= 0){
+
+        $.each(options, function (key, value) {
+            if ($(value)[0].parentElement.label.indexOf(groupName) >= 0) {
                 $(value).prop("selected", true);
             }
-        });        
+        });
 
-    $('.sector-select').trigger("change");
-    $('.sector-select').select2('close'); 
+        $('.sector-select').trigger("change");
+        $('.sector-select').select2('close');
     })
 }
 
@@ -606,8 +607,8 @@ toggle_selectableOptgroup();
 
 /*clear button*/
 // clear filters - select2 & js slider
-$('.clearfilter').on('click', function (){
-    $('#myCheck').checked="true";
+$('.clearfilter').on('click', function () {
+    $('#myCheck').checked = "true";
     $('.select').val(null).trigger('change');
     $('.js-range-slider').data("ionRangeSlider").update({
         from: 1960,
@@ -616,8 +617,8 @@ $('.clearfilter').on('click', function (){
 });
 
 for (let input of document.querySelectorAll('#clearEach')) {
-    input.onclick = (e) =>{
-        switch(input.className) {
+    input.onclick = (e) => {
+        switch (input.className) {
             case "region_clear":
                 $('.country-select').val(null).trigger('change');
                 break;
@@ -647,6 +648,6 @@ for (let input of document.querySelectorAll('#clearEach')) {
 /////////////
 // tooltip //
 /////////////
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
 });
