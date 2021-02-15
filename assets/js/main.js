@@ -137,8 +137,8 @@
 
   // jQuery counterUp
   $('[data-toggle="counter-up"]').counterUp({
-    delay: 0,
-    time: 0
+    delay: 10,
+    time: 1000
   });
 
   // Initiate venobox (lightbox feature used in portofilo)
