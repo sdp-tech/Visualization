@@ -1180,7 +1180,6 @@ section#Insight{
   width: 40px;
   height: 20px;
   line-height: 20px;
-  padding: 0px;
   text-align: center;
   border-radius: 3px;
   box-sizing: border-box;
@@ -1240,7 +1239,7 @@ section#Insight{
   overflow-y: auto;
 }
 
-#toolbar .hamburger {
+#toolbar .sidebar {
   cursor: pointer;
   height: 100px;
   width: 25px;
@@ -1256,7 +1255,7 @@ section#Insight{
   z-index: 1000;
 }
 
-.hamburger span{
+.sidebar span{
   color: #fff;
   font-family: "Raleway", sans-serif;
   font-size: 15px;
@@ -1368,7 +1367,7 @@ section#Insight{
   color: black;
 }
 
-#toolbar > div.hamburger > span > a,
+#toolbar > div.sidebar > span > a,
 #filters > button > span > a{
   color: white;
   font-style : bold;

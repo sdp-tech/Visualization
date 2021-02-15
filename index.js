@@ -7,7 +7,7 @@ const PORT = 4000
 var cached_json = ""
 
 app.use(cors())
-app.use('/assets', express.static('SDPmain/assets/'))
+app.use('/assets', express.static(__dirname+'/assets'));
 app.set('view engine', 'pug')
 
 app.get('/', (__, res)=>res.render('index'))

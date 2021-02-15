@@ -27,6 +27,7 @@ var customOption = {
 
 function toolbar_open() {
     document.getElementById("toolbar").classList.toggle('open');
+    setTimeout('$(".sidebar").removeAttr("disabled")', 100);
 };
 
 function load_data(customOption) {
