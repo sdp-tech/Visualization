@@ -751,78 +751,6 @@ section#Insight{
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
-.team .member {
-  text-align: center;
-  margin-bottom: 80px;
-  position: relative;
-}
-
-.team .member .pic {
-  overflow: hidden;
-}
-
-.team .member .member-info {
-  position: absolute;
-  top: 85%;
-  left: 20px;
-  right: 20px;
-  background: #fff;
-  padding: 20px 0;
-  color: #2f4d5a;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  max-height: 95px;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
-}
-
-.team .member:hover .member-info {
-  max-height: 300px;
-}
-
-.team .member h4 {
-  font-weight: 700;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #2f4d5a;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.team .member h4::after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 50px;
-  height: 1px;
-  background: #772e25;
-  bottom: 0;
-  left: calc(50% - 25px);
-}
-
-.team .member span {
-  font-style: italic;
-  display: block;
-  font-size: 13px;
-}
-
-.team .member .social {
-  margin-top: 15px;
-}
-
-.team .member .social a {
-  transition: color 0.3s;
-  color:#c44536;
-}
-
-
-.team .member .social a:hover {
-  color:#c44536 ;
-}
-
-.team .member .social i {
-  font-size: 16px;
-  margin: 0 2px;
-}
 
 #team .info-box{
   padding : 30px;
@@ -830,9 +758,9 @@ section#Insight{
 
 #contact a { text-decoration: none; }
 
-@media (max-width: 992px) {
-  .team .member {
-    margin-bottom: 110px;
+@media screen and (max-width: 992px) {
+  #team .info-box {
+    box-sizing: border-box;
   }
 }
 
@@ -880,92 +808,6 @@ section#Insight{
   line-height: 24px;
   font-size: 14px;
   margin-bottom: 0;
-}
-
-.contact .php-email-form {
-  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
-  padding: 30px;
-  background: #fff;
-}
-
-.contact .php-email-form .validate {
-  display: none;
-  color: #c44536;
-  margin: 0 0 15px 0;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.contact .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #c44536;
-  text-align: left;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .error-message br + br {
-  margin-top: 25px;
-}
-
-.contact .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #18d26e;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-}
-
-.contact .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
-
-.contact .php-email-form input, .contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-}
-
-.contact .php-email-form input::focus, .contact .php-email-form textarea::focus {
-  background-color: #c44536;
-}
-
-.contact .php-email-form input {
-  padding: 20px 15px;
-}
-
-.contact .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.contact .php-email-form button[type="submit"] {
-  background: #c44536;
-  border: 0;
-  padding: 10px 24px;
-  color: #fff;
-  transition: 0.4s;
-}
-
-.contact .php-email-form button[type="submit"]:hover {
-  background: #c44536;
 }
 
 @-webkit-keyframes animate-loading {
