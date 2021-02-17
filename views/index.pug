@@ -16,6 +16,7 @@ head
   link(href='assets/vendor/venobox/venobox.css' rel='stylesheet')
   link(href='assets/vendor/owl.carousel/assets/owl.carousel.min.css' rel='stylesheet')
   link(rel='stylesheet' href='assets/vendor/owl.carousel/assets/owl.theme.default.css')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css')
 
   link(href='assets/vendor/aos/aos.css' rel='stylesheet')
   // Template Main CSS File
@@ -157,26 +158,34 @@ main#main
           | SDP Failure Map provides insights as follows. This section enables the potential users to understand and foresee how the map can be utilized.
       .row.insight2(data-aos='fade-in' data-aos-delay='200')
             .insight-card.owl-carousel.owl-theme
-              .insight-title The causes of failure of the PPP infrastructure projects
+              .insight-eachcard
+                .insight-title The causes of failure of the PPP infrastructure projects
                 .insight-body The categorized causes of project failures show potential risks and allow project managers to devise numerous failure scenarios and prepare effective recovery strategies.
-              .insight-title  Project failure rates according to different areas
+              .insight-eachcard
+                .insight-title  Project failure rates according to different areas
                 .insight-body
                   ul(style='margin-left:-15px !important;')
                     li
                       | Investors may refer to the data to make their infrastructure project investment decisions.
                     li
                       | The data could work as the starting point of the feasibility check for the consulting firms.              div  Your Content 
-              .insight-title  Number of project failures per year
+              .insight-eachcard
+                .insight-title  Number of project failures per year
                 .insight-body Scholars and researchers of various organizations can detect the annual 	failure rates of the infrastructure projects in the world.
-              .insight-title  Frequent project failure cause by sector
+              .insight-eachcard
+                .insight-title  Frequent project failure cause by sector
                 .insight-body Corporates and governments may prevent possible failure cause with sector-specific plannings.
-              .insight-title  Varying degree of failure in developing/developed countries (Does the degree of national development have a significant impact on failure)? 
+              .insight-eachcard
+                .insight-title  Varying degree of failure in developing/developed countries (Does the degree of national development have a significant impact on failure)? 
                 .insight-body Banks, corporations, and government agencies can use this data as a means of determining risks in deciding whether to invest in certain countries or not.
-              .insight-title  Impact of major crisis (e.g. COVID-19) on project failure gradient
+              .insight-eachcard
+                .insight-title  Impact of major crisis (e.g. COVID-19) on project failure gradient
                 .insight-body Analysts and investment consultants can use this data to predict how current/future crises will affect projects.
-              .insight-title  Project failure and global trend (can be linked to IMF, Covid, etc. when data is more accumulated)
+              .insight-eachcard
+                .insight-title  Project failure and global trend (can be linked to IMF, Covid, etc. when data is more accumulated)
                 .insight-body When more data is accumulated, general global circumstances may be linked with project failures.
-              .insight-title Concentrated sector by country/region
+              .insight-eachcard
+                .insight-title Concentrated sector by country/region
                 .insight-body National governments, investors and other stakeholders may use this data to determine which infrastructure sector is vulnerable in terms of country or region.
       br
   // End Insight Section
@@ -725,5 +734,6 @@ script(src='assets/vendor/isotope-layout/isotope.pkgd.min.js')
 script(src='assets/vendor/venobox/venobox.min.js')
 script(src='assets/vendor/owl.carousel/owl.carousel.min.js')
 script(src='assets/vendor/aos/aos.js')
+script(src='https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 // Template Main JS File
 script(src='assets/js/main.js')
