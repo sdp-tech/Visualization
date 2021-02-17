@@ -15,6 +15,8 @@ head
   link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
   link(href='assets/vendor/venobox/venobox.css' rel='stylesheet')
   link(href='assets/vendor/owl.carousel/assets/owl.carousel.min.css' rel='stylesheet')
+  link(rel='stylesheet' href='assets/vendor/owl.carousel/assets/owl.theme.default.css')
+
   link(href='assets/vendor/aos/aos.css' rel='stylesheet')
   // Template Main CSS File
   link(href='assets/css/style.css' rel='stylesheet')
@@ -154,62 +156,28 @@ main#main
         p
           | SDP Failure Map provides insights as follows. This section enables the potential users to understand and foresee how the map can be utilized.
       .row.insight2(data-aos='fade-in' data-aos-delay='200')
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#') The causes of failure of the PPP infrastructure projects
-            .card-back
-              | The categorized causes of project failures show potential risks and allow project managers to devise numerous failure scenarios and prepare effective recovery strategies.
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#') Project failure rates according to different areas
-            .card-back
-              ul(style='margin-left:-15px !important;')
-                li
-                  | Investors may refer to the data to make their infrastructure project investment decisions.
-                li
-                  | The data could work as the starting point of the feasibility check for the consulting firms.
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#') Number of project failures per year
-            .card-back
-              | Scholars and researchers of various organizations can detect the annual 	failure rates of the infrastructure projects in the world.
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#') Frequent project failure cause by sector
-            .card-back
-              | Corporates and governments may prevent possible failure cause with sector-specific plannings.
-      br
-      .row.insight2(data-aos='fade-in' data-aos-delay='200')
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#')
-                | Varying degree of failure in developing/developed countries (Does the degree of national development have a significant impact on failure)?
-            .card-back
-              | Banks, corporations, and government agencies can use this data as a means of determining risks in deciding whether to invest in certain countries or not.
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#') Impact of major crisis (e.g. COVID-19) on project failure gradient
-            .card-back
-              | Analysts and investment consultants can use this data to predict how current/future crises will affect projects.
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#')
-                | Project failure and global trend (can be linked to IMF, Covid, etc. when data is more accumulated)
-            .card-back
-              | When more data is accumulated, general global circumstances may be linked with project failures.
-        .eachcard.col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0
-          .card-inner
-            .card-front
-              a.inactiveLink(href='#') Concentrated sector by country/region
-            .card-back
-              | National governments, investors and other stakeholders may use this data to determine which infrastructure sector is vulnerable in terms of country or region.
+            .insight-card.owl-carousel.owl-theme
+              .insight-title The causes of failure of the PPP infrastructure projects
+                .insight-body The categorized causes of project failures show potential risks and allow project managers to devise numerous failure scenarios and prepare effective recovery strategies.
+              .insight-title  Project failure rates according to different areas
+                .insight-body
+                  ul(style='margin-left:-15px !important;')
+                    li
+                      | Investors may refer to the data to make their infrastructure project investment decisions.
+                    li
+                      | The data could work as the starting point of the feasibility check for the consulting firms.              div  Your Content 
+              .insight-title  Number of project failures per year
+                .insight-body Scholars and researchers of various organizations can detect the annual 	failure rates of the infrastructure projects in the world.
+              .insight-title  Frequent project failure cause by sector
+                .insight-body Corporates and governments may prevent possible failure cause with sector-specific plannings.
+              .insight-title  Varying degree of failure in developing/developed countries (Does the degree of national development have a significant impact on failure)? 
+                .insight-body Banks, corporations, and government agencies can use this data as a means of determining risks in deciding whether to invest in certain countries or not.
+              .insight-title  Impact of major crisis (e.g. COVID-19) on project failure gradient
+                .insight-body Analysts and investment consultants can use this data to predict how current/future crises will affect projects.
+              .insight-title  Project failure and global trend (can be linked to IMF, Covid, etc. when data is more accumulated)
+                .insight-body When more data is accumulated, general global circumstances may be linked with project failures.
+              .insight-title Concentrated sector by country/region
+                .insight-body National governments, investors and other stakeholders may use this data to determine which infrastructure sector is vulnerable in terms of country or region.
       br
   // End Insight Section
   // ======= Counts Section =======
