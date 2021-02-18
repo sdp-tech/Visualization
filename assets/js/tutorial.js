@@ -58,3 +58,5 @@ window.onclick = function(event) {
       tutorial_off();
     }
 };
+
+const lightbox = GLightbox({});
