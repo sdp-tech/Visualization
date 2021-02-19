@@ -8,6 +8,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
 body {
   font-family: "Raleway", sans-serif;
   color: #444444;
@@ -41,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #67b0d1;
   color: #fff;
   transition: display 0.5s ease-in-out;
-  z-index: 99999;
+  z-index: 1000;
 }
 
 .back-to-top i {
@@ -66,11 +67,9 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #header {
   transition: all 0.5s;
-  z-index: 997;
-  transition: all 0.5s;
   padding: 15px 0;
   background: #c44536 ;
-  z-index : 100000;
+  z-index : 999;
 }
 
 #header.header-transparent {
@@ -160,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   left: 0;
   top: calc(100% + 30px);
-  z-index: 99;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
   padding: 10px 0;
@@ -233,11 +232,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Mobile Navigation */
+/* close button when hamburger opened */
 .mobile-nav-toggle {
   position: fixed;
   right: 15px;
   top: 15px;
-  z-index: 9998;
+  z-index: 1000;
   border: 0;
   background: none;
   font-size: 24px;
@@ -252,13 +252,14 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
+/* hamburger button */
 .mobile-nav {
   position: fixed;
   top: 55px;
   right: 15px;
   bottom: 15px;
   left: 15px;
-  z-index: 9999;
+  z-index: 1000;
   overflow-y: auto;
   background: #fff;
   transition: ease-in-out 0.2s;
@@ -313,10 +314,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 20px;
 }
 
+/* background when hamburger menu opened */
 .mobile-nav-overly {
   width: 100%;
   height: 100%;
-  z-index: 9997;
+  z-index: 999;
   top: 0;
   left: 0;
   position: fixed;
