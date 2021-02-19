@@ -5,6 +5,7 @@ from geojson import Feature, Point, FeatureCollection
 
 client = pymongo.MongoClient("mongodb://sdpygl:sdp_ygl@13.125.186.99:27017/")
 visualization = client["visualization"]
+
 collection_map = visualization["map"]
 collection_map.create_index([("project_name_wb", pymongo.TEXT)], unique = True)
 
@@ -12,7 +13,7 @@ collection_map.create_index([("project_name_wb", pymongo.TEXT)], unique = True)
 
 csv_test = pd.read_csv('./fail_map_data.csv')
 
-#SDP_FAILURE MAP point class
+# SDP_FAILURE MAP point class
 class SDP_FAILURE(object):
     def __init__(self, country, geographical, income_group, project_name_wb, project_name_common, sector, subsector,
                  segment, crossborder, reason_for_delay, 
@@ -46,7 +47,7 @@ class SDP_FAILURE(object):
                 "ppi_status": ppi_status,
                 "affected_stage": affected_stage,
                 "type_of_ppi": type_of_ppi,
-                "urls": urls,
+                "urls": SDP_FAILURE.parseUrls(urls),
                 "resumed": resumed,
                 "resume_url": resume_url,
                 "location": location,
@@ -57,7 +58,19 @@ class SDP_FAILURE(object):
     @staticmethod
     def capitalize(string) :
         if type(string) == str :
-            return string[0].upper() + string[1:len(string)]        
+            return string[0].upper() + string[1:]
+
+    @staticmethod
+    # use first matched url only
+    def parseUrls(urls) :
+        if type(urls) == str :
+            # consider both case - http | https
+            indices = [http.start() for http in re.finditer('http', urls)]
+            if len(indices) > 1 :
+                urls= urls[0:indices[1]]
+
+            return urls 
+
 try:
     for line in csv_test.loc:
         sdp_failure = SDP_FAILURE(
