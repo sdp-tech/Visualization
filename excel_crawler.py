@@ -3,7 +3,7 @@ import pandas as pd
 import pymongo
 from geojson import Feature, Point, FeatureCollection
 
-client = pymongo.MongoClient("mongodb://sdpygl:sdp_ygl@13.125.186.99:27017/")
+client = pymongo.MongoClient("mongodb://sdpygl:sdp_ygl@15.165.169.242:27017/admin")
 visualization = client["visualization"]
 
 collection_map = visualization["map"]
