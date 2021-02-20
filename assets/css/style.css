@@ -762,8 +762,20 @@ section#Insight{
 # Team
 --------------------------------------------------------------*/
 
+.team-intro{
+  display: flex;
+  min-height: 20vh;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+#team .flex-item {
+  flex: 1;
+  margin: 1em;
+}
+
 #team .info-box{
-  padding : 30px;
+  padding:20px;
 }
 
 #contact a { text-decoration: none; }
@@ -772,7 +784,8 @@ section#Insight{
   #team .info-box {
     box-sizing: border-box;
     margin-bottom: 30px;
-    padding : 20px;
+    padding : 30px;
+    display:block;
   }
 }
 
