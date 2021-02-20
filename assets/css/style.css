@@ -769,13 +769,17 @@ section#Insight{
   box-sizing: border-box;
 }
 
+#team .info-box p{
+  text-indent: 10px;
+}
+
 #team .flex-item {
   flex: 1;
   margin: 1em;
 }
 
 #team .info-box{
-  padding:20px;
+  padding:30px;
 }
 
 #contact a { text-decoration: none; }
