@@ -169,7 +169,6 @@ function load_map(json, customOption) {
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
-            container: isMobile ? 'findbox':false,
             position: 'topright',
             layer: geoLayer,
             initial: false,
