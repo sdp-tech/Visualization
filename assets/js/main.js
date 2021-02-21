@@ -1,83 +1,106 @@
 /**
-* Template Name: Squadfree - v2.2.0
-* Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+ * Template Name: Squadfree - v2.2.0
+ * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+ * Author: BootstrapMade.com
+ * License: https://bootstrapmade.com/license/
+ */
 
-!(function($) {
+!(function ($) {
   "use strict";
 
   // Smooth scroll for the navigation menu and links with .scrollto classes
-  var scrolltoOffset = $('#header').outerHeight() - 31;
+  var scrolltoOffset = $("#header").outerHeight() - 31;
   if (window.matchMedia("(max-width: 991px)").matches) {
     scrolltoOffset += 0;
   }
-  $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      e.preventDefault();
-      if (target.length) {
-
-        var scrollto = target.offset().top - scrolltoOffset;
-        if ($(this).attr("href") == '#header') {
-          scrollto = 0;
+  $(document).on(
+    "click",
+    ".nav-menu a, .mobile-nav a, .scrollto",
+    function (e) {
+      if (
+        location.pathname.replace(/^\//, "") ==
+          this.pathname.replace(/^\//, "") &&
+        location.hostname == this.hostname
+      ) {
+        var target = $(this.hash);
+        e.preventDefault();
+        if (target.length) {
+          var scrollto = target.offset().top - scrolltoOffset;
+          if ($(this).attr("href") == "#header") {
+            scrollto = 0;
+          }
+          $("html, body").animate(
+            {
+              scrollTop: scrollto,
+            },
+            0,
+            "easeInOutExpo"
+          );
+          if ($(this).parents(".nav-menu, .mobile-nav").length) {
+            $(".nav-menu .active, .mobile-nav .active").removeClass("active");
+            $(this).closest("li").addClass("active");
+          }
+          if ($("body").hasClass("mobile-nav-active")) {
+            $("body").removeClass("mobile-nav-active");
+            $(".mobile-nav-toggle i").toggleClass(
+              "icofont-navigation-menu icofont-close"
+            );
+            $(".mobile-nav-overly").fadeOut();
+          }
+          return false;
         }
-        $('html, body').animate({
-          scrollTop: scrollto
-        }, 0, 'easeInOutExpo');
-        if ($(this).parents('.nav-menu, .mobile-nav').length) {
-          $('.nav-menu .active, .mobile-nav .active').removeClass('active');
-          $(this).closest('li').addClass('active');
-        }
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
-          $('.mobile-nav-overly').fadeOut();
-        }
-        return false;
       }
     }
-  });
+  );
 
   // Activate smooth scroll on page load with hash links in the url
-  $(document).ready(function() {
+  $(document).ready(function () {
     if (window.location.hash) {
       var initial_nav = window.location.hash;
       if ($(initial_nav).length) {
         var scrollto = $(initial_nav).offset().top - scrolltoOffset;
-        $('html, body').animate({
-          scrollTop: scrollto
-        }, 0, 'easeInOutExpo');
+        $("html, body").animate(
+          {
+            scrollTop: scrollto,
+          },
+          0,
+          "easeInOutExpo"
+        );
       }
     }
   });
 
   // Mobile Navigation
-  if ($('.nav-menu').length) {
-    var $mobile_nav = $('.nav-menu').clone().prop({
-      class: 'mobile-nav d-lg-none'
+  if ($(".nav-menu").length) {
+    var $mobile_nav = $(".nav-menu").clone().prop({
+      class: "mobile-nav d-lg-none",
     });
-    $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
-    $('body').append('<div class="mobile-nav-overly"></div>');
-    $(document).on('click', '.mobile-nav-toggle', function(e) {
-      $('body').toggleClass('mobile-nav-active');
-      $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
-      $('.mobile-nav-overly').toggle();
+    $("body").append($mobile_nav);
+    $("body").prepend(
+      '<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>'
+    );
+    $("body").append('<div class="mobile-nav-overly"></div>');
+    $(document).on("click", ".mobile-nav-toggle", function (e) {
+      $("body").toggleClass("mobile-nav-active");
+      $(".mobile-nav-toggle i").toggleClass(
+        "icofont-navigation-menu icofont-close"
+      );
+      $(".mobile-nav-overly").toggle();
     });
-    $(document).on('click', '.mobile-nav .drop-down > a', function(e) {
+    $(document).on("click", ".mobile-nav .drop-down > a", function (e) {
       e.preventDefault();
       $(this).next().slideToggle(300);
-      $(this).parent().toggleClass('active');
+      $(this).parent().toggleClass("active");
     });
-    $(document).click(function(e) {
+    $(document).click(function (e) {
       var container = $(".mobile-nav, .mobile-nav-toggle");
       if (!container.is(e.target) && container.has(e.target).length === 0) {
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
-          $('.mobile-nav-overly').fadeOut();
+        if ($("body").hasClass("mobile-nav-active")) {
+          $("body").removeClass("mobile-nav-active");
+          $(".mobile-nav-toggle i").toggleClass(
+            "icofont-navigation-menu icofont-close"
+          );
+          $(".mobile-nav-overly").fadeOut();
         }
       }
     });
@@ -86,112 +109,116 @@
   }
 
   // Navigation active state on scroll
-  var nav_sections = $('section');
-  var main_nav = $('.nav-menu, .mobile-nav');
+  var nav_sections = $("section");
+  var main_nav = $(".nav-menu, .mobile-nav");
 
-  $(window).on('scroll', function() {
+  $(window).on("scroll", function () {
     var cur_pos = $(this).scrollTop();
 
-    nav_sections.each(function() {
+    nav_sections.each(function () {
       var top = $(this).offset().top,
         bottom = top + $(this).outerHeight();
 
       if (cur_pos >= top && cur_pos <= bottom) {
         if (cur_pos <= bottom) {
-          main_nav.find('li').removeClass('active');
+          main_nav.find("li").removeClass("active");
         }
-        main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');
+        main_nav
+          .find('a[href="#' + $(this).attr("id") + '"]')
+          .parent("li")
+          .addClass("active");
       }
       if (cur_pos < 300) {
-        $(".nav-menu ul:first li:first").addClass('active');
+        $(".nav-menu ul:first li:first").addClass("active");
       }
     });
   });
 
   // Toggle .header-scrolled class to #header when page is scrolled
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
-      $('#header').addClass('header-scrolled');
+      $("#header").addClass("header-scrolled");
     } else {
-      $('#header').removeClass('header-scrolled');
+      $("#header").removeClass("header-scrolled");
     }
   });
   if ($(window).scrollTop() > 100) {
-    $('#header').addClass('header-scrolled');
+    $("#header").addClass("header-scrolled");
   }
 
   // Back to top button
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
-      $('.back-to-top').fadeIn('slow');
+      $(".back-to-top").fadeIn("slow");
     } else {
-      $('.back-to-top').fadeOut('slow');
+      $(".back-to-top").fadeOut("slow");
     }
   });
-  $('.back-to-top').click(function() {
-    $('html, body').animate({
-      scrollTop: 0
-    }, 300, 'easeInOutExpo');
+  $(".back-to-top").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: 0,
+      },
+      300,
+      "easeInOutExpo"
+    );
     return false;
   });
 
   // jQuery counterUp
   $('[data-toggle="counter-up"]').counterUp({
     delay: 10,
-    time: 1000
+    time: 1000,
   });
 
   // Initiate venobox (lightbox feature used in portofilo)
-  $(document).ready(function() {
-    $('.venobox').venobox();
+  $(document).ready(function () {
+    $(".venobox").venobox();
   });
-
 
   // Init AOS
   function aos_init() {
     AOS.init({
       duration: 800,
       easing: "ease-in-out",
-      once: true
+      once: true,
     });
   }
-  $(window).on('load', function() {
+  $(window).on("load", function () {
     aos_init();
   });
-
-
 })(jQuery);
 
-  // methodology accordion
-  var acc = document.getElementsByClassName("accordion");
-  var i;
+// methodology accordion
+var acc = document.getElementsByClassName("accordion");
+var i;
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      } 
-    });
-  }
-
-  // Insight 
-  $(".insight-card").owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:2
-        },
-        1000:{
-            items:3
-        }
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
     }
   });
+}
+
+// Insight
+$(".insight-card").owlCarousel({
+  loop: true,
+  margin: 10,
+  nav: true,
+  responsive: {
+    0: {
+      items: 1,
+    },
+    600: {
+      items: 2,
+    },
+    1000: {
+      items: 3,
+    },
+  },
+});
