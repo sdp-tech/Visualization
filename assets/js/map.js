@@ -108,6 +108,7 @@ function data_process(json) {
 // setting a map 
 function load_map(json, customOption) {
 
+
     // /***************************
     //  *      Base map Layer     *
     // ***************************/

@@ -739,7 +739,7 @@ section#Insight{
   color: #fff;
 }
 
-.cta-btn {
+.goto-btn {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -754,7 +754,7 @@ section#Insight{
   color: #fff;
 }
 
-.cta-btn:hover {
+.goto-btn:hover {
   border-color: #fff;
 }
 
