@@ -49,7 +49,10 @@ head
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css')
   script(src='https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js')
   // gslide for tutorial
-  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css')
+  link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modaal@0.4.4/source/css/modaal.css")
+
+
+
 
     //- =======================================================
     //- * Template Name: Squadfree - v2.2.0
@@ -97,30 +100,12 @@ main#main
   // End Breadcrumbs Section
   section.inner-page
     // tutorial
-    #tutorial.modal
-      #tutorial_text.modal-content
-        // modal header
-        .modal-header
-          p(style='float: left;font-size: 24px; margin:0px; font-weight: bold;') Tutorial
-          span#tutorial_close.close(onclick='tutorial_off();') &times;
-        // modal body
-        .modal-body
-          #0.tutorial_content
-            img.tutorial_img(src='assets/img/tutorial_image/tutorial1.png' alt='alternatetext')
-          #1.tutorial_content
-            img.tutorial_img(src='assets/img/tutorial_image/tutorial2.png' alt='alternatetext')
-          #2.tutorial_content
-            img.tutorial_img(src='assets/img/tutorial_image/tutorial3.png' alt='alternatetext')
-        br
-        p.button_control(style='text-align: center;')
-          button#previous.innerbtn_tutorial(onclick='tutorialpage(previous)') &lt;
-          button#next.innerbtn_tutorial(onclick='tutorialpage(next)') &gt;
-    // tutorial
     .container
       br
       p(style='text-align: right;')
-        button#tutorial_btn(onclick='tutorial_on()')
-          span Tutorial
+        a#0.tutorial_content.tutorial_link_btn(href='assets/img/tutorial_image/tutorial1.png' data-group='gallery') Tutorial
+        a#1.tutorial_content(href='assets/img/tutorial_image/tutorial2.png' data-group='gallery') 
+        a#2.tutorial_content(href='assets/img/tutorial_image/tutorial3.png' data-group='gallery')
       // MAP GOES HERE
       // sidemenu
       #mapwrap.mapcontainer.wrapper
@@ -234,6 +219,7 @@ script(src='assets/vendor/owl.carousel/owl.carousel.min.js')
 script(src='assets/vendor/aos/aos.js')
 script(src='assets/vendor/select2/dist/js/select2.full.js')
 script(src='assets/vendor/select2/dist/js/select2.full.min.js')
+script(src="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/js/modaal.min.js")
 script(src='https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.min.js')
 script(src='https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 script(src='assets/js/leaflet.awesome-markers.js')
