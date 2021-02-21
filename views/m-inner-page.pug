@@ -62,6 +62,7 @@ header#header.fixed-top
             h4 Filter bar
             .filter_list
             ul
+              #findbox
               // // Region
               li.listclass_filter
                 h6 Country
@@ -81,7 +82,7 @@ header#header.fixed-top
                     span clear
                 input#myCheck(type='checkbox' onclick='includeNA()' checked='true')
                 |  Include N/A value 
-                input.js-range-slider(type='text' id='#demo_2' name='my_range' value='')
+                input.js-range-slider(type='text' name='FC_Year' value='')
               // // Status
               li.listclass_filter
                 h6 Status
@@ -111,8 +112,7 @@ mobilemain#main
   #mapwrap
 
 // ======= Footer =======
-footer.w3-container
-  h3 Footer
+footer
   
 // Vendor JS Files
 script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
