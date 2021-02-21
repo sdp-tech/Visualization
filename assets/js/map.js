@@ -647,9 +647,3 @@ for (let input of document.querySelectorAll('#clearEach')) {
     }
 }
 
-/////////////
-// tooltip //
-/////////////
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
