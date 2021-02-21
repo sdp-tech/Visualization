@@ -128,6 +128,7 @@ function load_map(json, customOption) {
 
     // prohibit dragging when mouse is over the filterbar
     $('#toolbar').on("mouseover", function () {
+        mymap.touchZoom.disable()
         mymap.dragging.disable();
         mymap.doubleClickZoom.disable();
         mymap.scrollWheelZoom.disable();
@@ -646,9 +647,3 @@ for (let input of document.querySelectorAll('#clearEach')) {
     }
 }
 
-/////////////
-// tooltip //
-/////////////
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});

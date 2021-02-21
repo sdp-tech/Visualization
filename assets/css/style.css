@@ -762,8 +762,25 @@ section#Insight{
 # Team
 --------------------------------------------------------------*/
 
+.team-intro{
+  display: flex;
+  min-height: 20vh;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+#team .info-box p{
+  text-indent: 10px;
+}
+
+>>>>>>> 
+#team .flex-item {
+  flex: 1;
+  margin: 1em;
+}
+
 #team .info-box{
-  padding : 30px;
+  padding:30px;
 }
 
 #contact a { text-decoration: none; }
@@ -771,6 +788,9 @@ section#Insight{
 @media screen and (max-width: 992px) {
   #team .info-box {
     box-sizing: border-box;
+    margin-bottom: 30px;
+    padding : 30px;
+    display:block;
   }
 }
 
@@ -787,6 +807,12 @@ section#Insight{
   text-align: center;
   box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
   padding: 20px 0 30px 0;
+}
+
+@media screen and (max-width: 992px) {
+  .contact .info-box {
+    margin : 10px 30px;
+  }
 }
 
 .contact .info-box i {
@@ -1315,7 +1341,12 @@ p.notice {
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+  width: 100%;}
 }
 
 th, td {
