@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const request = require('request')
 
-const url = 'mongodb://sdpygl:sdp_ygl@13.125.186.99:27017/admin';
+const url = 'mongodb://sdpygl:sdp_ygl@3.36.175.233:27017/admin';
 
 const dbName = 'visualization';
 let db, collection;
