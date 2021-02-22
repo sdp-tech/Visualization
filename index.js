@@ -7,6 +7,7 @@ const PORT = 4000
 var cached_json = ""
 
 app.use(cors())
+app.use('/', express.static(__dirname+ '/node_modules/'));
 app.use('/assets', express.static(__dirname+'/assets'));
 app.set('view engine', 'pug')
 
