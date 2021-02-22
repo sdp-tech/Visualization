@@ -62,7 +62,6 @@
                     el.setAttribute(j, o[j]);
                 }
             };
-
         for (i = 0; i < data.length; i++) {
             sum += data[i].value;
         }
@@ -225,12 +224,16 @@
         return arc;
     };
 
+    //points = markers => [{options : {title : ""},},]
     function createDonut(points, opt, cfgFn) {
         var blocks = {},
             count = points.length,
+            //title
             key = opt.key,
+            //value
             sumField = opt.sumField, 
             fieldList = opt.order || (opt.order = []),
+            //undefined
             fieldDict = opt.orderDict || (opt.orderDict={}),
             titleDict = opt.title || {},
             cfg = {};
@@ -251,6 +254,7 @@
         }
 
         for (var i = 0; i < count; i++) {
+            // s is title ex) Energy, ICT, etc
             var s = points[i].options[key]
             if (!blocks[s]) blocks[s] = 0;
             if (!fieldDict[s]) {
@@ -258,9 +262,8 @@
                 fieldList.push(s);
             }
 
-            if (!sumField)
-                blocks[s]++;
-            else blocks[s] += points[i].options[sumField];
+            if (!sumField) blocks[s]++;
+            else blocks[s] += 1;
         }
         var list = [];
 
@@ -339,9 +342,13 @@
      * @param {object} donutOpt donut cluster's options
      * 
      */
+    var cnt = 0;
     L.DonutCluster = function (opt, donutOpt) {
 
         var createIcon = function (cluster) {
+            console.log(cluster);
+            cnt += cluster.length;
+            console.log(cnt);
             var markers = cluster.getAllChildMarkers();
             var myDonut = createDonut(markers, donutOpt, function (points) {
                 var style;
@@ -359,7 +366,6 @@
                     fillColor: style.fill
                 }
             })
-
             return new L.DivIcon({
                 el: myDonut,
                 iconSize: new L.Point(myDonut.config.size + 10, myDonut.config.size + 10),
