@@ -98,7 +98,7 @@ function data_process(json) {
 
             switch (col) {
                 case "fc_year":
-                    option = (isNaN(option) ? "N/A" : Math.round(option));
+                    option = (isNaN(option) ? 0 : Math.round(option));
                     break;
                 case "ppi_status":
                     if (option.toLowerCase().includes("delay")) {
