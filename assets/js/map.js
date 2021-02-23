@@ -12,10 +12,11 @@ var mapdata;
 var mymap;
 
 // Marker Clusterer using Donut Clustering
+
 var markers = L.DonutCluster({
     chunkedLoading: true
 }, {
-    key: 'title',
+    key: 'sector',
     sumField : 'value', 
     order : ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"], 
     // title is the visible value when mouse over
@@ -61,8 +62,7 @@ function toolbar_open() {
 };
 
 function load_data(customOption) {
-    // const proxy = "https://cors-anywhere.herokuapp.com/";
-    // const url = "https://5jp713qow1.execute-api.ap-northeast-2.amazonaws.com/sdp-map-get-data";
+
     const url = 'apis/data'
 
     $.ajax({
@@ -178,12 +178,13 @@ function load_map(json, customOption) {
             filter: geoJson_filter,
             pointToLayer: geoJson_pointToLayer
         });
-
+        
+        markers.addLayer(geoLayer);
+        console.log(geoLayer);
         mymap.addLayer(markers);
         
         // Initialization
         updateStates(customOption);
-        geoLayer.addData(json);
 
         // Updata when any change is detected
         detectChange(json, geoLayer, customOption);
@@ -191,12 +192,13 @@ function load_map(json, customOption) {
         // Searchbox
         mymap.addControl(new L.Control.Search({
             position: 'topright',
-            layer: geoLayer,
+            layer: markers,
             initial: false,
             collapsed: true,
 
             moveToLocation: function (latlng, title, map) {
                 map.setView(latlng, 10);
+                console.log(markers);
                 let targetmarker = markers.find(el => el.defaultOptions.title === title);
                 targetmarker.openPopup();
             }
@@ -208,6 +210,7 @@ function load_map(json, customOption) {
             position: isMobile ? 'bottomright':'topright'
         }).addTo(mymap);
 
+        // zoom out to original level
         L.easyButton({
             position: isMobile ? 'bottomright':'topright',
             states: [{
@@ -227,10 +230,6 @@ function load_map(json, customOption) {
 
     // add to HTML
     options_to_html(json);
-
-    // // back to original zoom
-    // mymap.addControl(new L.Control.ZoomMin())
-
 }
 
 function addPopup(feature, layer) {
@@ -285,10 +284,11 @@ function geoJson_pointToLayer(feature, latlng, layer) {
 
     const marker = new L.Marker(latlng, {
         // title is not the visible one. only for clustering
-        title: feature.properties.sector,
+        title: feature.properties.project_name_wb,
+        sector : sector,
         icon: awesomemark,
     });
-
+    
     return marker;
 };
 
@@ -505,9 +505,15 @@ function detectChange(json, geoLayer, customOption) {
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
-            geoLayer.clearLayers()
+            markers.clearLayers()
             updateStates(customOption)
-            geoLayer.addData(json)
+            let geoLayer = L.geoJson(json, {
+                onEachFeature: addPopup,
+                filter: geoJson_filter,
+                pointToLayer: geoJson_pointToLayer
+            });
+            markers.addLayer(geoLayer)
+            mymap.addLayer(markers);
         }
     }
 }

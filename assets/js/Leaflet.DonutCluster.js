@@ -342,13 +342,9 @@
      * @param {object} donutOpt donut cluster's options
      * 
      */
-    var cnt = 0;
     L.DonutCluster = function (opt, donutOpt) {
 
         var createIcon = function (cluster) {
-            console.log(cluster);
-            cnt += cluster.length;
-            console.log(cnt);
             var markers = cluster.getAllChildMarkers();
             var myDonut = createDonut(markers, donutOpt, function (points) {
                 var style;
@@ -371,8 +367,8 @@
                 iconSize: new L.Point(myDonut.config.size + 10, myDonut.config.size + 10),
                 className: 'donut-cluster'
             });
-
         }
+
         opt.iconCreateFunction = createIcon;
         return L.markerClusterGroup(opt, donutOpt);
     }
