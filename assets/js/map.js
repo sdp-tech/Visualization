@@ -8,18 +8,18 @@
 //side bar
 //map
 
+
 var mapdata;
-var mymap;
+var mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);;
 
 // Marker Clusterer using Donut Clustering
-
 var markers = L.DonutCluster({
     chunkedLoading: true
 }, {
     key: 'sector',
     sumField : 'value', 
     order : ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"], 
-    // title is the visible value when mouse over
+    // title is the visible value when mouse over to clus
     title: { 
         'Energy' : 'Energy',
         'ICT' : "ICT", 
@@ -140,7 +140,7 @@ function load_map(json, customOption) {
     // /***************************
     //  *      Base map Layer     *
     // ***************************/
-    mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);
+    // mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGluYTAwNyIsImEiOiJja2hmZDNvOTgwNnVrMnJsNG1sOWtzcXNoIn0.Do0MCp-8-o2cv5cl-A2sNQ',
         {
@@ -155,21 +155,7 @@ function load_map(json, customOption) {
 
         }).addTo(mymap);
 
-    // prohibit dragging when mouse is over the filterbar
-    $('#toolbar').on("mouseover", function () {
-        mymap.touchZoom.disable()
-        mymap.dragging.disable();
-        mymap.doubleClickZoom.disable();
-        mymap.scrollWheelZoom.disable();
-        mymap.keyboard.disable();
-        mymap.boxZoom.disable();
-    }).on("mouseout", function () {
-        mymap.dragging.enable();
-        mymap.doubleClickZoom.enable();
-        mymap.scrollWheelZoom.enable();
-        mymap.keyboard.enable();
-        mymap.boxZoom.enable();
-    });
+    set_filter_touch_options();
 
     try {
         // markers
@@ -180,14 +166,13 @@ function load_map(json, customOption) {
         });
         
         markers.addLayer(geoLayer);
-        console.log(geoLayer);
         mymap.addLayer(markers);
         
         // Initialization
         updateStates(customOption);
 
         // Updata when any change is detected
-        detectChange(json, geoLayer, customOption);
+        detectChange(json);
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
@@ -198,7 +183,6 @@ function load_map(json, customOption) {
 
             moveToLocation: function (latlng, title, map) {
                 map.setView(latlng, 10);
-                console.log(markers);
                 let targetmarker = markers.find(el => el.defaultOptions.title === title);
                 targetmarker.openPopup();
             }
@@ -349,6 +333,23 @@ function subsector_to_icon(subsector) {
     return icon_png;
 }
 
+// prohibit dragging when mouse is over the filterbar
+function set_filter_touch_options(){
+    $('#toolbar').on("mouseover", function () {
+        mymap.touchZoom.disable()
+        mymap.dragging.disable();
+        mymap.doubleClickZoom.disable();
+        mymap.scrollWheelZoom.disable();
+        mymap.keyboard.disable();
+        mymap.boxZoom.disable();
+    }).on("mouseout", function () {
+        mymap.dragging.enable();
+        mymap.doubleClickZoom.enable();
+        mymap.scrollWheelZoom.enable();
+        mymap.keyboard.enable();
+        mymap.boxZoom.enable();
+    });
+}
 //////////////
 /// filter ///
 //////////////
@@ -452,7 +453,6 @@ function updateStates(customOption) {
             },
             onChange: function (data) {
                 // Called every time handle position is changed
-                customOption.yearOp = {};
                 customOption.yearOp["from"] = (data.from);
                 customOption.yearOp["to"] = (data.to);
             }
@@ -500,13 +500,12 @@ function updateStates(customOption) {
     })
 }
 
-function detectChange(json, geoLayer, customOption) {
+function detectChange(json) {
 
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
         input.onchange = (e) => {
             markers.clearLayers()
-            updateStates(customOption)
             let geoLayer = L.geoJson(json, {
                 onEachFeature: addPopup,
                 filter: geoJson_filter,
@@ -549,7 +548,6 @@ function getObjects(obj, key, val) {
 
 // map country-geographical into a set
 function country_to_geographical(geographical) {
-    ;
 
     let input = mapdata;
     let array = getObjects(input, "geographical", geographical);
@@ -559,8 +557,6 @@ function country_to_geographical(geographical) {
 };
 
 function subsector_to_region(sector) {
-    ;
-
     let input = mapdata;
     let array = getObjects(input, "sector", sector);
     let data = array.map(data => data.subsector);
@@ -575,10 +571,10 @@ function yearIsincluded(feature, yearOp) {
     let dateFrom = yearOp["from"];
     let dateTo = yearOp["to"];
 
-    if ((targetyear >= dateFrom) && (targetyear <= dateTo)) {
-        return true;
+    if(includeNA()){
+        return ((dateFrom <= targetyear && targetyear <= dateTo) || targetyear == 0);            
     }
-    return includeNA();
+    return (dateFrom <= targetyear && targetyear <= dateTo);
 }
 
 function sectorClass(sectorOp, properties) {
