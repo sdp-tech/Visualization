@@ -1,14 +1,3 @@
-//class
-//var 선언부
-//function 선언부
-//call 
-
-//module
-//tutorial button 끝
-//side bar
-//map
-
-
 var mapdata;
 var mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);;
 
@@ -19,7 +8,7 @@ var markers = L.DonutCluster({
     key: 'sector',
     sumField : 'value', 
     order : ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"], 
-    // title is the visible value when mouse over to clus
+    // title is the visible value when mouse over to cluster
     title: { 
         'Energy' : 'Energy',
         'ICT' : "ICT", 

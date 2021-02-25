@@ -80,12 +80,8 @@
 
         text.className = 'donut-text';
 
-        //if css is included, please comment the next line for performance.
-        // text.setAttribute('style', 'color: black;display: block;position: absolute;top: 50%;left: 0;z-index: 2;line-height: 0;width: 100%;text-align: center;')
-
         text.innerHTML = readable(sum);
         legend = document.createElement('div');
-
 
         var NS = 'http://www.w3.org/2000/svg',
             svg = doc.createElementNS(NS, 'svg'),
@@ -102,7 +98,6 @@
         circle.setAttribute('fill', fillColor);
         circle.setAttribute('fill-opacity', 0.6);
         svg.appendChild(circle);
-        // svg.innerHTML = '<circle cx="' + size0 / 2.0 + '" cy="' + size0 / 2.0 + '" r="' + (arcRadius - weight / 2) + '" fill="' + fillColor + '" fill-opacity="0.6"></circle>'
         
         div.appendChild(svg);
 
@@ -155,8 +150,6 @@
                 arc.addEventListener('mouseenter', function (e) {
                     var t = e.target,
                         val = readable(d.value);
-
-
                     t.setAttribute('stroke-width', weight + 5);
                     legend.setAttribute('class', 'legend');
                     div.zIndex = div.parentNode.style.zIndex;
@@ -164,8 +157,9 @@
                     text.innerHTML = val;
                     t.saved = {
                         val: d.value,
-                        legend: '<span style="border: 1px solid ' + c + '; background-color:rgba(255, 255, 255, 0.7) ;border-left-width:15px; padding:1px;">' + (d.title || d.name) + ':&nbsp;' + perc + '%</span>'
+                        legend: '<span style="border: 1px solid ' + c + '; background-color:rgba(255, 255, 255, 0.7); border-left-width:15px; padding:1px; white-space:pre;">' + (d.title || d.name) + ':&nbsp;' + perc + '%</span>'
                     }
+                    console.log(t.saved);
                     legend.innerHTML = t.saved.legend;
                 })
                 arc.addEventListener('mouseleave', function (e) {
@@ -188,6 +182,7 @@
                 })
             })(data[i], c, (value * 100 + '').substr(0, 5))
             svg.appendChild(arc);
+
             if (data[i].active) {
                 svg.stick = arc;
                 var event = new MouseEvent('mouseenter', {
@@ -199,7 +194,6 @@
                 arc.setAttribute('stroke-width', weight);
             }
         }
-
 
         div.appendChild(legend);
         if (el) {
