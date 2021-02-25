@@ -56,6 +56,7 @@ function load_data(customOption) {
         success: function (requested) {
             let json = requested['body'];
             mapdata = data_process(json);
+            options_to_html(json);
             load_map(mapdata, customOption);
             $.loading.end();
         },
@@ -203,9 +204,6 @@ function load_map(json, customOption) {
     } catch (err) {
         console.error(err);
     };
-
-    // add to HTML
-    options_to_html(json);
 
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())
@@ -555,7 +553,7 @@ function yearIsincluded(feature, yearOp) {
 }
 
 function sectorClass(sectorOp, properties) {
-    return sectorOp.includes(`${properties.sector}:${properties.subsector}`);
+    return sectorOp.includes(`${prdoperties.sector}:${properties.subsector}`);
 }
 
 // checkbox checking
