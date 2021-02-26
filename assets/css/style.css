@@ -1195,6 +1195,12 @@ section#Insight {
   margin: 4px;
   cursor: pointer;
 }
+.filter_list {
+  z-index: 10000;
+}
+.optionlist {
+  z-index: 10000000;
+}
 
 #toolbar li:hover {
   color: #666;
@@ -1367,9 +1373,6 @@ tr:hover {
   overflow: auto; /*Enable scroll if needed*/
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-.mobal {
-  z-index: -1;
 }
 
 /* Modal Content */

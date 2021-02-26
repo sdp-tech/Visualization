@@ -222,6 +222,7 @@ function load_map(json, customOption) {
           title: "mobile filter button",
           onClick: function (e) {
             $("#modal_filter").modal("show");
+            $("#modal_filter").modal("focus");
           },
         },
       ],
