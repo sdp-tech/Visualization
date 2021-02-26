@@ -63,59 +63,66 @@ header#header.fixed-top
 
       // Uncomment below if you prefer to use an image logo
       // <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
-    nav.nav-menu.d-none.d-lg-block
-      // filters
-      #filters
-            h4 Filter bar
-            .filter_list
-            ul
-              // // Region
-              li.listclass_filter
-                h6 Country
-                  button#clearEach.region_clear
-                    span clear
-                select#country-select.select.js-select2-multi.country-select(name='countries[]' multiple='multiple' style='width: 90%')
-              // // Sector
-              li.listclass_filter
-                h6 Sector
-                  button#clearEach.sector_clear
-                    span clear
-                select#sector-select.select.js-select2-multi.sector-select(name='sector[]' multiple='multiple' style='width: 90%')
-              // // FC Year
-              li.listclass_filter
-                h6 FC Year
-                  button#clearEach.fcyear_clear
-                    span clear
-                input#myCheck(type='checkbox' onclick='includeNA()' checked='true')
-                |  Include N/A value 
-                input.js-range-slider(type='text' name='FC_Year' value='')
-              // // Status
-              li.listclass_filter
-                h6 Status
-                  button#clearEach.status_clear
-                    span clear
-                select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple' style='width: 90%')
-              // // Income Group
-              li.listclass_filter
-                h6 Income Group
-                  button#clearEach.income_clear
-                    span clear
-                select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple' style='width: 90%')
-              // // PPI Type
-              li.listclass_filter
-                h6 PPI Type
-                  button#clearEach.ppitype_clear
-                    span clear
-                select#ppitype-select.select.js-select2-multi.ppitype-select(name='ppitype[]' multiple='multiple' style='width: 90%')
-            // button
-            button.button.clearfilter(style='vertical-align:middle')
-              span Clear All
-    // .nav-menu
+    
 // End Header
 
 // ======= Main =======
 mobilemain#main
   #mapwrap
+    // // modal for filters
+  #modal_filter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+          .modal-header
+            h4#exampleModalLongTitle.modal-title Filter bar
+            button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+          .modal-body
+            #filters            
+              .filter_list
+                ul
+                  // // Region
+                  li.listclass_filter
+                    h6 Country
+                      button#clearEach.region_clear
+                        span clear
+                    select#country-select.select.js-select2-multi.country-select(name='countries[]' multiple='multiple' style='width: 90%')
+                  // // Sector
+                  li.listclass_filter
+                    h6 Sector
+                      button#clearEach.sector_clear
+                        span clear
+                    select#sector-select.select.js-select2-multi.sector-select(name='sector[]' multiple='multiple' style='width: 90%')
+                  // // FC Year
+                  li.listclass_filter
+                    h6 FC Year
+                      button#clearEach.fcyear_clear
+                        span clear
+                    input#myCheck(type='checkbox' onclick='includeNA()' checked='true')
+                    |  Include N/A value 
+                    input.js-range-slider(type='text' name='FC_Year' value='')
+                  // // Status
+                  li.listclass_filter
+                    h6 Status
+                      button#clearEach.status_clear
+                        span clear
+                    select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple' style='width: 90%')
+                  // // Income Group
+                  li.listclass_filter
+                    h6 Income Group
+                      button#clearEach.income_clear
+                        span clear
+                    select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple' style='width: 90%')
+                  // // PPI Type
+                  li.listclass_filter
+                    h6 PPI Type
+                      button#clearEach.ppitype_clear
+                        span clear
+                    select#ppitype-select.select.js-select2-multi.ppitype-select(name='ppitype[]' multiple='multiple' style='width: 90%')
+          .modal-footer
+            // // button
+            button.button.clearfilter(style='vertical-align:middle')
+            span Clear All
 
 // ======= Footer =======
 footer
