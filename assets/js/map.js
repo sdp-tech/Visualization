@@ -220,7 +220,9 @@ function load_map(json, customOption) {
         {
           icon: "fas fa-filter",
           title: "mobile filter button",
-          // onClick: ()
+          onClick: function (e) {
+            $("#modal_filter").modal("show");
+          },
         },
       ],
     }).addTo(mymap);
