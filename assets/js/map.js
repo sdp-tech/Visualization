@@ -162,7 +162,7 @@ function load_map(json, customOption) {
         updateStates(customOption);
 
         // Updata when any change is detected
-        detectChange(json);
+        reloadMap(json);
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
@@ -491,7 +491,7 @@ function updateStates(customOption) {
     })
 }
 
-function detectChange(json) {
+function reloadMap(json) {
 
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
