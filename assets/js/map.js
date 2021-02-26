@@ -67,6 +67,7 @@ function load_data(customOption) {
         success: function (requested) {
             let json = requested['body'];
             mapdata = data_process(json);
+            options_to_html(json);
             load_map(mapdata, customOption);
             $.loading.end();
         },
@@ -201,8 +202,14 @@ function load_map(json, customOption) {
         console.error(err);
     };
 
+<<<<<<< HEAD
     // add to HTML
     options_to_html(json);
+=======
+    // // back to original zoom
+    // mymap.addControl(new L.Control.ZoomMin())
+
+>>>>>>> 7e29f3f (Move optionsto html from load_map to load_data)
 }
 
 function addPopup(feature, layer) {
@@ -567,7 +574,7 @@ function yearIsincluded(feature, yearOp) {
 }
 
 function sectorClass(sectorOp, properties) {
-    return sectorOp.includes(`${properties.sector}:${properties.subsector}`);
+    return sectorOp.includes(`${prdoperties.sector}:${properties.subsector}`);
 }
 
 // checkbox checking
