@@ -202,14 +202,9 @@ function load_map(json, customOption) {
         console.error(err);
     };
 
-<<<<<<< HEAD
-    // add to HTML
-    options_to_html(json);
-=======
+
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())
-
->>>>>>> 7e29f3f (Move optionsto html from load_map to load_data)
 }
 
 function addPopup(feature, layer) {
