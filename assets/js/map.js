@@ -68,6 +68,7 @@ function load_data(customOption) {
             let json = requested['body'];
             mapdata = data_process(json);
             load_map(mapdata, customOption);
+            options_to_html(json);
             $.loading.end();
         },
         error: function (err) {
@@ -161,7 +162,7 @@ function load_map(json, customOption) {
         updateStates(customOption);
 
         // Updata when any change is detected
-        detectChange(json);
+        reloadMap(json);
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
@@ -201,8 +202,8 @@ function load_map(json, customOption) {
         console.error(err);
     };
 
-    // add to HTML
-    options_to_html(json);
+    // // back to original zoom
+    // mymap.addControl(new L.Control.ZoomMin())
 }
 
 function addPopup(feature, layer) {
@@ -489,7 +490,7 @@ function updateStates(customOption) {
     })
 }
 
-function detectChange(json) {
+function reloadMap(json) {
 
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
