@@ -1117,7 +1117,7 @@ section#Insight{
   height: 100vh;
   position: absolute;
   left: -250px;
-  z-index: 1000;
+  z-index: 998;
   transition: .5s left;
   padding: 20px;
   box-sizing: border-box;
@@ -1255,6 +1255,10 @@ section#Insight{
 	position: static;
 	float: left;
 	margin-left: -22px;
+}
+
+.leaflet-top.leaflet-right{
+  z-index: 995;
 }
 
 .inactiveLink {
