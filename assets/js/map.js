@@ -67,8 +67,8 @@ function load_data(customOption) {
         success: function (requested) {
             let json = requested['body'];
             mapdata = data_process(json);
-            options_to_html(json);
             load_map(mapdata, customOption);
+            options_to_html(json);
             $.loading.end();
         },
         error: function (err) {
@@ -162,7 +162,7 @@ function load_map(json, customOption) {
         updateStates(customOption);
 
         // Updata when any change is detected
-        detectChange(json);
+        reloadMap(json);
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
@@ -201,7 +201,6 @@ function load_map(json, customOption) {
     } catch (err) {
         console.error(err);
     };
-
 
     // // back to original zoom
     // mymap.addControl(new L.Control.ZoomMin())
@@ -491,7 +490,7 @@ function updateStates(customOption) {
     })
 }
 
-function detectChange(json) {
+function reloadMap(json) {
 
     for (let input of document.querySelectorAll('.select, .js-range-slider, #myCheck')) {
         //Listen to 'change' event of all inputs
@@ -569,7 +568,7 @@ function yearIsincluded(feature, yearOp) {
 }
 
 function sectorClass(sectorOp, properties) {
-    return sectorOp.includes(`${prdoperties.sector}:${properties.subsector}`);
+    return sectorOp.includes(`${properties.sector}:${properties.subsector}`);
 }
 
 // checkbox checking
