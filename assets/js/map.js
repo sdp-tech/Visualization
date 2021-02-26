@@ -198,6 +198,19 @@ function load_map(json, customOption) {
             }]
         }).addTo(mymap);
 
+        L.easyButton({
+          position: isMobile ? "topright" : null,
+          states: [
+            {
+              icon: "fas fa-filter",
+              title: "mobile filter button",
+              onClick: function (e) {
+                $("#modal_filter").modal("show");
+              },
+            },
+          ],
+        }).addTo(mymap);
+
     } catch (err) {
         console.error(err);
     };
