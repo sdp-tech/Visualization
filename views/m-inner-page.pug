@@ -1,10 +1,11 @@
 doctype html
 head
   meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
-  link(href='assets/css/mobile.css' rel='stylesheet')
   link(href='assets/img/favicon.png' rel='icon')
   link(rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='')
   script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin='')
+  //
+  link(rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css")
   // Favicons
   link(href='assets/img/favicon.png' rel='icon')
   link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
@@ -52,83 +53,84 @@ head
   link(rel='stylesheet' href='assets/css/Leaflet.DonutCluster.css')
   script(src='assets/js/Leaflet.DonutCluster.js')
 
+// ======= Page =======
+div(data-role='page')
+  // ======= Header =======
+  div(data-role='header')
 
-// ======= Header =======
-header#header.fixed-top
-  .container.d-flex.align-items-center
-    .logo.mr-auto
-      h1.text-light
-        a(href='index')
-          span PROJECT MaPPPing
+    header#header.fixed-top
+      .container.d-flex.align-items-center
+        .logo.mr-auto
+          h1.text-light
+            a(href='index')
+              span PROJECT MaPPPing
+              
+  // ======= Main =======
+  div(data-role='content')
+        #mapwrap
 
-      // Uncomment below if you prefer to use an image logo
-      // <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
-    
-// End Header
+        #modal_filter.modal.fade(tabindex='-1' role='dialog' data-backdrop = 'false' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                  h4#exampleModalLongTitle.modal-title Filter bar
+                  button.close(type='button' data-dismiss='modal' aria-label='Close')
+                  span(aria-hidden='true') &times;
+                .modal-body
+                  #filters            
+                    .filter_list
+                      ul
+                        // // Region
+                        li.listclass_filter
+                          h6 Country
+                            button#clearEach.region_clear
+                              span clear
+                          select#country-select.select.js-select2-multi.country-select(name='countries[]' multiple='multiple' style='width: 90%')
+                        // // Sector
+                        li.listclass_filter
+                          h6 Sector
+                            button#clearEach.sector_clear
+                              span clear
+                          select#sector-select.select.js-select2-multi.sector-select(name='sector[]' multiple='multiple' style='width: 90%')
+                        // // FC Year
+                        li.listclass_filter
+                          h6 FC Year
+                            button#clearEach.fcyear_clear
+                              span clear
+                          input#myCheck(type='checkbox' onclick='includeNA()' checked='true')
+                          |  Include N/A value 
+                          input.js-range-slider(type='text' name='FC_Year' value='')
+                        // // Status
+                        li.listclass_filter
+                          h6 Status
+                            button#clearEach.status_clear
+                              span clear
+                          select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple' style='width: 90%')
+                        // // Income Group
+                        li.listclass_filter
+                          h6 Income Group
+                            button#clearEach.income_clear
+                              span clear
+                          select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple' style='width: 90%')
+                        // // PPI Type
+                        li.listclass_filter
+                          h6 PPI Type
+                            button#clearEach.ppitype_clear
+                              span clear
+                          select#ppitype-select.select.js-select2-multi.ppitype-select(name='ppitype[]' multiple='multiple' style='width: 90%')
+                .modal-footer
+                  // // button
+                  button.button.clearfilter(style='vertical-align:middle')
+                    span Clear All
+  // ======= Footer =======
+  div(data-role='footer')
 
-// ======= Main =======
-mobilemain#main
-  #mapwrap
-  #modal_filter.modal.fade(tabindex='-1' role='dialog' data-backdrop = 'false' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered(role='document')
-      .modal-content
-          .modal-header
-            h4#exampleModalLongTitle.modal-title Filter bar
-            button.close(type='button' data-dismiss='modal' aria-label='Close')
-            span(aria-hidden='true') &times;
-          .modal-body
-            #filters            
-              .filter_list
-                ul
-                  // // Region
-                  li.listclass_filter
-                    h6 Country
-                      button#clearEach.region_clear
-                        span clear
-                    select#country-select.select.js-select2-multi.country-select(name='countries[]' multiple='multiple' style='width: 90%')
-                  // // Sector
-                  li.listclass_filter
-                    h6 Sector
-                      button#clearEach.sector_clear
-                        span clear
-                    select#sector-select.select.js-select2-multi.sector-select(name='sector[]' multiple='multiple' style='width: 90%')
-                  // // FC Year
-                  li.listclass_filter
-                    h6 FC Year
-                      button#clearEach.fcyear_clear
-                        span clear
-                    input#myCheck(type='checkbox' onclick='includeNA()' checked='true')
-                    |  Include N/A value 
-                    input.js-range-slider(type='text' name='FC_Year' value='')
-                  // // Status
-                  li.listclass_filter
-                    h6 Status
-                      button#clearEach.status_clear
-                        span clear
-                    select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple' style='width: 90%')
-                  // // Income Group
-                  li.listclass_filter
-                    h6 Income Group
-                      button#clearEach.income_clear
-                        span clear
-                    select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple' style='width: 90%')
-                  // // PPI Type
-                  li.listclass_filter
-                    h6 PPI Type
-                      button#clearEach.ppitype_clear
-                        span clear
-                    select#ppitype-select.select.js-select2-multi.ppitype-select(name='ppitype[]' multiple='multiple' style='width: 90%')
-          .modal-footer
-            // // button
-            button.button.clearfilter(style='vertical-align:middle')
-              span Clear All
-// ======= Footer =======
-footer
-  |footer 
+// end of page
+
 
 // Vendor JS Files
-script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-script(src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous")
+script(src='http://code.jquery.com/jquery-1.11.1.min.js')
+script(src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous")
 script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
 script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js", integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf", crossorigin="anonymous")
 script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous")
