@@ -237,7 +237,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   right: 15px;
   top: 15px;
-  z-index: 1000;
+  z-index: 900;
   border: 0;
   background: none;
   font-size: 24px;
@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 15px;
   bottom: 15px;
   left: 15px;
-  z-index: 1000;
+  z-index: 900;
   overflow-y: auto;
   background: #fff;
   transition: ease-in-out 0.2s;
