@@ -1,5 +1,6 @@
 var mapdata;
 var mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);;
+mymap.setMaxBounds(  [[-90,-180],   [90,180]]  );
 
 // Marker Clusterer using Donut Clustering
 var markers = L.DonutCluster({
