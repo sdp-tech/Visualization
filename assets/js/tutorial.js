@@ -5,5 +5,5 @@ $('.tutorial_content').modaal({
 
 $('.m-tutorial_content').modaal({
     type: 'image',
-    start_open: false
+    start_open: true
 });
