@@ -360,16 +360,6 @@ function set_filter_touch_options(){
         mymap.boxZoom.enable();
     });
 
-    //
-    var div = L.DomUtil.get('mapwrap');
-    if (!L.Browser.touch) {
-        L.DomEvent.disableClickPropagation(div);
-        L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
-    } else {
-        L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
-    }
-
-
 }
 //////////////
 /// filter ///
