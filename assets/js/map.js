@@ -1,5 +1,10 @@
 var mapdata;
-var mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);;
+var bounds = [[-90,-180],   [90,180]];
+var mymap = L.map('mapwrap', { 
+        zoomControl: false,
+        maxBounds: bounds
+     }).setView([35, 40], 2.5);;
+
 
 // Marker Clusterer using Donut Clustering
 var markers = L.DonutCluster({
@@ -126,7 +131,6 @@ function data_process(json) {
 // setting a map 
 function load_map(json, customOption) {
 
-
     // /***************************
     //  *      Base map Layer     *
     // ***************************/
@@ -137,13 +141,14 @@ function load_map(json, customOption) {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             subdomains: 'abcd',
             tileSize: 512,
-
+            noWrap: true,
             // zoom controller
             minZoom: 2,
             maxZoom: 16,
             zoomOffset: -1
 
         }).addTo(mymap);
+
 
     set_filter_touch_options();
 
@@ -155,6 +160,8 @@ function load_map(json, customOption) {
             pointToLayer: geoJson_pointToLayer
         });
         
+        mymap.fitBounds(geoLayer.getBounds());
+
         markers.addLayer(geoLayer);
         mymap.addLayer(markers);
         
@@ -352,6 +359,17 @@ function set_filter_touch_options(){
         mymap.keyboard.enable();
         mymap.boxZoom.enable();
     });
+
+    //
+    var div = L.DomUtil.get('mapwrap');
+    if (!L.Browser.touch) {
+        L.DomEvent.disableClickPropagation(div);
+        L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+    } else {
+        L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+    }
+
+
 }
 //////////////
 /// filter ///
