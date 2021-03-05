@@ -228,19 +228,22 @@ function load_map(json, customOption) {
 
 function addPopup(feature, layer) {
     var popupText =
-        "<p id='p_popup_detail'>" +
-        "<strong style='color: #84b819; font-size:120%;' >" + feature.properties.project_name_wb + "</strong><br>" +
-        "<b>Country:</b> " + feature.properties.country + "<br>" +
-        "<b>Income Group:</b> " + feature.properties.income_group + "<br>" +
-        "<b>FC Year:</b> " + feature.properties.fc_year + "<br>" +
-        "<b>Status:</b> " + feature.properties.ppi_status + "<br>" +
-        "<b>Primary Sector:</b> " + feature.properties.sector + "<br>" +
-        "<b>Sub Sector:</b> " + feature.properties.subsector + "<br>" +
-        "<b>Problem:</b> " + feature.properties.reason_for_delay + "<br>" +
-        "<b>Type of PPI:</b> " + feature.properties.type_of_ppi + "<br>" +
-        "<p id='linked_p_popup_detail'>" +
-        "<b><a href='" + feature.properties.urls + "'target='_blank' rel='noopener noreferrer'>URL</a>" +
-        "</p></p>";
+        `<p id=p_popup_detail>
+            <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
+            <b>Country :</b> ${feature.properties.country}<br>
+            <b>Income Group :</b> ${feature.properties.income_group}<br>
+            <b>FC Year :</b> ${feature.properties.fc_year}<br>
+            <b>Status :</b> ${feature.properties.ppi_status}<br>
+            <b>Primary Sector :</b> ${feature.properties.sector}<br>
+            <b>Sub Sector :</b>${feature.properties.subsector}<br>
+            <b>Problem :</b>${feature.properties.reason_for_delay}<br>
+            <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
+            <b>See also : </b>
+            <p id=linked_p_popup_detail>
+                <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
+            </p>
+        </p>
+        `
 
     layer.bindPopup(popupText, {
         closeButton: true,

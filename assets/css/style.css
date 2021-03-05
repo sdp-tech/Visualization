@@ -1055,6 +1055,11 @@ section#Insight{
   overflow: visible; */
 }
 
+#p_popup-title{
+  color: #84b819; 
+  font-size:120%;
+}
+
 #linked_p_popup_detail
 {
   text-align: right;
