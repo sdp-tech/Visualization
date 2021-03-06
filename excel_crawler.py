@@ -73,7 +73,7 @@ def get_documents(
     db_name = "visualization",
     collection_name = "map"
     ) : 
-
+    
     client = pymongo.MongoClient(connection_string)
     visualization = client[db_name]
 
@@ -135,16 +135,37 @@ def insert_items() :
     except (KeyError, NameError) as e:
         print("error : ", e)
 
-# def update_see_also() :
+def update_see_also() :
 
-#     docs = get_documents()
-#     prefix_url = 'http://54.180.152.150:5000/method?ppi='
+    docs = get_documents()
+    prefix_url = 'http://54.180.152.150:5000/method?ppi='
 
-#     # iter document
-#     for doc in docs.find() : 
+    # iter document
+    for doc in docs.find() : 
+        # ex) 'http://54.180.152.150:5000/method?ppi=Hwange Thermal Power Station Expansion'
+        project_name_wb =  doc['properties']['project_name_wb']
+        req_url = prefix_url + project_name_wb
 
-#         # ex) 'http://54.180.152.150:5000/method?ppi=Hwange Thermal Power Station Expansion'
-#         req_url = prefix_url + doc['properties']['project_name_wb']
-#         print(requests.get(req_url).json())
+        res = requests.get(req_url)
+        
+        if(res.status_code == 200) :
+            # remove "유사 list"
+            see_also_list = res.text[8:].strip('][').split(', ') 
+            # remove ' in list
+            see_also_list = list(map(lambda x : x.strip("'"), see_also_list))
 
-# update_see_also()
+            query = { 
+                "properties.project_name_wb" : project_name_wb
+                }
+            values = { 
+                "$set": { 
+                    "properties.see_also": see_also_list 
+                } 
+            }
+
+            try :
+                res = docs.update_one(query, values)
+            except Exception as e :
+                print(e)
+
+update_see_also()
