@@ -231,6 +231,7 @@ function addPopup(feature, layer) {
     if(see_also_list) {
         see_also_list = see_also_list.join(', ');
     }
+    var word = 123
     var popupText =
         `<p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
@@ -242,12 +243,17 @@ function addPopup(feature, layer) {
             <b>Sub Sector :</b>${feature.properties.subsector}<br>
             <b>Problem :</b>${feature.properties.reason_for_delay}<br>
             <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            <b>See also : </b>${see_also_list}<br>
+            
+            <button id=seealso onclick=addLayerToMap("nature")>See also</button><br>
+
+            <b>See also :</b> </button>${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
             </p>
         </p>
         `
+
+        console.log(feature.properties.project_name_wb)
 
     layer.bindPopup(popupText, {
         closeButton: true,
@@ -696,3 +702,28 @@ for (let input of document.querySelectorAll('#clearEach')) {
     }
 }
 
+
+////////////////
+
+var dataLayerGroup;
+
+function addLayerToMap(subject){
+    console.log(mapdata);
+    //remove the layer from the map entirely
+    if (mymap.hasLayer(dataLayerGroup)){
+        dataLayerGroup.remove();
+    }
+    //add the data layer and style based on attribute. 
+    dataLayerGroup = L.geoJson(mapdata, {
+        onEachFeature: addPopup,
+        filter: function (feature){
+            
+
+            if(feature.properties.see_also)
+                return (feature.properties.see_also).includes(subject)
+            return false     
+        },
+        pointToLayer: geoJson_pointToLayer
+    }).addTo(mymap);
+
+}
