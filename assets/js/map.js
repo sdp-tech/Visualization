@@ -142,7 +142,7 @@ function load_map(json, customOption) {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             subdomains: 'abcd',
             tileSize: 512,
-            noWrap: true,
+            noWrap: false,
             // zoom controller
             minZoom: 2,
             maxZoom: 16,
@@ -244,9 +244,6 @@ function addPopup(feature, layer) {
             <b>Sub Sector :</b>${feature.properties.subsector}<br>
             <b>Problem :</b>${feature.properties.reason_for_delay}<br>
             <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            
-            <button id=seealso onclick=addLayerToMap(${feature.properties.project_name_wb})>See also</button><br>
-
             <b>See also :</b> </button>${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
@@ -254,7 +251,9 @@ function addPopup(feature, layer) {
         </p>
         `
 
-        
+    // <button id=seealso onclick=addLayerToMap(${feature.properties.project_name_wb})>See also</button><br>
+
+
     layer.bindPopup(popupText, {
         closeButton: true,
         offswet: L.point(0, -20)
