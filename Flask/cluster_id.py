@@ -16,8 +16,9 @@ result = collection.find()
 df = json_normalize(result)
 
 labels = np.array(df['properties.project_name_wb'])
+id_col = np.array(df['_id'])
 
-data_df = df.drop(['_id', 'type', 'geometry.type', 'geometry.coordinates',
+data_df = df.drop(['type', 'geometry.type', 'geometry.coordinates',
        'properties.country',
        'properties.project_name_common',
        'properties.segment', 'properties.crossborder',
@@ -29,7 +30,7 @@ data_df = df.drop(['_id', 'type', 'geometry.type', 'geometry.coordinates',
        'properties.urls', 'properties.resumed', 'properties.resume_url',
        'properties.location', 'properties.see_also'], axis=1)
 
-columns = ['Project_Name', 'Geographical', 'Income Group', 'Sector', 'SubSector']
+columns = ['_id', 'Project_Name', 'Geographical', 'Income Group', 'Sector', 'SubSector']
 
 data_df.columns = columns
 
@@ -50,6 +51,7 @@ y_km = km.fit_predict(df_final)
 cluster = pd.DataFrame(y_km)
 cluster.columns = ['cluster']
 cluster['Project_Name'] = labels
+cluster['_id'] = id_col
 
 app = Flask(__name__)
 
@@ -62,10 +64,12 @@ def method():
     if request.method == 'GET':
         ppi = int(request.args["id"])
         clustering_num = cluster.loc[ppi, 'cluster']
-        ppi_list = cluster.loc[cluster['cluster']==clustering_num, 'Project_Name'].tolist()
+        ppi_list = cluster.loc[cluster['cluster']==clustering_num, '_id'].tolist()
         ppi_three = random.sample(ppi_list, 3)
-
-        return "유사list: {}".format(ppi_three)
+        ppi_id = []
+        for i in ppi_three:
+            ppi_id.append(str(i))
+        return "유사list: {}".format(ppi_id)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', threaded=True)
