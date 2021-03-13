@@ -1,4 +1,5 @@
 var mapdata;
+var geoLayer;
 var bounds = [[-90,-180],   [90,180]];
 var mymap = L.map('mapwrap', { 
         zoomControl: false,
@@ -154,7 +155,7 @@ function load_map(json, customOption) {
 
     try {
         // markers
-        let geoLayer = L.geoJson(json, {
+        geoLayer = L.geoJson(json, {
             onEachFeature: addPopup,
             filter: geoJson_filter,
             pointToLayer: geoJson_pointToLayer
@@ -231,7 +232,7 @@ function addPopup(feature, layer) {
     if(see_also_list) {
         see_also_list = see_also_list.join(', ');
     }
-    var word = 123
+    var projectname = "Jakarta Bandung High-Speed Railway";
     var popupText =
         `<p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
@@ -244,7 +245,7 @@ function addPopup(feature, layer) {
             <b>Problem :</b>${feature.properties.reason_for_delay}<br>
             <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
             
-            <button id=seealso onclick=addLayerToMap("nature")>See also</button><br>
+            <button id=seealso onclick=addLayerToMap(${feature.properties.project_name_wb})>See also</button><br>
 
             <b>See also :</b> </button>${see_also_list}<br>
             <p id=linked_p_popup_detail>
@@ -253,8 +254,7 @@ function addPopup(feature, layer) {
         </p>
         `
 
-        console.log(feature.properties.project_name_wb)
-
+        
     layer.bindPopup(popupText, {
         closeButton: true,
         offswet: L.point(0, -20)
@@ -535,8 +535,8 @@ function reloadMap(json) {
                 filter: geoJson_filter,
                 pointToLayer: geoJson_pointToLayer
             });
-            markers.addLayer(geoLayer)
-            mymap.addLayer(markers);
+            // markers.addLayer(geoLayer)
+            // mymap.addLayer(markers);
         }
     }
 }
@@ -708,22 +708,29 @@ for (let input of document.querySelectorAll('#clearEach')) {
 var dataLayerGroup;
 
 function addLayerToMap(subject){
-    console.log(mapdata);
+
+    // remove geoLayer
+    if (mymap.hasLayer(geoLayer)){
+        geoLayer.remove();
+    }
     //remove the layer from the map entirely
     if (mymap.hasLayer(dataLayerGroup)){
         dataLayerGroup.remove();
     }
+
     //add the data layer and style based on attribute. 
     dataLayerGroup = L.geoJson(mapdata, {
         onEachFeature: addPopup,
         filter: function (feature){
             
-
             if(feature.properties.see_also)
                 return (feature.properties.see_also).includes(subject)
             return false     
         },
         pointToLayer: geoJson_pointToLayer
-    }).addTo(mymap);
+    });
+
+    markers.addLayer(dataLayerGroup);
+    mymap.addLayer(markers);
 
 }
