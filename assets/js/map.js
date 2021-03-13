@@ -534,8 +534,8 @@ function reloadMap(json) {
                 filter: geoJson_filter,
                 pointToLayer: geoJson_pointToLayer
             });
-            // markers.addLayer(geoLayer)
-            // mymap.addLayer(markers);
+            markers.addLayer(geoLayer)
+            mymap.addLayer(markers);
         }
     }
 }
