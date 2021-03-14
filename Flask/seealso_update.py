@@ -5,7 +5,6 @@ from pandas.io.json import json_normalize
 import numpy as np
 from sklearn.cluster import KMeans
 import random
-from flask import Flask, request
 
 def get_documents( 
     connection_string = "mongodb://sdpygl:sdp_ygl@3.36.175.233:27017/admin",
