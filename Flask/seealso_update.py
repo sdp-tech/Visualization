@@ -29,7 +29,7 @@ class cluster():
         self.pn_col = np.array(self.df['properties.project_name_wb'])
         self.id_col = np.array(self.df['_id'])
 
-        self.data_df = df.drop(['type', 'geometry.type', 'geometry.coordinates',
+        self.data_df = self.df.drop(['type', 'geometry.type', 'geometry.coordinates',
                'properties.country',
                'properties.project_name_common',
                'properties.segment', 'properties.crossborder',
