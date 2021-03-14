@@ -88,7 +88,7 @@ def update_see_also(df):
     cat_val = cat.values
     cat_list = cat_val.tolist()
     for i in cat_list:
-        see_also_list = df.loc[df['_id']==i, 'cluster_three']
+        see_also_list = df.loc[df['_id']==i, 'cluster_three'].tolist()
         query = { 
         "_id" : i
         }
