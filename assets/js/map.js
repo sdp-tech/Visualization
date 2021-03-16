@@ -259,7 +259,6 @@ function addPopup(feature, layer) {
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
             </p>
-            <button>see also</button><br>
         </p>
         `
 
