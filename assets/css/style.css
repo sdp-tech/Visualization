@@ -334,6 +334,7 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav-active .mobile-nav {
   opacity: 1;
   visibility: visible;
+  z-index: 10000;
 }
 
 .mobile-nav-active .mobile-nav-toggle i {
@@ -1105,6 +1106,7 @@ section#Insight{
   border: 1px solid transparent;
   position: relative;
   overflow: hidden;
+  z-index: -1;
 }
 
 #leafletmap {
@@ -1259,21 +1261,17 @@ section#Insight{
 .search-tooltip {
 	width: 200px;
 }
+
 .leaflet-control-search .search-cancel {
 	position: static;
 	float: left;
 	margin-left: -22px;
 }
 
-.leaflet-top.leaflet-right{
-  z-index: 995;
-}
-
 .inactiveLink {
   pointer-events: none;
   cursor: default;
 }
-
 
 /* methodology dropdown */
 /* Style the buttons that are used to open and close the accordion panel */
