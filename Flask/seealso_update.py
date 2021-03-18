@@ -78,7 +78,6 @@ def cal_clustering(df):
         ppi_three = random.sample(ppi_list, 3)
         ppi_id.append(ppi_three)
     df['cluster_three'] = ppi_id
-    
     return df
 
 #%%
@@ -87,14 +86,19 @@ def update_see_also(df):
     cat = df['_id']
     cat_val = cat.values
     cat_list = cat_val.tolist()
+
     for i in cat_list:
         see_also_list = df.loc[df['_id']==i, 'cluster_three'].tolist()
+        #flatten list, see_also_list is doubled array?!
+        flat_list = [item for sublist in see_also_list for item in sublist]
+        print(flat_list)
+
         query = { 
         "_id" : i
         }
         values = { 
             "$set": { 
-                "properties.see_also": see_also_list 
+                "properties.see_also": flat_list
             } 
         }
 

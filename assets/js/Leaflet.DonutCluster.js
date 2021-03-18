@@ -159,7 +159,6 @@
                         val: d.value,
                         legend: '<span style="border: 1px solid ' + c + '; background-color:rgba(255, 255, 255, 0.7); border-left-width:15px; padding:1px; white-space:pre;">' + (d.title || d.name) + ':&nbsp;' + perc + '%</span>'
                     }
-                    console.log(t.saved);
                     legend.innerHTML = t.saved.legend;
                 })
                 arc.addEventListener('mouseleave', function (e) {
