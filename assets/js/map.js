@@ -233,16 +233,9 @@ function load_map(json, customOption) {
 
 function addPopup(feature, layer) {
     let see_also_list = feature.properties.see_also
-    var see_also_name_list=[]
     if(see_also_list) {
-        see_also_list.forEach(function(element){
-            element.forEach(function(_id){
-                see_also_name_list.push(idnameDict[_id]);
-            })            
-        }
-    )
-    see_also_name_list = see_also_name_list.join(', ')
-}
+        see_also_list = see_also_list.map((_id) => idnameDict[_id]).join(', ');
+    }
 
     var popupText =
         `<p id=p_popup_detail>
@@ -255,7 +248,7 @@ function addPopup(feature, layer) {
             <b>Sub Sector :</b>${feature.properties.subsector}<br>
             <b>Problem :</b>${feature.properties.reason_for_delay}<br>
             <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            <b>See also :</b> ${see_also_name_list}<br>
+            <b>See also :</b> ${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
             </p>
