@@ -26,7 +26,7 @@
   // Smooth scroll for the navigation menu and links with .scrollto classes
   var scrolltoOffset = $("#header").outerHeight() - 31;
   if (window.matchMedia("(max-width: 991px)").matches) {
-    scrolltoOffset += 0;
+    scrolltoOffset += 30;
   }
   $(document).on(
     "click",
@@ -40,7 +40,8 @@
         var target = $(this.hash);
         e.preventDefault();
         if (target.length) {
-          var scrollto = target.offset().top - scrolltoOffset;
+          var scrollto = target.offset().top;
+          console.log(scrollto);
           if ($(this).attr("href") == "#header") {
             scrollto = 0;
           }
@@ -73,7 +74,7 @@
     if (window.location.hash) {
       var initial_nav = window.location.hash;
       if ($(initial_nav).length) {
-        var scrollto = $(initial_nav).offset().top - scrolltoOffset;
+        var scrollto = $(initial_nav).offset().top;
         $("html, body").animate(
           {
             scrollTop: scrollto,
@@ -133,7 +134,6 @@
     nav_sections.each(function () {
       var top = $(this).offset().top,
         bottom = top + $(this).outerHeight();
-
       if (cur_pos >= top && cur_pos <= bottom) {
         if (cur_pos <= bottom) {
           main_nav.find("li").removeClass("active");
