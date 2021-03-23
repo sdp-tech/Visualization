@@ -5,7 +5,7 @@ var bounds = [[-90,-180],   [90,180]];
 var mymap = L.map('mapwrap', { 
         zoomControl: false,
         maxBounds: bounds
-     }).setView([35, 40], 2.5);;
+     }).setView([35, 40], 2.5);
 
 
 // Marker Clusterer using Donut Clustering
@@ -164,7 +164,6 @@ function load_map(json, customOption) {
 
         }).addTo(mymap);
 
-
     set_filter_touch_options();
 
     try {
@@ -178,8 +177,13 @@ function load_map(json, customOption) {
         mymap.fitBounds(geoLayer.getBounds());
 
         markers.addLayer(geoLayer);
+        //spiderfy option for cluster
+        markers.on('clusterclick', function(cluster) {    
+            cluster.layer.spiderfy();
+        });
         mymap.addLayer(markers);
         
+
         // Initialization
         updateStates(customOption);
 
