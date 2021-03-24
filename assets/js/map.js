@@ -40,6 +40,15 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     mobileset();
 }
 
+function iOS() {
+    return [
+      'iPhone Simulator',
+      'iPhone'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
+
 // filterArray
 var customOption = {
     countryOp: [],
@@ -55,10 +64,9 @@ var customOption = {
 
 function mobileset(){
     $('.js-select2-multi').on('select2:opening select2:closing', function( event ) {
-        var $searchfield = $(this).parent().find('.select2-search__field');
-        $searchfield.prop('disabled', true);
+        var $searchfield = $('.select2-search__field');
+        $searchfield.attr('inputmode', 'none');
         $searchfield.prop('readonly', 'readonly');
-
     });
 }
 
