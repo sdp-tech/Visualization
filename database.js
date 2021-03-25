@@ -25,10 +25,10 @@ function getWBAPI(){
   try {
     wbCollection.find({}).forEach(element => {
       var query = {"properties.country":element.name};
-      var newvalues = { $set: {income_group: element.incomeLevel.value , geographical: element.region.value } };
+      var newvalues = { $set: {"properties.income_group": element.incomeLevel.value , "properties.geographical": element.region.value } };
       mapCollection.updateMany(query, newvalues, function(err, res) {
         if (err) throw err;
-        console.log(res.result.nModified + " document(s) updated");
+        // console.log(res.result.nModified + " document(s) updated");
       });
     });
 
