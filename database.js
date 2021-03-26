@@ -17,6 +17,7 @@ MongoClient.connect(url, async function(err, client) {
   // Find some documents
 
   getWBdb();
+
   request.get('http://localhost:4000/apis/update-data')
 });
 
