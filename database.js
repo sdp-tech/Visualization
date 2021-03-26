@@ -16,24 +16,25 @@ MongoClient.connect(url, async function(err, client) {
   wbCollection = db.collection('wbcountry')
   // Find some documents
 
-  getWBAPI();
+  // getWBdb();
   request.get('http://localhost:4000/apis/update-data')
 });
 
+// http://api.worldbank.org/v2/country/all/?format=json&page=2
 
-function getWBAPI(){
+function getWBdb(){
   try {
     wbCollection.find({}).forEach(element => {
       var query = {"properties.country":element.name};
       var newvalues = { $set: {"properties.income_group": element.incomeLevel.value , "properties.geographical": element.region.value } };
+      // var newvalues = { $set: {"properties.countryID": element.id} };
       mapCollection.updateMany(query, newvalues, function(err, res) {
         if (err) throw err;
-        // console.log(res.result.nModified + " document(s) updated");
+        // console.log(element.name+ ' ' + res.result.nModified + " document(s) updated");
       });
     });
-
-  } catch(e) {
-    print(e);
+    } catch(e) {
+      print(e);
   }
 
 }
