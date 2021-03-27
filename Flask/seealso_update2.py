@@ -33,16 +33,15 @@ def update_see_also(df):
     cat_list = cat_val.tolist()
 
     for i in cat_list:
-        see_also_list = df.loc[df['_id']==i, 'similar_id'].tolist()
-        flat_list = [item for sublist in see_also_list for item in sublist]
-        print(flat_list)
+        see_also_list = df.loc[df['_id']==i, 'similar_id'].values.tolist()
+        print(see_also_list)
 
         query = { 
         "_id" : i
         }
         values = { 
             "$set": { 
-                "properties.see_also": flat_list
+                "properties.see_also": see_also_list
             } 
         }
 
@@ -69,7 +68,7 @@ class cluster():
                'properties.fc_year_reason', 'properties.ppi_status',
                'properties.affected_stage', 'properties.type_of_ppi',
                'properties.urls', 'properties.resumed', 'properties.resume_url',
-               'properties.location', 'properties.see_also'], axis=1)
+               'properties.location', 'properties.see_also', 'properties.countryID'], axis=1)
 
         columns = ['Geographical', 'Income Group', 'Sector', 'SubSector']
         self.data_df.columns = columns
@@ -120,9 +119,9 @@ class dist():
         self.final_sold = []
         for i in least_sold:
             if len(i) > 1:
-                self.final_sold.append(i[random.randrange(1,len(i)+1)])
+                self.final_sold.append(i[random.randrange(len(i))])
             else:
-                self.final_sold.append(i)
+                self.final_sold.append(i[0])
         
         self.df_group = self.group[['cluster', '_id']]
         self.df_group['similar_id'] = self.final_sold
