@@ -14,6 +14,7 @@ app.set('view engine', 'pug')
 app.get('/', (__, res)=>res.render('index'))
 app.get('/index', (__, res)=>res.render('index'))
 app.get('/inner-page', (__, res)=>res.render('inner-page'))
+app.get('/pinner-page', (__, res)=>res.render('pinner-page'))
 app.get('/m-inner-page', (__, res)=>res.render('m-inner-page'))
 app.get('/apis/update-data', (__, res) => {
   mongodb.getData().then(data=>{cached_json = data});
