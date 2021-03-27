@@ -1,0 +1,19 @@
+.scale {
+  position: relative;
+}
+
+.scale__value {
+  position: absolute;
+  font-family: monospace;
+  font-weight: bold;
+  color: #8a8faa;
+  cursor: pointer;
+  -webkit-transform: translate(-50%, 50%);
+          transform: translate(-50%, 50%);
+  font-size: 14px;
+}
+
+.scale__value:hover {
+  color: #a8abbf;
+}
+/*# sourceMappingURL=scale.css.map */

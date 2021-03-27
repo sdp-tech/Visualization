@@ -7,14 +7,14 @@
     --nav-width: 219px;
 
     /*========== Colors ==========*/
-    --first-color: #6923D0;
-    --first-color: purple;
-    --first-color-light: #F4F0FA;
-    --title-color: #19181B;
-    --text-color: #58555E;
-    --text-color-light: #A5A1AA;
-    --body-color: #F9F6FD;
-    --container-color: #FFFFFF;
+    --first-color: #c44536;
+    --first-color: #83a8a6;
+    --first-color-light: #FBF0EF;
+    --title-color: #c44536;
+    --text-color: #283d3b;
+    --text-color-light: #83a8a6;
+    --body-color: white;
+    --container-color: white;
 
     /*========== Font and typography ==========*/
     --body-font: 'Poppins', sans-serif;
@@ -44,11 +44,11 @@
 
 body{
     margin: var(--header-height) 0 0 0;
-    padding: 1rem 1rem 0;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     background-color: var(--body-color);
     color: var(--text-color);
+    overflow: hidden;
 }
 h3{
     margin: 0;  
@@ -70,7 +70,7 @@ img{
     width: 100%;
     background-color: var(--container-color);
     box-shadow: 0 1px 0 rgba(22, 8, 43, .1);
-    padding: 0 1rem;
+    // padding: 0 1rem;
     z-index: var(--z-fixed);
     
     &__container{
@@ -252,10 +252,6 @@ img{
 }
 
 @media screen and (min-width: 768px){
-    body{
-        padding: 1rem 3rem 0 6rem;
-    }
-
     .header{
         padding: 0 3rem 0 6rem;
 

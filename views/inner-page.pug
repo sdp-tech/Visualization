@@ -57,14 +57,14 @@ head
   // ========== BOX ICONS ==========
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css')
   // ========== CSS ==========
-  link(rel='stylesheet' href='assets/vendor/responsive-sidebar-submenu-main/assets/css/styles.css')
+  link(rel='stylesheet' href='assets/vendor/responsive-sidebar-submenu-main/assets/scss/styles.css')
   title Failure Map
 
 
 // ========== HEADER ==========
 header.header
   .header__container
-    img.header__img(src='assets/vendor/responsive-sidebar-submenu-main/assets/img/perfil.jpg' alt='')
+    img.header__img(src='assets/img/logo.png' alt='')
     a.header__logo(href='#') SDP Project MaPPPing
     .header__search
       input.header__input(type='search' placeholder='Search')
@@ -98,15 +98,9 @@ header.header
           a.nav__link(href='#')
             i.bx.bx-bookmark.nav__icon
             span.nav__name Saved
-        .nav__list
-            .nav__items
-                h3.nav__subtitle Info
-                a.nav__link.active(href='#')
-                    i.bx.bx-home.nav__icon
-                    span.nav__name Home
-    a.nav__link.nav__logout(href='#')
-      i.bx.bx-log-out.nav__icon
-      span.nav__name Log Out
+    a.nav__link.active(href='index')
+      i.bx.bx-home.nav__icon
+      span.nav__name Home
 // ========== CONTENTS ==========
 main#main
     section.mapsection

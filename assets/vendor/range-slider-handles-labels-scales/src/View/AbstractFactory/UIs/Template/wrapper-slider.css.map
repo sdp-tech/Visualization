@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAC;EACd,QAAQ,EAAE,QAAQ;CAMnB;;AAJE,AAAD,2BAAa,CAAC;EACZ,WAAW,EAAE,IAAI;EACjB,cAAc,EAAE,IAAI;CACrB",
+    "sources": [
+        "wrapper-slider.scss"
+    ],
+    "names": [],
+    "file": "wrapper-slider.css"
+}
