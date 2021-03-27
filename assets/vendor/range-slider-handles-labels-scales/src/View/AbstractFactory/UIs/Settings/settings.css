@@ -1,0 +1,29 @@
+.settings {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: monospace;
+  font-size: 16px;
+  border: 2px dotted green;
+}
+
+.settings__separation {
+  height: 1px;
+  background-color: green;
+  margin: 5px;
+}
+
+.settings__label {
+  margin: 2px 5px;
+}
+
+.settings__input {
+  width: 90px;
+  font-family: monospace;
+}
+/*# sourceMappingURL=settings.css.map */
