@@ -119,8 +119,8 @@ class dist():
         
         self.final_sold = []
         for i in least_sold:
-            if len(i) > 3:
-                self.final_sold.append(i[0:3])
+            if len(i) > 1:
+                self.final_sold.append(i[random.randrange(1,len(i)+1)])
             else:
                 self.final_sold.append(i)
         
