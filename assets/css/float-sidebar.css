@@ -1,0 +1,30 @@
+/* override browser default */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* use viewport-relative units to cover page fully */
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+#mapwrap {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    height: 100vh;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#leafletmap {
+width: 100%;
+height: 600px;
+height: 100vh;
+}
