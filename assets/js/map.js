@@ -5,7 +5,7 @@ var bounds = [[-90,-180],   [90,180]];
 var mymap = L.map('mapwrap', { 
         zoomControl: false,
         maxBounds: bounds
-     }).setView([35, 40], 2.5);;
+     }).setView([35, 40], 2.5);
 
 
 // Marker Clusterer using Donut Clustering
@@ -40,6 +40,15 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     mobileset();
 }
 
+function iOS() {
+    return [
+      'iPhone Simulator',
+      'iPhone'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
+
 // filterArray
 var customOption = {
     countryOp: [],
@@ -55,10 +64,9 @@ var customOption = {
 
 function mobileset(){
     $('.js-select2-multi').on('select2:opening select2:closing', function( event ) {
-        var $searchfield = $(this).parent().find('.select2-search__field');
-        $searchfield.prop('disabled', true);
+        var $searchfield = $('.select2-search__field');
+        $searchfield.attr('inputmode', 'none');
         $searchfield.prop('readonly', 'readonly');
-
     });
 }
 
@@ -164,7 +172,6 @@ function load_map(json, customOption) {
 
         }).addTo(mymap);
 
-
     set_filter_touch_options();
 
     try {
@@ -178,8 +185,13 @@ function load_map(json, customOption) {
         mymap.fitBounds(geoLayer.getBounds());
 
         markers.addLayer(geoLayer);
+        //spiderfy option for cluster
+        markers.on('clusterclick', function(cluster) {    
+            cluster.layer.spiderfy();
+        });
         mymap.addLayer(markers);
         
+
         // Initialization
         updateStates(customOption);
 
@@ -250,15 +262,15 @@ function addPopup(feature, layer) {
     var popupText =
         `<p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
-            <b>Country :</b> ${feature.properties.country}<br>
-            <b>Income Group :</b> ${feature.properties.income_group}<br>
-            <b>FC Year :</b> ${feature.properties.fc_year}<br>
-            <b>Status :</b> ${feature.properties.ppi_status}<br>
-            <b>Primary Sector :</b> ${feature.properties.sector}<br>
-            <b>Sub Sector :</b>${feature.properties.subsector}<br>
-            <b>Problem :</b>${feature.properties.reason_for_delay}<br>
-            <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            <b>See also :</b> ${see_also_list}<br>
+            <b>Country : </b>${feature.properties.country}<br>
+            <b>Income Group : </b>${feature.properties.income_group}<br>
+            <b>FC Year : </b>${feature.properties.fc_year}<br>
+            <b>Status : </b>${feature.properties.ppi_status}<br>
+            <b>Primary Sector : </b>${feature.properties.sector}<br>
+            <b>Sub Sector : </b>${feature.properties.subsector}<br>
+            <b>Problem : </b>${feature.properties.reason_for_delay}<br>
+            <b>Type of PPI : </b>${feature.properties.type_of_ppi}<br>
+            <b>See also : </b>${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
             </p>
