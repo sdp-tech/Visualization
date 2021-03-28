@@ -363,8 +363,6 @@
         }
 
         opt.iconCreateFunction = createIcon;
-        opt.zoomToBoundsOnClick = false;
-
         return L.markerClusterGroup(opt, donutOpt);
     }
 
