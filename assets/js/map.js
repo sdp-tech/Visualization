@@ -1,11 +1,11 @@
 var mapdata;
 var geoLayer;
-var idnameDict = new Object();
-var bounds = [[-90,-180],   [90,180]];
-var mymap = L.map('mapwrap', { 
-        zoomControl: false,
-        maxBounds: bounds
-     }).setView([35, 40], 2.5);;
+var idToProject = new Object();
+var bounds = [[-90, -180], [90, 180]];
+var mymap = L.map('mapwrap', {
+    zoomControl: false,
+    maxBounds: bounds
+}).setView([35, 40], 2.5);;
 
 
 // Marker Clusterer using Donut Clustering
@@ -13,40 +13,31 @@ var markers = L.DonutCluster({
     chunkedLoading: true
 }, {
     key: 'sector',
-    sumField : 'value', 
-    order : ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"], 
+    sumField: 'value',
+    order: ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"],
     // title is the visible value when mouse over to cluster
-    title: { 
-        'Energy' : 'Energy',
-        'ICT' : "ICT", 
-        'Municipal Solid Waste' : 'Municipal Solid Waste', 
-        'Transport' : 'Transport', 
-        'Water and sewerage' : "Water and sewerage"
-        },
+    title: {
+        'Energy': 'Energy',
+        'ICT': "ICT",
+        'Municipal Solid Waste': 'Municipal Solid Waste',
+        'Transport': 'Transport',
+        'Water and sewerage': "Water and sewerage"
+    },
     arcColorDict: {
         "Energy": 'green',
-        "ICT" : 'purple',
-        "Municipal Solid Waste" : 'orange',
-        "Transport" : 'blue',
-        "Water and sewerage" : 'gray',
-        }
+        "ICT": 'purple',
+        "Municipal Solid Waste": 'orange',
+        "Transport": 'blue',
+        "Water and sewerage": 'gray',
+    }
 });
 
 var isMobile = false; //initiate as false
 // device detection
-if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
-    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
+if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
+    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))) {
     isMobile = true;
     mobileset();
-}
-
-function iOS() {
-    return [
-      'iPhone Simulator',
-      'iPhone'
-    ].includes(navigator.platform)
-    // iPad on iOS 13 detection
-    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
 // filterArray
@@ -62,8 +53,8 @@ var customOption = {
     ppitypeOp: [],
 };
 
-function mobileset(){
-    $('.js-select2-multi').on('select2:opening select2:closing', function( event ) {
+function mobileset() {
+    $('.js-select2-multi').on('select2:opening select2:closing', function (event) {
         var $searchfield = $('.select2-search__field');
         $searchfield.attr('inputmode', 'none');
         $searchfield.prop('readonly', 'readonly');
@@ -143,9 +134,8 @@ function data_process(json) {
             }
             element.properties[col] = option;
         })
-
         // add to dictionary
-        idnameDict[element._id]=element.properties.project_name_wb;
+        idToProject[element._id] = element;
     });
 
     return json;
@@ -162,14 +152,14 @@ function load_map(json, customOption) {
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
-            tileSize: 512,
-            noWrap: false,
-            // zoom controller
-            minZoom: 2,
-            maxZoom: 16,
-            zoomOffset: -1
+        tileSize: 512,
+        noWrap: false,
+        // zoom controller
+        minZoom: 2,
+        maxZoom: 16,
+        zoomOffset: -1
 
-        }).addTo(mymap);
+    }).addTo(mymap);
 
 
     set_filter_touch_options();
@@ -181,12 +171,12 @@ function load_map(json, customOption) {
             filter: geoJson_filter,
             pointToLayer: geoJson_pointToLayer
         });
-        
+
         mymap.fitBounds(geoLayer.getBounds());
 
         markers.addLayer(geoLayer);
         mymap.addLayer(markers);
-        
+
         // Initialization
         updateStates(customOption);
 
@@ -210,12 +200,12 @@ function load_map(json, customOption) {
 
         // zoom box
         L.control.zoom({
-            position: isMobile ? 'bottomright':'topright'
+            position: isMobile ? 'bottomright' : 'topright'
         }).addTo(mymap);
 
         // zoom out to original level
         L.easyButton({
-            position: isMobile ? 'bottomright':'topright',
+            position: isMobile ? 'bottomright' : 'topright',
             states: [{
                 stateName: 'zoom-to-original',        // name the state
                 icon: 'fas fa-map',               // and define its properties
@@ -228,16 +218,16 @@ function load_map(json, customOption) {
         }).addTo(mymap);
 
         L.easyButton({
-          position: isMobile ? "topright" : null,
-          states: [
-            {
-              icon: "fas fa-filter",
-              title: "mobile filter button",
-              onClick: function (e) {
-                $("#modal_filter").modal("show");
-              },
-            },
-          ],
+            position: isMobile ? "topright" : null,
+            states: [
+                {
+                    icon: "fas fa-filter",
+                    title: "mobile filter button",
+                    onClick: function (e) {
+                        $("#modal_filter").modal("show");
+                    },
+                },
+            ],
         }).addTo(mymap);
 
     } catch (err) {
@@ -249,13 +239,12 @@ function load_map(json, customOption) {
 }
 
 function addPopup(feature, layer) {
-    let see_also_list = feature.properties.see_also
-    if(see_also_list) {
-        see_also_list = see_also_list.map((_id) => idnameDict[_id]).join(', ');
-    }
-
-    var popupText =
-        `<p id=p_popup_detail>
+    //see_also type => ObjectId 
+    let see_also = feature.properties.see_also
+    var see_also_popup_text = ''
+    var popup_text =
+        `   
+        <p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
             <b>Country :</b> ${feature.properties.country}<br>
             <b>Income Group :</b> ${feature.properties.income_group}<br>
@@ -265,20 +254,45 @@ function addPopup(feature, layer) {
             <b>Sub Sector :</b>${feature.properties.subsector}<br>
             <b>Problem :</b>${feature.properties.reason_for_delay}<br>
             <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            <b>See also :</b> ${see_also_list}<br>
+            <b>See also :</b> ${see_also ? idToProject[see_also].properties.project_name_wb : 'No Project'}<br>
             <p id=linked_p_popup_detail>
-                <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
+                <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a></b>
             </p>
         </p>
+    `
+    if (see_also) {
+        let see_also_feature = idToProject[see_also]
+        see_also_popup_text =
         `
+            <div id=p_popup_detail>
+                <strong id=p_popup-title> ${see_also_feature.properties.project_name_wb}</strong><br>
+                <b>Country :</b> ${see_also_feature.properties.country}<br>
+                <b>Income Group :</b> ${see_also_feature.properties.income_group}<br>
+                <b>FC Year :</b> ${see_also_feature.properties.fc_year}<br>
+                <b>Status :</b> ${see_also_feature.properties.ppi_status}<br>
+                <b>Primary Sector :</b> ${see_also_feature.properties.sector}<br>
+                <b>Sub Sector :</b>${see_also_feature.properties.subsector}<br>
+                <b>Problem :</b>${see_also_feature.properties.reason_for_delay}<br>
+                <b>Type of PPI :</b>${see_also_feature.properties.type_of_ppi}<br>
+                <b>See also :</b> ${see_also_feature.properties.see_also ? idToProject[see_also_feature.properties.see_also].properties.project_name_wb : 'No Project'}<br>
+                <p id=linked_p_popup_detail>
+                    <b><a href=${see_also_feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a></b>
+                </p>
+            </div>
+        `
+    }
 
     // <button id=seealso onclick=addLayerToMap(${feature.properties.project_name_wb})>See also</button><br>
 
-
-    layer.bindPopup(popupText, {
+    layer.bindPopup(popup_text, {
         closeButton: true,
-        offswet: L.point(0, -20)
+        offset: L.point(0, -10)
     });
+
+    // layer.bindPopup(see_also_popup_text, {
+    //     closeButton: true,
+    //     offset: L.point(30, -20)
+    // });
 
     layer.on('click', function () {
         layer.openPopup();
@@ -312,10 +326,10 @@ function geoJson_pointToLayer(feature, latlng, layer) {
     const marker = new L.Marker(latlng, {
         // title is not the visible one. only for clustering
         title: feature.properties.project_name_wb,
-        sector : sector,
+        sector: sector,
         icon: awesomemark,
     });
-    
+
     return marker;
 };
 
@@ -377,7 +391,7 @@ function subsector_to_icon(subsector) {
 }
 
 // prohibit dragging when mouse is over the filterbar
-function set_filter_touch_options(){
+function set_filter_touch_options() {
     $('#toolbar').on("mouseover", function () {
         mymap.touchZoom.disable()
         mymap.dragging.disable();
@@ -615,8 +629,8 @@ function yearIsincluded(feature, yearOp) {
     let dateFrom = yearOp["from"];
     let dateTo = yearOp["to"];
 
-    if(includeNA()){
-        return ((dateFrom <= targetyear && targetyear <= dateTo) || targetyear == 0);            
+    if (includeNA()) {
+        return ((dateFrom <= targetyear && targetyear <= dateTo) || targetyear == 0);
     }
     return (dateFrom <= targetyear && targetyear <= dateTo);
 }
@@ -674,6 +688,15 @@ function toggle_selectableOptgroup() {
     })
 }
 
+function iOS() {
+    return [
+        'iPhone Simulator',
+        'iPhone'
+    ].includes(navigator.platform)
+        // iPad on iOS 13 detection
+        || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
+
 // load the map
 $.loading.start('Loading...');
 
@@ -727,25 +750,24 @@ for (let input of document.querySelectorAll('#clearEach')) {
 
 var dataLayerGroup;
 
-function addLayerToMap(subject){
+function addLayerToMap(subject) {
 
     // remove geoLayer
-    if (mymap.hasLayer(geoLayer)){
+    if (mymap.hasLayer(geoLayer)) {
         geoLayer.remove();
     }
     //remove the layer from the map entirely
-    if (mymap.hasLayer(dataLayerGroup)){
+    if (mymap.hasLayer(dataLayerGroup)) {
         dataLayerGroup.remove();
     }
 
     //add the data layer and style based on attribute. 
     dataLayerGroup = L.geoJson(mapdata, {
         onEachFeature: addPopup,
-        filter: function (feature){
-            
-            if(feature.properties.see_also)
+        filter: function (feature) {
+            if (feature.properties.see_also)
                 return (feature.properties.see_also).includes(subject)
-            return false     
+            return false
         },
         pointToLayer: geoJson_pointToLayer
     });
