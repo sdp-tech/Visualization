@@ -243,18 +243,18 @@ function addPopup(feature, layer) {
     let see_also = feature.properties.see_also
     var see_also_popup_text = ''
     var popup_text =
-        `   
+    `   
         <p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
-            <b>Country :</b> ${feature.properties.country}<br>
-            <b>Income Group :</b> ${feature.properties.income_group}<br>
-            <b>FC Year :</b> ${feature.properties.fc_year}<br>
-            <b>Status :</b> ${feature.properties.ppi_status}<br>
-            <b>Primary Sector :</b> ${feature.properties.sector}<br>
-            <b>Sub Sector :</b>${feature.properties.subsector}<br>
-            <b>Problem :</b>${feature.properties.reason_for_delay}<br>
-            <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            <b>See also :</b> ${see_also ? idToProject[see_also].properties.project_name_wb : 'No Project'}<br>
+            <b>Country : </b>${feature.properties.country}<br>
+            <b>Income Group : </b>${feature.properties.income_group}<br>
+            <b>FC Year : </b>${feature.properties.fc_year}<br>
+            <b>Status : </b>${feature.properties.ppi_status}<br>
+            <b>Primary Sector : </b>${feature.properties.sector}<br>
+            <b>Sub Sector : </b>${feature.properties.subsector}<br>
+            <b>Problem : </b>${feature.properties.reason_for_delay}<br>
+            <b>Type of PPI : </b>${feature.properties.type_of_ppi}<br>
+            <b>See also : </b>${see_also ? idToProject[see_also].properties.project_name_wb : 'No Project'}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a></b>
             </p>
@@ -266,15 +266,15 @@ function addPopup(feature, layer) {
         `
             <div id=p_popup_detail>
                 <strong id=p_popup-title> ${see_also_feature.properties.project_name_wb}</strong><br>
-                <b>Country :</b> ${see_also_feature.properties.country}<br>
-                <b>Income Group :</b> ${see_also_feature.properties.income_group}<br>
-                <b>FC Year :</b> ${see_also_feature.properties.fc_year}<br>
-                <b>Status :</b> ${see_also_feature.properties.ppi_status}<br>
-                <b>Primary Sector :</b> ${see_also_feature.properties.sector}<br>
-                <b>Sub Sector :</b>${see_also_feature.properties.subsector}<br>
-                <b>Problem :</b>${see_also_feature.properties.reason_for_delay}<br>
-                <b>Type of PPI :</b>${see_also_feature.properties.type_of_ppi}<br>
-                <b>See also :</b> ${see_also_feature.properties.see_also ? idToProject[see_also_feature.properties.see_also].properties.project_name_wb : 'No Project'}<br>
+                <b>Country : </b>${see_also_feature.properties.country}<br>
+                <b>Income Group : </b>${see_also_feature.properties.income_group}<br>
+                <b>FC Year : </b>${see_also_feature.properties.fc_year}<br>
+                <b>Status : </b>${see_also_feature.properties.ppi_status}<br>
+                <b>Primary Sector : </b>${see_also_feature.properties.sector}<br>
+                <b>Sub Sector : </b>${see_also_feature.properties.subsector}<br>
+                <b>Problem : </b>${see_also_feature.properties.reason_for_delay}<br>
+                <b>Type of PPI : </b>${see_also_feature.properties.type_of_ppi}<br>
+                <b>See also : </b>${see_also_feature.properties.see_also ? idToProject[see_also_feature.properties.see_also].properties.project_name_wb : 'No Project'}<br>
                 <p id=linked_p_popup_detail>
                     <b><a href=${see_also_feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a></b>
                 </p>
