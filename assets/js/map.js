@@ -244,7 +244,7 @@ function addPopup(feature, layer) {
     var see_also_popup_text = ''
     var popup_text =
     `   
-        <p id=p_popup_detail>
+        <div class=px-2 id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
             <b>Country : </b>${feature.properties.country}<br>
             <b>Income Group : </b>${feature.properties.income_group}<br>
@@ -258,13 +258,13 @@ function addPopup(feature, layer) {
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a></b>
             </p>
-        </p>
+        </div>
     `
     if (see_also) {
         let see_also_feature = idToProject[see_also]
         see_also_popup_text =
         `
-            <div id=p_popup_detail>
+            <div class=px-2 id=p_popup_detail>
                 <strong id=p_popup-title> ${see_also_feature.properties.project_name_wb}</strong><br>
                 <b>Country : </b>${see_also_feature.properties.country}<br>
                 <b>Income Group : </b>${see_also_feature.properties.income_group}<br>
@@ -280,19 +280,22 @@ function addPopup(feature, layer) {
                 </p>
             </div>
         `
+
+        popup_text = `
+            <div class=flex flex-row justify-between>
+                ${popup_text}
+                ${see_also_popup_text}
+            </div>
+        `
     }
 
     // <button id=seealso onclick=addLayerToMap(${feature.properties.project_name_wb})>See also</button><br>
 
     layer.bindPopup(popup_text, {
         closeButton: true,
-        offset: L.point(0, -10)
+        offset: L.point(0, -10),
+        maxWidth : 2000,
     });
-
-    // layer.bindPopup(see_also_popup_text, {
-    //     closeButton: true,
-    //     offset: L.point(30, -20)
-    // });
 
     layer.on('click', function () {
         layer.openPopup();
