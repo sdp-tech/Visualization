@@ -219,6 +219,12 @@ h1, h2, h3, h4, h5, h6 {
   right: 15px;
 }
 
+#nav_index {
+  /* margin-top: 1000vh; */
+  height: auto;
+}
+
+
 @media (max-width: 1366px) {
   .nav-menu .drop-down .drop-down ul {
     left: -90%;
