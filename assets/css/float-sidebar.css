@@ -32,6 +32,12 @@ body {
 }
 
 .header__logo{
-  font-size:150%;
+  font-size: 24px;
+  margin: 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
 }
 
