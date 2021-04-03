@@ -69,8 +69,8 @@
 }
 
 .timeline-item:last-child {
-  -o-border-image: linear-gradient(to bottom, #772e25 60%, rgba(119, 46, 37, 0)) 1 100%;
-     border-image: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #772e25), to(rgba(119, 46, 37, 0))) 1 100%;
-     border-image: linear-gradient(to bottom, #772e25 60%, rgba(119, 46, 37, 0)) 1 100%;
+  -o-border-image: linear-gradient(to bottom, #772e25 30%, rgba(119, 46, 37, 0)) 1 70%;
+     border-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #772e25), to(rgba(119, 46, 37, 0))) 1 70%;
+     border-image: linear-gradient(to bottom, #772e25 30%, rgba(119, 46, 37, 0)) 1 70%;
 }
 /*# sourceMappingURL=timeline.css.map */

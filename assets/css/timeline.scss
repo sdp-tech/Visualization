@@ -81,8 +81,8 @@ $border-color: #772e25;
 	&:last-child {
 		border-image: linear-gradient(
 			to bottom,
-			$border-color 60%,
-			rgba($border-color, 0)) 1 100%
+			$border-color 30%,
+			rgba($border-color, 0)) 1 70%
 		;
 	}
 }

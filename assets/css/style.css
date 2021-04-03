@@ -802,6 +802,7 @@ section#Insight {
 }
 
 #team .info-box {
+  height: 100%;
   padding: 30px;
 }
 
@@ -1337,18 +1338,19 @@ p.notice {
 
 table {
   border-collapse: collapse;
-  width: 60%;
+  width: 100%;
 }
 
 @media screen and (max-width: 600px) {
   table {
     width: 100%;
+    padding: 10px;
   }
 }
 
 th,
 td {
-  padding: 1px;
+  padding: 10px;
   text-align: left;
   vertical-align: middle;
   border-bottom: 1px solid #ddd;

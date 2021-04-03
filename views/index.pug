@@ -69,9 +69,7 @@ section#hero
     h1 Failure Map
     h2 Sustainable Development Program
     br
-    a.goto-btn Go to New Map
-    br
-    a.goto-btn1 Go to Previous Map
+    a.goto-btn Go to Our Map
     br
     a.btn-get-started.scrollto(href='#about')
       i.bx.bx-chevrons-down
@@ -85,39 +83,23 @@ main#main
           .content
             h3 What is Project MaPPPing &apos;Failure Map&apos;?
             p
-              | Project MaPPPing is one of SDP&rsquo;s major initiatives in line with the UN Sustainable Development Goals (SDGs) to contribute to the development of sustainable and resilient infrastructures. We aim to provide relevant data on infrastructure projects in the form of Public Private Partnership(PPP), because we believe that PPP is the most efficient way of building infrastructures. SDP&rsquo;s Project MaPPPing consists of three phases and the &lsquo;Failure Map&rsquo; is the last step. Through Phase 1 and 2, we developed our own database on disrupted PPP infrastructure Deals. In Phase 3 we have visualized this database into a &lsquo;Failure Map&rsquo; in order to engage and inspire our map users who are interested in sustainable infrastructure development.
+              | “Project mapping” aims to collect, visualize, and provide data about worldwide PPP projects that were failed or canceled. “Failure map” is the map that demonstrates the data with interactive features such as filter service, AI suggestion tools, and insights.
             a.about-btn(href='#team')
               | SDP Team
               i.bx.bx-chevron-right
         .col-xl-7.d-flex.align-items-stretch
           .icon-boxes.d-flex.flex-column.justify-content-center
             .row
-              .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='100')
-                i.bx.bx-shape-polygon
-                h4 Uniqueness
-                p
-                  | Our map is distinct from other maps because it is a &lsquo;Failure Map&rsquo; that specifically focuses on delayed or canceled PPP projects. We track them down, gather relevant information, and visualize the data in a way that anyone can easily understand the dynamics of the field. We collect information on &lsquo;failed&rsquo; PPP deals that have occurred in all countries regardless of their income or size, and of every type of infrastructure projects including power plants, wind farms, roads, water utilities and more.
-              .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='200')
-                i.bx.bx-user-pin
-                h4 User Experience
-                p
-                  | Our map aims to maximize the experience of our users not only by providing specific reasons as to why a project was delayed or canceled, but also by providing various filtering services. Users can search for specific projects based on its location, type, status, year and more. Furthermore, our AI tool suggests similar PPP projects that users might take interest in based on their search results. Overall, we hope that users can gather various insights using our map and support the development of sustainable infrastructures for our sustainable future.
               .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='300')
                 i.bx.bx-user-pin
                 h4 Why infrastructure?
-                p The question of why SDP is working on Project MaPPPing is also important.
                 p
-                  | First, we believe that infrastructure development is indispensable from sustainable development. Not to mention SDG Goal 9: &ldquo;Industry, Innovation, and Infrastructure&rdquo; and Goal 11: &ldquo;Sustainable Cities and Communities&rdquo; that directly refer to infrastructure development, but other SDGs make implicit the need for a solid infrastructure as well (ex) clean water.
+                  | We believe that infrastructure development is indispensable from sustainable development. It helps achieve SDG Goal 9: “Industry, Innovation, and Infrastructure” as it can unleash competitive economic forces and generate employment. Also, it contributes to attain SDG Goal 11: “Sustainable Cities and Communities” by not only creating career and business opportunities but improving urban planning and management in participatory ways. Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.
               .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='400')
                 i.bx.bxl-product-hunt
                 h4 Why PPP?
                 p
-                  | Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure. Infrastructure projects require large capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding which makes many infrastructure projects possible. Meanwhile, the government&apos;s overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs.
-              .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='500')
-                i.bx.bx-map-alt
-                h4 Why a Failure map?
-                p
-                  | Failure is the pillar of success and this applies to infrastructure projects as well. Knowing the causes of failure becomes the milestone for not repeating that mistake in the future. Therefore, SDP collects data on PPP infrastructure projects that have been delayed and or canceled due to various reasons. SDP then delivers the information intuitively to users via its &lsquo;Failure Map&rsquo;. Using this map, users can accrue insights themselves by utilizing various filters provided.
+                  | Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure.  Infrastructure projects require a great amount of capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding from the private sectors which makes many infrastructure projects more achievable. Also, utilizing private sector technology and innovation provides better public services with improved efficiency. Meanwhile, the government's overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs
               .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='600')
                 i.bx.bx-group
                 h4 Users who can benefit from our map:
@@ -327,123 +309,112 @@ main#main
           // button 2
           button.accordion Sector
           .panel
-            br
             p
-              span(style='font-weight: 400;') Projects are organized according to the type of infrastructure. 
-              span(style='font-weight: 400;')
-                br
-              span(style='font-weight: 400;') 5 Primary Sectors: Energy, ICT, Transport, Water and Sewerage, and Solid Waste
-              span(style='font-weight: 400;')
-                br
-              span(style='font-weight: 400;') (Subsectors are listed below each Primary Sectors)
-            hr
+            table
+              tbody
+                tr
+                  td
+                    p(style='text-align: center;')
+                      strong Primary Sector
+                  td
+                    p(style='text-align: center;')
+                      strong Subsector
+                tr
+                  td(rowspan='2')
+                    p
+                      strong Energy :
+                    p
+                      span(style='font-weight: 400;')
+                        | Includes the activities directly related to the provision of electricity or natural gas to users as a public service.
+                  td
+                    p
+                      strong Electricity : 
+                      span(style='font-weight: 400;')
+                        | Activities required for the provision of electricity. It includes the segments of generation, transmission, and distribution of electricity
+                tr
+                  td
+                    p
+                      strong Natural Gas : 
+                      span(style='font-weight: 400;')
+                        | It includes the segments of transmission and distribution pipelines. Excludes gas exploration and production. Note that if the gas is used as an input by a power plant, the project belongs to the electricity subsector and the generation segment.
+                tr
+                  td
+                    p
+                      strong ICT :
+                    p
+                      span(style='font-weight: 400;')
+                        | Reflecting changes in the telecoms/ICT field, the SDP Project MaPPPing will only track:
+                  td
+                    p
+                      strong ICT backbone :
+                      span(style='font-weight: 400;')
+                        | Hard infrastructure cable assets (such as fiber optic networks and other types of broadband networks) where the government is involved either through being a contracting authority (i.e. a party to a concession agreement), the owner of the assets, or some other form of government support.
+                tr
+                  td(rowspan='4')
+                    p
+                      strong Transport :
+                    p
+                      span(style='font-weight: 400;')
+                        | Assets or facilities required to move people or freight from one location to another as a public service.
+                  td
+                    p
+                      strong Airport : 
+                      span(style='font-weight: 400;') includes physical infrastructure (terminal, runway, tower)
+                tr
+                  td
+                    p
+                      strong Railway :
+                      span(style='font-weight: 400;')
+                        | includes track, terminals, rails, and rolling stock. Subway systems and/or monorails are also considered railway.
+                tr
+                  td
+                    p
+                      strong Road :
+                      span(style='font-weight: 400;')
+                        | includes all facilities necessary for land transport, but excludes buses and automobiles. A project may also have a combination of the below.
+                tr
+                  td
+                    p
+                      strong Ports :
+                      span(style='font-weight: 400;')
+                        | includes terminal facilities and surrounding waterway, but excludes shipping companies.
+                tr
+                  td(rowspan='2')
+                    p
+                      strong Water and Sewerage :
+                    p
+                      span(style='font-weight: 400;')
+                        | Activities needed to provide potable water to users or to process or dispose of wastewater as a public service.
+                  td
+                    p
+                      strong Treatment Plant :
+                      span(style='font-weight: 400;')
+                        | includes all facilities necessary for treating and storing potable water to users or processing wastewater.
+                tr
+                  td
+                    p
+                      strong Water Utility : 
+                      span(style='font-weight: 400;')
+                        | includes all facilities necessary for storing and delivering potable water to users, including pipes and devices for measuring consumption, for transfer of potable water to individual users.
+                tr
+                  td(rowspan='4')
+                    p
+                      strong Solid Waste :
+                    p
+                      span(style='font-weight: 400;')
+                        | Activities related to collection, transfer, treatment and disposal of municipal solid waste as a public service.
+                  td
+                    p
+                      strong Treatment/Disposal : 
+                      span(style='font-weight: 400;')
+                        | include activities related to collection, transfer, treatment and disposal of municipal solid waste as a public service.
+                tr
+                  td(rowspan='3')
+                    p
+                      strong Municipal Solid Waste : 
+                      span(style='font-weight: 400;') includes facilities for integrated solid waste management
+              br
             p
-              strong Energy:
-              span(style='font-weight: 400;')
-                | Includes the activities directly related to the provision of electricity or natural gas to users as a public service.
-            p
-              strong Subsectors
-              span(style='font-weight: 400;') :
-            ul
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Electricity:
-                span(style='font-weight: 400;')
-                  | Activities required for the provision of electricity. It includes the segments of generation, transmission, and distribution of electricity.
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Natural gas
-                span(style='font-weight: 400;') : It includes the segments of transmission and distribution pipelines. 
-                strong
-                  em Excludes gas exploration and production
-                span(style='font-weight: 400;')
-                  | . Note that if the gas is used as an input by a power plant, the project belongs to the electricity subsector and the generation segment.
-            hr
-            p
-              strong Information and communication technology (ICT):
-              span(style='font-weight: 400;')  Reflecting changes in the telecoms/ICT field, the 
-              span(style='font-weight: 400;') SDP Project MaPPPing
-              span(style='font-weight: 400;')  will only track:
-            p
-              strong Subsectors
-              span(style='font-weight: 400;') :
-            ul
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') ICT backbone
-                span(style='font-weight: 400;')
-                  | : Hard infrastructure cable assets (such as fiber optic networks and other types of broadband networks) where the government is involved either through being a contracting authority (i.e. a party to a concession agreement), the owner of the assets, or some other form of government support.
-            hr
-            p
-              strong Transport:
-              span(style='font-weight: 400;')
-                | Assets or facilities required to move people or freight from one location to another as a public service.
-            p
-              strong Subsectors
-              span(style='font-weight: 400;') :
-            ul
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Airport:
-                span(style='font-weight: 400;')  includes physical infrastructure (terminal, runway, tower)
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Railway:
-                span(style='font-weight: 400;')
-                  | includes track, terminals, rails, and rolling stock.&nbsp; Subway systems and/or monorails are also considered railway.
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Road
-                span(style='font-weight: 400;')
-                  | : includes all facilities necessary for land transport, but excludes buses and automobiles.&nbsp; A project may also have a combination of the below.
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Ports
-                span(style='font-weight: 400;')
-                  | : includes terminal facilities and surrounding waterway, but excludes shipping companies.
-            hr
-            p
-              strong Water and sewerage:
-              span(style='font-weight: 400;')
-                | Activities needed to provide potable water to users or to process or dispose of wastewater as a public service.
-            p
-              strong Subsectors
-              span(style='font-weight: 400;') :&nbsp;
-            ul
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Treatment plant
-                span(style='font-weight: 400;')
-                  | : includes all facilities necessary for treating and storing potable water to users or processing wastewater.
-              li(style='font-weight: 400;' aria-level='1')
-                em
-                  span(style='font-weight: 400;') Water Utility
-                span(style='font-weight: 400;')
-                  | : includes all facilities necessary for storing and delivering potable water to users, including pipes and devices for measuring consumption, for transfer of potable water to individual users.
-            hr
-            p
-              strong Solid Waste: 
-              span(style='font-weight: 400;')
-                | Activities related to collection, transfer, treatment and disposal of municipal solid waste as a public service.
-            p
-              strong Subsectors:&nbsp;
-            p
-              em
-                span(style='font-weight: 400;') Treatment/Disposal: 
-              span(style='font-weight: 400;')
-                | includes sorting and recycling facilities, mechanical and biological treatment, incineration/waste to Energy facilities and sanitary landfill. Treatment/Disposal also includes facilities related with collection, transport, and integrated management of waste.
-            hr
-            p
-              strong Others: 
-              span(style='font-weight: 400;')
-                | Includes activities and facilities not included in energy, information and communication technology (ICT), transport, water and sewerage, and solid waste.
-            p
-              strong Subsectors:
-            p
-              em
-                span(style='font-weight: 400;') Others: 
-              span(style='font-weight: 400;')
-                | refers to all infrastructure not mentioned above; smart city, housing, multiple complex, economic zone project, etc.
           // Income group
           button.accordion Income group
           .panel
@@ -464,182 +435,78 @@ main#main
                   strong High income group:
                   span(style='font-weight: 400;') $12,536 or More
           // Type of PPI:
-          button.accordion Type of PPI
+          button.accordion Type of PPP
           .panel
+            p
+            table
+              tbody
+                tr
+                  td
+                  td
+                      strong Management contract and lease
+                  td
+                      strong Greenfield Project
+                  td
+                      strong Brownfield Project&nbsp;
+                  td
+                      strong Divestiture
+                tr
+                  td
+                      strong Capital expenditure
+                  td
+                      span(style='font-weight: 400;') Public
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                tr
+                  td
+                      strong Operating expenditure
+                  td
+                      span(style='font-weight: 400;') Private or Public
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                tr
+                  td
+                      strong Operating expenditure
+                  td
+                      span(style='font-weight: 400;') Private
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                tr
+                  td
+                      strong Ownership of assets
+                  td
+                      span(style='font-weight: 400;') Private
+                  td
+                      span(style='font-weight: 400;') Public or Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Public or Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                tr
+                  td
+                      strong Ownership of contract
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
+                  td
+                      span(style='font-weight: 400;') Private or Mixed
             br
-            p(style='margin-top:18px;margin-bottom:-20px;')
-              ul
-                li Management contract and lease&nbsp;&nbsp;&nbsp; 
-              table(cellspacing='10' cellpadding='3')
-                tbody
-                  tr(style='height: 35px;')
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        strong Capital expenditure
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        span(style='font-weight: 400;') Public
-                  tr(style='height: 35px;')
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        strong Operating expenditure
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        span(style='font-weight: 400;') Private or Public
-                  tr(style='height: 35px;')
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        strong Operating expenditure
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        span(style='font-weight: 400;') Private
-                  tr(style='height: 35px;')
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        strong Ownership of assets
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        span(style='font-weight: 400;') Public
-                  tr(style='height: 35px;')
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        strong Ownership of contract
-                    td(style='height: 35px; text-align: center;')
-                      p
-                        span(style='font-weight: 400;') Private or Mixed
-            p &nbsp;
-            ul
-              li Brownfield Project&nbsp; 
-            table(cellspacing='10' cellpadding='3')
-              tbody
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Capital expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Operating expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Operating expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Ownership of assets
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Public or Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Ownership of contract
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-            p
-              br
-              br
-            ul
-              li Greenfield Project 
-            table(cellspacing='10' cellpadding='3')
-              tbody
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Capital expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Operating expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Operating expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Ownership of assets
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Public or Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Ownership of contract
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-            p
-              br
-            p
-              | &#x1360; 
-              em Difference between Greenfield and Brownfield
-            p
-              | Greenfield and brownfield projects have the above aforementioned operating and contractual relationship based on the projects.&nbsp; SDP Project&nbsp; MaPPPing focuses on classification by the definition of the terms for which whether the project is built from new(Greenfield) or passed on to another company(Brownfield)
-            p &nbsp;
-            ul
-              li Divestiture 
-            table(cellspacing='10' cellpadding='3')
-              tbody
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Capital expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Operating expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Operating expenditure
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Ownership of assets
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-                tr
-                  td(style='text-align: center;')
-                    p
-                      strong Ownership of contract
-                  td(style='text-align: center;')
-                    p
-                      span(style='font-weight: 400;') Private or Mixed
-            p
-              br
-              br
-            p
+            
           // Financial Closure year
           button.accordion Financial Closure year
           .panel
@@ -717,11 +584,11 @@ main#main
             h3 Research Team
             p(style='text-align: justify;')
               span(style='font-weight: 400;')
-                | Members of the research team are working as &ldquo;Research Analyst&rdquo; and &ldquo;Data Reviewer&rdquo; in Project MaPPPing. We search the articles regarding PPP(public-private partnership) projects directly or by using tools(AI Status Suggest) developed by our tech team, which will be entered into the Failure Map database. By categorizing and analyzing a vast range of Infrastructure Information from SDP&apos;s own database, better insights for a sustainable future are derived. Further, we contribute to the improvement of our tool by regularly delivering suggestions for efficient crawling to our tech team based on our findings.
+                | Members of the Research Team are working as “Research Analyst” and “Data Reviewer” in Project MaPPPing. We search the articles regarding PPP(public-private partnership) projects directly or by using tools(AI Status Suggest) developed by the Tech Team, which will be entered into the Failure Map database.
             br
             p(style='text-align: justify;')
               span(style='font-weight: 400;')
-                | We would like to present the present and future of sustainable development in developing countries through Project MaPPPing. In this sense, We believe that the failure map, which analyzes the failure of the infrastructure from a variety of perspectives, such as type, region, and time, will be a useful reference at the beginning of infrastructure construction as well as the planning inspection stage.
+                | Members of the Tech Team are responsible for the visualization of the data on our website and the subsequent management of the homepage in Project MaPPPing. We run the server by using tools such as HTML, CSS, JavaScript, and AWS.
         .flex-item.col-xl-6.align-items-stretch
           .info-box
             i.bx.bx-laptop
