@@ -5,7 +5,7 @@ var bounds = [[-90,-180],   [90,180]];
 var mymap = L.map('mapwrap', { 
         zoomControl: false,
         maxBounds: bounds
-     }).setView([35, 40], 2.5);;
+     }).setView([35, 40], 2.5);
 
 
 // Marker Clusterer using Donut Clustering
@@ -31,8 +31,21 @@ var markers = L.DonutCluster({
         "Water and sewerage" : 'gray',
         }
 });
+// filterArray
+var customOption = {
+    countryOp: [],
+    sectorOp: [],
+    yearOp: {
+        "from": 1960,
+        "to": 2021,
+    },
+    statusOp: [],
+    incomeOp: [],
+    ppitypeOp: [],
+};
 
 var isMobile = false; //initiate as false
+
 // device detection
 if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
     || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
@@ -49,31 +62,18 @@ function iOS() {
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
-// filterArray
-var customOption = {
-    countryOp: [],
-    sectorOp: [],
-    yearOp: {
-        "from": 1960,
-        "to": 2021,
-    },
-    statusOp: [],
-    incomeOp: [],
-    ppitypeOp: [],
-};
+// function mobileset(){
+//     $('.js-select2-multi').on('select2:opening select2:closing', function( event ) {
+//         var $searchfield = $('.select2-search__field');
+//         $searchfield.attr('inputmode', 'none');
+//         $searchfield.prop('readonly', 'readonly');
+//     });
+// }
 
-function mobileset(){
-    $('.js-select2-multi').on('select2:opening select2:closing', function( event ) {
-        var $searchfield = $('.select2-search__field');
-        $searchfield.attr('inputmode', 'none');
-        $searchfield.prop('readonly', 'readonly');
-    });
-}
-
-function toolbar_open() {
-    document.getElementById("toolbar").classList.toggle('open');
-    setTimeout('$(".sidebar").removeAttr("disabled")', 100);
-};
+// function toolbar_open() {
+//     document.getElementById("toolbar").classList.toggle('open');
+//     setTimeout('$(".sidebar").removeAttr("disabled")', 100);
+// };
 
 function load_data(customOption) {
 
@@ -93,7 +93,7 @@ function load_data(customOption) {
             let json = requested['body'];
             mapdata = data_process(json);
             load_map(mapdata, customOption);
-            options_to_html(json);
+            // options_to_html(json);
             $.loading.end();
         },
         error: function (err) {
@@ -107,7 +107,6 @@ function data_process(json) {
     json.forEach((element) => {
         Object.keys(element.properties).forEach((col) => {
             let option = element.properties[col];
-
             if (option == null)
                 option = ""
 
@@ -171,42 +170,27 @@ function load_map(json, customOption) {
 
         }).addTo(mymap);
 
-
-    set_filter_touch_options();
+    // set_filter_touch_options();
 
     try {
         // markers
         geoLayer = L.geoJson(json, {
             onEachFeature: addPopup,
-            filter: geoJson_filter,
+            // filter: geoJson_filter,
             pointToLayer: geoJson_pointToLayer
         });
         
         mymap.fitBounds(geoLayer.getBounds());
-
         markers.addLayer(geoLayer);
+
         mymap.addLayer(markers);
         
+
         // Initialization
-        updateStates(customOption);
+        // updateStates(customOption);
 
         // Updata when any change is detected
-        reloadMap(json);
-
-        // legend box
-        var legend = L.control({position: 'bottomright'});
-        legend.onAdd = function(mymap) {
-            var div = L.DomUtil.create("div", "legend");
-            div.innerHTML += "<h4>Sector</h4>";
-            div.innerHTML += '<i style="background: purple"></i><span>ICT</span><br>';
-            div.innerHTML += '<i style="background: blue"></i><span>Transport</span><br>';
-            div.innerHTML += '<i style="background: green"></i><span>Energy</span><br>';
-            div.innerHTML += '<i style="background: gray"></i><span>Water and sewerage</span><br>';            
-            div.innerHTML += '<i style="background: orange"></i><span>Municipal Solid Waste</span><br>';
-            return div;
-        };
-          
-        legend.addTo(mymap);
+        // reloadMap(json);
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
@@ -259,8 +243,6 @@ function load_map(json, customOption) {
         console.error(err);
     };
 
-    // // back to original zoom
-    // mymap.addControl(new L.Control.ZoomMin())
 }
 
 function addPopup(feature, layer) {
@@ -272,23 +254,20 @@ function addPopup(feature, layer) {
     var popupText =
         `<p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
-            <b>Country :</b> ${feature.properties.country}<br>
-            <b>Income Group :</b> ${feature.properties.income_group}<br>
-            <b>FC Year :</b> ${feature.properties.fc_year}<br>
-            <b>Status :</b> ${feature.properties.ppi_status}<br>
-            <b>Primary Sector :</b> ${feature.properties.sector}<br>
-            <b>Sub Sector :</b>${feature.properties.subsector}<br>
-            <b>Problem :</b>${feature.properties.reason_for_delay}<br>
-            <b>Type of PPI :</b>${feature.properties.type_of_ppi}<br>
-            <b>See also :</b> ${see_also_list}<br>
+            <b>Country : </b>${feature.properties.country}<br>
+            <b>Income Group : </b>${feature.properties.income_group}<br>
+            <b>FC Year : </b>${feature.properties.fc_year}<br>
+            <b>Status : </b>${feature.properties.ppi_status}<br>
+            <b>Primary Sector : </b>${feature.properties.sector}<br>
+            <b>Sub Sector : </b>${feature.properties.subsector}<br>
+            <b>Problem : </b>${feature.properties.reason_for_delay}<br>
+            <b>Type of PPI : </b>${feature.properties.type_of_ppi}<br>
+            <b>See also : </b>${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
             </p>
         </p>
         `
-
-    // <button id=seealso onclick=addLayerToMap(${feature.properties.project_name_wb})>See also</button><br>
-
 
     layer.bindPopup(popupText, {
         closeButton: true,
@@ -331,6 +310,7 @@ function geoJson_pointToLayer(feature, latlng, layer) {
         icon: awesomemark,
     });
     
+    console.log(marker)
     return marker;
 };
 
@@ -392,23 +372,24 @@ function subsector_to_icon(subsector) {
 }
 
 // prohibit dragging when mouse is over the filterbar
-function set_filter_touch_options(){
-    $('#toolbar').on("mouseover", function () {
-        mymap.touchZoom.disable()
-        mymap.dragging.disable();
-        mymap.doubleClickZoom.disable();
-        mymap.scrollWheelZoom.disable();
-        mymap.keyboard.disable();
-        mymap.boxZoom.disable();
-    }).on("mouseout", function () {
-        mymap.dragging.enable();
-        mymap.doubleClickZoom.enable();
-        mymap.scrollWheelZoom.enable();
-        mymap.keyboard.enable();
-        mymap.boxZoom.enable();
-    });
+// @deprecated
+// function set_filter_touch_options(){
+//     $('#toolbar').on("mouseover", function () {
+//         mymap.touchZoom.disable()
+//         mymap.dragging.disable();
+//         mymap.doubleClickZoom.disable();
+//         mymap.scrollWheelZoom.disable();
+//         mymap.keyboard.disable();
+//         mymap.boxZoom.disable();
+//     }).on("mouseout", function () {
+//         mymap.dragging.enable();
+//         mymap.doubleClickZoom.enable();
+//         mymap.scrollWheelZoom.enable();
+//         mymap.keyboard.enable();
+//         mymap.boxZoom.enable();
+//     });
 
-}
+// }
 //////////////
 /// filter ///
 //////////////

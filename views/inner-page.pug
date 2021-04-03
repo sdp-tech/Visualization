@@ -16,12 +16,15 @@ head
   link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
   link(href='assets/vendor/venobox/venobox.css' rel='stylesheet')
   link(href='assets/vendor/select2/dist/css/select2.min.css' rel='stylesheet')
+  // Template Main CSS File
+  link(href='assets/css/style.css' rel='stylesheet')
+  link(href='assets/css/mapstyle.css' rel='stylesheet')
   // search bar
   link(rel='stylesheet' href='assets/css/leaflet-search.css')
   script(type='text/javascript' src='assets/js/leaflet-search.js')
   // leaflet fontawesome icon
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' integrity='sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==' crossorigin='anonymous')
   link(rel='stylesheet' href='assets/css/leaflet.awesome-markers.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' integrity='sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==' crossorigin='anonymous')
   // filtering button
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css')
   script(src='https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js')
@@ -36,6 +39,7 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css')
   // main style
   link(rel='stylesheet' href='assets/css/style.css')
+  link(rel='stylesheet' href='assets/css/mapstyle.css')
   link(rel='stylesheet' href='assets/css/float-sidebar.css')
   
 
@@ -71,9 +75,6 @@ header.header
     //- .header__search
     //-   input.header__input(type='search' placeholder='Search')
     //-   i.bx.bx-search.header__icon
-
-
-  
     nav.nav-menu.d-none.d-lg-block
       ul
         li.active
@@ -88,6 +89,9 @@ header.header
           a(href='../#team') SDP Team
         li
           a(href='../#contact') Contact Us
+
+    .header__toggle
+      i#header-toggle.bx.bx-menu
 // ========== NAV ==========
 #navbar.nav
   nav.nav__container
@@ -123,8 +127,7 @@ header.header
 
 // ========== CONTENTS ==========
 main#main
-    section.mapsection
-        #mapwrap.mapcontainer.wrapper
+  #mapwrap
 
 // ========== MAIN JS ==========
 script(src='assets/vendor/responsive-sidebar-submenu-main/assets/js/main.js')
@@ -152,6 +155,6 @@ script(src='assets/js/loading.js')
 script(src='assets/js/main.js')
 script(src='assets/js/tutorial.js')
 // personal file
-script(type='text/javascript' src='assets/js/map.js')
+script(type='text/javascript' src='assets/js/newmap.js')
 // Plugin JavaScript file
 script(src='https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js')
