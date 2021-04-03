@@ -195,16 +195,16 @@ function load_map(json, customOption) {
 
         // legend box
         var legend = L.control({position: 'bottomright'});
-        legend.onAdd = function(map) {
+        legend.onAdd = function(mymap) {
             var div = L.DomUtil.create("div", "legend");
             div.innerHTML += "<h4>Sector</h4>";
-            div.innerHTML += '<i style="background: green"></i><span>Energy</span><br>';
             div.innerHTML += '<i style="background: purple"></i><span>ICT</span><br>';
-            div.innerHTML += '<i style="background: orange"></i><span>Municipal Solid Waste</span><br>';
             div.innerHTML += '<i style="background: blue"></i><span>Transport</span><br>';
+            div.innerHTML += '<i style="background: green"></i><span>Energy</span><br>';
             div.innerHTML += '<i style="background: gray"></i><span>Water and sewerage</span><br>';            
+            div.innerHTML += '<i style="background: orange"></i><span>Municipal Solid Waste</span><br>';
             return div;
-          };
+        };
           
         legend.addTo(mymap);
 
