@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700");
 .timeline-list {
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.5;
 }
 
 .timeline-list .timeline-title {
   font-size: 2rem;
   text-align: left;
+  padding-bottom: 20px;
 }
 
 .timeline-list .timeline-title, .timeline-list h1, .timeline-list h2, .timeline-list h3, .timeline-list h4, .timeline-list h5, .timeline-list h6 {
@@ -14,13 +15,14 @@
 }
 
 .timeline-list h1 {
-  font-size: 1.3rem;
+  color: #772e25;
+  font-size: 1.7rem;
   margin-bottom: .5em;
 }
 
 .timeline-list p, .timeline-list .timeline-description {
   text-align: start;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: .8rem;
 }
 
@@ -30,17 +32,11 @@
   list-style-type: circle;
 }
 
-.container {
-  max-width: 1024px;
-  width: 90%;
-  margin: 0 auto;
-}
-
 .timeline-item {
   padding: 3em 2em 2em;
   position: relative;
   color: rgba(0, 0, 0, 0.7);
-  border-left: 2px solid rgba(0, 0, 0, 0.3);
+  border-left: 2px solid #772e25;
 }
 
 .timeline-item p {
@@ -68,13 +64,13 @@
   left: -7px;
   border-radius: 10px;
   content: '';
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  border: 2px solid #772e25;
   background: white;
 }
 
 .timeline-item:last-child {
-  -o-border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0)) 1 100%;
-     border-image: -webkit-gradient(linear, left top, left bottom, color-stop(60%, rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0))) 1 100%;
-     border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0)) 1 100%;
+  -o-border-image: linear-gradient(to bottom, #772e25 60%, rgba(119, 46, 37, 0)) 1 100%;
+     border-image: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #772e25), to(rgba(119, 46, 37, 0))) 1 100%;
+     border-image: linear-gradient(to bottom, #772e25 60%, rgba(119, 46, 37, 0)) 1 100%;
 }
 /*# sourceMappingURL=timeline.css.map */
