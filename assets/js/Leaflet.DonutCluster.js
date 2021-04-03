@@ -151,7 +151,6 @@
                     var t = e.target,
                         val = readable(d.value);
                     t.setAttribute('stroke-width', weight + 5);
-                    legend.setAttribute('class', 'legend');
                     div.zIndex = div.parentNode.style.zIndex;
                     div.parentNode.style.zIndex = 100000;
                     text.innerHTML = val;
