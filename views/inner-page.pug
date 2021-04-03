@@ -16,6 +16,9 @@ head
   link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
   link(href='assets/vendor/venobox/venobox.css' rel='stylesheet')
   link(href='assets/vendor/select2/dist/css/select2.min.css' rel='stylesheet')
+  // Template Main CSS File
+  link(href='assets/css/style.css' rel='stylesheet')
+  link(href='assets/css/mapstyle.css' rel='stylesheet')
   // search bar
   link(rel='stylesheet' href='assets/css/leaflet-search.css')
   script(type='text/javascript' src='assets/js/leaflet-search.js')
@@ -36,6 +39,7 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css')
   // main style
   link(rel='stylesheet' href='assets/css/style.css')
+  link(rel='stylesheet' href='assets/css/mapstyle.css')
   link(rel='stylesheet' href='assets/css/float-sidebar.css')
   
 
@@ -66,9 +70,6 @@ header.header
   .header__container
     img.header__img(src='assets/img/logo.png' alt='')
     h1a.header__logo(href='index') SDP Project MaPPPing
-    .header__search
-      input.header__input(type='search' placeholder='Search')
-      i.bx.bx-search.header__icon
     .header__toggle
       i#header-toggle.bx.bx-menu
 // ========== NAV ==========
@@ -102,8 +103,7 @@ header.header
       span.nav__name Home
 // ========== CONTENTS ==========
 main#main
-    section.mapsection
-        #mapwrap.mapcontainer.wrapper
+  #mapwrap
 
 // ========== MAIN JS ==========
 script(src='assets/vendor/responsive-sidebar-submenu-main/assets/js/main.js')
