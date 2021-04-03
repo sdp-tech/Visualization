@@ -111,6 +111,9 @@ class dist():
         
         self.distance.columns = self._id.tolist()
         self.distance.index = self._id.tolist()
+
+        #자기 자신 제외하기 위해 대각열 100 수치 부여
+        np.fill_diagonal(self.distance.values, 100)
         
         # https://www.javaer101.com/article/4405413.html
         cols = self.distance.columns.to_numpy()
