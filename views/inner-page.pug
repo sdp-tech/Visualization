@@ -76,7 +76,7 @@ header.header
 #navbar.nav
   nav.nav__container
     div
-      a.nav__link.nav__logo(href='#')
+      a.nav__link.nav__logo(href='../#hero')
         i.bx.bxs-disc.nav__icon
         span.nav__logo-name Sustainable Development Program
       .nav__list
@@ -98,9 +98,31 @@ header.header
           a.nav__link(href='#')
             i.bx.bx-tag-alt.nav__icon
             span.nav__name Income Group
-    a.nav__link.active(href='index')
-      i.bx.bx-home.nav__icon
-      span.nav__name Home
+    //- a.nav__link.active(href='index')
+    //-   i.bx.bx-home.nav__icon
+    //-   span.nav__name Home
+
+    #nav_index
+      .nav__dropdown
+        #nav_menu_button
+          span.iconify(data-icon='eva:menu-fill' data-inline='false')
+          span  MENU
+        .nav__dropdown-collapse
+          .nav__dropdown-content
+              ul.navbar-nav
+                li.nav-item.active
+                  a(href='../#hero') Home
+                li
+                  a(href='../#about') Project MaPPPing
+                li
+                  a(href='../#Insight') Insight
+                li
+                  a(href='../#Methodology') Methodology
+                li
+                  a(href='../#team') SDP Team
+                li
+                  a(href='../#contact') Contact Us
+
 // ========== CONTENTS ==========
 main#main
     section.mapsection
