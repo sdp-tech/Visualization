@@ -310,7 +310,6 @@ function geoJson_pointToLayer(feature, latlng, layer) {
         icon: awesomemark,
     });
     
-    console.log(marker)
     return marker;
 };
 

@@ -1234,15 +1234,6 @@ section#Insight {
     opacity: 1;
   }
 }
-.fa {
-  font-family: FontAwesome;
-}
-
-.fas {
-  width: 100%;
-  height: 100%;
-}
-
 
 .dropdown-btn {
   padding: 6px 8px 6px 16px;
