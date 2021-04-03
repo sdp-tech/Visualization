@@ -195,6 +195,7 @@ function load_map(json, customOption) {
 
         // Searchbox
         mymap.addControl(new L.Control.Search({
+            container: 'header__search',
             position: 'topright',
             layer: markers,
             initial: false,

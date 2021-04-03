@@ -98,7 +98,7 @@ img {
   display: none;
 }
 
-.header__search {
+.leaflet-control-search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -107,29 +107,29 @@ img {
   border-radius: .25rem;
 }
 
-.header__input {
+.search-input {
   width: 100%;
   border: none;
   outline: none;
   background-color: var(--first-color-light);
 }
 
-.header__input::-webkit-input-placeholder {
+.search-input::-webkit-input-placeholder {
   font-family: var(--body-font);
   color: var(--text-color);
 }
 
-.header__input:-ms-input-placeholder {
+.search-input::-ms-input-placeholder {
   font-family: var(--body-font);
   color: var(--text-color);
 }
 
-.header__input::-ms-input-placeholder {
+.search-input::-ms-input-placeholder {
   font-family: var(--body-font);
   color: var(--text-color);
 }
 
-.header__input::placeholder {
+.search-input::placeholder {
   font-family: var(--body-font);
   color: var(--text-color);
 }
