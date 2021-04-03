@@ -5,12 +5,13 @@
 // ----------------  THE FONTS
 
 .timeline-list{
-    font-size: 14px;
+    font-size: 20px;
 	line-height: 1.5;
     
     .timeline-title{
         font-size: 2rem;
         text-align: left;
+        padding-bottom: 20px;
     }
 
     .timeline-title, h1, h2, h3, h4, h5, h6{
@@ -18,13 +19,14 @@
     }
     
     h1 {
-        font-size: 1.3rem;
+        color:#772e25;
+        font-size: 1.7rem;
         margin-bottom: .5em;
     }
     
     p, .timeline-description{
         text-align:start;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Barlow Condensed', sans-serif;
         font-size: .8rem;
     }
 
@@ -37,17 +39,9 @@
 }
 
 
-// ----------------  LAYOUT
-
-.container {
-	max-width: 1024px;
-	width: 90%;
-	margin: 0 auto;
-}
-
 // ----------------  THE FONTS
 
-$border-color: rgba(black, .3);
+$border-color: #772e25;
 
 .timeline-item {
 	padding: 3em 2em 2em;
