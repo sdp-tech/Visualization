@@ -21,6 +21,8 @@ head
   link(href='assets/vendor/aos/aos.css' rel='stylesheet')
   // Template Main CSS File
   link(href='assets/css/style.css' rel='stylesheet')
+  link(href='assets/css/timeline.css' rel='stylesheet')
+
   //
     =======================================================
     * Template Name: Squadfree - v2.2.0
@@ -680,6 +682,33 @@ main#main
         p
           | Sustainable Development Program(SDP) is the first global program on sustainability established under the leadership of undergraduate students.
           | Under the framework of sustainable development, we are continuing our activities on various topics every semester, and currently we are focusing on infrastructure and PPP.
+      .team-intro(data-aos='fade-up' data-aos-delay='200')
+        .flex-item.col-xl-12.align-items-stretch
+          .info-box.timeline-list
+            | Project MaPPPing History
+            .timeline-item(date-is='2018-12')
+              h1 Phase 1 Data Collection
+              h3 “The World Bank 2019 PPI Report” project
+              p
+                | SDP was named 'Data Reviewer and Research Assistant' of 'The World Bank Group Singapore PPI Team' for the first time as an undergraduate organization and began participating in the "The World Bank 2019 PPI Report" project. 
+            .timeline-item(date-is='2019-xx')
+              p
+                | SDP conducted open-source tracking and data reviews for all private partitioned infrastructure (PPI) deals in developing countries in 2019.
+            .timeline-item(date-is='2020-xx')
+              h1 Phase 2 Data Analysis
+              h3 “PPI Deal Tracking” project
+              p
+                | SDP continues to work with World Bank through the "PPI Deal Tracking" project.
+                ul
+                  li To meet your needs, &apos;(PPP Infrastructure) Failure Map&apos; provides a filter function that identifies infrastructure projects by various criteria such as region, sector, and financial closure (FC) year, etc. This feature allows users to see the infrastructure projects they searched for visualized on the web page&apos;s map.
+            .timeline-item(date-is='2021-xx')
+              h1 Phase 3 Data Visualization
+              h3 "Project MaPPPing"
+              p
+                | We are developing a web page that will help us derive insights based on SDP's own infrastructure database built through Phases 1 and 2. 
+                ul.timeline-description
+                  li In response to the pandemic in 2020, we collected, classified, and databased PPI Deal affected by Covid-19.
+                  li Based on this database, SDP conducted casework on PPI Deal, using artificial intelligence to extract features of PPI Deal.
       .team-intro(data-aos='fade-up' data-aos-delay='200')
         .flex-item.col-xl-6.align-items-stretch
           .info-box
