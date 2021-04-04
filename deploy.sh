@@ -1,18 +1,17 @@
 #!/bin/bash
-##### On Server, this script is placed "outside" from the Visualizaition folder
 
 echo "Kill all the running PM2 actions"
-pm2 kill
-
-echo "Jump to app folder"
-cd ./Visualization
+sudo pm2 kill
 
 echo "Update app from Git"
-git pull origin dev
+sudo pull origin dev
+
+echo "insatll sass package"
+sudo npm i -g sass
 
 echo "Install app dependencies"
-rm -rf node_modules package-lock.json
-npm install
+sudo rm -rf node_modules package-lock.json
+sudo npm install
 
 echo "Run new PM2 action"
-pm2 start ecosystem.config.js                        
+pm2 start ecosystem.config.js
