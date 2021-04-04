@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "assert": "^2.0.0",
+    "concurrently": "^6.0.0",
     "cors": "^2.8.5",
     "dc": "^4.2.3",
     "express": "^4.17.1",
@@ -11,6 +12,7 @@
     "pm2": "^4.5.4",
     "pug": "^3.0.0",
     "request": "^2.88.2",
+    "sass": "^1.32.8",
     "tailwindcss": "^2.0.4"
   },
   "name": "visualization",
@@ -19,7 +21,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:server": "nodemon index.js"
+    "dev" : "concurrently --kill-others \"npm run watch:sass\" \"npm run watch:js_pug\"",
+    "watch:js_pug" : "nodemon -e pug -e css -e js --watch ./ index.js ", 
+    "watch:sass": "sass --watch assets/scss:assets/css"
   },
   "repository": {
     "type": "git",
