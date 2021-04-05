@@ -17,10 +17,11 @@ head
   link(href='assets/vendor/owl.carousel/assets/owl.carousel.min.css' rel='stylesheet')
   link(rel='stylesheet' href='assets/vendor/owl.carousel/assets/owl.theme.default.css')
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css')
-
+  link(href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet")
   link(href='assets/vendor/aos/aos.css' rel='stylesheet')
   // Template Main CSS File
   link(href='assets/css/style.css' rel='stylesheet')
+  link(href='assets/css/about.css' rel='stylesheet')
   link(href='assets/css/timeline.css' rel='stylesheet')
 
   //
@@ -77,69 +78,47 @@ section#hero
 main#main
   // ======= About Section =======
   section#about.about
-    .container
-      .row.no-gutters
-        .content.col-xl-5.d-flex.align-items-stretch(data-aos='fade-up')
-          .content
-            h3 What is Project MaPPPing &apos;Failure Map&apos;?
-            p
-              | “Project mapping” aims to collect, visualize, and provide data about worldwide PPP projects that were failed or canceled. “Failure map” is the map that demonstrates the data with interactive features such as filter service, AI suggestion tools, and insights.
-            a.about-btn(href='#team')
-              | SDP Team
-              i.bx.bx-chevron-right
-        .col-xl-7.d-flex.align-items-stretch
-          .icon-boxes.d-flex.flex-column.justify-content-center
-            .row
-              .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='300')
-                i.bx.bx-user-pin
-                h4 Why infrastructure?
-                p
-                  | We believe that infrastructure development is indispensable from sustainable development. It helps achieve SDG Goal 9: “Industry, Innovation, and Infrastructure” as it can unleash competitive economic forces and generate employment. Also, it contributes to attain SDG Goal 11: “Sustainable Cities and Communities” by not only creating career and business opportunities but improving urban planning and management in participatory ways. Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.
-              .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='400')
-                i.bx.bxl-product-hunt
-                h4 Why PPP?
-                p
-                  | Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure.  Infrastructure projects require a great amount of capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding from the private sectors which makes many infrastructure projects more achievable. Also, utilizing private sector technology and innovation provides better public services with improved efficiency. Meanwhile, the government's overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs
-              .col-md-6.icon-box(data-aos='fade-up' data-aos-delay='600')
-                i.bx.bx-group
-                h4 Users who can benefit from our map:
-                p
-                  ul(style="list-style-type:none; padding-left: 0;")
-                    li Project Developers
-                    li Project Investors
-                    li Project Asset Managers
-                    li Government Agencies
-                    li Researchers
-                    li And more
-              br
-              br
-              ul(style='list-style-type: circle; padding:30px;' data-aos='fade-up' data-aos-delay='600')
-                li
-                  p
-                    | To know more about how to use the map, please refer to&nbsp;
-                    strong &lsquo;Tutorial&rsquo;
-                    |  above the map.
-                li
-                  p
-                    | To know more about terms and standards used in the map, please refer to 
-                    strong &apos;Methodology&apos;.
-                li
-                  p
-                    | To maximize your experience, please refer to 
-                    strong &lsquo;Insight&rsquo;
-                    |  and start developing your own!
-                li
-                  p
-                    | To know more about us, please refer to 
-                    strong &apos;SDP Team&apos;
-                    | &nbsp;and&nbsp;
-                    strong &apos;Contact Us&apos;.
+    .container.px-10
+      .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
+        br
+        h2 Project MaPPPing
+        p
 
+        - var datas = {'What is Project MaPPPing \'Failure Map\'?': '\"Project mapping\" aims to collect, visualize, and provide data about worldwide PPP projects that were failed or canceled. \"Failure map\" is the map that demonstrates the data with interactive features such as filter service, AI suggestion tools, and insights.', 'Why Infrastructure?':'We believe that infrastructure development is indispensable from sustainable development. It helps achieve SDG Goal 9 \:\'Industry, Innovation, and Infrastructure\' as it can unleash competitive economic forces and generate employment. Also, it contributes to attain SDG Goal 11: \“Sustainable Cities and Communities\" by not only creating career and business opportunities but improving urban planning and management in participatory ways. Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.', 'Why PPP?':'Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure.  Infrastructure projects require a great amount of capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding from the private sectors which makes many infrastructure projects more achievable. Also, utilizing private sector technology and innovation provides better public services with improved efficiency. Meanwhile, the government\'s overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs'}
+          div#scene.flex.flex-wrap
+            #left-zone
+              ul.list
+                each val, index in datas
+                  li.item
+                      if index == 'What is Project MaPPPing \'Failure Map\'?'
+                        input(type="radio", id='radio_' + val name="basic_carousel" value=val checked)
+                      else
+                        input(type="radio", id='radio_' + val name="basic_carousel" value=val) 
+                      
+                      label(for='radio_' + val, class='label_' + index)
+                        | #{index}
+                      div(class='content content_' + index)
+                        p
+                          | #{val}
+            #middle-border
+            #right-zone
+
+      .row.no-gutters
+        .flex.flex-row.flex-wrap
+          .icon-boxes
+            .icon-box.py-2(data-aos='fade-up' data-aos-delay='400')
+              i.bx.bx-layer-plus
+              //- h4 Failure Map Provides You : 
+
+              //- .flex.flex-row.px-8.flex-wrap(data-aos='fade-up' data-aos-delay='400')
+              //-   .container.mx-auto.flex-auto 122222222
+              //-   .container.mx-auto.flex-auto 2123123123123
+              //-   .container.mx-auto.flex-auto 1123125423523
         // End .content
   // End About Section
   // ======= Insight Section =======
   section#Insight.insight-box
-    .container
+    .container.px-10
       .section-title(data-aos='fade-in' data-aos-delay='100')
         br
         h2 Insight
@@ -279,7 +258,7 @@ main#main
 
   // ======= Methodology Section =======
   section#Methodology.Methodology
-    .container
+    .container.px-10
       .section-title(data-aos='fade-up' data-aos-delay='100')
         br
         h2 Methodology
@@ -296,7 +275,7 @@ main#main
             br
             p
               | Countries are organized based on their geographical location
-              ul
+              ul.list-disc.list-inside.bg-rose-200
                 li East Asia and Pacific
                 li Europe and Central Asia
                 li Latin America and the Caribbean
@@ -309,7 +288,6 @@ main#main
           // button 2
           button.accordion Sector
           .panel
-            p
             table
               tbody
                 tr
@@ -421,7 +399,7 @@ main#main
             p(style='margin-top:10px')
               span(style='font-weight: 400;')
                 | According to the World Bank country classification by income level, SDP Project MaPPPing assigns the world&apos;s economy to four income groups; low income, lower-middle income, upper-middle income, and high income groups. The classifications are based on GNI per capita in USD.
-              ul
+              ul.list-disc.list-inside.bg-rose-200
                 li(style='font-weight: 400;')
                   strong Low income group:
                   span(style='font-weight: 400;') $1,035 or Less
@@ -540,9 +518,9 @@ main#main
             p
       .row.methodology-container(data-aos='fade-up')
   // End Methodology Section
-  // ======= Testimonials Section =======
-  section#team.testimonials.section-bg
-    .container
+  // ======= Team Section =======
+  section#team.section-bg
+    .container.px-10
       .section-title(data-aos='fade-in' data-aos-delay='100')
         br
         h2 SDP Team
@@ -556,7 +534,7 @@ main#main
               | Project MaPPPing History
             .timeline-item(date-is='2018-12')
               h1 Phase 1 Data Collection
-              h3 “The World Bank 2019 PPI Report” project
+              h3 “The World Bank 2019 PPI Report" project
               p
                 | SDP was named 'Data Reviewer and Research Assistant' of 'The World Bank Group Singapore PPI Team' for the first time as an undergraduate organization and began participating in the "The World Bank 2019 PPI Report" project. 
             .timeline-item(date-is='2019-xx')
@@ -564,7 +542,7 @@ main#main
                 | SDP conducted open-source tracking and data reviews for all private partitioned infrastructure (PPI) deals in developing countries in 2019.
             .timeline-item(date-is='2020-xx')
               h1 Phase 2 Data Analysis
-              h3 “PPI Deal Tracking” project
+              h3 “PPI Deal Tracking" project
               p
                 | SDP continues to work with World Bank through the "PPI Deal Tracking" project.
                 ul.timeline-description
@@ -604,7 +582,7 @@ main#main
   // End Testimonials Section
   // ======= Contact Section =======
   section#contact.contact
-    .container
+    .container.px-10
       .section-title(data-aos='fade-in' data-aos-delay='100')
         br
         h2 Contact Us
@@ -640,7 +618,7 @@ main#main
 // ======= Footer =======
 footer#footer
   .footer-top
-    .container
+    .container.px-10
       .row
         .col-lg-4.col-md-6
           .footer-info(data-aos='fade-up' data-aos-delay='50')

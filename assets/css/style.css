@@ -1355,8 +1355,11 @@ td {
   vertical-align: middle;
   border-bottom: 1px solid #ddd;
 }
-
+.panel p{
+  padding: 10px;
+}
 .panel table p {
+  padding: initial;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
