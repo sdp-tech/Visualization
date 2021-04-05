@@ -51,6 +51,13 @@
   user-select: none;
 }
 
+@media (max-width: 768px) {
+  .about #scene {
+    min-width: 300px;
+    min-height: 300px;
+  }
+}
+
 .about #scene {
   display: -webkit-box;
   display: -ms-flexbox;
