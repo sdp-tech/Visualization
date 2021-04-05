@@ -79,3 +79,28 @@ And of course SDP FailureMap itself is open source with a [public repository](ht
    [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
    [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
    [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+
+# How to run server
+
+1. install packages
+```
+npm i
+```
+
+2. install sass globally to use sass complier
+```
+npm i -g sass
+```
+
+3. run server 
+  - development
+    ```
+    npm run dev
+    ```
+  - deploy sever
+
+    - we don't need to compile scss, Run index file only
+    ```
+    pm2 start ecosystem.config.js
+    ```
+    
