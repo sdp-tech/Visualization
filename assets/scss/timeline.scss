@@ -1,0 +1,88 @@
+// ----------------  THE BASICS
+
+@import url('https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700');
+
+// ----------------  THE FONTS
+
+.timeline-list{
+    font-size: 20px;
+	line-height: 1.5;
+    
+    .timeline-title{
+        font-size: 2rem;
+        text-align: left;
+        padding-bottom: 20px;
+    }
+
+    .timeline-title, h1, h2, h3, h4, h5, h6{
+        font-family: 'Oswald', sans-serif;
+    }
+    
+    h1 {
+        color:#c44536;
+        font-size: 1.7rem;
+        margin-bottom: .5em;
+    }
+    
+    p, .timeline-description{
+        text-align:start;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: .8rem;
+    }
+
+    ul.timeline-description{
+        text-align:justify;
+        text-indent: 0px;
+        list-style-type: circle;
+    }
+
+}
+
+
+// ----------------  THE FONTS
+
+$border-color: #772e25;
+
+.timeline-item {
+	padding: 3em 2em 2em;
+	position: relative;
+	color: rgba(black, .7);
+	border-left: 2px solid $border-color;
+	
+	p {
+		font-size: 1rem;
+	}
+	
+	&::before {
+		content: attr(date-is);
+		position: absolute;
+		left: 2em;
+		font-weight: bold;
+		top: 1em;
+		display: block;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 700;
+		font-size: .785rem;
+	}
+
+	&::after {
+		width: 10px;
+		height: 10px;
+		display: block;
+		top: 1em;
+		position: absolute;
+		left: -7px;
+		border-radius: 10px;
+		content: '';
+		border: 2px solid $border-color;
+		background: white;
+	}
+
+	&:last-child {
+		border-image: linear-gradient(
+			to bottom,
+			$border-color 30%,
+			rgba($border-color, 0)) 1 70%
+		;
+	}
+}
