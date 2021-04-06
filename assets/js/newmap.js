@@ -144,7 +144,7 @@ function data_process(json) {
         })
 
         // add to dictionary
-        idnameDict[element._id]=element.properties.project_name_wb;
+        idnameDict[element._id]=element.properties.project_name;
     });
 
     return json;
@@ -269,7 +269,7 @@ function addPopup(feature, layer) {
 
     var popupText =
         `<p id=p_popup_detail>
-            <strong id=p_popup-title> ${feature.properties.project_name_wb}</strong><br>
+            <strong id=p_popup-title> ${feature.properties.project_name}</strong><br>
             <b>Country : </b>${feature.properties.country}<br>
             <b>Income Group : </b>${feature.properties.income_group}<br>
             <b>FC Year : </b>${feature.properties.fc_year}<br>
@@ -321,7 +321,7 @@ function geoJson_pointToLayer(feature, latlng, layer) {
 
     const marker = new L.Marker(latlng, {
         // title is not the visible one. only for clustering
-        title: feature.properties.project_name_wb,
+        title: feature.properties.project_name,
         sector : sector,
         icon: awesomemark,
     });
