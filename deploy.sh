@@ -4,6 +4,8 @@ echo "Kill all the running PM2 actions"
 sudo pm2 kill
 
 echo "Update app from Git"
+sudo git fetch --all
+sudo git reset --hard origin/dev
 sudo git pull origin dev
 
 echo "insatll sass package"
