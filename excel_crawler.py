@@ -12,7 +12,6 @@ from geojson import Feature, Point, FeatureCollection
 
 # SDP_FAILURE MAP point class
 class SDP_FAILURE(object):
-    s = set()
     def __init__(self, country, project_name_wb, project_name_common, sector, subsector,
                  segment, crossborder, reason_for_delay, 
                  investment, project_bank, delayed_extent, fc_year, fc_year_reason, ppi_status,
@@ -53,12 +52,6 @@ class SDP_FAILURE(object):
                 self.properties['project_name'] = self.properties['project_name_wb']  
             else :
                 self.properties['project_name'] = self.properties['project_name_common']
-                        
-            if self.properties['project_name']  in SDP_FAILURE.s :
-                print(self.properties['project_name'])
-            else :
-                SDP_FAILURE.s.add(self.properties['project_name'])
-
 
         else:
             self.delete = True
