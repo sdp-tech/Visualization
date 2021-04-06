@@ -12,9 +12,10 @@ from geojson import Feature, Point, FeatureCollection
 
 # SDP_FAILURE MAP point class
 class SDP_FAILURE(object):
-    def __init__(self, country, geographical, income_group, project_name_wb, project_name_common, sector, subsector,
+    s = set()
+    def __init__(self, country, project_name_wb, project_name_common, sector, subsector,
                  segment, crossborder, reason_for_delay, 
-                 investment, project_bank, delayed_extent, updated_date, fc_year, fc_year_reason, ppi_status,
+                 investment, project_bank, delayed_extent, fc_year, fc_year_reason, ppi_status,
                  affected_stage, type_of_ppi, 
                  urls, resumed, resume_url, longitude, location, latitude):
         
@@ -26,8 +27,6 @@ class SDP_FAILURE(object):
                             }
             self.properties = {
                 "country": country,
-                "geographical": geographical,
-                "income_group": income_group,
                 "project_name_wb": project_name_wb,
                 "project_name_common": project_name_common,
                 "sector": sector,
@@ -38,17 +37,29 @@ class SDP_FAILURE(object):
                 "investment": investment,
                 "project_bank": project_bank,
                 "delayed_extent": delayed_extent,
-                "updated_date": updated_date,
                 "fc_year": fc_year,
                 "fc_year_reason": fc_year_reason,
                 "ppi_status": ppi_status,
                 "affected_stage": affected_stage,
                 "type_of_ppi": type_of_ppi,
-                "urls": SDP_FAILURE.parseUrls(urls),
+                "urls": SDP_FAILURE.parse_urls(urls),
                 "resumed": resumed,
                 "resume_url": resume_url,
                 "location": location,
             }
+
+            # set project name
+            if self.properties['project_name_wb'] != 'N/A'  :
+                self.properties['project_name'] = self.properties['project_name_wb']  
+            else :
+                self.properties['project_name'] = self.properties['project_name_common']
+                        
+            if self.properties['project_name']  in SDP_FAILURE.s :
+                print(self.properties['project_name'])
+            else :
+                SDP_FAILURE.s.add(self.properties['project_name'])
+
+
         else:
             self.delete = True
 
@@ -59,7 +70,7 @@ class SDP_FAILURE(object):
 
     @staticmethod
     # use first matched url only
-    def parseUrls(urls) :
+    def parse_urls(urls) :
         if type(urls) == str :
             # consider both case - http | https
             indices = [http.start() for http in re.finditer('http', urls)]
@@ -78,94 +89,59 @@ def get_documents(
     visualization = client[db_name]
 
     collection_map = visualization[collection_name]
-    collection_map.create_index([("project_name_wb", pymongo.TEXT)], unique = True)
+    # project_name => unique index 
+    # projcet_name is defined using (project_name_wb / project_name_common) by given order
+    collection_map.create_index("properties.project_name", unique = True)
 
     return collection_map
 
 # ================ insert items ====================
 def insert_items() : 
-    docs = get_documents()
-    csv_test = pd.read_csv('./fail_map_data.csv')
     
-    try:
-        for line in csv_test.loc:
-            sdp_failure = SDP_FAILURE(
-                country=line["Country"],
-                geographical=line["Geographical"],
-                income_group=line["Income Group"],
-                project_name_wb=line["Project name_WB"],
-                project_name_common=line["Project name_common"],
-                sector=line["Sector"],
-                subsector=line["SubSector"],
-                segment=line["Segment"],
-                crossborder=line["Crossborder"],
-                reason_for_delay=line["Reason for delay"],
-                investment=line["Investment Size"],
-                project_bank=line["Project Banks"],
-                delayed_extent=line["Delayed Extent"],
-                updated_date=line["Updated Date"],
-                fc_year=line["FC Year"],
-                fc_year_reason=line["FC Year reason"],
-                ppi_status=line["Status"],
-                affected_stage=line["Affected Stage"],
-                type_of_ppi=line["Type of PPP"],
-                urls=line["URLs"],
-                resumed=line["Resumed"],
-                resume_url=line["Resume URL"],
-                longitude=line["Longitude"],
-                location=line["location"],
-                latitude=line["Latitude"]
-            )
+    docs = get_documents()
+    map_excel = pd.read_excel('./Failure Map_Data.xlsx')
+    map_excel = map_excel.fillna('N/A')
 
-            if hasattr(sdp_failure, 'delete'):
-                del sdp_failure
-            # insert item to db
-            else:
-                x = docs.find_one({
-                    "properties.project_name_wb" : sdp_failure.properties['project_name_wb']
-                })
+    for _, line in map_excel.iterrows():
+        sdp_failure = SDP_FAILURE(
+            country=line["Country"],
+            project_name_wb=line["Project name_WB"],
+            project_name_common=line["Project name_common"],
+            sector=line["Sector"],
+            subsector=line["SubSector"],
+            segment=line["Segment"],
+            crossborder=line["Crossborder"],
+            reason_for_delay=line["failure 증거 (기사 속 키워드) "],
+            investment=line["Investment Size"],
+            project_bank=line["Project Banks"],
+            delayed_extent=line["Delayed Extent"],
+            fc_year=line["FC Year"],
+            fc_year_reason=line["FC Year 증거"],
+            ppi_status=line["Failure History"],
+            affected_stage=line["Affected Stage"],
+            type_of_ppi=line["Type of PPP"],
+            urls=line["URLs"],
+            resumed=line["Resumed"],
+            resume_url=line["Resume URL"],
+            longitude=line["Longitude"],
+            location=line["위치 기준"],
+            latitude=line["Latitude"]
+        )
 
-                if x == None : 
-                    docs.insert_one({
+        if hasattr(sdp_failure, 'delete'):
+            del sdp_failure
+
+        # insert item to db
+        else:
+            try : 
+                docs.insert_one(
+                    {
                         "type" : sdp_failure.type,
                         "geometry" : sdp_failure.geometry,
                         "properties" : sdp_failure.properties
-                    })
-
-    except (KeyError, NameError) as e:
-        print("error : ", e)
-
-def update_see_also() :
-
-    docs = get_documents()
-    prefix_url = 'http://54.180.152.150:5000/method?ppi='
-
-    # iter document
-    for doc in docs.find() : 
-        # ex) 'http://54.180.152.150:5000/method?ppi=Hwange Thermal Power Station Expansion'
-        project_name_wb =  doc['properties']['project_name_wb']
-        req_url = prefix_url + project_name_wb
-
-        res = requests.get(req_url)
-        
-        if(res.status_code == 200) :
-            # remove "유사 list"
-            see_also_list = res.text[8:].strip('][').split(', ') 
-            # remove ' in list
-            see_also_list = list(map(lambda x : x.strip("'"), see_also_list))
-
-            query = { 
-                "properties.project_name_wb" : project_name_wb
-                }
-            values = { 
-                "$set": { 
-                    "properties.see_also": see_also_list 
-                } 
-            }
-
-            try :
-                res = docs.update_one(query, values)
+                    }
+                )
             except Exception as e :
                 print(e)
 
-update_see_also()
+insert_items()
