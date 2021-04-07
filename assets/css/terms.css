@@ -103,6 +103,10 @@ section h2 {
     top : 0;
 }
 
+.logo{
+    font-family: "Poppins", sans-serif;
+}
+
 .header .logo {
     display: block;
     color: #fff;
