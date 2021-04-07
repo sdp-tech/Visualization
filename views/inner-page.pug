@@ -71,7 +71,7 @@ header.header
   .header__container
 
     img.header__img(src='assets/img/logo.png' alt='')
-    a.header__logo(href='#') SDP Project MaPPPing
+    a.header__logo(href='../') SDP Project MaPPPing
     //- .header__search
     //-   input.header__input(type='search' placeholder='Search')
     //-   i.bx.bx-search.header__icon
@@ -97,7 +97,7 @@ header.header
 #navbar.nav
   nav.nav__container
     div
-      a.nav__link.nav__logo(href='../#hero')
+      a.nav__link.nav__logo(href='../')
         i.bx.bxs-disc.nav__icon
         span.nav__logo-name Sustainable Development Program
       .nav__list
@@ -106,13 +106,23 @@ header.header
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-map-pin.nav__icon
-              span.nav__name Sector
+              span.nav__name Country
               i.bx.bx-chevron-down.nav__icon.nav__dropdown-icon
             .nav__dropdown-collapse
               .nav__dropdown-content
                 a.nav__dropdown-item(href='#') 여기에
                 a.nav__dropdown-item(href='#') 넣을수
                 a.nav__dropdown-item(href='#') 있는지
+          .nav__dropdown
+            span.nav__name Sector
+          .nav__dropdown
+            span.nav__name FC Year
+          .nav__dropdown
+            span.nav__name Status
+          .nav__dropdown
+            span.nav__name Income Group
+          .nav__dropdown
+            span.nav__name PPI Type
           a.nav__link(href='#')
             i.bx.bx-area.nav__icon
             span.nav__name Status
