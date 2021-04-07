@@ -615,6 +615,16 @@ section {
   color: #848484;
 }
 
+.about-title{
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  color: #2f4d5a;
+  z-index: 2;
+  padding: 20px;
+}
+
 @media (max-width: 1200px) {
   .about .content {
     padding-right: 0;
