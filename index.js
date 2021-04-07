@@ -16,6 +16,8 @@ app.get('/index', (__, res)=>res.render('index'))
 app.get('/inner-page', (__, res)=>res.render('inner-page'))
 app.get('/pinner-page', (__, res)=>res.render('pinner-page'))
 app.get('/m-inner-page', (__, res)=>res.render('m-inner-page'))
+app.get('/terms', (__, res)=>res.render('terms'))
+
 app.get('/apis/update-data', (__, res) => {
   mongodb.getData().then(data=>{cached_json = data});
   return res.redirect('/inner-page')
