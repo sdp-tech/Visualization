@@ -103,18 +103,52 @@ main#main
             #middle-border
             #right-zone
 
-      .row.no-gutters
-        .flex.flex-row.flex-wrap
-          .icon-boxes
-            .icon-box.py-2(data-aos='fade-up' data-aos-delay='400')
-              i.bx.bx-layer-plus
-              //- h4 Failure Map Provides You : 
+      .row.no-gutters.leading-6
+        .flex.icon-boxes.flex-row.flex-wrap.justify-content-center
+          .row
+            .icon-box(data-aos='fade-up' data-aos-delay='0')
+              .about-title Failure Map Provides You:
+          .row.space-x-8
+            .flex-1.icon-box(data-aos='fade-up' data-aos-delay='100')
+              i.bx.bx-shape-polygon.
+              h4 Diverse PPP Records
+              p Failure Map provides you a variety of ‘failed’ PPP deals that were carried out in all countries regardless of their income or size, and of every type of infrastructure projects. Our Map provides PPP projects including power plants, wind farms, roads, water utilities and many more.
+            .flex-1.icon-box(data-aos='fade-up' data-aos-delay='200')
+              i.bx.bx-user
+              h4 Interactive User Experience
+              p Failure Map is an interactive mapping service where the users can actively explore failed PPP deals according to their own interests and desires. Our filtering service enables the users to search for specific projects based on its location, type, status, year and more. Moreover, our specialized AI tool suggests PPP projects that the users might take interests in based on their search results. 
+            .flex-1.icon-box(data-aos='fade-up' data-aos-delay='300')
+              i.bx.bx-data
+              h4 Failure-Specific Data
+              p Failure Map uniquely focuses on recording delayed or canceled data of PPP projects. The specificity of the failure record data will be a great opportunity for users to explore significant insights based on their own interest. 
+              p     
+          .row
+            .icon-box(data-aos='fade-up' data-aos-delay='300')
+              .about-title Users Who Can Benefit from Our Map:
+              ul.text-center
+                li  Project Developers
+                li  Project Investors
+                li  Project Asset Managers
+                li  Government Agencies
+                li  Researchers
+                li  And more&mldr;
+              p
+              | o To learn more about how to use the map, please refer to 
+              strong &lsquo;Tutorial&rsquo;
+              |  above the map.
+              p
+              | o To know more about terms and standards used in the map, please refer to 
+              strong &apos;Methodology&apos;.
+              p
+              | o To maximize your experience, please refer to 
+              strong &lsquo;Insight&rsquo;
+              |  and start developing your own!
+              p
+              | o To know more about us, please refer to 
+              strong &apos;SDP Team&apos;
+              |  and 
+              strong &apos;Contact Us&apos;.
 
-              //- .flex.flex-row.px-8.flex-wrap(data-aos='fade-up' data-aos-delay='400')
-              //-   .container.mx-auto.flex-auto 122222222
-              //-   .container.mx-auto.flex-auto 2123123123123
-              //-   .container.mx-auto.flex-auto 1123125423523
-        // End .content
   // End About Section
   // ======= Insight Section =======
   section#Insight.insight-box
@@ -509,13 +543,21 @@ main#main
           .panel
             p
             p
-              span(style='font-weight: 400;')
-                | World Bank Institute (2012, p. 11): A PPP is &ldquo;a long-term contract between a private party and a government agency, for providing a public asset or service, in which the private party bears significant risk and management responsibility&rdquo;.
+              | A PPP
+              |  is &ldquo;a long-term contract between a private party and a government agency, for providing a public asset or service, in which the private party bears significant risk and management responsibility&rdquo;. 
+              em (World Bank Institute, 2012, p. 11)
+            p Project MaPPPing excludes projects that apply to the following:
+            ol.list-disc.list-inside.bg-rose-200
+              li
+                | Turnkey or Design-Build contracts; PPP originally excludes turnkey contracts as they do not generate the same long-term incentives as PPPs.
+              li
+                | Certain infrastructures that World Bank PPI do not deal with: infrastructures planned solely for social purposes such as schools, hospitals, prisons, agribusiness
+              li
+                | Projects without financial closure: Those projects are not stable enough to be called PPP since the project would not include important processes for the project to be a long-term contract.
+              li
+                | Projects of insignificant magnitude: Projects with small scale would have limited impact on the community.
             p
-              span(style='font-weight: 400;') Obtained from UN-based PPP report ANNEX 1(pg.28): 
-              a(href='https://www.un.org/esa/desa/papers/2016/wp148_2016.pdf')
-                span(style='font-weight: 400;') https://www.un.org/esa/desa/papers/2016/wp148_2016.pdf
-            p
+
       .row.methodology-container(data-aos='fade-up')
   // End Methodology Section
   // ======= Team Section =======
@@ -537,17 +579,17 @@ main#main
               h3 “The World Bank 2019 PPI Report" project
               p
                 | SDP was named 'Data Reviewer and Research Assistant' of 'The World Bank Group Singapore PPI Team' for the first time as an undergraduate organization and began participating in the "The World Bank 2019 PPI Report" project. 
-            .timeline-item(date-is='2019-xx')
+            .timeline-item(date-is='2019')
               p
                 | SDP conducted open-source tracking and data reviews for all private partitioned infrastructure (PPI) deals in developing countries in 2019.
-            .timeline-item(date-is='2020-xx')
+            .timeline-item(date-is='2020')
               h1 Phase 2 Data Analysis
               h3 “PPI Deal Tracking" project
               p
                 | SDP continues to work with World Bank through the "PPI Deal Tracking" project.
                 ul.timeline-description
                   li To meet your needs, &apos;(PPP Infrastructure) Failure Map&apos; provides a filter function that identifies infrastructure projects by various criteria such as region, sector, and financial closure (FC) year, etc. This feature allows users to see the infrastructure projects they searched for visualized on the web page&apos;s map.
-            .timeline-item(date-is='2021-xx')
+            .timeline-item(date-is='2021')
               h1 Phase 3 Data Visualization
               h3 "Project MaPPPing"
               p
