@@ -289,19 +289,6 @@ img{
             opacity: 0;
             transition: .3s;
         }
-
-        &:hover &__logo-name{
-            opacity: 1;
-        }
-        &:hover &__subtitle{
-            opacity: 1;
-        }
-        &:hover &__name{
-            opacity: 1;
-        }
-        &:hover &__dropdown-icon{
-            opacity: 1;
-        }
     }
 }
 
@@ -311,4 +298,8 @@ img{
 
 .nav-hover{
     width: var(--nav-width);
+}
+
+.hover-opacity {
+    opacity : 1
 }

@@ -261,18 +261,6 @@ img {
     opacity: 0;
     transition: 0.3s;
   }
-  .nav:hover .nav__logo-name {
-    opacity: 1;
-  }
-  .nav:hover .nav__subtitle {
-    opacity: 1;
-  }
-  .nav:hover .nav__name {
-    opacity: 1;
-  }
-  .nav:hover .nav__dropdown-icon {
-    opacity: 1;
-  }
 }
 .select2-active {
   max-height: 100rem;
@@ -280,6 +268,10 @@ img {
 
 .nav-hover {
   width: var(--nav-width);
+}
+
+.hover-opacity {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=sidebar.css.map */
