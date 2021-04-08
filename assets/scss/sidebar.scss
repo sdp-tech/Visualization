@@ -195,14 +195,13 @@ img{
         transition: .4s ease-in-out;
 
         &-collapse{
-            background-color: var(--first-color-light);
             border-radius: .25rem;
             margin-top: 1rem;
         }
         &-content{
             display: grid;
             row-gap: .5rem;
-            padding: .75rem 2.5rem .75rem 1.8rem;
+            padding: .25em;
         }
 
         &-item{
@@ -217,11 +216,6 @@ img{
         &-icon{
             margin-left: auto;
             transition: .4s;
-        }
-
-        /* Show collapse */
-        &:hover{
-            max-height: 100rem;
         }
 
         /*Rotate icon arrow*/
@@ -296,10 +290,6 @@ img{
             transition: .3s;
         }
 
-        &:hover{
-           width: var(--nav-width);
-        }
-
         &:hover &__logo-name{
             opacity: 1;
         }
@@ -313,4 +303,12 @@ img{
             opacity: 1;
         }
     }
+}
+
+.select2-active{
+    max-height: 100rem;
+}
+
+.nav-hover{
+    width: var(--nav-width);
 }

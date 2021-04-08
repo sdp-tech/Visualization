@@ -110,29 +110,49 @@ header.header
               i.bx.bx-chevron-down.nav__icon.nav__dropdown-icon
             .nav__dropdown-collapse
               .nav__dropdown-content
-                a.nav__dropdown-item(href='#') 여기에
-                a.nav__dropdown-item(href='#') 넣을수
-                a.nav__dropdown-item(href='#') 있는지
+                select#country-select.select.js-select2-multi.country-select(name='countries[]' multiple='multiple' style='width: 100%')
+
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-pie-chart-alt-2.nav__icon
               span.nav__name Sector
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#sector-select.select.js-select2-multi.sector-select(name='sector[]' multiple='multiple' style='width: 100%')
+
           .nav__dropdown
             a.nav__link(href='#') 
               i.bx.bx-time.nav__icon
               span.nav__name FC Year
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                input#myCheck(type='checkbox' onclick='includeNA()' checked='true')
+                |  Include N/A value 
+                input.js-range-slider(type='text' name='FC_Year' value='')
+
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-check-circle.nav__icon
               span.nav__name Status
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple' style='width: 100%')
+
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-money.nav__icon
               span.nav__name Income Group
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple' style='width: 100%')
+
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-arch.nav__icon
               span.nav__name PPI Type
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#ppitype-select.select.js-select2-multi.ppitype-select(name='ppitype[]' multiple='multiple' style='width: 100%')
         
             
     a.nav__link.active(href='index')
