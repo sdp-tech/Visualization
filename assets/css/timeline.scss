@@ -1,12 +1,16 @@
 // ----------------  THE BASICS
 
 @import url('https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700');
-
+@import url('https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Raleway:wght@100;200&display=swap');
 // ----------------  THE FONTS
 
 .timeline-list{
     font-size: 20px;
 	line-height: 1.5;
+
+	p{
+		color: black;
+	}
     
     .timeline-title{
         font-size: 2rem;
@@ -19,14 +23,22 @@
     }
     
     h1 {
+		text-align:justify;
         color:#c44536;
-        font-size: 1.7rem;
+        font-size: 1.0rem;
         margin-bottom: .5em;
     }
+
+	h3 {
+		text-align:justify;
+		font-size: 1.3rem;
+	}
     
     p, .timeline-description{
-        text-align:start;
-        font-family: 'Barlow Condensed', sans-serif;
+        text-align:justify;
+		font-family: 'Raleway', sans-serif;
+
+        // font-family: 'Barlow Condensed', sans-serif;
         font-size: .8rem;
     }
 
@@ -41,41 +53,46 @@
 
 // ----------------  THE FONTS
 
-$border-color: #772e25;
+$border-color: #c44536;
 
 .timeline-item {
-	padding: 3em 2em 2em;
+	padding: 1em 2em 2em;
 	position: relative;
-	color: rgba(black, .7);
-	border-left: 2px solid $border-color;
-	
+	color: rgba(white, .7);
+	border-left: 5px solid $border-color;
+	left: 40px;
 	p {
 		font-size: 1rem;
 	}
 	
 	&::before {
-		content: attr(date-is);
+		content: '';
 		position: absolute;
 		left: 2em;
 		font-weight: bold;
 		top: 1em;
 		display: block;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Raleway', sans-serif;
 		font-weight: 700;
 		font-size: .785rem;
 	}
 
 	&::after {
-		width: 10px;
-		height: 10px;
+		width: 60px;
+		height: 60px;
+		border-radius: 60px;
+		line-height: 60px;
 		display: block;
 		top: 1em;
 		position: absolute;
-		left: -7px;
-		border-radius: 10px;
-		content: '';
-		border: 2px solid $border-color;
-		background: white;
+		left: -33px;
+		content: attr(year);
+		white-space: pre-wrap;
+		color: white;
+		font-size: 15px;
+		font-family: 'Raleway Dots', cursive;
+    	text-align: center;
+		background: $border-color
 	}
 
 	&:last-child {

@@ -1,12 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700");
-@import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Raleway:wght@100;200&display=swap");
 .timeline-list {
   font-size: 20px;
   line-height: 1.5;
-}
-
-.timeline-list p {
-  color: black;
 }
 
 .timeline-list .timeline-title {
@@ -20,20 +15,14 @@
 }
 
 .timeline-list h1 {
-  text-align: justify;
   color: #c44536;
-  font-size: 1.0rem;
+  font-size: 1.7rem;
   margin-bottom: .5em;
 }
 
-.timeline-list h3 {
-  text-align: justify;
-  font-size: 1.3rem;
-}
-
 .timeline-list p, .timeline-list .timeline-description {
-  text-align: justify;
-  font-family: 'Raleway', sans-serif;
+  text-align: start;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: .8rem;
 }
 
@@ -44,11 +33,10 @@
 }
 
 .timeline-item {
-  padding: 1em 2em 2em;
+  padding: 3em 2em 2em;
   position: relative;
-  color: rgba(255, 255, 255, 0.7);
-  border-left: 5px solid #c44536;
-  left: 40px;
+  color: rgba(0, 0, 0, 0.7);
+  border-left: 2px solid #772e25;
 }
 
 .timeline-item p {
@@ -56,38 +44,33 @@
 }
 
 .timeline-item::before {
-  content: '';
+  content: attr(date-is);
   position: absolute;
   left: 2em;
   font-weight: bold;
   top: 1em;
   display: block;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: .785rem;
 }
 
 .timeline-item::after {
-  width: 60px;
-  height: 60px;
-  border-radius: 60px;
-  line-height: 60px;
+  width: 10px;
+  height: 10px;
   display: block;
   top: 1em;
   position: absolute;
-  left: -33px;
-  content: attr(year);
-  white-space: pre-wrap;
-  color: white;
-  font-size: 15px;
-  font-family: 'Raleway Dots', cursive;
-  text-align: center;
-  background: #c44536;
+  left: -7px;
+  border-radius: 10px;
+  content: '';
+  border: 2px solid #772e25;
+  background: white;
 }
 
 .timeline-item:last-child {
-  -o-border-image: linear-gradient(to bottom, #c44536 30%, rgba(196, 69, 54, 0)) 1 70%;
-     border-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #c44536), to(rgba(196, 69, 54, 0))) 1 70%;
-     border-image: linear-gradient(to bottom, #c44536 30%, rgba(196, 69, 54, 0)) 1 70%;
+  -o-border-image: linear-gradient(to bottom, #772e25 30%, rgba(119, 46, 37, 0)) 1 70%;
+     border-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #772e25), to(rgba(119, 46, 37, 0))) 1 70%;
+     border-image: linear-gradient(to bottom, #772e25 30%, rgba(119, 46, 37, 0)) 1 70%;
 }
 /*# sourceMappingURL=timeline.css.map */
