@@ -85,7 +85,7 @@ main#main
         p
 
         - var datas = {'What is Project MaPPPing \'Failure Map\'?': '\"Project MaPPPing\" aims to collect, visualize, and provide data about worldwide PPP projects that were failed or canceled. \"Failure map\" is the map that demonstrates the data with interactive features such as filter service, AI suggestion tools, and insights.', 'Why Infrastructure?':'We believe that infrastructure development is indispensable from sustainable development. It helps achieve SDG Goal 9 \:\'Industry, Innovation, and Infrastructure\' as it can unleash competitive economic forces and generate employment. Also, it contributes to attain SDG Goal 11: \“Sustainable Cities and Communities\" by not only creating career and business opportunities but improving urban planning and management in participatory ways. Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.', 'Why PPP?':'Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure.  Infrastructure projects require a great amount of capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding from the private sectors which makes many infrastructure projects more achievable. Also, utilizing private sector technology and innovation provides better public services with improved efficiency. Meanwhile, the government\'s overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs'}
-          div#scene.flex.flex-wrap
+          div#scene
             #left-zone
               ul.list
                 each val, index in datas
@@ -100,6 +100,12 @@ main#main
                       div(class='content content_' + index)
                         p
                           | #{val}
+                        if index == 'Why Infrastructure?'
+                          .flex.items-stretch
+                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-09.png")
+                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-11.png")
+                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-06.png")
+                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-07.png")
             #middle-border
             #right-zone
 
@@ -251,13 +257,13 @@ main#main
             em
               span(style='font-weight: 400;')  2021. 2. 20.
       // ======= Counts Section =======
-      #counts.counts.section-bg.container 
+      #counts.counts.section-bg.container
         br
         .row.no-gutters
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-world
-              span(data-toggle='counter-up') 123
+              span(data-toggle='counter-up') 94
               p
                 strong Countries
                 br
@@ -265,23 +271,23 @@ main#main
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-clock-time
-              span(data-toggle='counter-up') 456
+              span(data-toggle='counter-up') 351
               p
                 strong Delayed projects
                 br
-                |  in 2020
+                |  until 2020
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-exclamation-tringle
-              span(data-toggle='counter-up') 789
+              span(data-toggle='counter-up') 50
               p
                 strong Cancelled projects
                 br
-                |  in 2020
+                |  until 2020
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-files-stack
-              span(data-aos='fade-in' data-aos-delay='50') blah
+              span(data-aos='fade-in' data-aos-delay='50') Energy
               p
                 strong Most affected sector
                 br
@@ -610,29 +616,21 @@ main#main
           .info-box.timeline-list
             .timeline-title
               | Project MaPPPing History
-            .timeline-item(date-is='2018-12')
+            .timeline-item(year='2019')
               h1 Phase 1 Data Collection
               h3 “The World Bank 2019 PPI Report" project
               p
-                | SDP was named 'Data Reviewer and Research Assistant' of 'The World Bank Group Singapore PPI Team' for the first time as an undergraduate organization and began participating in the "The World Bank 2019 PPI Report" project. 
-            .timeline-item(date-is='2019')
-              p
-                | SDP conducted open-source tracking and data reviews for all private partitioned infrastructure (PPI) deals in developing countries in 2019.
-            .timeline-item(date-is='2020')
+                | SDP was named 'Data Reviewer and Research Assistant' of 'The World Bank Group Singapore PPI Team' for the first time as an undergraduate organization and began participating in the "The World Bank 2019 PPI Report" project. SDP conducted open-source tracking and data reviews for all private partitioned infrastructure (PPI) deals in developing countries in 2019.
+            .timeline-item(year='2020-1H')
               h1 Phase 2 Data Analysis
               h3 “PPI Deal Tracking" project
               p
-                | SDP continues to work with World Bank through the "PPI Deal Tracking" project.
-                ul.timeline-description
-                  li To meet your needs, &apos;(PPP Infrastructure) Failure Map&apos; provides a filter function that identifies infrastructure projects by various criteria such as region, sector, and financial closure (FC) year, etc. This feature allows users to see the infrastructure projects they searched for visualized on the web page&apos;s map.
-            .timeline-item(date-is='2021')
+                | SDP continues to work with World Bank through the "PPI Deal Tracking" project. To meet your needs, &apos;(PPP Infrastructure) Failure Map&apos; provides a filter function that identifies infrastructure projects by various criteria such as region, sector, and financial closure (FC) year, etc. This feature allows users to see the infrastructure projects they searched for visualized on the web page&apos;s map.
+            .timeline-item(year='2020-2H')
               h1 Phase 3 Data Visualization
               h3 "Project MaPPPing"
               p
-                | We are developing a web page that will help us derive insights based on SDP's own infrastructure database built through Phases 1 and 2. 
-                ul.timeline-description
-                  li In response to the pandemic in 2020, we collected, classified, and databased PPI Deal affected by Covid-19.
-                  li Based on this database, SDP conducted casework on PPI Deal, using artificial intelligence to extract features of PPI Deal.
+                | We are developing a web page that will help us derive insights based on SDP's own infrastructure database built through Phases 1 and 2. In response to the pandemic in 2020, we collected, classified, and databased PPI Deal affected by Covid-19. Based on this database, SDP conducted casework on PPI Deal, using artificial intelligence to extract features of PPI Deal.
   // End Testimonials Section
   // ======= Contact Section =======
   section#contact.contact

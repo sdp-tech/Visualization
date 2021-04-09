@@ -1,6 +1,6 @@
-$menu-width: 350px;
-$scene-width: 900px;
-$scene-height: 400px;
+$menu-width: 30vw;
+$scene-width: 70vw;
+$scene-height: 60vh;
 
 $sections: strawberry, banana, apple, orange;
 
@@ -13,12 +13,6 @@ $colors: (
   gray: #eee
 );
 
-$pictograms: (
-  strawberry: url('https://d30y9cdsu7xlg0.cloudfront.net/png/83067-200.png'),
-  banana: url('https://d30y9cdsu7xlg0.cloudfront.net/png/53209-200.png'),
-  apple: url('https://d30y9cdsu7xlg0.cloudfront.net/png/14333-200.png'),
-  orange: url('https://d30y9cdsu7xlg0.cloudfront.net/png/9636-200.png')
-);
 
 @function get-color($color-name) {
   @if map-has-key($colors, $color-name) {
@@ -30,15 +24,6 @@ $pictograms: (
   }
 }
 
-@function get-picto-url($picto-name) {
-  @if map-has-key($pictograms, $picto-name) {
-    @return map-get($pictograms, $picto-name);
-  }
- 
-  @else {
-    @warn "This pictogram key doesn't exist."
-  }
-}
 
 @keyframes slidein {
   0% {
@@ -72,11 +57,7 @@ $pictograms: (
   -ms-user-select: none;
   user-select: none;
 
-  @media (max-width: 768px) {
-    #scene {
-      min-width: 300px;
-      min-height: 300px;
-    }
+
   }
   
   #scene {
@@ -149,7 +130,6 @@ $pictograms: (
                     width: 50px;
                     height: 50px;
                     margin-left: 15px;
-                    background-image: get-picto-url($item);
                     background-position: center;
                     background-size: 75% 75%;
                     background-repeat: no-repeat;
@@ -175,15 +155,6 @@ $pictograms: (
               flex-direction: column;
               @each $item in $sections{
                 &.content_#{$item} {
-                    
-                  .picto {
-                    height: 100px;
-                    width: 100px;
-                    background-image: get-picto-url($item);
-                    background-position: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                  }
                   
                   h1{
                     color: get-color($item);
@@ -241,4 +212,3 @@ $pictograms: (
       flex-grow: 3;
     }
   }
-}
