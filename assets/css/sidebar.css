@@ -235,6 +235,10 @@ img {
   .header__logo {
     display: block;
   }
+  .header__toggle {
+    /* display: none; */
+    margin-right : 0.5rem;
+  }
 
 }
 @media screen and (min-width: 768px) {

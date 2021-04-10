@@ -257,7 +257,8 @@ h6 {
 /* hamburger button */
 .mobile-nav-toggle {
   position: fixed;
-  right: 15px;
+  /* right: 15px; */
+  right: 22px;
   top: 15px;
   z-index: 1000;
   border: 0;
