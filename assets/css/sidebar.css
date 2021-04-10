@@ -4,6 +4,7 @@
 :root {
   --header-height: 3.5rem;
   --nav-width: 219px;
+  --nav-select-width: 175px;
   /*========== Colors ==========*/
   --first-color: #c44536;
   --first-color: #83a8a6;
@@ -272,6 +273,10 @@ img {
 
 .hover-opacity {
   opacity: 1;
+}
+
+.js-select2-multi {
+  width: var(--nav-select-width);
 }
 
 /*# sourceMappingURL=sidebar.css.map */
