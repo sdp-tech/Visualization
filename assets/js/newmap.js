@@ -659,12 +659,13 @@ function toggle_selectableOptgroup() {
     })
 }
 
-function onClickNavSelect2(){
-    let dropdown_menus = Array.from(document.getElementsByClassName('nav__dropdown'))
-    dropdown_menus.forEach(menu => {
-        menu.addEventListener('click', () => {
+function onClickSelect2(){
+    let dropdown_links = Array.from(document.getElementsByClassName('nav__link'))
+    dropdown_links.forEach(link => {
+        link.addEventListener('click', () => {
+        //open select2 box only if navbar is opened
         if(document.getElementById('navbar').classList.contains('nav-hover'))
-            menu.classList.toggle('select2-active')
+            link.parentElement.classList.toggle('select2-active')
         })
     }
     )
@@ -680,10 +681,12 @@ function onClickNavbar(){
     let dropdown_icons = document.querySelectorAll('.nav__dropdown-icon')
 
     nav_opener.addEventListener('click', () => {
+        //if navbar opened, close select2 boxes first 
         if(navbar.classList.contains('nav-hover')){
             document.querySelectorAll('.nav__dropdown').forEach(elem => elem.classList.remove('select2-active'))
         }
         navbar.classList.toggle('nav-hover')
+
         logo_names.forEach((elem) => elem.classList.toggle('hover-opacity'))
         logo_subtitles.forEach((elem) => elem.classList.toggle('hover-opacity'))
         names.forEach((elem) => elem.classList.toggle('hover-opacity'))
@@ -741,7 +744,7 @@ $('.clearfilter').on('click', function () {
     });
 });
 
-onClickNavSelect2()
+onClickSelect2()
 onClickNavbar()
 setClearEachEvent()
 
