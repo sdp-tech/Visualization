@@ -390,6 +390,15 @@ h6 {
   text-align: center;
 }
 
+.main-title{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 #hero h1 {
   margin: 0 0 10px 0;
   font-size: 64px;
