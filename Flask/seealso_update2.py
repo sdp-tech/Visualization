@@ -15,7 +15,6 @@ def get_documents(
     visualization = client[db_name]
 
     collection_map = visualization[collection_name]
-    collection_map.create_index([("project_name_wb", pymongo.TEXT)], unique = True)
 
     return collection_map
 
