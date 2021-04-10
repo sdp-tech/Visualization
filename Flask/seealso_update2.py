@@ -64,13 +64,14 @@ class cluster():
                'properties.segment', 'properties.crossborder',
                'properties.reason_for_delay', 'properties.investment',
                'properties.project_bank', 'properties.delayed_extent',
-               'properties.updated_date', 'properties.fc_year',
+               'properties.fc_year',
                'properties.fc_year_reason', 'properties.ppi_status',
                'properties.affected_stage', 'properties.type_of_ppi',
                'properties.urls', 'properties.resumed', 'properties.resume_url',
-               'properties.location', 'properties.see_also', 'properties.countryID'], axis=1)
+               'properties.location', 'properties.see_also', 'properties.category_of_reason', 
+               'properties.covid_19', 'properties.project_name'], axis=1)
 
-        columns = ['Geographical', 'Income Group', 'Sector', 'SubSector']
+        columns = ['Sector', 'SubSector','Geographical', 'Income Group']
         self.data_df.columns = columns
         
         df_geo = pd.get_dummies(self.data_df['Geographical'])
