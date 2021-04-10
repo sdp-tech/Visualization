@@ -293,12 +293,13 @@ function geoJson_filter(feature) {
     const countryselect = (customOption.countryOp.length == 0) ? true : (customOption.countryOp.includes(feature.properties.country));
     const sectorselect = (customOption.sectorOp.length == 0) ? true : (sectorClass(customOption.sectorOp, feature.properties));
     const statusselect = (customOption.statusOp.length == 0) ? true : (customOption.statusOp.includes(feature.properties.ppi_status));
+    const covidselect = (customOption.covidOp.length == 0) ? true : (customOption.covidOp.includes(feature.properties.covid_19));
     const affectedselect = (customOption.affectedOp.length == 0) ? true : (customOption.affectedOp.includes(feature.properties.affected_stage));
     const categoryselect = (customOption.categoryOp.length == 0) ? true : (customOption.categoryOp.includes(feature.properties.category_of_reason));
     const incomeselect = (customOption.incomeOp.length == 0) ? true : (customOption.incomeOp.includes(feature.properties.income_group));
     const ppitypeselect = (customOption.ppitypeOp.length == 0) ? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
     const yearselect = yearIsincluded(feature, customOption.yearOp);
-    return (countryselect && sectorselect && categoryselect && affectedselect && yearselect && incomeselect && statusselect && ppitypeselect);
+    return (countryselect && sectorselect && categoryselect && affectedselect && yearselect && incomeselect && statusselect && covidselect && ppitypeselect);
 }
 
 function geoJson_pointToLayer(feature, latlng, layer) {
@@ -392,6 +393,7 @@ function options_to_html(data) {
     const geographical_set = arraytosortedSet(property_list["geographical"]);
     const sector_set = arraytosortedSet(property_list["sector"]);
     const status_set = arraytosortedSet(property_list["ppi_status"]);
+    const covid_set =  arraytosortedSet(property_list["covid_19"]);
     const affected_set = arraytosortedSet(property_list['affected_stage'])
     const category_set = arraytosortedSet(property_list['category_of_reason'])
     const income_set = arraytosortedSet(property_list["income_group"]);
@@ -400,6 +402,7 @@ function options_to_html(data) {
     var statusselect = document.getElementById('status-select');
     var affectedselect = document.getElementById('affected-select')
     var categoryselect = document.getElementById('category-select')
+    var covidselect =  document.getElementById('covid-select')
     var incomeselect = document.getElementById('income-select');
     var ppitypeselect = document.getElementById('ppitype-select');
     
@@ -433,6 +436,9 @@ function options_to_html(data) {
 
     // affected 
     addOptionToSelect(affected_set, affectedselect )
+    
+    // covid
+    addOptionToSelect(covid_set, covidselect )
 
     // category
     addOptionToSelect(category_set, categoryselect )
@@ -501,6 +507,31 @@ function updateStates(customOption) {
             }
         })
 
+        $('.covid-select')
+            .select2({
+                placeholder: "Choose a covid-specific"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.covidOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.covidOp.push(value[i]);
+                }
+            });
+
+         // status selection
+        $('.status-select')
+            .select2({
+                placeholder: "Choose a Status"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.statusOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.statusOp.push(value[i]);
+                }
+            });
+        
         // status selection
         $('.status-select')
             .select2({

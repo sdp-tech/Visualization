@@ -128,7 +128,15 @@ header.header
                 input#myCheck(type='checkbox' onclick='includeNA()' checked='true' style='display:inline-block') 
                 span Include N/A value 
                 input.js-range-slider(type='text' name='FC_Year' value='')
-
+          
+          .nav__dropdown
+            a.nav__link(href='#')
+              i.bx.bx-check-circle.nav__icon
+              span.nav__name COVID-19 Specific
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#covid-select.select.js-select2-multi.covid-select(name='covid[]' multiple='multiple')
+          
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-check-circle.nav__icon
