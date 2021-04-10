@@ -68,7 +68,8 @@ class cluster():
                'properties.fc_year_reason', 'properties.ppi_status',
                'properties.affected_stage', 'properties.type_of_ppi',
                'properties.urls', 'properties.resumed', 'properties.resume_url',
-               'properties.location', 'properties.see_also', 'properties.category_of_reason', 'properties.project_name'], axis=1)
+               'properties.location', 'properties.see_also', 'properties.category_of_reason', 
+               'properties.covid_19', 'properties.project_name'], axis=1)
 
         columns = ['Sector', 'SubSector','Geographical', 'Income Group']
         self.data_df.columns = columns
