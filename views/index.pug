@@ -95,7 +95,6 @@ main#main
                       label(for='radio_' + val, class='label_' + index)
                         | #{index}
                       div(class='content content_' + index)
-                        p
                         if index == 'Why Infrastructure?'
                           ul.image-wrap
                             li
@@ -112,7 +111,8 @@ main#main
                               p.text-justify Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.
                             
                         else 
-                          | #{val}
+                          p.text-justify
+                            | #{val}
             #middle-border
             #right-zone
       .row.no-gutters.leading-6
