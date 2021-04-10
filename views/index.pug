@@ -84,12 +84,12 @@ main#main
         h2 Project MaPPPing
         p
 
-        - var datas = {'What is Project MaPPPing \'Failure Map\'?': '\"Project MaPPPing\" aims to collect, visualize, and provide data about worldwide PPP projects that were failed or canceled. \"Failure map\" is the map that demonstrates the data with interactive features such as filter service, AI suggestion tools, and insights.', 'Why Infrastructure?':'We believe that infrastructure development is indispensable from sustainable development. It helps achieve SDG Goal 9 \:\'Industry, Innovation, and Infrastructure\' as it can unleash competitive economic forces and generate employment. Also, it contributes to attain SDG Goal 11: \“Sustainable Cities and Communities\" by not only creating career and business opportunities but improving urban planning and management in participatory ways. Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.', 'Why PPP?':'Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure.  Infrastructure projects require a great amount of capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding from the private sectors which makes many infrastructure projects more achievable. Also, utilizing private sector technology and innovation provides better public services with improved efficiency. Meanwhile, the government\'s overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs'}
+        - var info1 = {'What is Project MaPPPing \'Failure Map\'?': '\"Project MaPPPing\" aims to collect, visualize, and provide data about worldwide PPP projects that were failed or canceled. \"Failure map\" is the map that demonstrates the data with interactive features such as filter service, AI suggestion tools, and insights.', 'Why Infrastructure?':'.', 'Why PPP?':'Out of many infrastructure projects, SDP focuses on Public Private Partnership (PPP). This is due to the efficiency of PPP in building infrastructure.  Infrastructure projects require a great amount of capital, which is usually a heavy burden for governments in developing countries. PPP can allow for better procurement of funding from the private sectors which makes many infrastructure projects more achievable. Also, utilizing private sector technology and innovation provides better public services with improved efficiency. Meanwhile, the government\'s overall involvement in the project keeps the private sector in check so that the project not only seeks profit but is beneficial for society and in line with the SDGs'}
           div#scene
 
             #left-zone
               ul.list
-                each val, index in datas
+                each val, index in info1
                   li.item
                       if index == 'What is Project MaPPPing \'Failure Map\'?'
                         input(type="radio", id='radio_' + val name="basic_carousel" value=val checked)
@@ -100,60 +100,70 @@ main#main
                         | #{index}
                       div(class='content content_' + index)
                         p
-                          | #{val}
                         if index == 'Why Infrastructure?'
-                          .flex.items-stretch
-                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-09.png")
-                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-11.png")
-                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-06.png")
-                            img.w-14.h-14.sdgs_icon(src="assets/img/sdgsicon/sdgs-07.png")
+                          ul.image-wrap
+                            li
+                              p.text-justify We believe that infrastructure development is indispensable from sustainable development. 
+                            li
+                              img.float-left.w-16.h-16.sdgs_icon(src="assets/img/sdgsicon/sdgs-09.png")
+                              p.text-justify It helps achieve SDG Goal 9: “Industry, Innovation, and Infrastructure” as it can unleash competitive economic forces and generate employment. 
+                            li
+                              img.float-left.w-16.h-16.sdgs_icon(src="assets/img/sdgsicon/sdgs-11.png")
+                              p.text-justify Also, it contributes to attain SDG Goal 11: “Sustainable Cities and Communities” by not only creating career and business opportunities but improving urban planning and management in participatory ways. 
+                            li
+                              img.float-right.w-16.h-16.sdgs_icon(src="assets/img/sdgsicon/sdgs-06.png")
+                              img.float-right.w-16.h-16.sdgs_icon(src="assets/img/sdgsicon/sdgs-07.png")
+                              p.text-justify Other SDGs like Clean Water and Sanitation make implicit the need for a solid infrastructure as well.
+                            
+                        else 
+                          | #{val}
             #middle-border
             #right-zone
-      //- .row.no-gutters.leading-6
-      //-   .flex.icon-boxes.flex-row.flex-wrap.justify-content-center
-      //-     .row
-      //-       .icon-box(data-aos='fade-up' data-aos-delay='0')
-      //-         .about-title Failure Map Provides You:
-      //-     .row.space-x-8
-      //-       .flex-1.icon-box(data-aos='fade-up' data-aos-delay='100')
-      //-         i.bx.bx-shape-polygon.
-      //-         h4 Diverse PPP Records
-      //-         p Failure Map provides you a variety of ‘failed’ PPP deals that were carried out in all countries regardless of their income or size, and of every type of infrastructure projects. Our Map provides PPP projects including power plants, wind farms, roads, water utilities and many more.
-      //-       .flex-1.icon-box(data-aos='fade-up' data-aos-delay='200')
-      //-         i.bx.bx-user
-      //-         h4 Interactive User Experience
-      //-         p Failure Map is an interactive mapping service where the users can actively explore failed PPP deals according to their own interests and desires. Our filtering service enables the users to search for specific projects based on its location, type, status, year and more. Moreover, our specialized AI tool suggests PPP projects that the users might take interests in based on their search results. 
-      //-       .flex-1.icon-box(data-aos='fade-up' data-aos-delay='300')
-      //-         i.bx.bx-data
-      //-         h4 Failure-Specific Data
-      //-         p Failure Map uniquely focuses on recording delayed or canceled data of PPP projects. The specificity of the failure record data will be a great opportunity for users to explore significant insights based on their own interest. 
-      //-         p     
-      //-     .row
-      //-       .icon-box(data-aos='fade-up' data-aos-delay='300')
-      //-         .about-title Users Who Can Benefit from Our Map:
-      //-         ul.text-center
-      //-           li  Project Developers
-      //-           li  Project Investors
-      //-           li  Project Asset Managers
-      //-           li  Government Agencies
-      //-           li  Researchers
-      //-           li  And more&mldr;
-      //-         p
-      //-         | o To learn more about how to use the map, please refer to 
-      //-         strong &lsquo;Tutorial&rsquo;
-      //-         |  above the map.
-      //-         p
-      //-         | o To know more about terms and standards used in the map, please refer to 
-      //-         strong &apos;Methodology&apos;.
-      //-         p
-      //-         | o To maximize your experience, please refer to 
-      //-         strong &lsquo;Insight&rsquo;
-      //-         |  and start developing your own!
-      //-         p
-      //-         | o To know more about us, please refer to 
-      //-         strong &apos;SDP Team&apos;
-      //-         |  and 
-      //-         strong &apos;Contact Us&apos;.
+      .row.no-gutters.leading-6
+        .flex.icon-boxes.flex-row.flex-wrap.justify-content-center
+          .row.px-6
+            .icon-box(data-aos='fade-up' data-aos-delay='0')
+              .about-title Failure Map Provides You:
+          .row.space-x-8
+            .flex-1.icon-box(data-aos='fade-up' data-aos-delay='100')
+              i.bx.bx-shape-polygon.
+              h4 Diverse PPP Records
+              p Failure Map provides you a variety of ‘failed’ PPP deals that were carried out in all countries regardless of their income or size, and of every type of infrastructure projects. Our Map provides PPP projects including power plants, wind farms, roads, water utilities and many more.
+            .flex-1.icon-box(data-aos='fade-up' data-aos-delay='200')
+              i.bx.bx-user
+              h4 Interactive User Experience
+              p Failure Map is an interactive mapping service where the users can actively explore failed PPP deals according to their own interests and desires. Our filtering service enables the users to search for specific projects based on its location, type, status, year and more. Moreover, our specialized AI tool suggests PPP projects that the users might take interests in based on their search results. 
+            .flex-1.icon-box(data-aos='fade-up' data-aos-delay='300')
+              i.bx.bx-data
+              h4 Failure-Specific Data
+              p Failure Map uniquely focuses on recording delayed or canceled data of PPP projects. The specificity of the failure record data will be a great opportunity for users to explore significant insights based on their own interest. 
+              p     
+          //- .row
+          //-   .icon-box(data-aos='fade-up' data-aos-delay='300')
+          //-     .about-title Users Who Can Benefit from Our Map:
+          //-     ul.text-center
+          //-       li  Project Developers
+          //-       li  Project Investors
+          //-       li  Project Asset Managers
+          //-       li  Government Agencies
+          //-       li  Researchers
+          //-       li  And more&mldr;
+          //-     p
+          //-     | o To learn more about how to use the map, please refer to 
+          //-     strong &lsquo;Tutorial&rsquo;
+          //-     |  above the map.
+          //-     p
+          //-     | o To know more about terms and standards used in the map, please refer to 
+          //-     strong &apos;Methodology&apos;.
+          //-     p
+          //-     | o To maximize your experience, please refer to 
+          //-     strong &lsquo;Insight&rsquo;
+          //-     |  and start developing your own!
+          //-     p
+          //-     | o To know more about us, please refer to 
+          //-     strong &apos;SDP Team&apos;
+          //-     |  and 
+          //-     strong &apos;Contact Us&apos;.
 
 
   // End About Section
