@@ -295,9 +295,12 @@ img {
 
 /* ========== MEDIA QUERIES ==========*/
 /* For small devices reduce search*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
   .header__search {
     width: 70%;
+  }
+  .header__container{
+  background-color : red;
   }
 }
 

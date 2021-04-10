@@ -93,7 +93,7 @@
     });
     $("body").append($mobile_nav);
     $("body").prepend(
-      // '<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>'
+      '<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>'
     );
     $("body").append('<div class="mobile-nav-overly"></div>');
     $(document).on("click", ".mobile-nav-toggle", function (e) {
