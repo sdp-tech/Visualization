@@ -91,7 +91,7 @@ function load_data(customOption) {
             let json = requested['body'];
             mapdata = data_process(json);
             load_map(mapdata, customOption);
-            options_to_html(json);
+            optionsToHtml(json);
             $.loading.end();
         },
         error: function (err) {
@@ -109,6 +109,18 @@ function data_process(json) {
                 option = ""
 
             switch (col) {
+                case "affected_stage" : 
+                    option = option.toLowerCase().trim()
+                    break;
+                case "covid_19" :
+                    option = option.split(',').map(e => e.toLowerCase().trim())
+                    break;
+                case "category_of_reason" :
+                    option = option.split(',').map(e => {
+                        e = e.toLowerCase().trim()
+                        return e[e.length - 1] === '.' ? e.substr(0, e.length-1) : e
+                    })
+                    break;
                 case "fc_year":
                     option = (isNaN(option) ? 0 : Math.round(option));
                     break;
@@ -296,9 +308,13 @@ function geoJson_filter(feature) {
     const countryselect = (customOption.countryOp.length == 0) ? true : (customOption.countryOp.includes(feature.properties.country));
     const sectorselect = (customOption.sectorOp.length == 0) ? true : (sectorClass(customOption.sectorOp, feature.properties));
     const statusselect = (customOption.statusOp.length == 0) ? true : (customOption.statusOp.includes(feature.properties.ppi_status));
-    const covidselect = (customOption.covidOp.length == 0) ? true : (customOption.covidOp.includes(feature.properties.covid_19));
-    const affectedselect = (customOption.affectedOp.length == 0) ? true : (customOption.affectedOp.includes(feature.properties.affected_stage));
-    const categoryselect = (customOption.categoryOp.length == 0) ? true : (customOption.categoryOp.includes(feature.properties.category_of_reason));
+    const covidselect = (customOption.covidOp.length == 0) ? true : (feature.properties.covid_19.some((covid) => {
+        return customOption.covidOp.includes(covid)
+    }))
+    const affectedselect = (customOption.affectedOp.length == 0) ? true :  (customOption.affectedOp.includes(feature.properties.affected_stage));
+    const categoryselect = (customOption.categoryOp.length == 0) ? true :  (feature.properties.category_of_reason.some((category) => {
+        return customOption.categoryOp.includes(category)
+    }))
     const incomeselect = (customOption.incomeOp.length == 0) ? true : (customOption.incomeOp.includes(feature.properties.income_group));
     const ppitypeselect = (customOption.ppitypeOp.length == 0) ? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
     const yearselect = yearIsincluded(feature, customOption.yearOp);
@@ -389,19 +405,19 @@ function subsector_to_icon(subsector) {
 /// filter ///
 //////////////
 
-function options_to_html(data) {
+function optionsToHtml(data) {
 
     const property_list = getKeys(data);
+    const geographical_set = removeDuplicates(property_list["geographical"]);
+    const sector_set = removeDuplicates(property_list["sector"]);
+    const status_set = removeDuplicates(property_list["ppi_status"]);
+    const covid_set =  removeDuplicates(property_list["covid_19"]);
+    const affected_set = removeDuplicates(property_list['affected_stage'])
+    const category_set = removeDuplicates(property_list['category_of_reason'])
+    const income_set = removeDuplicates(property_list["income_group"]);
+    const ppitype_set = removeDuplicates(property_list["type_of_ppi"]);
 
-    const geographical_set = arraytosortedSet(property_list["geographical"]);
-    const sector_set = arraytosortedSet(property_list["sector"]);
-    const status_set = arraytosortedSet(property_list["ppi_status"]);
-    const covid_set =  arraytosortedSet(property_list["covid_19"]);
-    const affected_set = arraytosortedSet(property_list['affected_stage'])
-    const category_set = arraytosortedSet(property_list['category_of_reason'])
-    const income_set = arraytosortedSet(property_list["income_group"]);
-    const ppitype_set = arraytosortedSet(property_list["type_of_ppi"]);
-
+    console.log(category_set);
     var statusselect = document.getElementById('status-select');
     var affectedselect = document.getElementById('affected-select')
     var categoryselect = document.getElementById('category-select')
@@ -625,7 +641,15 @@ function getKeys(input) {
     let out = input.reduce((acc, { properties }) => {
         Object.entries(properties).forEach(([key, val]) => {
             acc[key] = acc[key] || new Set();
-            acc[key].add(val);
+            //to unpackage options in array
+            if(Array.isArray(val)) {
+                val.forEach(elem => {
+                    acc[key].add(elem);
+                })
+            }
+            else {
+                acc[key].add(val);
+            }
         });
 
         return acc;
@@ -655,7 +679,7 @@ function country_to_geographical(geographical) {
     let array = getObjects(input, "geographical", geographical);
     let data = array.map(data => data.country);
 
-    return arraytosortedSet(data);
+    return removeDuplicates(data);
 };
 
 function subsector_to_region(sector) {
@@ -663,7 +687,7 @@ function subsector_to_region(sector) {
     let array = getObjects(input, "sector", sector);
     let data = array.map(data => data.subsector);
 
-    return arraytosortedSet(data);
+    return removeDuplicates(data);
 };
 
 // Manage Range slider
@@ -689,7 +713,7 @@ function includeNA() {
     return document.getElementById("myCheck").checked;
 }
 
-function arraytosortedSet(array) {
+function removeDuplicates(array) {
     return Array.from(new Set(array)).sort();
 }
 
