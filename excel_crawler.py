@@ -45,6 +45,7 @@ class SDP_FAILURE(object):
                 "resumed": resumed,
                 "resume_url": resume_url,
                 "location": location,
+                "see_also" : ''
             }
 
             # set project name
@@ -92,7 +93,7 @@ def get_documents(
 def insert_items() : 
     
     docs = get_documents()
-    map_excel = pd.read_excel('./Failure Map_Data.xlsx')
+    map_excel = pd.read_excel('./Failure Map_Data.xlsx', sheet_name = 'Failure Map Data', skiprows = 1)
     map_excel = map_excel.fillna('N/A')
 
     for _, line in map_excel.iterrows():
@@ -127,12 +128,19 @@ def insert_items() :
         # insert item to db
         else:
             try : 
-                docs.insert_one(
+                docs.update_one(
                     {
-                        "type" : sdp_failure.type,
-                        "geometry" : sdp_failure.geometry,
-                        "properties" : sdp_failure.properties
-                    }
+                        "properties.project_name" : sdp_failure.properties['project_name']
+                    },
+                    {
+                        '$set' : 
+                            {
+                            "type" : sdp_failure.type,
+                            "geometry" : sdp_failure.geometry,
+                            "properties" : sdp_failure.properties
+                            }
+                    }, 
+                    upsert=True
                 )
             except Exception as e :
                 print(e)
