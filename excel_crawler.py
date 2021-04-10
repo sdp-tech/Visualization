@@ -1,3 +1,8 @@
+'''
+Google Drive에 있는 FailureMapData 스프레드 시트를 xlsx 형식으로 다운받아 
+"수정 없이" 바로 사용할 수 있습니다.
+'''
+
 import re
 import pandas as pd
 import pymongo
@@ -16,7 +21,7 @@ class SDP_FAILURE(object):
                  segment, crossborder, reason_for_delay, 
                  investment, project_bank, delayed_extent, fc_year, fc_year_reason, ppi_status,
                  affected_stage, type_of_ppi, 
-                 urls, resumed, resume_url, longitude, location, latitude):
+                 urls, resumed, resume_url, longitude, location, latitude, category_of_reason, covid_19):
         
         if (re.match('^[0-9.|\-]*$', str(longitude)) and (re.match('^[0-9.|\-]*$', str(latitude)))):
             self.type = "Feature"
@@ -45,7 +50,10 @@ class SDP_FAILURE(object):
                 "resumed": resumed,
                 "resume_url": resume_url,
                 "location": location,
-            }
+                "category_of_reason" : category_of_reason,
+                "see_also" : '',
+                'covid_19' : covid_19
+            } 
 
             # set project name
             if self.properties['project_name_wb'] != 'N/A'  :
@@ -92,7 +100,7 @@ def get_documents(
 def insert_items() : 
     
     docs = get_documents()
-    map_excel = pd.read_excel('./Failure Map_Data.xlsx')
+    map_excel = pd.read_excel('./Failure Map_Data.xlsx', sheet_name = 'Failure Map Data', skiprows = 1)
     map_excel = map_excel.fillna('N/A')
 
     for _, line in map_excel.iterrows():
@@ -118,7 +126,9 @@ def insert_items() :
             resume_url=line["Resume URL"],
             longitude=line["Longitude"],
             location=line["위치 기준"],
-            latitude=line["Latitude"]
+            latitude=line["Latitude"],
+            category_of_reason=line['Category of reason'],
+            covid_19=line['Covid-19 specific']
         )
 
         if hasattr(sdp_failure, 'delete'):
@@ -127,12 +137,18 @@ def insert_items() :
         # insert item to db
         else:
             try : 
-                docs.insert_one(
+                docs.update_one(
                     {
-                        "type" : sdp_failure.type,
-                        "geometry" : sdp_failure.geometry,
-                        "properties" : sdp_failure.properties
-                    }
+                        'properties.project_name' : sdp_failure.properties['project_name']
+                    },
+                    { 
+                        '$set' : {
+                            "type" : sdp_failure.type,
+                            "geometry" : sdp_failure.geometry,
+                            "properties" : sdp_failure.properties
+                            }
+                    }, 
+                    upsert = True
                 )
             except Exception as e :
                 print(e)
