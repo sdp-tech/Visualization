@@ -132,10 +132,26 @@ header.header
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-check-circle.nav__icon
-              span.nav__name Status
+              span.nav__name Failure History
             .nav__dropdown-collapse
               .nav__dropdown-content
                 select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple')
+
+          .nav__dropdown
+            a.nav__link(href='#')
+              i.bx.bx-check-circle.nav__icon
+              span.nav__name Affected Stage
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#affected-select.select.js-select2-multi.affected-select(name='affected_stage[]' multiple='multiple')
+
+          .nav__dropdown
+            a.nav__link(href='#')
+              i.bx.bx-check-circle.nav__icon
+              span.nav__name Category of Reason
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#category-select.select.js-select2-multi.category-select(name='Category of Reason[]' multiple='multiple')
 
           .nav__dropdown
             a.nav__link(href='#')
