@@ -1,5 +1,5 @@
-$menu-width: 30vw;
-$scene-width: 70vw;
+$menu-width: 25vw;
+$scene-width: 75vw;
 $scene-height: 60vh;
 
 $sections: strawberry, banana, apple, orange;
@@ -142,6 +142,7 @@ $colors: (
               position: absolute;
               left: $menu-width;
               top: -$scene-height;
+              padding : 10px;
               width: $scene-width - $menu-width;
               height: $scene-height;
               
@@ -155,7 +156,7 @@ $colors: (
               flex-direction: column;
               @each $item in $sections{
                 &.content_#{$item} {
-                  
+                  li p{text-align: left;}
                   h1{
                     color: get-color($item);
                   }
@@ -168,8 +169,7 @@ $colors: (
                 }
               }
               p {
-                max-width: 90%;
-                text-align: center;
+                text-align: justify;
               }
             }
             

@@ -61,7 +61,7 @@
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
-  width: 70vw;
+  width: 75vw;
   height: 60vh;
   position: relative;
   top: 0;
@@ -84,7 +84,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 30vw;
+  width: 25vw;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -183,9 +183,10 @@
 
 #scene #left-zone .list li.item input[type="radio"] ~ .content {
   position: absolute;
-  left: 30vw;
+  left: 25vw;
   top: -60vh;
-  width: 40vw;
+  padding: 10px;
+  width: 50vw;
   height: 60vh;
   -webkit-animation-duration: 0.75s;
           animation-duration: 0.75s;
@@ -208,16 +209,32 @@
           flex-direction: column;
 }
 
+#scene #left-zone .list li.item input[type="radio"] ~ .content.content_strawberry li p {
+  text-align: left;
+}
+
 #scene #left-zone .list li.item input[type="radio"] ~ .content.content_strawberry h1 {
   color: #D64541;
+}
+
+#scene #left-zone .list li.item input[type="radio"] ~ .content.content_banana li p {
+  text-align: left;
 }
 
 #scene #left-zone .list li.item input[type="radio"] ~ .content.content_banana h1 {
   color: #F5D76E;
 }
 
+#scene #left-zone .list li.item input[type="radio"] ~ .content.content_apple li p {
+  text-align: left;
+}
+
 #scene #left-zone .list li.item input[type="radio"] ~ .content.content_apple h1 {
   color: #00B16A;
+}
+
+#scene #left-zone .list li.item input[type="radio"] ~ .content.content_orange li p {
+  text-align: left;
 }
 
 #scene #left-zone .list li.item input[type="radio"] ~ .content.content_orange h1 {
@@ -229,8 +246,7 @@
 }
 
 #scene #left-zone .list li.item input[type="radio"] ~ .content p {
-  max-width: 90%;
-  text-align: center;
+  text-align: justify;
 }
 
 #scene #left-zone .list li.item input[type="radio"]:checked ~ label {
