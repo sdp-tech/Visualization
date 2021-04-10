@@ -70,11 +70,6 @@ function iOS() {
 //     });
 // }
 
-// function toolbar_open() {
-//     document.getElementById("toolbar").classList.toggle('open');
-//     setTimeout('$(".sidebar").removeAttr("disabled")', 100);
-// };
-
 function load_data(customOption) {
 
     const url = 'apis/data'
@@ -93,7 +88,7 @@ function load_data(customOption) {
             let json = requested['body'];
             mapdata = data_process(json);
             load_map(mapdata, customOption);
-            // options_to_html(json);
+            options_to_html(json);
             $.loading.end();
         },
         error: function (err) {
@@ -170,13 +165,11 @@ function load_map(json, customOption) {
 
         }).addTo(mymap);
 
-    // set_filter_touch_options();
-
     try {
         // markers
         geoLayer = L.geoJson(json, {
             onEachFeature: addPopup,
-            // filter: geoJson_filter,
+            filter: geoJson_filter,
             pointToLayer: geoJson_pointToLayer
         });
         
@@ -187,10 +180,10 @@ function load_map(json, customOption) {
         
 
         // Initialization
-        // updateStates(customOption);
+        updateStates(customOption);
 
         // Updata when any change is detected
-        // reloadMap(json);
+        reloadMap(json);
 
         // legend box
         var legend = L.control({position: 'bottomright'});
@@ -386,25 +379,6 @@ function subsector_to_icon(subsector) {
     return icon_png;
 }
 
-// prohibit dragging when mouse is over the filterbar
-// @deprecated
-// function set_filter_touch_options(){
-//     $('#toolbar').on("mouseover", function () {
-//         mymap.touchZoom.disable()
-//         mymap.dragging.disable();
-//         mymap.doubleClickZoom.disable();
-//         mymap.scrollWheelZoom.disable();
-//         mymap.keyboard.disable();
-//         mymap.boxZoom.disable();
-//     }).on("mouseout", function () {
-//         mymap.dragging.enable();
-//         mymap.doubleClickZoom.enable();
-//         mymap.scrollWheelZoom.enable();
-//         mymap.keyboard.enable();
-//         mymap.boxZoom.enable();
-//     });
-
-// }
 //////////////
 /// filter ///
 //////////////
@@ -471,7 +445,7 @@ function updateStates(customOption) {
         // country selection
         $('.country-select')
             .select2({
-                placeholder: "Choose a Country"
+                placeholder : "Choose a Country"
             })
             .on('change.select2', function (el) {
                 value = $(el.currentTarget).val();
@@ -685,13 +659,79 @@ function toggle_selectableOptgroup() {
     })
 }
 
+function onClickSelect2(){
+    let dropdown_links = Array.from(document.getElementsByClassName('nav__link'))
+    dropdown_links.forEach(link => {
+        link.addEventListener('click', () => {
+        //open select2 box only if navbar is opened
+        if(document.getElementById('navbar').classList.contains('nav-hover'))
+            link.parentElement.classList.toggle('select2-active')
+        })
+    }
+    )
+}
+
+//open & close navbar
+function onClickNavbar(){
+    let nav_opener = document.getElementById('nav_opener')
+    let navbar = document.getElementById('navbar')
+    let logo_names = document.querySelectorAll('.nav__logo-name')
+    let logo_subtitles = document.querySelectorAll('.nav__logo-subtitle')
+    let names = document.querySelectorAll('.nav__name')
+    let dropdown_icons = document.querySelectorAll('.nav__dropdown-icon')
+
+    nav_opener.addEventListener('click', () => {
+        //if navbar opened, close select2 boxes first 
+        if(navbar.classList.contains('nav-hover')){
+            document.querySelectorAll('.nav__dropdown').forEach(elem => elem.classList.remove('select2-active'))
+        }
+        navbar.classList.toggle('nav-hover')
+
+        logo_names.forEach((elem) => elem.classList.toggle('hover-opacity'))
+        logo_subtitles.forEach((elem) => elem.classList.toggle('hover-opacity'))
+        names.forEach((elem) => elem.classList.toggle('hover-opacity'))
+        dropdown_icons.forEach((elem) => elem.classList.toggle('hover-opacity'))
+    })
+}
+
+function setClearEachEvent() {
+    for (let input of document.querySelectorAll('#clearEach')) {
+        input.onclick = (e) => {
+            switch (input.className) {
+                case "region_clear":
+                    $('.country-select').val(null).trigger('change');
+                    break;
+                case "sector_clear":
+                    $('.sector-select').val(null).trigger('change');
+                    break;
+                case "fcyear_clear":
+                    $('.js-range-slider').data("ionRangeSlider").update({
+                        from: 1960,
+                        to: 2021,
+                    })
+                    break;
+                case "status_clear":
+                    $('.status-select').val(null).trigger('change');
+                    break;
+                case "income_clear":
+                    $('.income-select').val(null).trigger('change');
+                    break;
+                case "ppitype_clear":
+                    $('.ppitype-select').val(null).trigger('change');
+                    break;
+                default:
+            }
+        }
+    }
+}
+
 // load the map
 $.loading.start('Loading...');
 
 load_data(customOption);
 
 /* sidemenu */
-toggle_selectableOptgroup();
+// toggle_selectableOptgroup();
 
 /*clear button*/
 // clear filters - select2 & js slider
@@ -704,37 +744,9 @@ $('.clearfilter').on('click', function () {
     });
 });
 
-for (let input of document.querySelectorAll('#clearEach')) {
-    input.onclick = (e) => {
-        switch (input.className) {
-            case "region_clear":
-                $('.country-select').val(null).trigger('change');
-                break;
-            case "sector_clear":
-                $('.sector-select').val(null).trigger('change');
-                break;
-            case "fcyear_clear":
-                $('.js-range-slider').data("ionRangeSlider").update({
-                    from: 1960,
-                    to: 2021,
-                })
-                break;
-            case "status_clear":
-                $('.status-select').val(null).trigger('change');
-                break;
-            case "income_clear":
-                $('.income-select').val(null).trigger('change');
-                break;
-            case "ppitype_clear":
-                $('.ppitype-select').val(null).trigger('change');
-                break;
-            default:
-        }
-    }
-}
-
-
-////////////////
+onClickSelect2()
+onClickNavbar()
+setClearEachEvent()
 
 var dataLayerGroup;
 
@@ -753,7 +765,6 @@ function addLayerToMap(subject){
     dataLayerGroup = L.geoJson(mapdata, {
         onEachFeature: addPopup,
         filter: function (feature){
-            
             if(feature.properties.see_also)
                 return (feature.properties.see_also).includes(subject)
             return false     
