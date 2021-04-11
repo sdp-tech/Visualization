@@ -112,6 +112,14 @@ header.header
 
           .nav__dropdown
             a.nav__link(href='#')
+              i.bx.bx-money.nav__icon
+              span.nav__name Income Group
+            .nav__dropdown-collapse
+              .nav__dropdown-content
+                select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple')
+
+          .nav__dropdown
+            a.nav__link(href='#')
               i.bx.bx-pie-chart-alt-2.nav__icon
               span.nav__name Sector
             .nav__dropdown-collapse
@@ -130,20 +138,12 @@ header.header
           
           .nav__dropdown
             a.nav__link(href='#')
-              i.bx.bxs-virus.nav__icon
-              span.nav__name COVID-19 Specific
-            .nav__dropdown-collapse
-              .nav__dropdown-content
-                select#covid-select.select.js-select2-multi.covid-select(name='covid[]' multiple='multiple')
-          
-          .nav__dropdown
-            a.nav__link(href='#')
               i.bx.bx-check-circle.nav__icon
               span.nav__name Failure History
             .nav__dropdown-collapse
               .nav__dropdown-content
                 select#status-select.select.js-select2-multi.status-select(name='status[]' multiple='multiple')
-
+          
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bxs-traffic-barrier.nav__icon
@@ -162,12 +162,12 @@ header.header
 
           .nav__dropdown
             a.nav__link(href='#')
-              i.bx.bx-money.nav__icon
-              span.nav__name Income Group
+              i.bx.bxs-virus.nav__icon
+              span.nav__name COVID-19 Specific
             .nav__dropdown-collapse
               .nav__dropdown-content
-                select#income-select.select.js-select2-multi.income-select(name='income[]' multiple='multiple')
-
+                select#covid-select.select.js-select2-multi.covid-select(name='covid[]' multiple='multiple')
+          
           .nav__dropdown
             a.nav__link(href='#')
               i.bx.bx-arch.nav__icon
