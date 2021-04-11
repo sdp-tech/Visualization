@@ -7,7 +7,6 @@ var mymap = L.map('mapwrap', {
         maxBounds: bounds
      }).setView([35, 40], 2.5);
 
-
 // Marker Clusterer using Donut Clustering
 var markers = L.DonutCluster({
     chunkedLoading: true
@@ -48,6 +47,8 @@ var customOption = {
 };
 
 var isMobile = false; //initiate as false
+
+var sectorCount = Object()
 
 // device detection
 // if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
@@ -155,6 +156,7 @@ function data_process(json) {
 
         // add to dictionary
         idnameDict[element._id]=element.properties.project_name;
+        sectorCount[element.properties.sector] = sectorCount[element.properties.sector] + 1 || 1
     });
 
     return json;
@@ -407,17 +409,18 @@ function subsector_to_icon(subsector) {
 
 function optionsToHtml(data) {
 
+    const covid_fix_list =  ['covid19', 'etc', 'n/a']
+
     const property_list = getKeys(data);
     const geographical_set = removeDuplicates(property_list["geographical"]);
-    const sector_set = removeDuplicates(property_list["sector"]);
+    const sector_set = removeDuplicates(property_list["sector"]).sort((a, b) => sectorCount[b] - sectorCount[a]);
     const status_set = removeDuplicates(property_list["ppi_status"]);
-    const covid_set =  removeDuplicates(property_list["covid_19"]);
+    const covid_set =  removeDuplicates(property_list["covid_19"]).filter(elem => !covid_fix_list.includes(elem)).concat(covid_fix_list);
     const affected_set = removeDuplicates(property_list['affected_stage'])
     const category_set = removeDuplicates(property_list['category_of_reason'])
     const income_set = removeDuplicates(property_list["income_group"]);
     const ppitype_set = removeDuplicates(property_list["type_of_ppi"]);
 
-    console.log(category_set);
     var statusselect = document.getElementById('status-select');
     var affectedselect = document.getElementById('affected-select')
     var categoryselect = document.getElementById('category-select')
