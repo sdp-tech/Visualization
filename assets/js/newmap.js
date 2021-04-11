@@ -168,7 +168,7 @@ function load_map(json, customOption) {
     // ***************************/
     // mymap = L.map('mapwrap', { zoomControl: false }).setView([35, 40], 2.5);
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/sdpygl/cknbfvkpc05mu18mji4sjecum/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2RweWdsIiwiYSI6ImNrbjFkeDY3bTBtOHYydXFwd2Z6NDdobzIifQ.1Zaax4vAIFaz1m5Lpm14lw', {
+    L.tileLayer('https://api.mapbox.com/styles/v1/sdpygl/cknbhbfmg0puo17mjlmw0ceeb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2RweWdsIiwiYSI6ImNrbjFkeDY3bTBtOHYydXFwd2Z6NDdobzIifQ.1Zaax4vAIFaz1m5Lpm14lw', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
 
