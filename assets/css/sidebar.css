@@ -3,8 +3,8 @@
 /*========== VARIABLES CSS ==========*/
 :root {
   --header-height: 3.5rem;
-  --nav-width: 219px;
-  --nav-select-width: 175px;
+  --nav-width: 300px;
+  --nav-select-width: 240px;
   /*========== Colors ==========*/
   --first-color: #c44536;
   --first-color: #83a8a6;
@@ -219,30 +219,11 @@ img {
 
 /* ========== MEDIA QUERIES ==========*/
 /* For small devices reduce search*/
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 320px) {
   .header__search {
     width: 70%;
   }
-  .header__container {
-    height: calc(var(--header-height) + .5rem);
-  }
-  .header__img {
-    width: 40px;
-    height: 40px;
-    /* order: 1; */
-    margin-left : 0.5rem;
-  } 
-  .header__logo {
-    display: block;
-    position: fixed;
-    margin-left : 3.5rem;
-  }
-  .header__toggle {
-    /* display: none; */
-    margin-right : 1rem;
-  }
 }
-
 @media screen and (min-width: 768px) {
   .header {
     padding: 0 3rem 0 6rem;
