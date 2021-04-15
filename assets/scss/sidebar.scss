@@ -283,6 +283,19 @@ img{
             font-size: 1.3rem;
         }
 
+        &__logo-name{
+            font-size : 1.5rem;
+        }
+
+        &__name{
+            font-size : 1rem;
+        }
+
+        &__logo {
+            margin-top : 1rem;
+            font-size : 1.2rem;
+        }
+
         &__logo-name,
         &__name,
         &__subtitle,
@@ -290,6 +303,8 @@ img{
             opacity: 0;
             transition: .3s;
         }
+        
+       
     }
 }
 

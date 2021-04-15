@@ -781,6 +781,9 @@ function onClickNavbar(){
     let dropdown_icons = document.querySelectorAll('.nav__dropdown-icon')
 
     nav_opener.addEventListener('click', () => {
+        //alter opener direction
+        nav_opener.innerText = nav_opener.innerText === ">>" ? "<<" : ">>"
+
         //if navbar opened, close select2 boxes first 
         if(navbar.classList.contains('nav-hover')){
             document.querySelectorAll('.nav__dropdown').forEach(elem => elem.classList.remove('select2-active'))
