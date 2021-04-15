@@ -172,7 +172,7 @@ img {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding-bottom: 3rem;
-  overflow: auto;
+  overflow: visible;
   scrollbar-width: none;
   /* For mozilla */
   /* For Google Chrome and others */
@@ -190,6 +190,7 @@ img {
 .nav__list, .nav__items {
   display: -ms-grid;
   display: grid;
+  overflow: visible;
 }
 
 .nav__list {
@@ -198,6 +199,7 @@ img {
 
 .nav__items {
   row-gap: 1.5rem;
+  overflow: visible;
 }
 
 .nav__subtitle {
@@ -295,12 +297,9 @@ img {
 
 /* ========== MEDIA QUERIES ==========*/
 /* For small devices reduce search*/
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 320px) {
   .header__search {
     width: 70%;
-  }
-  .header__container{
-  background-color : red;
   }
 }
 
@@ -335,6 +334,7 @@ img {
   }
   .nav__items {
     row-gap: 1.7rem;
+    overflow: visible;
   }
   .nav__icon {
     font-size: 1.3rem;

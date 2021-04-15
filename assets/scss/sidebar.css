@@ -3,8 +3,8 @@
 /*========== VARIABLES CSS ==========*/
 :root {
   --header-height: 3.5rem;
-  --nav-width: 219px;
-  --nav-select-width: 175px;
+  --nav-width: 300px;
+  --nav-select-width: 240px;
   /*========== Colors ==========*/
   --first-color: #c44536;
   --first-color: #83a8a6;
@@ -330,6 +330,16 @@ img {
   }
   .nav__icon {
     font-size: 1.3rem;
+  }
+  .nav__logo-name {
+    font-size: 1.5rem;
+  }
+  .nav__name {
+    font-size: 1rem;
+  }
+  .nav__logo {
+    margin-top: 1rem;
+    font-size: 1.2rem;
   }
   .nav__logo-name, .nav__name, .nav__subtitle, .nav__dropdown-icon {
     opacity: 0;

@@ -775,6 +775,7 @@ function onClickSelect2(){
 function onClickNavbar(){
     let nav_opener = document.getElementById('nav_opener')
     let navbar = document.getElementById('navbar')
+    let nav_subtitles = document.querySelectorAll('.nav__subtitle')
     let logo_names = document.querySelectorAll('.nav__logo-name')
     let logo_subtitles = document.querySelectorAll('.nav__logo-subtitle')
     let names = document.querySelectorAll('.nav__name')
@@ -782,7 +783,7 @@ function onClickNavbar(){
 
     nav_opener.addEventListener('click', () => {
         //alter opener direction
-        nav_opener.innerText = nav_opener.innerText === ">>" ? "<<" : ">>"
+        // nav_opener.innerText = nav_opener.innerText === ">>" ? "<<" : ">>"
 
         //if navbar opened, close select2 boxes first 
         if(navbar.classList.contains('nav-hover')){
@@ -793,6 +794,7 @@ function onClickNavbar(){
         logo_names.forEach((elem) => elem.classList.toggle('hover-opacity'))
         logo_subtitles.forEach((elem) => elem.classList.toggle('hover-opacity'))
         names.forEach((elem) => elem.classList.toggle('hover-opacity'))
+        nav_subtitles.forEach((elem) => elem.classList.toggle('hover-opacity'))
         dropdown_icons.forEach((elem) => elem.classList.toggle('hover-opacity'))
     })
 }

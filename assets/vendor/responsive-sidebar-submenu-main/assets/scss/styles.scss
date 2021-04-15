@@ -135,7 +135,7 @@ img{
         flex-direction: column;
         justify-content: space-between;
         padding-bottom: 3rem;
-        overflow: auto;
+        overflow: visible;
         scrollbar-width: none; /* For mozilla */
 
         /* For Google Chrome and others */
@@ -153,12 +153,14 @@ img{
     &__list, 
     &__items{
         display: grid;
+        overflow: visible;
     }
     &__list{
         row-gap: 2.5rem;
     }
     &__items{
         row-gap: 1.5rem;
+        overflow: visible;
     }
     &__subtitle{
         font-size: var(--normal-font-size);
@@ -282,6 +284,7 @@ img{
         
         &__items{
             row-gap: 1.7rem;
+            overflow: visible;
         }
 
         &__icon{
