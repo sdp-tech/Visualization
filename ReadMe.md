@@ -18,16 +18,6 @@ We continue to work with the World Bank through the "PPI Deal Tracking" project.
 Based on the infrastructure database of SDPs built through the previous Phases, we plan to make visualizations that can derive insights (and here it is!)
 
 ***
-# Features
-  - Retreive data from JSON API
-  - Interactive filters
-  - Multiple select dropdown
-  - Pop-up bind marker
-
-You can also:
-  - ...
-
-***
 # Tech
 
 SDP Failure Map uses a number of open source projects to work properly:
