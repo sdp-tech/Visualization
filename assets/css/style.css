@@ -1432,3 +1432,15 @@ tr:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+@media (min-width: 1300px){
+  .d-lg-block-fixed {
+      display: block !important;  
+  }
+}
+
+@media (min-width: 1300px){
+  .d-lg-none-fixed{
+    display : none !important;
+  }
+}
