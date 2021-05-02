@@ -1442,6 +1442,11 @@ tr:hover {
       display: block !important;  
   }
 }
+@media (min-width: 420px){
+  .d-xs-block{
+    display : block !important;
+  }
+}
 
 @media (min-width: 1320px){
   .d-xxl-none{
