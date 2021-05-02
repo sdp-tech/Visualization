@@ -5,14 +5,23 @@ const cors = require('cors')
 const app = express()
 const PORT = 4000
 var cached_json = ""
+var counter = function (req, res){
+  res.render('index', {
+    countryn : 94,
+    delayn : 351,
+    canceln : 50,
+    sector : 'Energy'
+    });
+}
 
 app.use(cors())
 app.use('/', express.static(__dirname+ '/node_modules/'));
 app.use('/assets', express.static(__dirname+'/assets'));
+app.set('views', __dirname + '/views');
 app.set('view engine', 'pug')
 
-app.get('/', (__, res)=>res.render('index'))
-app.get('/index', (__, res)=>res.render('index'))
+app.get('/', counter)
+app.get('/index', counter)
 app.get('/inner-page', (__, res)=>res.render('inner-page'))
 app.get('/pinner-page', (__, res)=>res.render('pinner-page'))
 app.get('/m-inner-page', (__, res)=>res.render('m-inner-page'))
