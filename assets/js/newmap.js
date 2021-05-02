@@ -1,34 +1,34 @@
 var mapdata;
 var geoLayer;
 var idnameDict = new Object();
-var bounds = [[-90,-180],   [90,180]];
-var mymap = L.map('mapwrap', { 
-        zoomControl: false,
-        maxBounds: bounds
-     }).setView([35, 40], 2.5);
+var bounds = [[-90, -180], [90, 180]];
+var mymap = L.map('mapwrap', {
+    zoomControl: false,
+    maxBounds: bounds
+}).setView([35, 40], 2.5);
 
 // Marker Clusterer using Donut Clustering
 var markers = L.DonutCluster({
     chunkedLoading: true
 }, {
     key: 'sector',
-    sumField : 'value', 
-    order : ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"], 
+    sumField: 'value',
+    order: ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"],
     // title is the visible value when mouse over to cluster
-    title: { 
-        'Energy' : 'Energy',
-        'ICT' : "ICT", 
-        'Municipal Solid Waste' : 'Municipal Solid Waste', 
-        'Transport' : 'Transport', 
-        'Water and sewerage' : "Water and sewerage"
-        },
+    title: {
+        'Energy': 'Energy',
+        'ICT': "ICT",
+        'Municipal Solid Waste': 'Municipal Solid Waste',
+        'Transport': 'Transport',
+        'Water and sewerage': "Water and sewerage"
+    },
     arcColorDict: {
         "Energy": 'green',
-        "ICT" : 'purple',
-        "Municipal Solid Waste" : 'orange',
-        "Transport" : 'blue',
-        "Water and sewerage" : 'gray',
-        }
+        "ICT": 'purple',
+        "Municipal Solid Waste": 'orange',
+        "Transport": 'blue',
+        "Water and sewerage": 'gray',
+    }
 });
 // filterArray
 var customOption = {
@@ -38,10 +38,10 @@ var customOption = {
         "from": 1960,
         "to": 2021,
     },
-    covidOp : [],
+    covidOp: [],
     statusOp: [],
-    affectedOp : [],
-    categoryOp : [],
+    affectedOp: [],
+    categoryOp: [],
     incomeOp: [],
     ppitypeOp: [],
 };
@@ -51,23 +51,23 @@ var isMobile = false; //initiate as false
 var sectorCount = Object()
 
 // device detection
-if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
-    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
+if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
+    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))) {
     isMobile = true;
 }
 
 function iOS() {
     return [
-      'iPhone Simulator',
-      'iPhone'
+        'iPhone Simulator',
+        'iPhone'
     ].includes(navigator.platform)
-    // iPad on iOS 13 detection
-    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+        // iPad on iOS 13 detection
+        || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
-if(isMobile){
-    $(".nav__logo").css({display:'none'});
-    $('.js-select2-multi').on('select2:opening select2:closing', function( event ) {
+if (isMobile) {
+    $(".nav__logo").css({ display: 'none' });
+    $('.js-select2-multi').on('select2:opening select2:closing', function (event) {
         var $searchfield = $('.select2-search__field');
         $searchfield.attr('inputmode', 'none');
         $searchfield.prop('readonly', 'readonly');
@@ -110,16 +110,16 @@ function data_process(json) {
                 option = ""
 
             switch (col) {
-                case "affected_stage" : 
+                case "affected_stage":
                     option = option.toLowerCase().trim()
                     break;
-                case "covid_19" :
+                case "covid_19":
                     option = option.split(',').map(e => e.toLowerCase().trim())
                     break;
-                case "category_of_reason" :
+                case "category_of_reason":
                     option = option.split(',').map(e => {
                         e = e.toLowerCase().trim()
-                        return e[e.length - 1] === '.' ? e.substr(0, e.length-1) : e
+                        return e[e.length - 1] === '.' ? e.substr(0, e.length - 1) : e
                     })
                     break;
                 case "fc_year":
@@ -155,7 +155,7 @@ function data_process(json) {
         })
 
         // add to dictionary
-        idnameDict[element._id]=element.properties.project_name;
+        idnameDict[element._id] = element.properties.project_name;
         sectorCount[element.properties.sector] = sectorCount[element.properties.sector] + 1 || 1
     });
 
@@ -174,13 +174,13 @@ function load_map(json, customOption) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
 
-            tileSize: 512,
-            noWrap: false,
-            // zoom controller
-            minZoom: 2,
-            maxZoom: 16,
-            zoomOffset: -1
-        }).addTo(mymap);
+        tileSize: 512,
+        noWrap: false,
+        // zoom controller
+        minZoom: 2,
+        maxZoom: 16,
+        zoomOffset: -1
+    }).addTo(mymap);
 
     try {
         // markers
@@ -189,12 +189,12 @@ function load_map(json, customOption) {
             filter: geoJson_filter,
             pointToLayer: geoJson_pointToLayer
         });
-        
+
         mymap.fitBounds(geoLayer.getBounds());
         markers.addLayer(geoLayer);
 
         mymap.addLayer(markers);
-        
+
 
         // Initialization
         updateStates(customOption);
@@ -203,21 +203,21 @@ function load_map(json, customOption) {
         reloadMap(json);
 
         // legend box
-        var legend = L.control({position: 'bottomright'});
-        legend.onAdd = function(mymap) {
+        var legend = L.control({ position: 'bottomright' });
+        legend.onAdd = function (mymap) {
             var div = L.DomUtil.create("div", "legend");
             div.style.marginBottom = "5rem";
             div.innerHTML += "<h4>Sector</h4>";
             div.innerHTML += '<i style="background: green"></i><span>Energy</span><br>';
             div.innerHTML += '<i style="background: blue"></i><span>Transport</span><br>';
-            div.innerHTML += '<i style="background: gray"></i><span>Water and sewerage</span><br>';            
+            div.innerHTML += '<i style="background: gray"></i><span>Water and sewerage</span><br>';
             div.innerHTML += '<i style="background: purple"></i><span>ICT</span><br>';
             div.innerHTML += '<i style="background: orange"></i><span>Municipal Solid Waste</span><br>';
             return div;
         };
-          
+
         legend.addTo(mymap);
-        
+
         // Searchbox
         mymap.addControl(new L.Control.Search({
             position: 'topright',
@@ -235,12 +235,12 @@ function load_map(json, customOption) {
 
         // zoom box
         L.control.zoom({
-            position: isMobile ? 'bottomright':'topright'
+            position: isMobile ? 'bottomright' : 'topright'
         }).addTo(mymap);
 
         // zoom out to original level
         L.easyButton({
-            position: isMobile ? 'bottomright':'topright',
+            position: isMobile ? 'bottomright' : 'topright',
             states: [{
                 stateName: 'zoom-to-original',        // name the state
                 icon: 'fas fa-map',               // and define its properties
@@ -253,16 +253,16 @@ function load_map(json, customOption) {
         }).addTo(mymap);
 
         L.easyButton({
-          position: isMobile ? "topright" : null,
-          states: [
-            {
-              icon: "fas fa-filter",
-              title: "mobile filter button",
-              onClick: function (e) {
-                $("#modal_filter").modal("show");
-              },
-            },
-          ],
+            position: isMobile ? "topright" : null,
+            states: [
+                {
+                    icon: "fas fa-filter",
+                    title: "mobile filter button",
+                    onClick: function (e) {
+                        $("#modal_filter").modal("show");
+                    },
+                },
+            ],
         }).addTo(mymap);
 
     } catch (err) {
@@ -273,7 +273,7 @@ function load_map(json, customOption) {
 
 function addPopup(feature, layer) {
     let see_also_list = feature.properties.see_also
-    if(see_also_list) {
+    if (see_also_list) {
         see_also_list = see_also_list.map((_id) => idnameDict[_id]).join(', ');
     }
 
@@ -313,8 +313,8 @@ function geoJson_filter(feature) {
     const covidselect = (customOption.covidOp.length == 0) ? true : (feature.properties.covid_19.some((covid) => {
         return customOption.covidOp.includes(covid)
     }))
-    const affectedselect = (customOption.affectedOp.length == 0) ? true :  (customOption.affectedOp.includes(feature.properties.affected_stage));
-    const categoryselect = (customOption.categoryOp.length == 0) ? true :  (feature.properties.category_of_reason.some((category) => {
+    const affectedselect = (customOption.affectedOp.length == 0) ? true : (customOption.affectedOp.includes(feature.properties.affected_stage));
+    const categoryselect = (customOption.categoryOp.length == 0) ? true : (feature.properties.category_of_reason.some((category) => {
         return customOption.categoryOp.includes(category)
     }))
     const incomeselect = (customOption.incomeOp.length == 0) ? true : (customOption.incomeOp.includes(feature.properties.income_group));
@@ -339,10 +339,10 @@ function geoJson_pointToLayer(feature, latlng, layer) {
     const marker = new L.Marker(latlng, {
         // title is not the visible one. only for clustering
         title: feature.properties.project_name,
-        sector : sector,
+        sector: sector,
         icon: awesomemark,
     });
-    
+
     return marker;
 };
 
@@ -409,13 +409,13 @@ function subsector_to_icon(subsector) {
 
 function optionsToHtml(data) {
 
-    const category_fix_list =  ['covid-19', 'etc', 'n/a']
+    const category_fix_list = ['covid-19', 'etc', 'n/a']
 
     const property_list = getKeys(data);
     const geographical_set = removeDuplicates(property_list["geographical"]);
     const sector_set = removeDuplicates(property_list["sector"]).sort((a, b) => sectorCount[b] - sectorCount[a]);
     const status_set = removeDuplicates(property_list["ppi_status"]);
-    const covid_set =  removeDuplicates(property_list["covid_19"]).filter(elem => elem !== 'n/a').concat(['n/a'])
+    const covid_set = removeDuplicates(property_list["covid_19"]).filter(elem => elem !== 'n/a').concat(['n/a'])
     const affected_set = removeDuplicates(property_list['affected_stage'])
     const category_set = removeDuplicates(property_list['category_of_reason']).filter(elem => !category_fix_list.includes(elem)).concat(category_fix_list);
     const income_set = removeDuplicates(property_list["income_group"]);
@@ -424,10 +424,10 @@ function optionsToHtml(data) {
     var statusselect = document.getElementById('status-select');
     var affectedselect = document.getElementById('affected-select')
     var categoryselect = document.getElementById('category-select')
-    var covidselect =  document.getElementById('covid-select')
+    var covidselect = document.getElementById('covid-select')
     var incomeselect = document.getElementById('income-select');
     var ppitypeselect = document.getElementById('ppitype-select');
-    
+
 
     // region select
     $(function () {
@@ -457,13 +457,13 @@ function optionsToHtml(data) {
     addOptionToSelect(status_set, statusselect);
 
     // affected 
-    addOptionToSelect(affected_set, affectedselect )
-    
+    addOptionToSelect(affected_set, affectedselect)
+
     // covid
-    addOptionToSelect(covid_set, covidselect )
+    addOptionToSelect(covid_set, covidselect)
 
     // category
-    addOptionToSelect(category_set, categoryselect )
+    addOptionToSelect(category_set, categoryselect)
 
     // income
     addOptionToSelect(income_set, incomeselect);
@@ -471,7 +471,7 @@ function optionsToHtml(data) {
     // ppi-type
     addOptionToSelect(ppitype_set, ppitypeselect);
 
-    
+
 }
 
 function addOptionToSelect(option_set, select) {
@@ -488,7 +488,7 @@ function updateStates(customOption) {
         // country selection
         $('.country-select')
             .select2({
-                placeholder : "Choose a Country"
+                placeholder: "Choose a Country"
             })
             .on('change.select2', function (el) {
                 value = $(el.currentTarget).val();
@@ -541,19 +541,6 @@ function updateStates(customOption) {
                 }
             });
 
-         // status selection
-        $('.status-select')
-            .select2({
-                placeholder: "Choose a Status"
-            })
-            .on('change', function (el) {
-                value = $(el.currentTarget).val();
-                customOption.statusOp = [];
-                for (let i = 0; i < value.length; i++) {
-                    customOption.statusOp.push(value[i]);
-                }
-            });
-        
         // status selection
         $('.status-select')
             .select2({
@@ -566,7 +553,20 @@ function updateStates(customOption) {
                     customOption.statusOp.push(value[i]);
                 }
             });
-        
+
+        // status selection
+        $('.status-select')
+            .select2({
+                placeholder: "Choose a Status"
+            })
+            .on('change', function (el) {
+                value = $(el.currentTarget).val();
+                customOption.statusOp = [];
+                for (let i = 0; i < value.length; i++) {
+                    customOption.statusOp.push(value[i]);
+                }
+            });
+
         // affected selection
         $('.affected-select')
             .select2({
@@ -580,7 +580,7 @@ function updateStates(customOption) {
                 }
             });
 
-                    // status selection
+        // status selection
         $('.category-select')
             .select2({
                 placeholder: "Choose a Category"
@@ -645,7 +645,7 @@ function getKeys(input) {
         Object.entries(properties).forEach(([key, val]) => {
             acc[key] = acc[key] || new Set();
             //to unpackage options in array
-            if(Array.isArray(val)) {
+            if (Array.isArray(val)) {
                 val.forEach(elem => {
                     acc[key].add(elem);
                 })
@@ -700,8 +700,8 @@ function yearIsincluded(feature, yearOp) {
     let dateFrom = yearOp["from"];
     let dateTo = yearOp["to"];
 
-    if(includeNA()){
-        return ((dateFrom <= targetyear && targetyear <= dateTo) || targetyear == 0);            
+    if (includeNA()) {
+        return ((dateFrom <= targetyear && targetyear <= dateTo) || targetyear == 0);
     }
     return (dateFrom <= targetyear && targetyear <= dateTo);
 }
@@ -759,21 +759,22 @@ function toggle_selectableOptgroup() {
     })
 }
 
-function onClickSelect2(){
+function onClickSelect2() {
     let dropdown_links = Array.from(document.getElementsByClassName('nav__link'))
     dropdown_links.forEach(link => {
         link.addEventListener('click', () => {
-        //open select2 box only if navbar is opened
-        if(document.getElementById('navbar').classList.contains('nav-hover'))
-            link.parentElement.classList.toggle('select2-active')
+            //open select2 box only if navbar is opened
+            if (document.getElementById('navbar').classList.contains('nav-hover'))
+                link.parentElement.classList.toggle('select2-active')
         })
     }
     )
 }
 
 //open & close navbar
-function onClickNavbar(){
+function onClickNavbar() {
     let nav_opener = document.getElementById('nav_opener')
+    let double_arrow = nav_opener.firstChild;
     let navbar = document.getElementById('navbar')
     let nav_subtitles = document.querySelectorAll('.nav__subtitle')
     let logo_names = document.querySelectorAll('.nav__logo-name')
@@ -786,7 +787,7 @@ function onClickNavbar(){
         // nav_opener.innerText = nav_opener.innerText === ">>" ? "<<" : ">>"
 
         //if navbar opened, close select2 boxes first 
-        if(navbar.classList.contains('nav-hover')){
+        if (navbar.classList.contains('nav-hover')) {
             document.querySelectorAll('.nav__dropdown').forEach(elem => elem.classList.remove('select2-active'))
         }
         navbar.classList.toggle('nav-hover')
@@ -796,6 +797,10 @@ function onClickNavbar(){
         names.forEach((elem) => elem.classList.toggle('hover-opacity'))
         nav_subtitles.forEach((elem) => elem.classList.toggle('hover-opacity'))
         dropdown_icons.forEach((elem) => elem.classList.toggle('hover-opacity'))
+
+        // 항상 두 값은 (0, 1), (1, 0) 상태 유지.
+        double_arrow.classList.toggle('fa-angle-double-right')
+        double_arrow.classList.toggle('fa-angle-double-left')
     })
 }
 
@@ -830,13 +835,52 @@ function setClearEachEvent() {
     }
 }
 
+function configHamburgerSetting() {
+    if ($(".nav-menu").length) {
+        var $mobile_nav = $(".nav-menu").clone().prop({
+            class: "mobile-nav d-block",
+        });
+        $("body").append($mobile_nav);
+        $("body").prepend(
+            '<button type="button" class="mobile-nav-toggle d-xxl-none"><i class="icofont-navigation-menu" style="color:#444444"></i></button>'
+        );
+        $("body").append('<div class="mobile-nav-overly"></div>');
+        $(document).on("click", ".mobile-nav-toggle", function (e) {
+            $("body").toggleClass("mobile-nav-active");
+            $(".mobile-nav-toggle i").toggleClass(
+                "icofont-navigation-menu icofont-close"
+            );
+            $(".mobile-nav-overly").toggle();
+        });
+        $(document).on("click", ".mobile-nav .drop-down > a", function (e) {
+            e.preventDefault();
+            $(this).next().slideToggle(300);
+            $(this).parent().toggleClass("active");
+        });
+        $(document).click(function (e) {
+            var container = $(".mobile-nav, .mobile-nav-toggle");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                if ($("body").hasClass("mobile-nav-active")) {
+                    $("body").removeClass("mobile-nav-active");
+                    $(".mobile-nav-toggle i").toggleClass(
+                        "icofont-navigation-menu icofont-close"
+                    );
+                    $(".mobile-nav-overly").fadeOut();
+                }
+            }
+        });
+    } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
+        $(".mobile-nav, .mobile-nav-toggle").hide();
+    }
+}
+
 // load the map
 $.loading.start('Loading...');
 load_data(customOption);
 onClickSelect2()
 onClickNavbar()
 setClearEachEvent()
-
+configHamburgerSetting()
 
 /*clear button*/
 // clear filters - select2 & js slider
@@ -848,3 +892,4 @@ $('.clearfilter').on('click', function () {
         to: 2021,
     });
 });
+

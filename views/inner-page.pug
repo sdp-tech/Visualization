@@ -65,39 +65,34 @@ head
   link(rel='stylesheet' href='assets/css/sidebar.css')
   title Failure Map
 
-
 // ========== HEADER ==========
 header.header
   .header__container
+    h1
+      a(href='../') 
+        span#header-heading SDP Project MaPPPing 
+    
+    nav#nav_inner.nav-menu.d-none.d-xxl-block
+      ul
+        li.active
+          a(href='../#hero') Home
+        li
+          a(href='../#about') Project MaPPPing
+        li
+          a(href='../#Insight') Insight
+        li
+          a(href='../#Methodology') Methodology
+        li
+          a(href='../#team') SDP Team
+        li
+          a(href='../#contact') Contact Us
 
-    img.header__img(src='assets/img/logo.png' alt='')
-    a.header__logo(href='../') SDP Project MaPPPing
-    //- .header__search
-    //-   input.header__input(type='search' placeholder='Search')
-    //-   i.bx.bx-search.header__icon
-    #nav_inner 
-      nav.nav-menu.d-none.d-lg-block
-        ul
-          li.active
-            a(href='../#hero') Home
-          li
-            a(href='../#about') Project MaPPPing
-          li
-            a(href='../#Insight') Insight
-          li
-            a(href='../#Methodology') Methodology
-          li
-            a(href='../#team') SDP Team
-          li
-            a(href='../#contact') Contact Us
-    .header__toggle
-      i#header-toggle.bx.bx-menu
 // ========== NAV ==========
 #navbar.nav
   nav.nav__container
     div
       a#nav_opener.nav__link.nav__logo
-        i.fas.fa-bars
+        i#arrow.fas.fa-angle-double-right
       .nav__list
         .nav__items
           span.nav__subtitle Filters
@@ -176,13 +171,9 @@ header.header
               .nav__dropdown-content
                 select#ppitype-select.select.js-select2-multi.ppitype-select(name='ppitype[]' multiple='multiple')
         
-            
     a.nav__link.active(href='index')
       i.bx.bx-home.nav__icon
       span.nav__name Home
-
-
-              
 
 // ========== CONTENTS ==========
 main
@@ -210,8 +201,6 @@ script(src='https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.mi
 script(src='assets/js/leaflet.awesome-markers.js')
 script(src='assets/js/loading.js')
 
-// Template Main JS File
-//- script(src='assets/js/main.js')
 script(src='assets/js/tutorial.js')
 // personal file
 script(type='text/javascript' src='assets/js/newmap.js')
