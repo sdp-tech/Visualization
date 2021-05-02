@@ -1434,13 +1434,13 @@ tr:hover {
 }
 
 @media (min-width: 1300px){
-  .d-lg-block-fixed {
+  .d-xxl-block {
       display: block !important;  
   }
 }
 
 @media (min-width: 1300px){
-  .d-lg-none-fixed{
+  .d-xxl-none{
     display : none !important;
   }
 }

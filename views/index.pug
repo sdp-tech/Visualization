@@ -39,7 +39,7 @@ header#header.fixed-top.header-transparent
         a(href='index')
           span Project MaPPPing
 
-    nav.nav-menu.d-none.d-lg-block
+    nav.nav-menu.d-none.d-xxl-block
       ul
         li.active
           a(href='#hero') Home
@@ -55,6 +55,8 @@ header#header.fixed-top.header-transparent
           a(href='#team') SDP Team
         li
           a(href='#contact') Contact Us
+    //hamburger 버튼이 나타날 때, header-scrolled 클래스로 인해 nav bar가 과하게 줄어드는 현상 방지하기 위한 더미 div
+    div.d-xxl.none(style='height:60px ')
     // .nav-menu
   // End Header
 // ======= Hero Section =======
