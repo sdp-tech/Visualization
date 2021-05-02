@@ -173,7 +173,6 @@ function load_map(json, customOption) {
     L.tileLayer('https://api.mapbox.com/styles/v1/sdpygl/cknbhbfmg0puo17mjlmw0ceeb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2RweWdsIiwiYSI6ImNrbjFkeDY3bTBtOHYydXFwd2Z6NDdobzIifQ.1Zaax4vAIFaz1m5Lpm14lw', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
-
         tileSize: 512,
         noWrap: false,
         // zoom controller
@@ -194,7 +193,6 @@ function load_map(json, customOption) {
         markers.addLayer(geoLayer);
 
         mymap.addLayer(markers);
-
 
         // Initialization
         updateStates(customOption);
@@ -234,23 +232,23 @@ function load_map(json, customOption) {
         );
 
         // zoom box
-        L.control.zoom({
-            position: isMobile ? 'bottomright' : 'topright'
-        }).addTo(mymap);
+        // L.control.zoom({
+        //     position: isMobile ? 'bottomright' : 'topright'
+        // }).addTo(mymap);
 
-        // zoom out to original level
-        L.easyButton({
-            position: isMobile ? 'bottomright' : 'topright',
-            states: [{
-                stateName: 'zoom-to-original',        // name the state
-                icon: 'fas fa-map',               // and define its properties
-                title: 'zoom to a original',      // like its title
-                onClick: function (btn, map) {       // and its callback
-                    map.setView([35, 40], 2.5);
-                    btn.state('zoom-to-original');    // change state on click!
-                }
-            }]
-        }).addTo(mymap);
+        // // zoom out to original level
+        // L.easyButton({
+        //     position: isMobile ? 'bottomright' : 'topright',
+        //     states: [{
+        //         stateName: 'zoom-to-original',        // name the state
+        //         icon: 'fas fa-map',               // and define its properties
+        //         title: 'zoom to a original',      // like its title
+        //         onClick: function (btn, map) {       // and its callback
+        //             map.setView([35, 40], 2.5);
+        //             btn.state('zoom-to-original');    // change state on click!
+        //         }
+        //     }]
+        // }).addTo(mymap);
 
         L.easyButton({
             position: isMobile ? "topright" : null,
