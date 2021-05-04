@@ -93,7 +93,6 @@ function load_data(customOption) {
             mapdata = data_process(json);
             load_map(mapdata, customOption);
             optionsToHtml(json);
-            $.loading.end();
         },
         error: function (err) {
             console.log("ERR", err);
@@ -873,7 +872,6 @@ function configHamburgerSetting() {
 }
 
 // load the map
-$.loading.start('Loading...');
 load_data(customOption);
 onClickSelect2()
 onClickNavbar()
