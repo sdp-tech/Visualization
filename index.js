@@ -23,7 +23,6 @@ app.set('view engine', 'pug')
 app.get('/', counter)
 app.get('/index', counter)
 app.get('/inner-page', (__, res)=>res.render('inner-page'))
-app.get('/pinner-page', (__, res)=>res.render('pinner-page'))
 app.get('/m-inner-page', (__, res)=>res.render('m-inner-page'))
 app.get('/terms', (__, res)=>res.render('terms'))
 
