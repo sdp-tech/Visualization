@@ -73,13 +73,12 @@
 
   // Mobile Navigation
   if ($(".nav-menu").length) {
-    console.log($(".nav-menu").length)
     var $mobile_nav = $(".nav-menu").clone().prop({
-      class: "mobile-nav d-lg-none",
+      class: "mobile-nav d-block",
     });
     $("body").append($mobile_nav);
     $("body").prepend(
-      '<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>'
+      '<button type="button" class="mobile-nav-toggle d-xxl-none"><i class="icofont-navigation-menu"></i></button>'
     );
     $("body").append('<div class="mobile-nav-overly"></div>');
     $(document).on("click", ".mobile-nav-toggle", function (e) {
@@ -242,12 +241,3 @@ $(".insight-card").owlCarousel({
     },
   },
 });
-
-var navbar = document.getElementsByClassName('d-lg-block')[0]
-navbar.classList.remove('d-lg-block')
-navbar.classList.add('d-lg-block-fixed')
-
-var hamburger = document.getElementsByClassName('mobile-nav-toggle')[0]
-hamburger.classList.remove('d-lg-none')
-hamburger.classList.add('d-lg-none-fixed')
-

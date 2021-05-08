@@ -39,7 +39,7 @@ header#header.fixed-top.header-transparent
         a(href='index')
           span Project MaPPPing
 
-    nav.nav-menu.d-none.d-lg-block
+    nav.nav-menu.d-none.d-xxl-block
       ul
         li.active
           a(href='#hero') Home
@@ -55,6 +55,8 @@ header#header.fixed-top.header-transparent
           a(href='#team') SDP Team
         li
           a(href='#contact') Contact Us
+    //hamburger 버튼이 나타날 때, header-scrolled 클래스로 인해 nav bar가 과하게 줄어드는 현상 방지하기 위한 더미 div
+    div.d-xxl.none(style='height:60px ')
     // .nav-menu
   // End Header
 // ======= Hero Section =======
@@ -134,34 +136,6 @@ main#main
               h4 Failure-Specific Data
               p Failure Map uniquely focuses on recording delayed or canceled data of PPP projects. The specificity of the failure record data will be a great opportunity for users to explore significant insights based on their own interest. 
               p     
-          //- .row
-          //-   .icon-box(data-aos='fade-up' data-aos-delay='300')
-          //-     .about-title Users Who Can Benefit from Our Map:
-          //-     ul.text-center
-          //-       li  Project Developers
-          //-       li  Project Investors
-          //-       li  Project Asset Managers
-          //-       li  Government Agencies
-          //-       li  Researchers
-          //-       li  And more&mldr;
-          //-     p
-          //-     | o To learn more about how to use the map, please refer to 
-          //-     strong &lsquo;Tutorial&rsquo;
-          //-     |  above the map.
-          //-     p
-          //-     | o To know more about terms and standards used in the map, please refer to 
-          //-     strong &apos;Methodology&apos;.
-          //-     p
-          //-     | o To maximize your experience, please refer to 
-          //-     strong &lsquo;Insight&rsquo;
-          //-     |  and start developing your own!
-          //-     p
-          //-     | o To know more about us, please refer to 
-          //-     strong &apos;SDP Team&apos;
-          //-     |  and 
-          //-     strong &apos;Contact Us&apos;.
-
-
   // End About Section
   // ======= Insight Section =======
   section#Insight.insight-box
@@ -270,7 +244,8 @@ main#main
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-world
-              span(data-toggle='counter-up') 94
+              span(data-toggle='counter-up')
+                countryn=countryn
               p
                 strong Countries
                 br
@@ -278,7 +253,8 @@ main#main
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-clock-time
-              span(data-toggle='counter-up') 351
+              span(data-toggle='counter-up')
+                delayn=delayn
               p
                 strong Delayed projects
                 br
@@ -286,7 +262,8 @@ main#main
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-exclamation-tringle
-              span(data-toggle='counter-up') 50
+              span(data-toggle='counter-up')
+                canceln=canceln
               p
                 strong Cancelled projects
                 br
@@ -294,7 +271,8 @@ main#main
           .col-lg-3.col-md-6.d-md-flex.align-items-md-stretch
             .count-box
               i.icofont-files-stack
-              span(data-aos='fade-in' data-aos-delay='50') Energy
+              span(data-aos='fade-in')
+                sector=sector
               p
                 strong Most affected sector
                 br

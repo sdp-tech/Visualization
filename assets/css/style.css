@@ -125,6 +125,7 @@ h6 {
   list-style: none;
 }
 
+
 .nav-menu > ul > li {
   position: relative;
   white-space: nowrap;
@@ -142,16 +143,6 @@ h6 {
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
-}
-#nav_inner {
-  /* position: relative;*/
-  display: inline-block; 
-  height: 100%;
-  width: 100%;
-  
-}
-#nav_inner a {
-  color: #c44536;
 }
 
 .nav-menu a:hover,
@@ -246,7 +237,9 @@ h6 {
   /* margin-top: 1000vh; */
   height: auto;
 }
-
+#nav_inner a {
+  color: #444444;
+}
 
 @media (max-width: 1366px) {
   .nav-menu .drop-down .drop-down ul {
@@ -1433,14 +1426,30 @@ tr:hover {
   cursor: pointer;
 }
 
-@media (min-width: 1300px){
-  .d-lg-block-fixed {
+/* sidebar arrow  */
+#arrow {
+  text-align : right;
+}
+
+#header-heading {
+  font-size : 1.5rem;
+  color : #444444;
+}
+
+
+@media (min-width: 1320px){
+  .d-xxl-block {
       display: block !important;  
   }
 }
+@media (min-width: 420px){
+  .d-xs-block{
+    display : block !important;
+  }
+}
 
-@media (min-width: 1300px){
-  .d-lg-none-fixed{
+@media (min-width: 1320px){
+  .d-xxl-none{
     display : none !important;
   }
 }
