@@ -1,11 +1,11 @@
 # SDP Visualization
 
 <b>Project MaPPIng​</b>
-- Project MaPPping focuses on large-scale infrastructure that can increase 
-- connectivity with many of the megacities that arise from the intensive 
-- urbanization of Asia. The project aims to collect, analyze, and visualize these 
-- relevant indicators to show how sustainable development in Asia is happening and 
-- how to move forward.​
+> Project MaPPping focuses on large-scale infrastructure that can increase 
+> connectivity with many of the megacities that arise from the intensive 
+> urbanization of Asia. The project aims to collect, analyze, and visualize these 
+> relevant indicators to show how sustainable development in Asia is happening and 
+> how to move forward.​
 
 
 #### Project Process
