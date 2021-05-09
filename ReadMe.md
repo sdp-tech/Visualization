@@ -1,7 +1,10 @@
 # SDP Visualization
 
 <b>Project MaPPIng​</b>
->Project MaPPping focuses on large-scale infrastructure that can increase >connectivity with many of the megacities that arise from the intensive >urbanization of Asia. The project aims to collect, analyze, and visualize these >relevant indicators to show how sustainable development in Asia is happening and >how to move forward.​
+- Project MaPPping focuses on large-scale infrastructure that can increase 
+- connectivity with many of the megacities that arise from the intensive 
+- urbanization of Asia. The project aims to collect, analyze, and visualize these 
+- relevant indicators to show how sustainable development in Asia is happening and >how to move forward.​
 
 
 #### Project Process
@@ -15,7 +18,7 @@ We continue to work with the World Bank through the "PPI Deal Tracking" project.
 
   - Phase 3
 
-Based on the infrastructure database of SDPs built through the previous Phases, we plan to make visualizations that can derive insights (and here it is!)
+Based on the infrastructure database of SDPs built through the previous Phases, we plan to make visualizations that can derive insights to all the interested parties(and here it is!)
 
 ***
 # Tech
