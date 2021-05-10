@@ -2,6 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
 const url = 'mongodb://sdpygl:sdp_ygl@3.36.175.233:27017/admin';
+
 const dbName = 'visualization';
 let ProjectData = null, db;
 
@@ -26,5 +27,5 @@ const getProjectData = async (req, res) => {
 }
 
 module.exports = {
-  getProjectData
+  getData
 }
