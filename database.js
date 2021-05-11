@@ -27,5 +27,5 @@ const getProjectData = async (req, res) => {
 }
 
 module.exports = {
-  getData
+  getProjectData
 }
