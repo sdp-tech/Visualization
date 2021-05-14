@@ -10,12 +10,16 @@ import requests
 import json
 import gspread
 import random
+import time
 from tqdm import tqdm
 from geojson import Feature, Point, FeatureCollection
 from oauth2client.service_account import ServiceAccountCredentials
 from pandas.io.json import json_normalize
 from sklearn.cluster import KMeans
 from ppiproject import PpiProject
+from oauth2client.client import Error
+import concurrent.futures as futures
+import concurrent.futures
 
 def get_collection(collection_name) : 
 
@@ -130,22 +134,28 @@ def update_income_geo(projects_col, wb_col):
                 print(e)
             pbar.update(1)
 
-def insert_api():
+def update_with_wb_api(projects_col):
+    
     dic_pop = {}
+    urls = ['http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&page={}'.format(i) for i in range(1,324)]
+    pbar = tqdm(range(1,324), desc='send request to WB api')
 
-    for k in range(1,324):
-        url = 'http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&page={}'.format(k)
-        data = requests.get(url)
-        j = json.loads(data.text)[1]
-        for i in j:
-            if i['date'] == '2019':
-                dic_pop[i['country']['value']] = i['value']
-
-    for i in list(dic_pop.keys()):
-        query = {"properties.country":i}
+    # refer to ThreadPoolExecutor Document
+    with futures.ThreadPoolExecutor(max_workers=32) as executor : 
+        # future collection
+        results = list(executor.map(requests.get, urls))
+        for res in results :
+            for i in json.loads(res.text)[1] :
+                if i['date'] == '2019':
+                    dic_pop[i['country']['value']] = i['value']
+            pbar.update(1)
+        
+    
+    for i in tqdm(list(dic_pop.keys()), desc="update Population of Country") :
+        query = {"properties.country": i}
         newvalues = { '$set' : {"properties.pop": dic_pop[i] }}
         try : 
-            example.update_one(query, newvalues)
+            projects_col.update_one(query, newvalues)
         except Exception as e :
             print(e)   
 
@@ -257,7 +267,7 @@ if __name__ == '__main__' :
 
     insert_ppi_projects(projects_col)
     update_income_geo(projects_col, wb_col)
-    # insert_api()
+    update_with_wb_api(projects_col)
 
     # ##clustering
     # comb = cluster(example).df_combine
