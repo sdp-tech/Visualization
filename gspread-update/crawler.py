@@ -16,10 +16,11 @@ from geojson import Feature, Point, FeatureCollection
 from oauth2client.service_account import ServiceAccountCredentials
 from pandas.io.json import json_normalize
 from sklearn.cluster import KMeans
-from ppiproject import PpiProject
 from oauth2client.client import Error
 import concurrent.futures as futures
 import concurrent.futures
+from ppiproject import PpiProject
+from dist import Dist
 
 def get_collection(collection_name) : 
 
@@ -159,27 +160,16 @@ def update_with_wb_api(projects_col):
         except Exception as e :
             print(e)   
 
-
-##clustering
-def euclidean(inp):
-    len_inp = len(inp)
-    result = np.array([[ np.linalg.norm(i-j) for j in inp] for i in inp])
-    result = np.reshape(result, (len_inp, len_inp))
-    result = pd.DataFrame(result)
-    return result    
-
 # df -> cal_df 넣기
-def update_see_also(df):
+def update_see_also(df, projects_col):
     cat = df['_id']
     cat_val = cat.values
     cat_list = cat_val.tolist()
 
-    for i in cat_list:
+    for i in tqdm(cat_list, desc='updating see also') :
         see_also_list = df.loc[df['_id']==i, 'similar_id'].values.tolist()
-        print(see_also_list)
-
         query = { 
-        "_id" : i
+            "_id" : i
         }
         values = { 
             "$set": { 
@@ -188,7 +178,7 @@ def update_see_also(df):
         }
 
         try :
-            res = example.update_one(query, values)
+            projects_col.update_one(query, values)
         except Exception as e :
             print(e)
 
@@ -230,48 +220,17 @@ class cluster():
         self.df_combine['cluster'] = y_km
         self.df_combine['_id'] = self.id_col
 
-class dist():
-    def __init__(self, df, i):
-        self.group = df.loc[df['cluster']==i]
-        self._id = np.array(self.group['_id'])
-        self.group_c = self.group.drop(['cluster', '_id'], axis=1)
-        
-        
-        group_list = self.group_c.values.tolist()
-        group_array = np.array(group_list)
-        self.distance = euclidean(group_array)
-        
-        self.distance.columns = self._id.tolist()
-        self.distance.index = self._id.tolist()
-
-        #자기 자신 제외하기 위해 대각열 100 수치 부여
-        np.fill_diagonal(self.distance.values, 100)
-        
-        # https://www.javaer101.com/article/4405413.html
-        cols = self.distance.columns.to_numpy()
-        least_sold = [cols[x].tolist() for x in self.distance.eq(self.distance.min(axis=1), axis=0).to_numpy()]
-        
-        self.final_sold = []
-        for i in least_sold:
-            if len(i) > 1:
-                self.final_sold.append(i[random.randrange(len(i))])
-            else:
-                self.final_sold.append(i[0])
-        
-        self.df_group = self.group[['cluster', '_id']]
-        self.df_group['similar_id'] = self.final_sold
-
 if __name__ == '__main__' : 
     projects_col = get_collection("projects")
     wb_col = get_collection("wbcountry")
 
-    insert_ppi_projects(projects_col)
-    update_income_geo(projects_col, wb_col)
-    update_with_wb_api(projects_col)
+    # insert_ppi_projects(projects_col)
+    # update_income_geo(projects_col, wb_col)
+    # update_with_wb_api(projects_col)
 
-    # ##clustering
-    # comb = cluster(example).df_combine
-    # groups = [dist(comb,x).df_group for x in range(4)]
-    # group_merge = pd.concat(groups, ignore_index=True)
+    ##clustering
+    comb = cluster(projects_col).df_combine
+    groups = [Dist(comb,x).df_group for x in range(4)]
+    group_merge = pd.concat(groups, ignore_index=True)
 
-    # update_see_also(group_merge)
+    update_see_also(group_merge, projects_col)
