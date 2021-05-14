@@ -185,9 +185,9 @@ if __name__ == '__main__' :
     projects_col = get_collection("projects")
     wb_col = get_collection("wbcountry")
 
-    # insert_ppi_projects(projects_col)
-    # update_income_geo(projects_col, wb_col)
-    # update_with_wb_api(projects_col)
+    insert_ppi_projects(projects_col)
+    update_income_geo(projects_col, wb_col)
+    update_with_wb_api(projects_col)
 
     ##clustering
     comb = Cluster(projects_col).df_combine
