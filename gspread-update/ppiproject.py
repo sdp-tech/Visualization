@@ -1,5 +1,5 @@
 import re
-
+from functools import reduce
 # Investment Size	Project Banks	Delayed Extent	Updated Date	FC Year	FC Year 증거	Status	Affected Stage	Type of PPP	URLs	Resumed	Resume URL	위치 기준	Latitude	Longitude		Under Construction	U.C URL	Delayed	Delayed URL	Cancelled	Cancelled URL	Operation	Operation URL
 
 # SDP_FAILURE MAP point class
@@ -61,10 +61,21 @@ class PpiProject(object):
                 urls= urls[0:indices[1]]
             return urls 
 
+    # 나라 split 할 때, ",~. Rep'. 경우 고려,
+    @staticmethod 
+    def merge_REP_case(acc, cur) : 
+        # Rep 인 경우, 앞 국가에 붙여서 저장
+        if cur.find("Rep.") != -1 :  
+            acc[len(acc)-1] += cur
+        # 아닌 경우, 공백 제거 후 저장
+        else :
+            acc.append(cur.strip())
+        return acc
+
     @staticmethod
     def parse_country(country) : 
-        countryList =  country.split(',')
-        return countryList
+        country_list = country.split(',')
+        return reduce(PpiProject.merge_REP_case, country_list, [])
 
     @staticmethod 
     def set_project_name(project_name_wb, project_name_common) :
