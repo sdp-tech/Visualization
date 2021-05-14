@@ -273,11 +273,11 @@ function addPopup(feature, layer) {
     if (see_also_list) {
         see_also_list = see_also_list.map((_id) => idnameDict[_id]).join(', ');
     }
-
+    
     var popupText =
         `<p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name}</strong><br>
-            <b>Country : </b>${feature.properties.country}<br>
+            <b>Country : </b>${feature.properties.country.join(', ')}<br>
             <b>Income Group : </b>${feature.properties.income_group}<br>
             <b>FC Year : </b>${feature.properties.fc_year}<br>
             <b>Status : </b>${feature.properties.ppi_status}<br>
@@ -304,7 +304,7 @@ function addPopup(feature, layer) {
 
 function geoJson_filter(feature) {
     // if no filter, select all
-    const countryselect = (customOption.countryOp.length == 0) ? true : (customOption.countryOp.includes(feature.properties.country));
+    const countryselect = (customOption.countryOp.length == 0) ? true : (feature.properties.country.some(e => customOption.countryOp.includes(e)));
     const sectorselect = (customOption.sectorOp.length == 0) ? true : (sectorClass(customOption.sectorOp, feature.properties));
     const statusselect = (customOption.statusOp.length == 0) ? true : (customOption.statusOp.includes(feature.properties.ppi_status));
     const covidselect = (customOption.covidOp.length == 0) ? true : (feature.properties.covid_19.some((covid) => {
@@ -425,6 +425,7 @@ function optionsToHtml(data) {
     var incomeselect = document.getElementById('income-select');
     var ppitypeselect = document.getElementById('ppitype-select');
 
+    console.log(geographical_set)
 
     // region select
     $(function () {
@@ -677,7 +678,7 @@ function country_to_geographical(geographical) {
 
     let input = mapdata;
     let array = getObjects(input, "geographical", geographical);
-    let data = array.map(data => data.country);
+    let data = array.map(data => data.country).flat();
 
     return removeDuplicates(data);
 };
