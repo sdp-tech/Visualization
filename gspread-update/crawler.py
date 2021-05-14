@@ -129,7 +129,7 @@ def update_income_geo(projects_col, wb_col):
                 }
                 
             try : 
-                projects_col.update_one(query, newvalues)
+                projects_col.update_many(query, newvalues)
             except Exception as e :
                 print(e)
             pbar.update(1)
@@ -155,7 +155,7 @@ def update_with_wb_api(projects_col):
         query = {"properties.country": i}
         newvalues = { '$set' : {"properties.pop": dic_pop[i] }}
         try : 
-            projects_col.update_one(query, newvalues)
+            projects_col.update_many(query, newvalues)
         except Exception as e :
             print(e)   
 
