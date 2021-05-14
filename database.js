@@ -16,7 +16,7 @@ const getProjectData = async (req, res) => {
   //not cached yet
   if (ProjectData === null) {
     try {
-      ProjectData = await db.collection('map').find({}).toArray();
+      ProjectData = await db.collection('projects').find({}).toArray();
     } catch (error) {
       console.log("fetching data from MongoDB Failed")
       throw error
