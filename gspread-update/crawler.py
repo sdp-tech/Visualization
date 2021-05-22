@@ -5,6 +5,7 @@ Google Drive에 있는 FailureMapData 스프레드 시트를 연동하여
 
 import pandas as pd
 import numpy as np
+import os
 import pymongo
 import requests
 import json
@@ -40,7 +41,10 @@ def insert_ppi_projects(projects_col) :
     'https://www.googleapis.com/auth/drive',
     ]
 
-    json_file_name = '.\\failuremap-32c588e2da44.json'
+    # OS에 상관 없이 절대경로로 
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    json_file_path = os.path.join(cwd, 'failuremap-32c588e2da44.json')
+    
     credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
     gc = gspread.authorize(credentials)
 
