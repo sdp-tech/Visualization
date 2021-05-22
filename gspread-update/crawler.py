@@ -45,7 +45,7 @@ def insert_ppi_projects(projects_col) :
     cwd = os.path.dirname(os.path.abspath(__file__))
     json_file_path = os.path.join(cwd, 'failuremap-32c588e2da44.json')
     
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_path, scope)
     gc = gspread.authorize(credentials)
 
     # "client_email": "chung-780@failuremap.iam.gserviceaccount.com"
