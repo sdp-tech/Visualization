@@ -192,7 +192,6 @@ function load_map(json, customOption) {
             pointToLayer: geoJson_pointToLayer
         });
 
-        console.log(projectCountOfCountry)
         // geojsonXYZ 에서 받음.
         // 나라 국경을 polygon으로 표현해둔 geojson data 
         $.getJSON('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson', (data) => {
@@ -226,6 +225,22 @@ function load_map(json, customOption) {
 
         legend.addTo(mymap);
 
+        legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [0, 3, 6 ,8, 15, 18, 25],
+        
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColorByNumberOfProjects(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            }
+            return div;
+        };
+        
+        legend.addTo(mymap);
+
         // Searchbox
         mymap.addControl(new L.Control.Search({
             position: 'topright',
@@ -240,25 +255,6 @@ function load_map(json, customOption) {
             }
         })
         );
-
-        // zoom box
-        // L.control.zoom({
-        //     position: isMobile ? 'bottomright' : 'topright'
-        // }).addTo(mymap);
-
-        // // zoom out to original level
-        // L.easyButton({
-        //     position: isMobile ? 'bottomright' : 'topright',
-        //     states: [{
-        //         stateName: 'zoom-to-original',        // name the state
-        //         icon: 'fas fa-map',               // and define its properties
-        //         title: 'zoom to a original',      // like its title
-        //         onClick: function (btn, map) {       // and its callback
-        //             map.setView([35, 40], 2.5);
-        //             btn.state('zoom-to-original');    // change state on click!
-        //         }
-        //     }]
-        // }).addTo(mymap);
 
         if (isMobile) {
             L.easyButton({
@@ -435,8 +431,6 @@ function optionsToHtml(data) {
     var covidselect = document.getElementById('covid-select')
     var incomeselect = document.getElementById('income-select');
     var ppitypeselect = document.getElementById('ppitype-select');
-
-    console.log(geographical_set)
 
     // region select
     $(function () {
@@ -895,6 +889,17 @@ function getColorOfCountry(country_name) {
                 '#FFEDA0';
 }
 
+function getColorByNumberOfProjects(count){
+    return  count > 25 ? '#800026' :
+    count  > 18  ? '#BD0026' :
+    count  > 15 ? '#E31A1C' :
+    count  > 8  ? '#FC4E2A' :
+    count  > 6   ? '#FD8D3C' :
+    count  > 3   ? '#FEB24C' :
+    count  > 0   ? '#FED976' :
+            '#FFEDA0';
+}
+
 function countryColorStyle(feature) {
     return {
         fillColor: getColorOfCountry(feature.properties.name),
@@ -905,7 +910,6 @@ function countryColorStyle(feature) {
         fillOpacity: 0.7
     };
 }
-
 
 // load the map
 load_data(customOption);
