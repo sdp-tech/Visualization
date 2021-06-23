@@ -117,10 +117,7 @@ function data_process(json) {
                     option = option.split(',').map(e => e.toLowerCase().trim())
                     break;
                 case "category_of_reason":
-                    option = option.split(',').map(e => {
-                        e = e.toLowerCase().trim()
-                        return e[e.length - 1] === '.' ? e.substr(0, e.length - 1) : e
-                    })
+                    if (Array.isArray(option)) option = option.map(e => e.toLowerCase().trim())
                     break;
                 case "fc_year":
                     option = (isNaN(option) ? 0 : Math.round(option));
