@@ -229,7 +229,8 @@ function load_map(json, customOption) {
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend'),
                 grades = [0, 3, 6 ,8, 15, 18, 25]
-        
+            
+            div.innerHTML += "<h4># of failed projects</h4>"
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
