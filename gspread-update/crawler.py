@@ -138,30 +138,23 @@ def update_income_geo(projects_col, wb_col):
                 print(e)
             pbar.update(1)
 
-def update_with_wb_api(projects_col):
+def insert_wb_country(wb_col):
     
-    dic_pop = {}
-    urls = ['http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&page={}'.format(i) for i in range(1,324)]
-    pbar = tqdm(range(1,324), desc='send request to WB api')
+    wb_col.create_index('name')
+    urls = ['https://api.worldbank.org/v2/country/all?format=json&page={}'.format(i) for i in range(1,7)]
+    pbar = tqdm(range(1,7), desc='send request to WB api')
 
     # refer to ThreadPoolExecutor Document
     with futures.ThreadPoolExecutor(max_workers=32) as executor : 
         # future collection
         results = list(executor.map(requests.get, urls))
         for res in results :
-            for i in json.loads(res.text)[1] :
-                if i['date'] == '2019':
-                    dic_pop[i['country']['value']] = i['value']
+            for country in json.loads(res.text)[1] :
+                query = {'name' : country['name']}
+                newvalue = {'$set' : country}
+                wb_col.update_one(query, newvalue, upsert=True)
             pbar.update(1)
         
-    
-    for i in tqdm(list(dic_pop.keys()), desc="update Population of Country") :
-        query = {"properties.country": i}
-        newvalues = { '$set' : {"properties.pop": dic_pop[i] }}
-        try : 
-            projects_col.update_many(query, newvalues)
-        except Exception as e :
-            print(e)   
 
 # df -> cal_df 넣기
 def update_see_also(df, projects_col):
@@ -189,9 +182,9 @@ if __name__ == '__main__' :
     projects_col = get_collection("projects")
     wb_col = get_collection("wbcountry")
 
+    insert_wb_country(wb_col)
     insert_ppi_projects(projects_col)
     update_income_geo(projects_col, wb_col)
-    update_with_wb_api(projects_col)
 
     ##clustering
     comb = Cluster(projects_col).df_combine
