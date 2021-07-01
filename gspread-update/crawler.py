@@ -59,7 +59,7 @@ def insert_ppi_projects(projects_col) :
     worksheet = doc.worksheet('Failure Map Data')
 
     # 사용할 데이터 영역
-    worksheet_list = worksheet.get('C:AC')
+    worksheet_list = worksheet.get('C:AE')
 
     #행 개수
     end_row = len(worksheet_list)
@@ -68,8 +68,7 @@ def insert_ppi_projects(projects_col) :
     worksheet_column = worksheet_list[1]
     worksheet_list = worksheet_list[2:end_row]
 
-    df = pd.DataFrame(worksheet_list,columns=worksheet_column)
-
+    df = pd.DataFrame(worksheet_list, columns=worksheet_column)
     for i in tqdm(range(end_row-2), desc="insert PPI Projects to MongoDB"):
         project = PpiProject(
             country=df.iloc[i].loc["Country"],
@@ -122,8 +121,12 @@ def update_income_geo(projects_col, wb_col):
     
     with tqdm(total=wb_col.estimated_document_count(), desc="updating incomeGroup, Geographical") as pbar:
         for element in wb_col.find({}):
+            # incasesensitive search
             query = { 
-                "properties.country" : element['name']
+                "properties.country" : {
+                    '$regex' : element['name'],
+                    "$options" : 'i' 
+                    }
             }
             newvalues = { 
                 '$set' : {
@@ -182,7 +185,7 @@ if __name__ == '__main__' :
     projects_col = get_collection("projects")
     wb_col = get_collection("wbcountry")
 
-    insert_wb_country(wb_col)
+    # insert_wb_country(wb_col)
     insert_ppi_projects(projects_col)
     update_income_geo(projects_col, wb_col)
 
