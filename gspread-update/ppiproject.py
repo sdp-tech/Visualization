@@ -4,7 +4,7 @@ from functools import reduce
 
 # SDP_FAILURE MAP point class
 class PpiProject(object):
-    def __init__(self, country, project_name_wb, project_name_common, sector, subsector,
+    def __init__(self, country, project_name_wb, project_name_common, sector, subsector, electricity,
                  segment, crossborder, reason_for_delay, 
                  investment, project_bank, delayed_extent, fc_year, fc_year_reason, ppi_status,
                  affected_stage, type_of_ppi, 
@@ -23,6 +23,7 @@ class PpiProject(object):
                 "project_name" : PpiProject.set_project_name(project_name_wb, project_name_common),
                 "sector": sector,
                 "subsector": subsector,
+                "electricity": electricity,
                 "segment": segment,
                 "crossborder": crossborder,
                 "reason_for_delay": PpiProject.capitalize(reason_for_delay),
@@ -42,6 +43,11 @@ class PpiProject(object):
                 "see_also" : '',
                 'covid_19' : covid_19
             } 
+
+            # set all emtpy string to null and N/A to null
+            for key, value in self.properties.items():
+                if type(value) == str and (not value or value == 'N/A') :
+                    self.properties[key] = None
 
         else:
             self.delete = True
