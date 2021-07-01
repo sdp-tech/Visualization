@@ -107,7 +107,7 @@ function data_process(json) {
         Object.keys(element.properties).forEach((col) => {
             let option = element.properties[col];
             if (option == null)
-                option = ""
+                option = "N/A"
 
             switch (col) {
                 case "affected_stage":
@@ -129,9 +129,6 @@ function data_process(json) {
                     else if (option.toLowerCase().includes("cancel")) {
                         option = "Canceled";
                     }
-                    else {
-                        option = "N/A";
-                    }
                     break;
                 case "type_of_ppi":
                     if (option.toLowerCase().includes("green")) {
@@ -142,9 +139,6 @@ function data_process(json) {
                     }
                     else if (option.toLowerCase().includes("expans")) {
                         option = "Expansion";
-                    }
-                    else {
-                        option = "N/A";
                     }
                     break;
             }
@@ -275,7 +269,7 @@ function load_map(json, customOption) {
 
 function addPopup(feature, layer) {
     let see_also_list = feature.properties.see_also
-    if (see_also_list) {
+    if (see_also_list !== 'N/A') {
         see_also_list = see_also_list.map((_id) => idnameDict[_id]).join(', ');
     }
     
