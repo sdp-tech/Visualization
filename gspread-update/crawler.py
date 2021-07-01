@@ -76,6 +76,7 @@ def insert_ppi_projects(projects_col) :
             project_name_common=df.iloc[i].loc["Project name_common"],
             sector=df.iloc[i].loc["Sector"],
             subsector=df.iloc[i].loc["SubSector"],
+            electricity=df.iloc[i].loc['Electricity'],
             segment=df.iloc[i].loc["Segment"],
             crossborder=df.iloc[i].loc["Crossborder"],
             reason_for_delay=df.iloc[i].loc["failure 증거 (기사 속 키워드) "],
@@ -185,7 +186,7 @@ if __name__ == '__main__' :
     projects_col = get_collection("projects")
     wb_col = get_collection("wbcountry")
 
-    # insert_wb_country(wb_col)
+    insert_wb_country(wb_col)
     insert_ppi_projects(projects_col)
     update_income_geo(projects_col, wb_col)
 
@@ -195,3 +196,4 @@ if __name__ == '__main__' :
     group_merge = pd.concat(groups, ignore_index=True)
 
     update_see_also(group_merge, projects_col)
+
