@@ -46,8 +46,14 @@ class PpiProject(object):
 
             # set all emtpy string to null and N/A to null
             for key, value in self.properties.items():
-                if type(value) == str and (not value or value == 'N/A') :
+                if type(value) == str and (not value or value.upper() == "N/A") :
                     self.properties[key] = None
+
+            if self.properties['category_of_reason'] is not None :
+                self.properties['category_of_reason'] = self.properties['category_of_reason'].split(',')
+            
+            if self.properties['covid_19'] is not None :
+                self.properties['covid_19'] = self.properties['covid_19'].split(',')
 
         else:
             self.delete = True
@@ -87,4 +93,4 @@ class PpiProject(object):
     def set_project_name(project_name_wb, project_name_common) :
         if project_name_wb != 'N/A' :
             return project_name_wb
-        return project_name_common
+        return project_name_common          
