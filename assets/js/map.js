@@ -108,10 +108,7 @@ function data_process(json) {
             let option = element.properties[col];
             if (option == null)
                 option = "N/A"
-            if (Array.isArray(option)) {
-                option = option.map(e => e.toLowerCase().trim())
-            }
-
+            
             switch (col) {
                 case "affected_stage":
                     option = option.toLowerCase().trim()
@@ -120,10 +117,12 @@ function data_process(json) {
                     option = (isNaN(option) ? 0 : Math.round(option));
                     break;
                 case "category_of_reason" :
-                    if(option === "N/A") option = ["N/A"]
+                    if (Array.isArray(option)) option = option.map(e => e.toLowerCase().trim())
+                    else if(option === "N/A") option = ["N/A"]
                     break;
                 case "covid_19" :
-                    if(option === "N/A") option = ["N/A"]
+                    if (Array.isArray(option)) option = option.map(e => e.toLowerCase().trim())
+                    else if(option === "N/A") option = ["N/A"]
                     break;
                 case "ppi_status":
                     if (option.toLowerCase().includes("delay")) {
@@ -153,7 +152,7 @@ function data_process(json) {
         // 각 섹터별로 몇 개 존재하는지 카운팅
         sectorCount[element.properties.sector] = sectorCount[element.properties.sector] + 1 || 1
         // 각 나라에 프로젝트가 몇 개 존재하는지 카운팅
-        element.properties.country.forEach(country => projectCountOfCountry[country] = projectCountOfCountry[country] +1 || 1)
+        element.properties.country.forEach(country => projectCountOfCountry[country] = projectCountOfCountry[country] + 1 || 1)
     });
 
     return json;
@@ -306,7 +305,6 @@ function addPopup(feature, layer) {
 
 function geoJson_filter(feature) {
     // if no filter, select all
-    let  categoryselect
     const countryselect = (customOption.countryOp.length == 0) ? true : (feature.properties.country.some(e => customOption.countryOp.includes(e)));
     const sectorselect = (customOption.sectorOp.length == 0) ? true : (sectorClass(customOption.sectorOp, feature.properties));
     const statusselect = (customOption.statusOp.length == 0) ? true : (customOption.statusOp.includes(feature.properties.ppi_status));
@@ -314,15 +312,9 @@ function geoJson_filter(feature) {
         return customOption.covidOp.includes(covid)
     }))
     const affectedselect = (customOption.affectedOp.length == 0) ? true : (customOption.affectedOp.includes(feature.properties.affected_stage));
-    try {
-        categoryselect = (customOption.categoryOp.length == 0) ? true : (feature.properties.category_of_reason.some((category) => {
+    const categoryselect = (customOption.categoryOp.length == 0) ? true : (feature.properties.category_of_reason.some((category) => {
         return customOption.categoryOp.includes(category)
-    }))}
-    catch{            
-        console.log(feature.properties)
-        console.log(feature.properties.category_of_reason)
-        console.log(Array.isArray(feature.properties.category_of_reason))
-    }
+    }))
     const incomeselect = (customOption.incomeOp.length == 0) ? true : (customOption.incomeOp.includes(feature.properties.income_group));
     const ppitypeselect = (customOption.ppitypeOp.length == 0) ? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
     const yearselect = yearIsincluded(feature, customOption.yearOp);
