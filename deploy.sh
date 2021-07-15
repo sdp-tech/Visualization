@@ -8,6 +8,12 @@ sudo git fetch --all
 sudo git reset --hard origin/dev
 sudo git pull origin dev
 
+echo "installing pip reqiurements"
+sudo pip3 install -r reqiurements.txt
+
+echo "update Project Collection in MongoDB"
+sudo python3 gspread-update/crawler.py
+
 echo "insatll sass package"
 sudo npm i -g sass
 
