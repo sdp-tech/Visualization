@@ -108,16 +108,13 @@ function data_process(json) {
             let option = element.properties[col];
             if (option == null)
                 option = "N/A"
+            if (Array.isArray(option)) {
+                option = option.map(e => e.toLowerCase().trim())
+            }
 
             switch (col) {
                 case "affected_stage":
                     option = option.toLowerCase().trim()
-                    break;
-                case "covid_19":
-                    option = option.split(',').map(e => e.toLowerCase().trim())
-                    break;
-                case "category_of_reason":
-                    if (Array.isArray(option)) option = option.map(e => e.toLowerCase().trim())
                     break;
                 case "fc_year":
                     option = (isNaN(option) ? 0 : Math.round(option));
