@@ -190,7 +190,10 @@ function load_map(json, customOption) {
         // geojsonXYZ 에서 받음.
         // 나라 국경을 polygon으로 표현해둔 geojson data 
         $.getJSON('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson', (data) => {
-            L.geoJson(data, {style : countryColorStyle}).addTo(mymap);
+            L.geoJson(data, {
+                style : countryColorStyle,
+                filter : filter_unused_countries, 
+            }).addTo(mymap);
         });
 
         mymap.fitBounds(geoLayer.getBounds());
@@ -906,6 +909,10 @@ function countryColorStyle(feature) {
         dashArray: '3',
         fillOpacity: 0.7
     };
+}
+
+function filter_unused_countries(feature) {
+    return feature.properties.name.toLowerCase() !== 'antarctica' 
 }
 
 // load the map
