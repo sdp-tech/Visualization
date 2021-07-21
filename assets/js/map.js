@@ -13,14 +13,15 @@ var markers = L.DonutCluster({
 }, {
     key: 'sector',
     sumField: 'value',
-    order: ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage"],
+    order: ['Energy', 'ICT', 'Municipal Solid Waste', 'Transport', "Water and sewerage", "Others"],
     // title is the visible value when mouse over to cluster
     title: {
         'Energy': 'Energy',
         'ICT': "ICT",
         'Municipal Solid Waste': 'Municipal Solid Waste',
         'Transport': 'Transport',
-        'Water and sewerage': "Water and sewerage"
+        'Water and sewerage': "Water and sewerage",
+        "Others" : "Others"
     },
     arcColorDict: {
         "Energy": 'green',
@@ -28,6 +29,7 @@ var markers = L.DonutCluster({
         "Municipal Solid Waste": 'orange',
         "Transport": 'blue',
         "Water and sewerage": 'gray',
+        "Others" : 'red'
     }
 });
 // filterArray
@@ -213,6 +215,7 @@ function load_map(json, customOption) {
             div.innerHTML += '<i style="background: gray"></i><span>Water and sewerage</span><br>';
             div.innerHTML += '<i style="background: purple"></i><span>ICT</span><br>';
             div.innerHTML += '<i style="background: orange"></i><span>Municipal Solid Waste</span><br>';
+            div.innerHTML += '<i style="background: red"></i><span>Others</span><br>';
             return div;
         };
 
