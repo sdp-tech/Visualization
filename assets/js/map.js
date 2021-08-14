@@ -291,7 +291,7 @@ function addPopup(feature, layer) {
             <b>Primary Sector : </b>${feature.properties.sector}<br>
             <b>Sub Sector : </b>${feature.properties.subsector}<br>
             <b>Problem : </b>${feature.properties.reason_for_delay}<br>
-            <b>Type of PPI : </b>${feature.properties.type_of_ppp}<br>
+            <b>Type of PPP : </b>${feature.properties.type_of_ppp}<br>
             <b>See also : </b>${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
