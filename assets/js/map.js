@@ -134,7 +134,7 @@ function data_process(json) {
                         option = "Canceled";
                     }
                     break;
-                case "type_of_ppi":
+                case "type_of_ppp":
                     if (option.toLowerCase().includes("green")) {
                         option = "Greenfield";
                     }
@@ -291,7 +291,7 @@ function addPopup(feature, layer) {
             <b>Primary Sector : </b>${feature.properties.sector}<br>
             <b>Sub Sector : </b>${feature.properties.subsector}<br>
             <b>Problem : </b>${feature.properties.reason_for_delay}<br>
-            <b>Type of PPI : </b>${feature.properties.type_of_ppi}<br>
+            <b>Type of PPP : </b>${feature.properties.type_of_ppp}<br>
             <b>See also : </b>${see_also_list}<br>
             <p id=linked_p_popup_detail>
                 <b><a href=${feature.properties.urls} target=_blank rel=noopener noreferrer>URL</a>
@@ -322,7 +322,7 @@ function geoJson_filter(feature) {
         return customOption.categoryOp.includes(category)
     }))
     const incomeselect = (customOption.incomeOp.length == 0) ? true : (customOption.incomeOp.includes(feature.properties.income_group));
-    const ppitypeselect = (customOption.ppitypeOp.length == 0) ? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppi));
+    const ppitypeselect = (customOption.ppitypeOp.length == 0) ? true : (customOption.ppitypeOp.includes(feature.properties.type_of_ppp));
     const yearselect = yearIsincluded(feature, customOption.yearOp);
     return (countryselect && sectorselect && categoryselect && affectedselect && yearselect && incomeselect && statusselect && covidselect && ppitypeselect);
 }
@@ -423,7 +423,7 @@ function optionsToHtml(data) {
     const affected_set = removeDuplicates(property_list['affected_stage'])
     const category_set = removeDuplicates(property_list['category_of_reason']).filter(elem => !category_fix_list.includes(elem)).concat(category_fix_list);
     const income_set = removeDuplicates(property_list["income_group"]);
-    const ppitype_set = removeDuplicates(property_list["type_of_ppi"]);
+    const ppitype_set = removeDuplicates(property_list["type_of_ppp"]);
 
     var statusselect = document.getElementById('status-select');
     var affectedselect = document.getElementById('affected-select')

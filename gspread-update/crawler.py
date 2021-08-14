@@ -87,7 +87,7 @@ def insert_ppi_projects(projects_col) :
             fc_year_reason=df.iloc[i].loc["FC Year 증거"],
             ppi_status=df.iloc[i].loc["Failure History"],
             affected_stage=df.iloc[i].loc["Affected Stage"],
-            type_of_ppi=df.iloc[i].loc["Type of PPP"],
+            type_of_ppp=df.iloc[i].loc["Type of PPP"],
             urls=df.iloc[i].loc["URLs"],
             resumed=df.iloc[i].loc["Resumed"],
             resume_url=df.iloc[i].loc["Resume URL"],

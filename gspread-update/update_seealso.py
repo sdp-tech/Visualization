@@ -65,7 +65,7 @@ class cluster():
                'properties.project_bank', 'properties.delayed_extent',
                'properties.fc_year',
                'properties.fc_year_reason', 'properties.ppi_status',
-               'properties.affected_stage', 'properties.type_of_ppi',
+               'properties.affected_stage', 'properties.type_of_ppp',
                'properties.urls', 'properties.resumed', 'properties.resume_url',
                'properties.location', 'properties.see_also', 'properties.category_of_reason', 
                'properties.covid_19', 'properties.project_name'], axis=1)

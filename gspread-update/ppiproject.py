@@ -7,7 +7,7 @@ class PpiProject(object):
     def __init__(self, country, project_name_wb, project_name_common, sector, subsector, electricity,
                  segment, crossborder, reason_for_delay, 
                  investment, project_bank, delayed_extent, fc_year, fc_year_reason, ppi_status,
-                 affected_stage, type_of_ppi, 
+                 affected_stage, type_of_ppp, 
                  urls, resumed, resume_url, longitude, location, latitude, category_of_reason, covid_19):
         
         if (re.match('^[0-9.|\-]*$', str(longitude)) and (re.match('^[0-9.|\-]*$', str(latitude)))):
@@ -34,7 +34,7 @@ class PpiProject(object):
                 "fc_year_reason": fc_year_reason,
                 "ppi_status": ppi_status,
                 "affected_stage": affected_stage,
-                "type_of_ppi": type_of_ppi,
+                "type_of_ppp" : type_of_ppp,
                 "urls": PpiProject.parse_urls(urls),
                 "resumed": resumed,
                 "resume_url": resume_url,
