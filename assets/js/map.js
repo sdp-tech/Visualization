@@ -4,7 +4,6 @@ var idnameDict = new Object();
 var bounds = [[-90, -180], [90, 180]];
 var mymap = L.map('mapwrap', {
     zoomControl: false,
-    maxBounds: bounds
 }).setView([35, 40], 2.5);
 
 // Marker Clusterer using Donut Clustering
