@@ -281,15 +281,18 @@ function addPopup(feature, layer) {
         see_also_list = see_also_list.map((_id) => idnameDict[_id]).join(', ');
     }
     
+    fc_year = feature.properties.fc_year === 0 ? "N/A" : feature.properties.fc_year
+
     var popupText =
         `<p id=p_popup_detail>
             <strong id=p_popup-title> ${feature.properties.project_name}</strong><br>
             <b>Country : </b>${feature.properties.country.join(', ')}<br>
             <b>Income Group : </b>${feature.properties.income_group}<br>
-            <b>FC Year : </b>${feature.properties.fc_year}<br>
+            <b>FC Year : </b>${fc_year}<br>
             <b>Status : </b>${feature.properties.ppi_status}<br>
             <b>Primary Sector : </b>${feature.properties.sector}<br>
             <b>Sub Sector : </b>${feature.properties.subsector}<br>
+            <b>Reason : </b>${feature.properties.category_of_reason[0]}<br>
             <b>Problem : </b>${feature.properties.reason_for_delay}<br>
             <b>Type of PPP : </b>${feature.properties.type_of_ppp}<br>
             <b>See also : </b>${see_also_list}<br>
