@@ -59,7 +59,7 @@ def insert_ppi_projects(projects_col) :
     worksheet = doc.worksheet('Failure Map Data')
 
     # 사용할 데이터 영역
-    worksheet_list = worksheet.get('C:AE')
+    worksheet_list = worksheet.get('C:AO')
 
     #행 개수
     end_row = len(worksheet_list)
@@ -187,14 +187,14 @@ if __name__ == '__main__' :
     projects_col = get_collection("projects")
     wb_col = get_collection("wbcountry")
 
-    insert_wb_country(wb_col)
+    # insert_wb_country(wb_col)
     insert_ppi_projects(projects_col)
-    update_income_geo(projects_col, wb_col)
+    # update_income_geo(projects_col, wb_col)
 
-    ##clustering
-    comb = Cluster(projects_col).df_combine
-    groups = [Dist(comb,x).df_group for x in range(4)]
-    group_merge = pd.concat(groups, ignore_index=True)
+    # ##clustering
+    # comb = Cluster(projects_col).df_combine
+    # groups = [Dist(comb,x).df_group for x in range(4)]
+    # group_merge = pd.concat(groups, ignore_index=True)
 
-    update_see_also(group_merge, projects_col)
+    # update_see_also(group_merge, projects_col)
 

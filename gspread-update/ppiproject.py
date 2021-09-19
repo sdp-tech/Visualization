@@ -11,14 +11,6 @@ class PpiProject(object):
                  urls, resumed, resume_url, longitude, location, latitude, category_of_reason, covid_19, failure_year):
 
 
-        def _dict_helper(properties):
-            res = dict()
-            for key, value in properties :
-                key = key.replace('_', ' ')
-                res[key] = value
-
-            return res
-
         if (re.match('^[0-9.|\-]*$', str(longitude)) and (re.match('^[0-9.|\-]*$', str(latitude)))):
             self.type = "Feature"
             self.geometry = {
@@ -64,8 +56,6 @@ class PpiProject(object):
 
             if self.properties['covid_19'] is not None :
                 self.properties['covid_19'] = self.properties['covid_19'].split(',')
-
-            self.properties = _dict_helper(self.properties)
 
         else:
             self.delete = True
