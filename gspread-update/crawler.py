@@ -96,7 +96,7 @@ def insert_ppi_projects(projects_col) :
             latitude=df.iloc[i].loc["Latitude"],
             category_of_reason=df.iloc[i].loc['Category of reason'],
             covid_19=df.iloc[i].loc['Covid-19 specific'],
-            failure_yaer=df.iloc[i].loc['Failure Year']
+            failure_year=df.iloc[i].loc['Failure Year']
         )
 
         if hasattr(project, 'delete'):
