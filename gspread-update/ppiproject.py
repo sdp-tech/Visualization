@@ -5,13 +5,13 @@ from functools import reduce
 # SDP_FAILURE MAP point class
 class PpiProject(object):
     def __init__(self, country, project_name_wb, project_name_common, sector, subsector, electricity,
-                 segment, crossborder, reason_for_delay, 
+                 segment, crossborder, reason_for_delay,
                  investment, project_bank, delayed_extent, fc_year, fc_year_reason, ppi_status,
-                 affected_stage, type_of_ppp, 
-                 urls, resumed, resume_url, longitude, location, latitude, category_of_reason, covid_19):
-        
+                 affected_stage, type_of_ppp,
+                 urls, resumed, resume_url, longitude, location, latitude, category_of_reason, covid_19, failure_year):
 
-        def _dict_helper(properties): 
+
+        def _dict_helper(properties):
             res = dict()
             for key, value in properties :
                 key = key.replace('_', ' ')
@@ -50,8 +50,9 @@ class PpiProject(object):
                 "location": location,
                 "category_of_reason" : category_of_reason,
                 "see_also" : '',
-                'covid_19' : covid_19
-            } 
+                'covid_19' : covid_19,
+                "failure_year": failure_year,
+            }
 
             # set all emtpy string to null and N/A to null
             for key, value in self.properties.items():
@@ -60,7 +61,7 @@ class PpiProject(object):
 
             if self.properties['category_of_reason'] is not None :
                 self.properties['category_of_reason'] = self.properties['category_of_reason'].split(',')
-            
+
             if self.properties['covid_19'] is not None :
                 self.properties['covid_19'] = self.properties['covid_19'].split(',')
 
@@ -82,13 +83,13 @@ class PpiProject(object):
             indices = [http.start() for http in re.finditer('http', urls)]
             if len(indices) > 1 :
                 urls= urls[0:indices[1]]
-            return urls 
+            return urls
 
     # 나라 split 할 때, ",~. Rep'. 경우 고려,
-    @staticmethod 
-    def merge_REP_case(acc, cur) : 
+    @staticmethod
+    def merge_REP_case(acc, cur) :
         # Rep 인 경우, 앞 국가에 붙여서 저장
-        if cur.find("Rep.") != -1 :  
+        if cur.find("Rep.") != -1 :
             acc[len(acc)-1] += cur
         # 아닌 경우, 공백 제거 후 저장
         else :
@@ -96,12 +97,12 @@ class PpiProject(object):
         return acc
 
     @staticmethod
-    def parse_country(country) : 
+    def parse_country(country) :
         country_list = country.split(',')
         return reduce(PpiProject.merge_REP_case, country_list, [])
 
-    @staticmethod 
+    @staticmethod
     def set_project_name(project_name_wb, project_name_common) :
         if project_name_wb != 'N/A' :
             return project_name_wb
-        return project_name_common          
+        return project_name_common
