@@ -4,12 +4,18 @@ const assert = require('assert');
 const url = 'mongodb://sdpygl:sdp_ygl@3.36.175.233:27017/admin';
 
 const dbName = 'visualization';
-let ProjectData = null, db;
+let ProjectData = null,
+  db;
 
-MongoClient.connect(url, async (err, client) => {
+const client = new MongoClient(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+client.connect(async (err, client) => {
   assert.strictEqual(null, err);
-  console.log("Connected successfully to server");
-  db = client.db(dbName)
+  console.log('Connected successfully to server');
+  db = client.db(dbName);
 });
 
 const getProjectData = async (req, res) => {
@@ -18,14 +24,15 @@ const getProjectData = async (req, res) => {
     try {
       ProjectData = await db.collection('projects').find({}).toArray();
     } catch (error) {
-      console.log("fetching data from MongoDB Failed")
-      throw error
+      console.log('fetching data from MongoDB Failed');
+      console.err(error);
+      //throw error;
     }
   }
 
-  return ProjectData
-}
+  return ProjectData;
+};
 
 module.exports = {
-  getProjectData
-}
+  getProjectData,
+};
