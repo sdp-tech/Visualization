@@ -20,6 +20,7 @@ app.get('/index', counter, (__, res) => res.render('index', res.locals));
 app.get('/inner-page', (__, res) => res.render('inner-page'));
 app.get('/m-inner-page', (__, res) => res.render('m-inner-page'));
 app.get('/terms', (__, res) => res.render('terms'));
+app.get('/compare', (__, res) => res.render('compare'));
 
 app.get('/apis/data', async (req, res) => {
   const body = await getProjectData();

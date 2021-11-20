@@ -1,0 +1,146 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport')
+  title SDP Project MaPPPing
+  meta(content='' name='descriptison')
+  meta(content='' name='keywords')
+  // Favicons
+  link(href='assets/img/favicon.png' rel='icon')
+  link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")  
+  link(href='assets/vendor/icofont/icofont.min.css' rel='stylesheet')
+  link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='assets/vendor/venobox/venobox.css' rel='stylesheet')
+  link(href='assets/vendor/owl.carousel/assets/owl.carousel.min.css' rel='stylesheet')
+  link(rel='stylesheet' href='assets/vendor/owl.carousel/assets/owl.theme.default.css')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css')
+  link(href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet")
+  link(href='assets/vendor/aos/aos.css' rel='stylesheet')
+  // Template Main CSS File
+  link(href='assets/css/style.css' rel='stylesheet')
+  link(href='assets/css/about.css' rel='stylesheet')
+  link(href='assets/css/timeline.css' rel='stylesheet')
+
+  //
+    =======================================================
+    * Template Name: Squadfree - v2.2.0
+    * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ========================================================
+// ======= Header =======
+header#header
+  .container.d-flex.align-items-center
+    .logo.mr-auto
+      h1.text-light
+        a(href='index')
+          span Project MaPPPing
+
+    nav.nav-menu.d-none.d-xxl-block
+      ul
+        li
+          a(href='../#hero' style="background:none !important;") Home
+        li
+          a(href='../inner-page#hero') Map
+        li
+          a(href='../#about') Project MaPPPing
+        li
+          a(href='../#Insight') Insight
+        li.active
+          a(href='#compare') Compare
+        li
+          a(href='../#Methodology') Methodology
+        li
+          a(href='../#team') SDP Team
+        li
+          a(href='../#contact') Contact Us
+        
+    //hamburger 버튼이 나타날 때, header-scrolled 클래스로 인해 nav bar가 과하게 줄어드는 현상 방지하기 위한 더미 div
+    div.d-xxl.none(style='height:60px ')
+    // .nav-menu
+  // End Header
+// End #main
+main#main
+  // ======= About Section =======
+  section#compare
+    .container.px-10
+      .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
+        br
+        h2(style="font-size:50px") Compare PPPs
+        p
+        a(href='/inner-page' style="color:black; border-color:black").goto-btn Go to Our Map
+        br
+        a(href="https://dashboard.sdpglobal.org" style="color:black; border-color:black").goto-btn Go to Dashboard
+        br
+      .panel
+            p
+            table(style="border:1px solid black; width:80%; margin:auto;")
+              tbody
+                tr 
+                  td(style="border-bottom: 1px solid black;")
+                      strong Project Name
+                  td(style="border-bottom: 1px solid black;")
+                      input(style="border: 1px solid black; width:85%")
+                tr
+                  td(style="border-bottom: 1px solid black;")
+                      strong Income Group
+                  td(style="border-bottom: 1px solid black;")
+                      input(style="border: 1px solid black; width:85%")
+                tr
+                  td(style="border-bottom: 1px solid black;")
+                      strong Status
+                  td(style="border-bottom: 1px solid black;")
+                      input(style="border: 1px solid black; width:85%")
+                tr
+                  td(style="border-bottom: 1px solid black;")
+                      strong Primary Sector
+                  td(style="border-bottom: 1px solid black;")
+                      input(style="border: 1px solid black; width:85%")
+                tr
+                  td(style="border-bottom: 1px solid black;")
+                      strong Sub Sector
+                  td(style="border-bottom: 1px solid black;")
+                      input(style="border: 1px solid black; width:85%")
+              br
+      .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
+        a(href='#' style="color:black; border-color:black").goto-btn Search
+
+// ======= Footer =======
+footer#footer
+  .container
+    .copyright
+      | &copy; Copyright 
+      strong
+        span SDP Project MaPPPing
+      | . All Rights Reserved
+    .credits
+      // All the links in the footer should remain intact.
+      // You can delete the links only if you purchased the pro version.
+      // Licensing information: https://bootstrapmade.com/license/
+      // Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+      | Designed by 
+      a(href='https://bootstrapmade.com/') BootstrapMade 
+      | |  
+      a(href='/terms') terms of use
+// End Footer
+a.back-to-top(href='#')
+  i.icofont-simple-up
+// Vendor JS Files
+script(src='https://code.jquery.com/jquery-3.5.1.min.js'
+  integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0='
+  crossorigin='anonymous')
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous")
+script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
+script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js", integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf", crossorigin="anonymous")
+script(src='assets/vendor/waypoints/jquery.waypoints.min.js')
+script(src='assets/vendor/counterup/counterup.min.js')
+script(src='assets/vendor/isotope-layout/isotope.pkgd.min.js')
+script(src='assets/vendor/venobox/venobox.min.js')
+script(src='assets/vendor/owl.carousel/owl.carousel.min.js')
+script(src='assets/vendor/aos/aos.js')
+script(src='https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
+// Template Main JS File
+script(src='assets/js/main.js')
