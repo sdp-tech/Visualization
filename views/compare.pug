@@ -5,10 +5,13 @@ head
   title SDP Project MaPPPing
   meta(content='' name='descriptison')
   meta(content='' name='keywords')
+
   // Favicons
   link(href='assets/img/favicon.png' rel='icon')
   link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+
   // Vendor CSS Files
   link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")  
   link(href='assets/vendor/icofont/icofont.min.css' rel='stylesheet')
@@ -19,6 +22,7 @@ head
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css')
   link(href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet")
   link(href='assets/vendor/aos/aos.css' rel='stylesheet')
+  
   // Template Main CSS File
   link(href='assets/css/style.css' rel='stylesheet')
   link(href='assets/css/about.css' rel='stylesheet')
@@ -39,18 +43,19 @@ header#header
         a(href='index')
           span Project MaPPPing
 
+    //- 추가로 compare에서 말고 전체에서 nav 작동할 때 하이라이트 이상하게 작동함
     nav.nav-menu.d-none.d-xxl-block
       ul
         li
           a(href='../#hero' style="background:none !important;") Home
         li
           a(href='../inner-page#hero') Map
+        li.active
+          a(href='#compare') Compare
         li
           a(href='../#about') Project MaPPPing
         li
           a(href='../#Insight') Insight
-        li.active
-          a(href='#compare') Compare
         li
           a(href='../#Methodology') Methodology
         li
@@ -67,47 +72,166 @@ main#main
   // ======= About Section =======
   section#compare
     .container.px-10
-      .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
+      .section-title.p-0(data-aos='fade-in' data-aos-delay='10')
         br
         h2(style="font-size:50px") Compare PPPs
-        p
-        a(href='/inner-page' style="color:black; border-color:black").goto-btn Go to Our Map
-        br
-        a(href="https://dashboard.sdpglobal.org" style="color:black; border-color:black").goto-btn Go to Dashboard
-        br
-      .panel
+        div(style="display:flex; justify-content: center; margin-top: 40px")
+          div(style="display:flex; font-size: 30px; padding-right: 70px")
+            a(href='/inner-page' style="font-weight: bold; color: #196be6") Go to Our Map
+            span(class="material-icons" style="font-weight: bold; color: #196be6; display: block; margin-top: auto; margin-bottom: auto") arrow_forward_ios
+          div(style="display:flex; font-size: 30px;")
+            a(href='/inner-page' style="font-weight: bold; color:#196be6") Go to Dashboard
+            span(class="material-icons" style="font-weight: bold; color: #196be6; display: block; margin-top: auto; margin-bottom: auto") arrow_forward_ios
+
+      .panel(data-aos='fade-in' data-aos-delay='80')
             p
-            table(style="border:1px solid black; width:80%; margin:auto;")
+            table(style="width:70%; margin:auto;")
               tbody
                 tr 
-                  td(style="border-bottom: 1px solid black;")
+                  td(style="border-top: 2px solid black; border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Project Name
-                  td(style="border-bottom: 1px solid black;")
-                      input(style="border: 1px solid black; width:85%")
+                  td(style="border-bottom: 2px solid black; border-top: 2px solid black; display:flex")
+                      input(style="border: 1px solid black; width:220px; margin-right: 10px" placeholder=" Enter the project name")
+                      span(class="material-icons" style="display: block; margin-top: auto; margin-bottom: auto; cursor: pointer") search
                 tr
-                  td(style="border-bottom: 1px solid black;")
+                  td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Income Group
-                  td(style="border-bottom: 1px solid black;")
-                      input(style="border: 1px solid black; width:85%")
+                  td(style="border-bottom: 2px solid black")
+                      //- 확대했을 때 테이블 깨지는 문제 발생
+                      select(style="border: 1px solid black; width:280px")
+                        option(style="display: none")
+                        option(value="High Income") High Icome
+                        option(value="Low Income") Low Income
+                        option(value="Lower middle income") Lower middle income
+                        option(value="Upper middle income") Upper middle income
+
                 tr
-                  td(style="border-bottom: 1px solid black;")
+                  td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Status
-                  td(style="border-bottom: 1px solid black;")
-                      input(style="border: 1px solid black; width:85%")
+                  td(style="border-bottom: 2px solid black;")
+                      select(style="border: 1px solid black; width:280px")
+                        option(style="display: none")
+                        option(value="High Income") Status1
+                        option(value="Low Income") Status2
+                        option(value="Lower middle income") Status3
+                        option(value="Upper middle income") Status4
                 tr
-                  td(style="border-bottom: 1px solid black;")
+                  td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Primary Sector
-                  td(style="border-bottom: 1px solid black;")
-                      input(style="border: 1px solid black; width:85%")
+                  td(style="border-bottom: 2px solid black;")
+                      select(class="primeSector" style="border: 1px solid black; width:280px; color: black; font-weight: 600")
+                        option(value="Energy") Energy
+                        option(value="ICT") ICT
+                        option(value="Transport") Transport
+                        option(value="Water and Sewerage") Water and Sewerage
+                        option(value="Solid Waste") Solid Waste
+                        option(value="Other Sector") Other Sector
                 tr
-                  td(style="border-bottom: 1px solid black;")
+                  td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Sub Sector
-                  td(style="border-bottom: 1px solid black;")
-                      input(style="border: 1px solid black; width:85%")
+                  td(style="border-bottom: 2px solid black;")
+                      //- 앞 Primary Sector에 따라 다른 값 가져야 하는 문제
+                      //- PUG 문법에서 이런 기능이 가능한지가... JS에서 다뤄야 할 거 같은데
+                      select(style="border: 1px solid black; width:180px; color: black; font-weight: 600")
+                        option(value="Electricity") Electricity
+                        option(value="Coal/Mine") Coal/Mine
+                        option(value="Natural Gas Pipeline") Natural Gas Pipeline
+                        option(value="Oil Pipeline") Oil Pipeline
               br
       .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
-        a(href='#' style="color:black; border-color:black").goto-btn Search
+        submit#searchbtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px").btn Search
 
+      //- search가 안 된 페이지일 경우에 어떤 값을 보여줄 건지
+      //- 백에서 받아서 데이터 오는 거다 보니까 JS로 만들어서 표 내용 들어올 것으로 예상
+      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 40px")
+            p
+            button#cmpaccordion.accordion Search Results
+            .panel_cmp
+             table(style="width:100%; margin:auto;")
+                tbody
+                  tr
+                    th(style="text-align:center") Select
+                    th(style="text-align:center") Country
+                    th(style="text-align:center") Region
+                    th(style="text-align:center") Sector
+                    th(style="text-align:center") Subsector
+                    th(style="text-align:center") Project name
+                    th(style="text-align:center") Date
+                    th(style="text-align:center") FC
+                    th(style="text-align:center") Impact
+                    th(style="text-align:center") URL
+                    th(style="text-align:center") Resumed
+                  tr
+                    td(style="text-align:center")
+                      input(type="checkbox" style="zoom: 1.3")
+                    td(style="text-align:center") Pakistan
+                    td(style="text-align:center") SAR
+                    td(style="text-align:center") Energy
+                    td(style="text-align:center") Electricity
+                    td(style="text-align:center") The Block 2 power plant
+                    td(style="text-align:center") April 14th 2020
+                    td(style="text-align:center") Post FC
+                    td(style="text-align:center") midor delay
+                    td(style="text-align:center")
+                    td(style="text-align:center") N/A
+                  tr
+                    td(style="text-align:center")
+                      input(type="checkbox" style="zoom: 1.3")
+                    td(style="text-align:center") Pakistan
+                    td(style="text-align:center") SAR
+                    td(style="text-align:center") Energy
+                    td(style="text-align:center") Electricity
+                    td(style="text-align:center") The Block 2 power plant
+                    td(style="text-align:center") April 14th 2020
+                    td(style="text-align:center") Post FC
+                    td(style="text-align:center") midor delay
+                    td(style="text-align:center")
+                    td(style="text-align:center") N/A
+                  tr
+                    td(style="text-align:center")
+                      input(type="checkbox" style="zoom: 1.3")
+                    td(style="text-align:center") Pakistan
+                    td(style="text-align:center") SAR
+                    td(style="text-align:center") Energy
+                    td(style="text-align:center") Electricity
+                    td(style="text-align:center") The Block 2 power plant
+                    td(style="text-align:center") April 14th 2020
+                    td(style="text-align:center") Post FC
+                    td(style="text-align:center") midor delay
+                    td(style="text-align:center")
+                    td(style="text-align:center") N/A
+                br
+
+      .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
+        submit#comparebtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px").btn Compare
+      
+      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 40px")
+            p
+            .panel
+              table(style="width:100%; margin:auto;")
+                tbody
+                  tr
+                    td(style="text-align:left") Country
+                  tr
+                    td(style="text-align:left") Region
+                  tr
+                    td(style="text-align:left") Subsector
+                  tr
+                    td(style="text-align:left") Project name
+                  tr
+                    td(style="text-align:left") Date
+                  tr 
+                    td(style="text-align:left") FC
+                  tr 
+                    td(style="text-align:left") Impact
+                  tr
+                    td(style="text-align:left") URL
+                  tr 
+                    td(style="text-align:left") Resumed
+
+
+                br
+             
 // ======= Footer =======
 footer#footer
   .container

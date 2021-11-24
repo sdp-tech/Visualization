@@ -208,10 +208,8 @@
 
 })(jQuery);
 
-// methodology accordion
+// Methodology + compare accordion
 var acc = document.getElementsByClassName("accordion");
-var i;
-
 for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function () {
     this.classList.toggle("active");
@@ -223,6 +221,21 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 }
+
+// compare accordion active
+var btn = document.getElementById("searchbtn");
+btn.addEventListener("click", function () {
+  
+  var cmpacc = document.getElementById("cmpaccordion");
+  cmpacc.classList.toggle("active");
+  var panel = cmpacc.nextElementSibling;
+  if (panel.style.maxHeight) {
+    panel.style.maxHeight = null;
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+  }
+});
+
 
 // Insight
 $(".insight-card").owlCarousel({

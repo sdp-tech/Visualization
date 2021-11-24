@@ -1350,6 +1350,48 @@ section#Insight {
   transition: max-height 0.2s ease-out;
 }
 
+/* compare dropdown */
+/* Style the buttons that are used to open and close the accordion panel */
+
+#compare #cmpaccordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: 0.4s;
+}
+
+/* #compare .accordion:before {
+  content: "\02795"; 
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 0px;
+}
+
+#compare .active:before {
+  content: "\2796"; 
+} */
+
+#compare .active,
+#cmpaccordion:hover {
+  background-color: #eee;
+}
+
+#compare .panel_cmp {
+  padding: 0 40px;
+  background-color: rgba(220, 223, 238, 0.199);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+
 p.notice {
   font-weight: bold;
   padding: 20px;
