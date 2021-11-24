@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald|Roboto:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Raleway:wght@100;200&display=swap");
+.timeline-list {
+  font-size: 20px;
+  line-height: 1.5;
+}
+.timeline-list p {
+  color: black;
+}
+.timeline-list .timeline-title {
+  font-size: 2rem;
+  text-align: left;
+  padding-bottom: 20px;
+}
+.timeline-list .timeline-title, .timeline-list h1, .timeline-list h2, .timeline-list h3, .timeline-list h4, .timeline-list h5, .timeline-list h6 {
+  font-family: "Oswald", sans-serif;
+}
+.timeline-list h1 {
+  text-align: justify;
+  color: #c44536;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+}
+.timeline-list h3 {
+  text-align: justify;
+  font-size: 1.3rem;
+}
+.timeline-list p, .timeline-list .timeline-description {
+  text-align: justify;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
+}
+.timeline-list ul.timeline-description {
+  text-align: justify;
+  text-indent: 0px;
+  list-style-type: circle;
+}
+
+.timeline-item {
+  padding: 1em 2em 2em;
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  border-left: 5px solid #c44536;
+  left: 40px;
+}
+.timeline-item p {
+  font-size: 1rem;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 2em;
+  font-weight: bold;
+  top: 1em;
+  display: block;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  font-size: 0.785rem;
+}
+.timeline-item::after {
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  line-height: 60px;
+  display: block;
+  top: 1em;
+  position: absolute;
+  left: -33px;
+  content: attr(year);
+  white-space: pre-wrap;
+  color: white;
+  font-size: 15px;
+  font-family: "Raleway", cursive;
+  text-align: center;
+  background: #c44536;
+}
+.timeline-item:last-child {
+  border-image: linear-gradient(to bottom, #c44536 30%, rgba(196, 69, 54, 0)) 1 70%;
+}
+
+/*# sourceMappingURL=timeline.css.map */
