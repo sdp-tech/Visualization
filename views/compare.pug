@@ -6,6 +6,13 @@ head
   meta(content='' name='descriptison')
   meta(content='' name='keywords')
 
+  //jqeury
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous")
+  script(src='assets/vendor/waypoints/jquery.waypoints.min.js')
+  //compare
+  script(src='assets/js/compare.js')
   // Favicons
   link(href='assets/img/favicon.png' rel='icon')
   link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
@@ -90,56 +97,73 @@ main#main
                 tr 
                   td(style="border-top: 2px solid black; border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Project Name
-                  td(style="border-bottom: 2px solid black; border-top: 2px solid black; display:flex")
+                  td(style="border-bottom: 2px solid black; border-top: 2px solid black;")
                       input(style="border: 1px solid black; width:220px; margin-right: 10px" placeholder=" Enter the project name")
-                      span(class="material-icons" style="display: block; margin-top: auto; margin-bottom: auto; cursor: pointer") search
+                      span(class="material-icons" style="cursor: pointer; vertical-align:middle;") search
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Income Group
                   td(style="border-bottom: 2px solid black")
-                      //- 확대했을 때 테이블 깨지는 문제 발생
+                      //- 확대했을 때 테이블 깨지는 문제 발생 -> Project Name에서 display block 때문에 발생.. -> 해결.
+                      //- "each ~ in" 에서 사용하는 criteria value는 index.js의 getSearchCriteria라는 미들웨어를 통해 res.locals에 저장하여 전달하고 있음. 
                       select(style="border: 1px solid black; width:280px")
-                        option(style="display: none")
-                        option(value="High Income") High Icome
-                        option(value="Low Income") Low Income
-                        option(value="Lower middle income") Lower middle income
-                        option(value="Upper middle income") Upper middle income
+                        option(value="not select") not selected
+                        each val in criteria.income_group
+                          option(value=val)= val
+                        //- option(style="display: none")
+                        //- option(value="High Income") High Icome
+                        //- option(value="Low Income") Low Income
+                        //- option(value="Lower middle income") Lower middle income
+                        //- option(value="Upper middle income") Upper middle income
+                        
 
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Status
                   td(style="border-bottom: 2px solid black;")
                       select(style="border: 1px solid black; width:280px")
-                        option(style="display: none")
-                        option(value="High Income") Status1
-                        option(value="Low Income") Status2
-                        option(value="Lower middle income") Status3
-                        option(value="Upper middle income") Status4
+                        option(value="not select") not selected
+                        each val in criteria.ppi_status
+                          option(value=val)= val
+                        //- option(style="display: none")
+                        //- option(value="High Income") Status1
+                        //- option(value="Low Income") Status2
+                        //- option(value="Lower middle income") Status3
+                        //- option(value="Upper middle income") Status4
+                        
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Primary Sector
                   td(style="border-bottom: 2px solid black;")
-                      select(class="primeSector" style="border: 1px solid black; width:280px; color: black; font-weight: 600")
-                        option(value="Energy") Energy
-                        option(value="ICT") ICT
-                        option(value="Transport") Transport
-                        option(value="Water and Sewerage") Water and Sewerage
-                        option(value="Solid Waste") Solid Waste
-                        option(value="Other Sector") Other Sector
+                      select(class="primeSector" id="primarySector" style="border: 1px solid black; width:280px; color: black; font-weight: 600" onChange="selectOnChange();")
+                        option(value="not select") not selected
+                        each val,key in criteria.sector
+                          option(value=key)= key
+                        //- option(value="Energy") Energy
+                        //- option(value="ICT") ICT
+                        //- option(value="Transport") Transport
+                        //- option(value="Water and Sewerage") Water and Sewerage
+                        //- option(value="Solid Waste") Solid Waste
+                        //- option(value="Other Sector") Other Sector
+                        
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Sub Sector
                   td(style="border-bottom: 2px solid black;")
                       //- 앞 Primary Sector에 따라 다른 값 가져야 하는 문제
                       //- PUG 문법에서 이런 기능이 가능한지가... JS에서 다뤄야 할 거 같은데
-                      select(style="border: 1px solid black; width:180px; color: black; font-weight: 600")
-                        option(value="Electricity") Electricity
-                        option(value="Coal/Mine") Coal/Mine
-                        option(value="Natural Gas Pipeline") Natural Gas Pipeline
-                        option(value="Oil Pipeline") Oil Pipeline
+                      select(id="subsector" style="border: 1px solid black; width:180px; color: black; font-weight: 600")
+                        //- - const primarySector = document.getElementById("primarySector")
+                        //- each val in criteria.sector[primarySector]
+                        //-   option(value=key)= key
+                        //- option(value="Electricity") Electricity
+                        //- option(value="Coal/Mine") Coal/Mine
+                        //- option(value="Natural Gas Pipeline") Natural Gas Pipeline
+                        //- option(value="Oil Pipeline") Oil Pipeline
               br
+      //- onClick에 onClickHandler 추가하였음. assets/js/compare 함수에서 구현해야합니다.
       .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
-        submit#searchbtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px").btn Search
+        submit#searchbtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px" onClick="onClickHandler()").btn Search
 
       //- search가 안 된 페이지일 경우에 어떤 값을 보여줄 건지
       //- 백에서 받아서 데이터 오는 거다 보니까 JS로 만들어서 표 내용 들어올 것으로 예상
