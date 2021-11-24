@@ -33,6 +33,35 @@ const getProjectData = async (req, res) => {
   return ProjectData;
 };
 
+const searchData = async (req) => {
+  // project_name : "test"
+  // ppi_status : "Delayed"
+  // sector : "Energy"
+  // subsector : "Electricitry"
+  // income_group: "Low income"
+
+  let data = ProjectData;
+  if (data == null) {
+    await getProjectData();
+    data = ProjectData;
+  }
+
+  for (const [key, value] of Object.entries(req.query)) {
+    data = data.filter((datum) => {
+      if (key === 'name') {
+        return datum.properties.project_name
+          .toLowerCase()
+          .includes(value.toLowerCase());
+      } else {
+        return datum.properties[key] === value;
+      }
+    });
+  }
+
+  return data;
+};
+
 module.exports = {
   getProjectData,
+  searchData,
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { getProjectData } = require('./database');
+const { getProjectData, searchData } = require('./database');
 const { counter } = require('./middlewares/middlewares');
 const morgan = require('morgan');
 
@@ -25,6 +25,20 @@ app.get('/compare', (__, res) => res.render('compare'));
 app.get('/apis/data', async (req, res) => {
   const body = await getProjectData();
   res.json({ body: body });
+});
+
+/*
+  search example.
+  GET /apis/search?name=test&&ppi_status=Delayed&&sector=Energy&&subsector=Electricity&&income_group=Low income
+    name : "test"
+    ppi_status : "Delayed"
+    sector : "Energy"
+    subsector : "Electricity"
+    income_group: "Low income"
+*/
+app.get('/apis/search', async (req, res) => {
+  const data = await searchData(req);
+  res.json(data);
 });
 
 app.listen(PORT, () => console.log(`listen on ${PORT}`));
