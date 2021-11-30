@@ -222,21 +222,6 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
-// compare accordion active
-var btn = document.getElementById("searchbtn");
-btn.addEventListener("click", function () {
-  
-  var cmpacc = document.getElementById("cmpaccordion");
-  cmpacc.classList.toggle("active");
-  var panel = cmpacc.nextElementSibling;
-  if (panel.style.maxHeight) {
-    panel.style.maxHeight = null;
-  } else {
-    panel.style.maxHeight = panel.scrollHeight + "px";
-  }
-});
-
-
 // Insight
 $(".insight-card").owlCarousel({
   loop: true,

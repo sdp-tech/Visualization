@@ -50,7 +50,6 @@ header#header
         a(href='index')
           span Project MaPPPing
 
-    //- 추가로 compare에서 말고 전체에서 nav 작동할 때 하이라이트 이상하게 작동함
     nav.nav-menu.d-none.d-xxl-block
       ul
         li
@@ -76,7 +75,8 @@ header#header
   // End Header
 // End #main
 main#main
-  // ======= About Section =======
+
+  // ======= Compare Section =======
   section#compare
     .container.px-10
       .section-title.p-0(data-aos='fade-in' data-aos-delay='10')
@@ -98,7 +98,7 @@ main#main
                   td(style="border-top: 2px solid black; border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Project Name
                   td(style="border-bottom: 2px solid black; border-top: 2px solid black;")
-                      input(style="border: 1px solid black; width:220px; margin-right: 10px" placeholder=" Enter the project name")
+                      input(id="projectName" style="border: 1px solid black; width:220px; margin-right: 10px" placeholder=" Enter the project name")
                       span(class="material-icons" style="cursor: pointer; vertical-align:middle;") search
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
@@ -106,30 +106,19 @@ main#main
                   td(style="border-bottom: 2px solid black")
                       //- 확대했을 때 테이블 깨지는 문제 발생 -> Project Name에서 display block 때문에 발생.. -> 해결.
                       //- "each ~ in" 에서 사용하는 criteria value는 index.js의 getSearchCriteria라는 미들웨어를 통해 res.locals에 저장하여 전달하고 있음. 
-                      select(style="border: 1px solid black; width:280px")
+                      select(id="incomeGroup" style="border: 1px solid black; width:280px")
                         option(value="not select") not selected
                         each val in criteria.income_group
                           option(value=val)= val
-                        //- option(style="display: none")
-                        //- option(value="High Income") High Icome
-                        //- option(value="Low Income") Low Income
-                        //- option(value="Lower middle income") Lower middle income
-                        //- option(value="Upper middle income") Upper middle income
-                        
 
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Status
                   td(style="border-bottom: 2px solid black;")
-                      select(style="border: 1px solid black; width:280px")
+                      select(id="status" style="border: 1px solid black; width:280px")
                         option(value="not select") not selected
                         each val in criteria.ppi_status
                           option(value=val)= val
-                        //- option(style="display: none")
-                        //- option(value="High Income") Status1
-                        //- option(value="Low Income") Status2
-                        //- option(value="Lower middle income") Status3
-                        //- option(value="Upper middle income") Status4
                         
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
@@ -139,40 +128,24 @@ main#main
                         option(value="not select") not selected
                         each val,key in criteria.sector
                           option(value=key)= key
-                        //- option(value="Energy") Energy
-                        //- option(value="ICT") ICT
-                        //- option(value="Transport") Transport
-                        //- option(value="Water and Sewerage") Water and Sewerage
-                        //- option(value="Solid Waste") Solid Waste
-                        //- option(value="Other Sector") Other Sector
                         
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Sub Sector
                   td(style="border-bottom: 2px solid black;")
-                      //- 앞 Primary Sector에 따라 다른 값 가져야 하는 문제
-                      //- PUG 문법에서 이런 기능이 가능한지가... JS에서 다뤄야 할 거 같은데
-                      select(id="subsector" style="border: 1px solid black; width:180px; color: black; font-weight: 600")
-                        //- - const primarySector = document.getElementById("primarySector")
-                        //- each val in criteria.sector[primarySector]
-                        //-   option(value=key)= key
-                        //- option(value="Electricity") Electricity
-                        //- option(value="Coal/Mine") Coal/Mine
-                        //- option(value="Natural Gas Pipeline") Natural Gas Pipeline
-                        //- option(value="Oil Pipeline") Oil Pipeline
+                      select(id="subSector" style="border: 1px solid black; width:180px; color: black; font-weight: 600")
+
               br
       //- onClick에 onClickHandler 추가하였음. assets/js/compare 함수에서 구현해야합니다.
       .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
-        submit#searchbtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px" onClick="onClickHandler()").btn Search
+        submit#searchbtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px" onClick="onClickHandler();").btn Search
 
-      //- search가 안 된 페이지일 경우에 어떤 값을 보여줄 건지
-      //- 백에서 받아서 데이터 오는 거다 보니까 JS로 만들어서 표 내용 들어올 것으로 예상
-      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 40px")
+      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 80px")
             p
             button#cmpaccordion.accordion Search Results
-            .panel_cmp
+            .panel_cmp(style="overflow:auto; height: 800px; width:100%")
              table(style="width:100%; margin:auto;")
-                tbody
+                tbody(id="resultTable")
                   tr
                     th(style="text-align:center") Select
                     th(style="text-align:center") Country
@@ -180,80 +153,32 @@ main#main
                     th(style="text-align:center") Sector
                     th(style="text-align:center") Subsector
                     th(style="text-align:center") Project name
-                    th(style="text-align:center") Date
-                    th(style="text-align:center") FC
-                    th(style="text-align:center") Impact
+                    th(style="text-align:center") FC Year
                     th(style="text-align:center") URL
-                    th(style="text-align:center") Resumed
-                  tr
-                    td(style="text-align:center")
-                      input(type="checkbox" style="zoom: 1.3")
-                    td(style="text-align:center") Pakistan
-                    td(style="text-align:center") SAR
-                    td(style="text-align:center") Energy
-                    td(style="text-align:center") Electricity
-                    td(style="text-align:center") The Block 2 power plant
-                    td(style="text-align:center") April 14th 2020
-                    td(style="text-align:center") Post FC
-                    td(style="text-align:center") midor delay
-                    td(style="text-align:center")
-                    td(style="text-align:center") N/A
-                  tr
-                    td(style="text-align:center")
-                      input(type="checkbox" style="zoom: 1.3")
-                    td(style="text-align:center") Pakistan
-                    td(style="text-align:center") SAR
-                    td(style="text-align:center") Energy
-                    td(style="text-align:center") Electricity
-                    td(style="text-align:center") The Block 2 power plant
-                    td(style="text-align:center") April 14th 2020
-                    td(style="text-align:center") Post FC
-                    td(style="text-align:center") midor delay
-                    td(style="text-align:center")
-                    td(style="text-align:center") N/A
-                  tr
-                    td(style="text-align:center")
-                      input(type="checkbox" style="zoom: 1.3")
-                    td(style="text-align:center") Pakistan
-                    td(style="text-align:center") SAR
-                    td(style="text-align:center") Energy
-                    td(style="text-align:center") Electricity
-                    td(style="text-align:center") The Block 2 power plant
-                    td(style="text-align:center") April 14th 2020
-                    td(style="text-align:center") Post FC
-                    td(style="text-align:center") midor delay
-                    td(style="text-align:center")
-                    td(style="text-align:center") N/A
                 br
 
       .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
-        submit#comparebtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px").btn Compare
+        submit#comparebtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px" onClick="compareOnClick();").btn Compare
       
-      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 40px")
+      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 120px")
             p
-            .panel
-              table(style="width:100%; margin:auto;")
+            .panel(style='display:flex; justify-content: center; overflow:auto; height: 100%; width:100%')
+              table(style="width:130%")
                 tbody
-                  tr
-                    td(style="text-align:left") Country
-                  tr
-                    td(style="text-align:left") Region
-                  tr
+                  tr(id='country')
+                    td(style="text-align:left; width:20px") Country
+                  tr(id='geographical')
+                    td( style="text-align:left") Region
+                  tr(id='sector')
+                    td(style="text-align:left") Sector
+                  tr(id='subsector')
                     td(style="text-align:left") Subsector
-                  tr
+                  tr(id='project_name')
                     td(style="text-align:left") Project name
-                  tr
-                    td(style="text-align:left") Date
-                  tr 
-                    td(style="text-align:left") FC
-                  tr 
-                    td(style="text-align:left") Impact
-                  tr
+                  tr(id='fc_year')
+                    td(style="text-align:left") FC Year
+                  tr(id='urls')
                     td(style="text-align:left") URL
-                  tr 
-                    td(style="text-align:left") Resumed
-
-
                 br
              
 // ======= Footer =======
