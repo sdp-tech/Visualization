@@ -92,20 +92,18 @@ main#main
 
       .panel(data-aos='fade-in' data-aos-delay='80')
             p
-            table(style="width:70%; margin:auto;")
+            table(style="width:70%; margin:auto; font-size:20px")
               tbody
                 tr 
                   td(style="border-top: 2px solid black; border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Project Name
                   td(style="border-bottom: 2px solid black; border-top: 2px solid black;")
-                      input(id="projectName" style="border: 1px solid black; width:220px; margin-right: 10px" placeholder=" Enter the project name")
+                      input(id="projectName" style="border: 1px solid black; width:240px; margin-right: 10px" placeholder=" Enter the project name")
                       span(class="material-icons" style="cursor: pointer; vertical-align:middle;") search
                 tr
                   td(style="border-bottom: 2px solid black; border-right: 2px solid black; width: 20%; background-color: #ececdf")
                       strong Income Group
                   td(style="border-bottom: 2px solid black")
-                      //- 확대했을 때 테이블 깨지는 문제 발생 -> Project Name에서 display block 때문에 발생.. -> 해결.
-                      //- "each ~ in" 에서 사용하는 criteria value는 index.js의 getSearchCriteria라는 미들웨어를 통해 res.locals에 저장하여 전달하고 있음. 
                       select(id="incomeGroup" style="border: 1px solid black; width:280px")
                         option(value="not select") not selected
                         each val in criteria.income_group
@@ -134,51 +132,50 @@ main#main
                       strong Sub Sector
                   td(style="border-bottom: 2px solid black;")
                       select(id="subSector" style="border: 1px solid black; width:180px; color: black; font-weight: 600")
-
               br
-      //- onClick에 onClickHandler 추가하였음. assets/js/compare 함수에서 구현해야합니다.
+
       .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
         submit#searchbtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px" onClick="onClickHandler();").btn Search
 
       .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 80px")
             p
-            button#cmpaccordion.accordion Search Results
+            button#cmpaccordion.accordion(style="font-size: 25px") Search Results
             .panel_cmp(style="overflow:auto; height: 800px; width:100%")
              table(style="width:100%; margin:auto;")
                 tbody(id="resultTable")
                   tr
-                    th(style="text-align:center") Select
-                    th(style="text-align:center") Country
-                    th(style="text-align:center") Region
-                    th(style="text-align:center") Sector
-                    th(style="text-align:center") Subsector
-                    th(style="text-align:center") Project name
-                    th(style="text-align:center") FC Year
-                    th(style="text-align:center") URL
+                    th Select
+                    th Country
+                    th Region
+                    th Sector
+                    th Subsector
+                    th Project name
+                    th FC Year
+                    th URL
                 br
 
       .section-title.p-0(data-aos='fade-in' data-aos-delay='100')
-        submit#comparebtn(style="color:white; border-color: #196be6; background-color: #196be6; border-radius: 0; margin-top: 20px; font-size: 20px" onClick="compareOnClick();").btn Compare
+        submit#comparebtn(style="color:white; border-color: #196be6; background-color: #196be6; margin-top: 20px; font-size: 20px" onClick="compareOnClick();").btn Compare
       
-      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 120px")
+      .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 120px; margin-bottom: 80px")
             p
-            .panel(style='display:flex; justify-content: center; overflow:auto; height: 100%; width:100%')
-              table(style="width:130%")
-                tbody
+            .panel_result(style='overflow:auto; width:120%; left: 50%; transform:translate(-10%, 0)')
+              table.table_result(style="font-size: 25px; padding: 10px")
+                tbody(style="")
                   tr(id='country')
-                    td(style="text-align:left; width:20px") Country
+                    td(style="width: 30px; text-align: center; font-weight: 600") Country
                   tr(id='geographical')
-                    td( style="text-align:left") Region
+                    td( style="text-align: center; font-weight: 600") Region
                   tr(id='sector')
-                    td(style="text-align:left") Sector
+                    td(style="text-align: center; font-weight: 600") Sector
                   tr(id='subsector')
-                    td(style="text-align:left") Subsector
+                    td(style="text-align: center; font-weight: 600") Subsector
                   tr(id='project_name')
-                    td(style="text-align:left") Project name
+                    td(style="text-align: center; font-weight: 600") Project name
                   tr(id='fc_year')
-                    td(style="text-align:left") FC Year
+                    td(style="text-align: center; font-weight: 600") FC Year
                   tr(id='urls')
-                    td(style="text-align:left") URL
+                    td(style="text-align: center; font-weight: 600") URL
                 br
              
 // ======= Footer =======

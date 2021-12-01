@@ -1366,18 +1366,6 @@ section#Insight {
   transition: 0.4s;
 }
 
-/* #compare .accordion:before {
-  content: "\02795"; 
-  font-size: 13px;
-  color: #777;
-  float: right;
-  margin-left: 0px;
-}
-
-#compare .active:before {
-  content: "\2796"; 
-} */
-
 #compare .active,
 #cmpaccordion:hover {
   background-color: #eee;
@@ -1385,10 +1373,71 @@ section#Insight {
 
 #compare .panel_cmp {
   padding: 0 40px;
-  background-color: rgba(220, 223, 238, 0.199);
+  background-color: rgba(230, 233, 255, 0.199);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+#compare .panel_cmp th{
+  font-size: 20px; 
+  text-align:center;
+}
+
+/* scroll bar */
+#compare .panel_cmp::-webkit-scrollbar {
+  width: 15px;
+}
+#compare .panel_cmp::-webkit-scrollbar-thumb {
+  background-color: #82858c;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+#compare .panel_cmp::-webkit-scrollbar-track {
+  background-color: rgb(187, 187, 187);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
+
+/* after compare table  */
+#compare .panel_result{
+  border-radius: 20px;
+}
+#compare .table_result {
+  background-color: rgba(163, 201, 255, 0.183);
+  border-collapse: collapse;
+  border-radius: 20px;
+  border-style: hidden;
+}
+#compare .table_result td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(163, 201, 255, 0.25);
+}
+#compare .table_result tr:first-child td:first-child { border-top-left-radius: 20px; }
+#compare .table_result tr:first-child td:last-child { border-top-right-radius: 20px; }
+#compare .table_result tr:last-child td:first-child { border-bottom-left-radius: 20px; }
+#compare .table_result tr:last-child td:last-child { border-bottom-right-radius: 20px; }
+#compare .table_result tr:first-child td { border-top-style: solid; }
+#compare .table_result tr td:first-child { border-left-style: solid; }
+
+#compare .table_result tr:hover {
+  background-color: rgba(163, 201, 255, 0.20);
+}
+
+/* scroll bar */
+#compare .panel_result::-webkit-scrollbar {
+  height : 25px;
+}
+#compare .panel_result::-webkit-scrollbar-thumb {
+  background-color: rgba(140, 157, 181, 0.183);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+#compare .panel_result::-webkit-scrollbar-track {
+  background-color: rgba(212, 216, 221, 0.183);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
 }
 
 
@@ -1400,7 +1449,6 @@ p.notice {
 }
 
 /* table */
-
 table {
   border-collapse: collapse;
   width: 100%;

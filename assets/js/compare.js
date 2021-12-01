@@ -97,17 +97,18 @@ const onClickHandler = () => {
         tableEl.removeChild(tableEl.lastChild);
       }
       
+      const newHeight = 0;
       for(const item of res){
         const trEl = document.createElement('tr');
         for(lst of tableList){
           let tdEl = document.createElement('td');
-          tdEl.style = 'text-align:center';
+          tdEl.style = 'text-align:center; font-size:17px';
           tdEl.className = lst;
       
           if(lst ==='select'){
             let inputEl = document.createElement('input');
             inputEl.type = 'checkbox';
-            inputEl.style = 'zoom: 1.3';
+            inputEl.style = 'zoom: 1.6';
             inputEl.className = 'cmpCheckbox';
             tdEl.appendChild(inputEl);
           }
@@ -134,7 +135,7 @@ const onClickHandler = () => {
         panel.style.maxHeight = null;        
       }
       else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.style.maxHeight = tableEl.scrollHeight + 40  + "px";
       }
 
       cmpacc.textContent = 'Search Results (' + (tableEl.children.length-1).toString() + ')';
@@ -168,10 +169,8 @@ const compareOnClick = () => {
           var aEl = document.createElement('a');
           aEl.href = sib.children[0].href;
           aEl.textContent = sib.children[0].href;
-          // aEl.textContent = item.properties[lst];
           tdEl.appendChild(aEl);
-          tdEl.style = 'overflow:hidden; width: 20px';
-          
+          tdEl.style = 'text-align:center; width: 20px';
         }else
           tdEl.textContent = sib.textContent;
         container.appendChild(tdEl);
