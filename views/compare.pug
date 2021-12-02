@@ -160,25 +160,23 @@ main#main
         submit#comparebtn(style="color:white; border-color: #196be6; background-color: #196be6; margin-top: 20px; font-size: 20px" onClick="compareOnClick();").btn Compare
       
       .panel(data-aos='fade-in' data-aos-delay='80' style="margin-top: 120px; margin-bottom: 80px")
-            p
-            .panel_result(style='overflow:auto; width:120%; left: 50%; transform:translate(-7.5%, 0)')
-              table.table_result(style="font-size: 25px; padding: 10px")
-                tbody(style="")
-                  tr(id='country')
-                    td(style="width: 30px; text-align: center; font-weight: 600") Country
-                  tr(id='geographical')
-                    td( style="text-align: center; font-weight: 600") Region
-                  tr(id='sector')
-                    td(style="text-align: center; font-weight: 600") Sector
-                  tr(id='subsector')
-                    td(style="text-align: center; font-weight: 600") Subsector
-                  tr(id='project_name')
-                    td(style="text-align: center; font-weight: 600") Project name
-                  tr(id='fc_year')
-                    td(style="text-align: center; font-weight: 600") FC Year
-                  tr(id='urls')
-                    td(style="text-align: center; font-weight: 600") URL
-                br
+              .panel_result(style='overflow:auto; width:120%; left: 50%; transform:translate(-7.5%, 0); background-color:rgba(163, 201, 255, 0.183);')
+                  table.table_result(style="font-size: 25px; padding: 10px; background-color:none;")
+                    tbody(style="")
+                      tr(id='country')
+                        td(style="width: 30px; text-align: center; font-weight: 600") Country
+                      tr(id='geographical')
+                        td( style="text-align: center; font-weight: 600") Region
+                      tr(id='sector')
+                        td(style="text-align: center; font-weight: 600") Sector
+                      tr(id='subsector')
+                        td(style="text-align: center; font-weight: 600") Subsector
+                      tr(id='project_name')
+                        td(style="text-align: center; font-weight: 600") Project name
+                      tr(id='fc_year')
+                        td(style="text-align: center; font-weight: 600") FC Year
+                      tr(id='urls')
+                        td(style="text-align: center; font-weight: 600") URL
              
 // ======= Footer =======
 footer#footer

@@ -10,7 +10,7 @@
 --------------------------------------------------------------*/
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #444444;
 }
 
@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -92,7 +92,7 @@ h6 {
   line-height: 1;
   font-weight: 700;
   letter-spacing: 1px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
 }
 
@@ -125,7 +125,6 @@ h6 {
   list-style: none;
 }
 
-
 .nav-menu > ul > li {
   position: relative;
   white-space: nowrap;
@@ -140,7 +139,7 @@ h6 {
   padding: 20px 15px;
   transition: 0.3s;
   font-size: 16px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -206,7 +205,7 @@ h6 {
 }
 
 .nav-menu .drop-down > a:after {
-  content: "\ea99";
+  content: '\ea99';
   font-family: IcoFont;
   padding-left: 5px;
 }
@@ -227,7 +226,7 @@ h6 {
 }
 
 .nav-menu .drop-down .drop-down > a:after {
-  content: "\eaa0";
+  content: '\eaa0';
   font-family: IcoFont;
   position: absolute;
   right: 15px;
@@ -249,7 +248,7 @@ h6 {
     left: -100%;
   }
   .nav-menu .drop-down .drop-down > a:after {
-    content: "\ea9d";
+    content: '\ea9d';
   }
 }
 
@@ -314,7 +313,7 @@ h6 {
 }
 
 .mobile-nav .drop-down > a:after {
-  content: "\ea99";
+  content: '\ea99';
   font-family: IcoFont;
   padding-left: 10px;
   position: absolute;
@@ -322,7 +321,7 @@ h6 {
 }
 
 .mobile-nav .active.drop-down > a:after {
-  content: "\eaa1";
+  content: '\eaa1';
 }
 
 .mobile-nav .drop-down > a {
@@ -372,7 +371,7 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/hero-bg.jpg") top center;
+  background: url('../img/hero-bg.jpg') top center;
   background-size: cover;
   position: relative;
   margin-bottom: -90px;
@@ -391,7 +390,7 @@ h6 {
   text-align: center;
 }
 
-.main-title{
+.main-title {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -482,7 +481,7 @@ section {
 }
 
 .section-title h2::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 50%;
   top: 50%;
@@ -529,7 +528,7 @@ section {
   display: inline-block;
   padding-right: 10px;
   color: #6c757d;
-  content: "/";
+  content: '/';
 }
 
 @media (max-width: 768px) {
@@ -548,14 +547,14 @@ section {
 # About
 --------------------------------------------------------------*/
 .about {
-  background: url("../img/about-bg.jpg") center center no-repeat;
+  background: url('../img/about-bg.jpg') center center no-repeat;
   background-size: cover;
   padding: 60px 0;
   position: relative;
 }
 
 .about::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
@@ -628,7 +627,7 @@ section {
   color: #848484;
 }
 
-.about-title{
+.about-title {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
@@ -672,7 +671,7 @@ section#Insight {
 }
 
 .insight-eachcard::before {
-  content: "";
+  content: '';
   position: absolute;
   background: white;
   right: 0;
@@ -745,7 +744,7 @@ section#Insight {
 .counts .count-box p {
   padding: 15px 0 0 0;
   margin: 0 0 0 60px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   color: #c44536;
 }
@@ -756,7 +755,7 @@ section#Insight {
   margin-top: 20px;
   color: #c44536;
   font-size: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: ease-in-out 0.3s;
 }
 
@@ -769,7 +768,7 @@ section#Insight {
 --------------------------------------------------------------*/
 .cta {
   background: linear-gradient(#f1bdb8, #f1bdb8),
-    url("../img/cta-bg.jpg") fixed center center;
+    url('../img/cta-bg.jpg') fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -785,7 +784,7 @@ section#Insight {
 }
 
 .goto-btn {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
@@ -806,7 +805,6 @@ section#Insight {
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
-
 
 .team-intro {
   display: flex;
@@ -950,7 +948,7 @@ section#Insight {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 #footer .footer-top .social-links a {
@@ -1028,13 +1026,13 @@ section#Insight {
   border-radius: 4;
 }
 
-#footer .footer-top .footer-newsletter form input[type="email"] {
+#footer .footer-top .footer-newsletter form input[type='email'] {
   border: 0;
   padding: 4px;
   width: calc(100% - 110px);
 }
 
-#footer .footer-top .footer-newsletter form input[type="submit"] {
+#footer .footer-top .footer-newsletter form input[type='submit'] {
   position: absolute;
   top: 0;
   right: 0;
@@ -1049,7 +1047,7 @@ section#Insight {
   border-radius: 4;
 }
 
-#footer .footer-top .footer-newsletter form input[type="submit"]:hover {
+#footer .footer-top .footer-newsletter form input[type='submit']:hover {
   background: #c44536;
 }
 
@@ -1099,7 +1097,7 @@ section#Insight {
 #p_popup_detail {
   font-size: 13px;
   line-height: 20px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   word-wrap: break-word;
   /* white-space: nowrap;
   overflow: visible; */
@@ -1136,7 +1134,7 @@ section#Insight {
 }
 
 #clearEach span {
-  font-family: "Poppins", sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
   justify-content: center;
   text-align: center;
   font-size: 8px;
@@ -1205,7 +1203,7 @@ section#Insight {
 
 .sidebar span {
   color: #fff;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 15px;
   /* display: inline-block; */
   position: absolute;
@@ -1274,7 +1272,6 @@ section#Insight {
   outline: none;
 }
 
-
 .dropdown-container {
   display: none;
   padding-left: 8px;
@@ -1326,7 +1323,7 @@ section#Insight {
 }
 
 #Methodology .accordion:after {
-  content: "\02795"; /* Unicode character for "plus" sign (+) */
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
   font-size: 13px;
   color: #777;
   float: right;
@@ -1334,7 +1331,7 @@ section#Insight {
 }
 
 #Methodology .active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
+  content: '\2796'; /* Unicode character for "minus" sign (-) */
 }
 
 #Methodology .active,
@@ -1376,11 +1373,12 @@ section#Insight {
   background-color: rgba(230, 233, 255, 0.199);
   max-height: 0;
   overflow: hidden;
+
   transition: max-height 0.2s ease-out;
 }
-#compare .panel_cmp th{
-  font-size: 20px; 
-  text-align:center;
+#compare .panel_cmp th {
+  font-size: 20px;
+  text-align: center;
 }
 
 /* scroll bar */
@@ -1400,7 +1398,7 @@ section#Insight {
 }
 
 /* after compare table  */
-#compare .panel_result{
+#compare .panel_result {
   border-radius: 20px;
 }
 #compare .table_result {
@@ -1413,20 +1411,32 @@ section#Insight {
   padding: 15px;
   border-bottom: 1px solid rgba(163, 201, 255, 0.25);
 }
-#compare .table_result tr:first-child td:first-child { border-top-left-radius: 20px; }
-#compare .table_result tr:first-child td:last-child { border-top-right-radius: 20px; }
-#compare .table_result tr:last-child td:first-child { border-bottom-left-radius: 20px; }
-#compare .table_result tr:last-child td:last-child { border-bottom-right-radius: 20px; }
-#compare .table_result tr:first-child td { border-top-style: solid; }
-#compare .table_result tr td:first-child { border-left-style: solid; }
+#compare .table_result tr:first-child td:first-child {
+  border-top-left-radius: 20px;
+}
+#compare .table_result tr:first-child td:last-child {
+  border-top-right-radius: 20px;
+}
+#compare .table_result tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+#compare .table_result tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+#compare .table_result tr:first-child td {
+  border-top-style: solid;
+}
+#compare .table_result tr td:first-child {
+  border-left-style: solid;
+}
 
 #compare .table_result tr:hover {
-  background-color: rgba(163, 201, 255, 0.20);
+  background-color: rgba(163, 201, 255, 0.2);
 }
 
 /* scroll bar */
 #compare .panel_result::-webkit-scrollbar {
-  height : 25px;
+  height: 25px;
 }
 #compare .panel_result::-webkit-scrollbar-thumb {
   background-color: rgba(140, 157, 181, 0.183);
@@ -1439,6 +1449,47 @@ section#Insight {
   border-radius: 10px;
   box-shadow: inset 0px 0px 5px white;
 }
+
+
+/* Report */
+#Report .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+#Report .accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+#Report .active:after {
+  content: '\2796'; /* Unicode character for "minus" sign (-) */
+}
+
+#Report .active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+#Report .panel {
+  padding: 0 40px;
+  background-color: rgba(224, 224, 224, 0.199);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 
 
 p.notice {
@@ -1468,7 +1519,7 @@ td {
   vertical-align: middle;
   border-bottom: 1px solid #ddd;
 }
-.panel p{
+.panel p {
   padding: 10px;
 }
 .panel table p {
@@ -1518,28 +1569,27 @@ tr:hover {
 
 /* sidebar arrow  */
 #arrow {
-  text-align : right;
+  text-align: right;
 }
 
 #header-heading {
-  font-size : 1.5rem;
-  color : #444444;
+  font-size: 1.5rem;
+  color: #444444;
 }
 
-
-@media (min-width: 1320px){
+@media (min-width: 1320px) {
   .d-xxl-block {
-      display: block !important;  
+    display: block !important;
   }
 }
-@media (min-width: 420px){
-  .d-xs-block{
-    display : block !important;
+@media (min-width: 420px) {
+  .d-xs-block {
+    display: block !important;
   }
 }
 
-@media (min-width: 1320px){
-  .d-xxl-none{
-    display : none !important;
+@media (min-width: 1320px) {
+  .d-xxl-none {
+    display: none !important;
   }
 }
