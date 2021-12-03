@@ -1373,7 +1373,6 @@ section#Insight {
   background-color: rgba(230, 233, 255, 0.199);
   max-height: 0;
   overflow: hidden;
-
   transition: max-height 0.2s ease-out;
 }
 #compare .panel_cmp th {
@@ -1451,13 +1450,14 @@ section#Insight {
 }
 
 
-/* Report */
-#Report .accordion {
-  background-color: #eee;
+/* Report Section*/
+#Report .accord {
+  background-color: #c9cdd39e;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   color: #444;
   cursor: pointer;
   padding: 18px;
-  width: 100%;
   border: none;
   text-align: left;
   outline: none;
@@ -1465,29 +1465,25 @@ section#Insight {
   transition: 0.4s;
 }
 
-#Report .accordion:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
-  font-size: 13px;
-  color: #777;
-  float: right;
-  margin-left: 5px;
+#Report .active {
+  background-color: #eff4fb;
 }
 
-#Report .active:after {
-  content: '\2796'; /* Unicode character for "minus" sign (-) */
+#Report .accord:hover {
+  background-color: #dde1e79e;
 }
 
-#Report .active,
-.accordion:hover {
-  background-color: #ccc;
+#Report .active:hover {
+  background-color: #eff4fb;
 }
-
-#Report .panel {
-  padding: 0 40px;
-  background-color: rgba(224, 224, 224, 0.199);
-  max-height: 0;
+#Report .rpt_panel {
+  display:flex; 
+  align-content:center;
+  padding: 20px 40px 10px;
+  background-color: #eff4fb;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  height: 0;
+  /* transition: height 0.2s ease-out; */
 }
 
 
