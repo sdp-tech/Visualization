@@ -114,11 +114,12 @@
   var main_nav = $(".nav-menu, .mobile-nav");
 
   $(window).on("scroll", function () {
-    var cur_pos = $(this).scrollTop();
+    var cur_pos = ($(this).scrollTop() * 2 + $(this).height()) / 2;
 
     nav_sections.each(function () {
       var top = $(this).offset().top,
         bottom = top + $(this).outerHeight();
+
       if (cur_pos >= top && cur_pos <= bottom) {
         if (cur_pos <= bottom) {
           main_nav.find("li").removeClass("active");
@@ -208,10 +209,8 @@
 
 })(jQuery);
 
-// methodology accordion
+// Methodology + compare accordion
 var acc = document.getElementsByClassName("accordion");
-var i;
-
 for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function () {
     this.classList.toggle("active");

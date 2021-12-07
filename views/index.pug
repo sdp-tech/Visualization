@@ -9,6 +9,10 @@ head
   link(href='assets/img/favicon.png' rel='icon')
   link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  
+  //report
+  script(src='assets/js/report.js')
+
   // Vendor CSS Files
   link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")  
   link(href='assets/vendor/icofont/icofont.min.css' rel='stylesheet')
@@ -46,11 +50,15 @@ header#header.fixed-top.header-transparent
         li
           a(href='/inner-page#hero') Map
         li
+          a(href='/compare') Compare  
+        li
           a(href='#about') Project MaPPPing
         li
-          a(href='#Insight') Insight
+          a(href='#Insight') Insight      
         li
           a(href='#Methodology') Methodology
+        li
+          a(href='#Report') Report
         li
           a(href='#team') SDP Team
         li
@@ -575,6 +583,42 @@ main#main
 
       .row.methodology-container(data-aos='fade-up')
   // End Methodology Section
+
+  // ======= Report Section =======
+  section#Report.report-box
+    .container.px-10
+      .section-title(data-aos='fade-in' data-aos-delay='100')
+        br
+        h2 Report
+        p
+          | SDP Failure Map Provides report to help the users understand infrastructue and PPP well with using the map.
+          br
+          | Download the Report and have more insights about infrastructure and PPP.  
+      .row(style="width: 90%; margin:auto") 
+        .col-12(data-aos='fade-in' data-aos-delay='300' )
+          div(style="display: flex")
+            button.accord.active(onClick="accordOpener('2021-1')") 2021-1 Report
+            button.accord(onClick="accordOpener('2021-2')") 2021-2 Report
+          div 
+            .rpt_panel#2021-1(style="height:100%")
+              img(src="/assets/report/img/2021_1.PNG" style="width: auto; height:440px; margin: auto; padding: 20px")
+              div(style="padding: 25px; height:100%; margin: auto")
+                p
+                  | This is the first report that contains the insights of SDP and what they learned and felt by working
+                  | on Project MaPPPing. It contains 'PPP & Project Financing', 'International Relations & Infrastructure'
+                  | and 'PPP & sustainability'.
+                a(href="/assets/report/pdf/2021_1.pdf" download)
+                  div(style="color:white; border-color: #e24b3a; background-color: #e24b3a; border-radius: 25px; width: 160px; margin-top: 20px; font-size: 20px").btn Download
+
+            .rpt_panel#2021-2
+              img(src="/assets/report/img/2020.jpeg" style="width: auto; height:440px; margin: auto; padding: 20px")
+              div(style="padding: 25px; height:100%; margin: auto")
+                p
+                  | Report is to be updated.
+                a(href="/assets/report/pdf/2020.pdf" download disabled)
+                  div(style="color:white; border-color: #e24b3a; background-color: #e24b3a; border-radius: 25px; width: 160px; margin-top: 20px; font-size: 20px").btn Download
+
+            
   // ======= Team Section =======
   section#team.section-bg
     .container.px-10
@@ -659,7 +703,7 @@ footer#footer
   .footer-top
     .container.px-10
       .row
-        .col-lg-4.col-md-6
+        .col-lg-4.col-md-6(style="margin:auto")
           .footer-info(data-aos='fade-up' data-aos-delay='50')
             h3 SDP Project MaPPPing
             p.pb-3
